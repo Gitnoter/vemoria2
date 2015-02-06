@@ -8,7 +8,7 @@
 *.log
 
 # toplevel directories
-/build *
+/build*
 
 # dot-files which should NOT be ignored
 !.gitignore
