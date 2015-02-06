@@ -1,0 +1,12 @@
+This project is licensed under the EUPL v.1.1 or a later version.
+
+See the "license" folder for the text of the license or find it at
+https://joinup.ec.europa.eu/software/page/eupl/licence-eupl
+
+If the project uses other open source projects, they may be licensed
+under another open source license; see the license informations in
+theses parts for details.
+
+(Please note: Every source file should contain a comment
+	Licensed under the EUPL v.1.1 or later
+at the head of the file.)
