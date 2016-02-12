@@ -6,4 +6,12 @@ Informatik" (applied computer science) of the "Hochschule Worms"
 
 The following people contributed to this project:
 
-(please add the team members here)
+Joshua Gramlich, Project Owner (inf2156@hs-worms.de)
+Martin Gärthöffner, Scrum Master (inf573@hs-worms.de)
+Dominik Corell, Developer (inf1797@hs-worms.de)
+Jens Westphal, Developer (inf2184@hs-worms.de)
+Tobias Mayer, Developer (inf903@hs-worms.de)
+Julia Kammerlander, Developer (inf2099@hs-worms.de)
+Nico Kreutzer, Developer (inf1885@hs-worms.de)
+Lucas Löffel, Developer (inf2171@hs-worms.de)
+Dennis Skopp, Developer (inf2179@hs-worms.de)
