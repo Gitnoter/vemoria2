@@ -13,10 +13,40 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    cachemanager.cpp \
+    collection.cpp \
+    collections.cpp \
+    filter.cpp \
+    item.cpp \
+    cache.cpp \
+    collectionmanager.cpp \
+    itemmanager.cpp \
+    picture.cpp \
+    video.cpp \
+    document.cpp \
+    audio.cpp \
+    undefined.cpp \
+    undefinedgui_1.cpp \
+    undefinedgui_2.cpp
 
 HEADERS  += mainwindow.h \
-    version.h
+    version.h \
+    cachemanager.h \
+    collection.h \
+    collections.h \
+    filter.h \
+    item.h \
+    cache.h \
+    collectionmanager.h \
+    itemmanager.h \
+    picture.h \
+    video.h \
+    document.h \
+    audio.h \
+    undefined.h \
+    undefinedgui_1.h \
+    undefinedgui_2.h
 
 FORMS    += mainwindow.ui
 
