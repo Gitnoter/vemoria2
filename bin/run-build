@@ -38,6 +38,9 @@ for name in /opt/Qt/*/gcc*/bin; do
     addpath "$name"
 done
 addpath $PWD/bin/share
+# even standard paths are needed on Windows (Cygwin) :-(
+addpath /bin /usr/bin /usr/local/bin
+
 echo "PATH=$PATH"
 OSTYPE=$(uname -s | tr [:upper:] [:lower:])
 ARCH=$(uname -m | tr [:upper:] [:lower:])
