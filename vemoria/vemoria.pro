@@ -1,7 +1,10 @@
 #-------------------------------------------------
+# Project Vemoria
 #
-# Project created by QtCreator 2016-03-01T09:29:13
+# Vemoria aims to be an environment for archiving multimedia files.
 #
+#
+# This project is licensed under the EUPL v.1.1 or a later version.
 #-------------------------------------------------
 
 QT       += core gui
