@@ -5,6 +5,7 @@ using namespace std;
 
 class Item
 {
+    string FileEnding;
 public:
     Item();
     ~Item();

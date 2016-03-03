@@ -4,3 +4,13 @@ Collection::Collection()
 {
 
 }
+
+void Collection::fillCollection()
+{
+
+}
+
+void Collection::updateItem()
+{
+
+}

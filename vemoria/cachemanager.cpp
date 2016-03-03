@@ -4,3 +4,8 @@ CacheManager::CacheManager()
 {
 
 }
+
+void CacheManager::checkCache()
+{
+
+}
