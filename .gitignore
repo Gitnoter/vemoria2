@@ -7,6 +7,8 @@
 *.bak
 *.log
 *.pro.user*
+*.o
+*.obj
 # toplevel directories
 /build*
 
