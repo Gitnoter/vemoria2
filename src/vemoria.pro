@@ -7,22 +7,11 @@
 # This project is licensed under the EUPL v.1.1 or a later version.
 #-------------------------------------------------
 
-QT       += core gui
+TEMPLATE = subdirs
+#CONFIG = ordered
+SUBDIRS = main \
+#          libgit2 \
+#          unittest
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
-
-TARGET = vemoria
-TEMPLATE = app
-
-
-SOURCES += main.cpp\
-        mainwindow.cpp
-
-HEADERS  += mainwindow.h \
-    version.h
-
-FORMS    += mainwindow.ui
-
-DISTFILES += \
-    version.sh \
-    VERSION
+#main.depends = libgit2
+#unittest.depends = libgit2
