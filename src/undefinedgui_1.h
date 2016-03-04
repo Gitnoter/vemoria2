@@ -1,11 +1,11 @@
-#-------------------------------------------------
-# Project Vemoria
-#
-# Vemoria aims to be an environment for archiving multimedia files.
-#
-#
-# This project is licensed under the EUPL v.1.1 or a later version.
-#-------------------------------------------------
+////////////////////////////////////////////////////////////////////////
+/// Project Vemoria                                                    /
+///                                                                    /
+/// Vemoria aims to be an environment for archiving multimedia files.  /
+///                                                                    /
+///                                                                    /
+/// This project is licensed under the EUPL v.1.1 or a later version.  /
+////////////////////////////////////////////////////////////////////////
 #ifndef UNDEFINEDGUI_1_H
 #define UNDEFINEDGUI_1_H
 #include <collections.h>
