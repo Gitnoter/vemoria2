@@ -3,7 +3,7 @@
 QT -= gui
 TARGET = git2
 TEMPLATE = lib
-CONFIG += staticlib c++11
+CONFIG += staticlib
 
 # note: paths relative to _PRO_FILE_PWD_ which is the profile path of
 # the subprojects in src/*
