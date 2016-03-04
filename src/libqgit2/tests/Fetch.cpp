@@ -1,5 +1,5 @@
 /******************************************************************************
-* Copyright (C) 2014 Peter Kümmel <syntheticpp@gmx.net>
+* Copyright (C) 2014 Peter KÃ¼mmel <syntheticpp@gmx.net>
 *
 * Permission to use, copy, modify, and distribute the software
 * and its documentation for any purpose and without fee is hereby
