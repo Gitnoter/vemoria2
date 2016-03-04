@@ -906,7 +906,6 @@ void test_repo_iterator__fs2(void)
 	static const char *expect_base[] = {
 		"heads/br2",
 		"heads/dir",
-		"heads/ident",
 		"heads/long-file-name",
 		"heads/master",
 		"heads/packed-test",
@@ -924,11 +923,11 @@ void test_repo_iterator__fs2(void)
 
 	cl_git_pass(git_iterator_for_filesystem(
 		&i, "testrepo/.git/refs", 0, NULL, NULL));
-	expect_iterator_items(i, 13, expect_base, 13, expect_base);
+	expect_iterator_items(i, 12, expect_base, 12, expect_base);
 	git_iterator_free(i);
 }
 
-void test_repo_iterator__unreadable_dir(void)
+void test_repo_iterator__fs_preserves_error(void)
 {
 	git_iterator *i;
 	const git_index_entry *e;
@@ -951,6 +950,10 @@ void test_repo_iterator__unreadable_dir(void)
 
 	cl_git_pass(git_iterator_advance(&e, i)); /* a */
 	cl_git_fail(git_iterator_advance(&e, i)); /* b */
+	cl_assert(giterr_last());
+	cl_assert(giterr_last()->message != NULL);
+	/* skip 'c/' empty directory */
+	cl_git_pass(git_iterator_advance(&e, i)); /* d */
 	cl_assert_equal_i(GIT_ITEROVER, git_iterator_advance(&e, i));
 
 	cl_must_pass(p_chmod("empty_standard_repo/r/b", 0777));

@@ -65,7 +65,7 @@ static void clar_unsandbox(void)
 	if (_clar_path[0] == '\0')
 		return;
 
-	cl_must_pass(chdir(".."));
+	chdir("..");
 
 	fs_rm(_clar_path);
 }

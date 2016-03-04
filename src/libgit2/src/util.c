@@ -171,9 +171,9 @@ int git__strcmp(const char *a, const char *b)
 
 int git__strcasecmp(const char *a, const char *b)
 {
-	while (*a && *b && git__tolower(*a) == git__tolower(*b))
+	while (*a && *b && tolower(*a) == tolower(*b))
 		++a, ++b;
-	return ((unsigned char)git__tolower(*a) - (unsigned char)git__tolower(*b));
+	return (tolower(*a) - tolower(*b));
 }
 
 int git__strcasesort_cmp(const char *a, const char *b)
@@ -182,7 +182,7 @@ int git__strcasesort_cmp(const char *a, const char *b)
 
 	while (*a && *b) {
 		if (*a != *b) {
-			if (git__tolower(*a) != git__tolower(*b))
+			if (tolower(*a) != tolower(*b))
 				break;
 			/* use case in sort order even if not in equivalence */
 			if (!cmp)
@@ -193,7 +193,7 @@ int git__strcasesort_cmp(const char *a, const char *b)
 	}
 
 	if (*a || *b)
-		return (unsigned char)git__tolower(*a) - (unsigned char)git__tolower(*b);
+		return tolower(*a) - tolower(*b);
 
 	return cmp;
 }
@@ -212,8 +212,8 @@ int git__strncasecmp(const char *a, const char *b, size_t sz)
 	int al, bl;
 
 	do {
-		al = (unsigned char)git__tolower(*a);
-		bl = (unsigned char)git__tolower(*b);
+		al = (unsigned char)tolower(*a);
+		bl = (unsigned char)tolower(*b);
 		++a, ++b;
 	} while (--sz && al && al == bl);
 
@@ -225,7 +225,7 @@ void git__strntolower(char *str, size_t len)
 	size_t i;
 
 	for (i = 0; i < len; ++i) {
-		str[i] = (char)git__tolower(str[i]);
+		str[i] = (char) tolower(str[i]);
 	}
 }
 
@@ -255,8 +255,8 @@ int git__prefixncmp_icase(const char *str, size_t str_n, const char *prefix)
 	int s, p;
 
 	while(str_n--) {
-		s = (unsigned char)git__tolower(*str++);
-		p = (unsigned char)git__tolower(*prefix++);
+		s = (unsigned char)tolower(*str++);
+		p = (unsigned char)tolower(*prefix++);
 
 		if (s != p)
 			return s - p;
@@ -607,7 +607,7 @@ size_t git__unescape(char *str)
 	return (pos - str);
 }
 
-#if defined(HAVE_QSORT_S) || (defined(HAVE_QSORT_R) && defined(BSD))
+#if defined(GIT_WIN32) || defined(BSD)
 typedef struct {
 	git__sort_r_cmp cmp;
 	void *payload;
@@ -624,16 +624,21 @@ static int GIT_STDLIB_CALL git__qsort_r_glue_cmp(
 void git__qsort_r(
 	void *els, size_t nel, size_t elsize, git__sort_r_cmp cmp, void *payload)
 {
-#if defined(HAVE_QSORT_R) && defined(BSD)
-	git__qsort_r_glue glue = { cmp, payload };
-	qsort_r(els, nel, elsize, &glue, git__qsort_r_glue_cmp);
-#elif defined(HAVE_QSORT_R) && defined(__GLIBC__)
-	qsort_r(els, nel, elsize, cmp, payload);
-#elif defined(HAVE_QSORT_S)
+#if defined(__MINGW32__) || defined(AMIGA) || \
+	defined(__OpenBSD__) || defined(__NetBSD__) || \
+	defined(__gnu_hurd__) || defined(__ANDROID_API__) || \
+	defined(__sun) || defined(__CYGWIN__) || \
+	(__GLIBC__ == 2 && __GLIBC_MINOR__ < 8) || \
+	(defined(_MSC_VER) && _MSC_VER < 1500)
+	git__insertsort_r(els, nel, elsize, NULL, cmp, payload);
+#elif defined(GIT_WIN32)
 	git__qsort_r_glue glue = { cmp, payload };
 	qsort_s(els, nel, elsize, git__qsort_r_glue_cmp, &glue);
+#elif defined(BSD)
+	git__qsort_r_glue glue = { cmp, payload };
+	qsort_r(els, nel, elsize, &glue, git__qsort_r_glue_cmp);
 #else
-	git__insertsort_r(els, nel, elsize, NULL, cmp, payload);
+	qsort_r(els, nel, elsize, cmp, payload);
 #endif
 }
 
@@ -659,31 +664,6 @@ void git__insertsort_r(
 	if (freeswap)
 		git__free(swapel);
 }
-
-/*
- * git__utf8_iterate is taken from the utf8proc project,
- * http://www.public-software-group.org/utf8proc
- *
- * Copyright (c) 2009 Public Software Group e. V., Berlin, Germany
- *
- * Permission is hereby granted, free of charge, to any person obtaining a
- * copy of this software and associated documentation files (the ""Software""),
- * to deal in the Software without restriction, including without limitation
- * the rights to use, copy, modify, merge, publish, distribute, sublicense,
- * and/or sell copies of the Software, and to permit persons to whom the
- * Software is furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE.
- */
 
 static const int8_t utf8proc_utf8class[256] = {
 	1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,

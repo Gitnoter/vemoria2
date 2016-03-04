@@ -90,7 +90,7 @@ int merge_branches(git_repository *repo,
 
 	head_checkout_opts.checkout_strategy = GIT_CHECKOUT_FORCE;
 
-	cl_git_pass(git_reference_symbolic_create(&head_ref, repo, "HEAD", ours_branch, 1, NULL));
+	cl_git_pass(git_reference_symbolic_create(&head_ref, repo, "HEAD", ours_branch, 1, NULL, NULL));
 	cl_git_pass(git_checkout_head(repo, &head_checkout_opts));
 
 	cl_git_pass(git_reference_lookup(&theirs_ref, repo, theirs_branch));
@@ -110,7 +110,7 @@ void merge__dump_index_entries(git_vector *index_entries)
 	size_t i;
 	const git_index_entry *index_entry;
 
-	printf ("\nINDEX [%"PRIuZ"]:\n", index_entries->length);
+	printf ("\nINDEX [%d]:\n", (int)index_entries->length);
 	for (i = 0; i < index_entries->length; i++) {
 		index_entry = index_entries->contents[i];
 

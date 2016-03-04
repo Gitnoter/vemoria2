@@ -1,5 +1,4 @@
 #include "clar_libgit2.h"
-#include "config/config_helpers.h"
 #include "refs.h"
 
 static git_repository *repo;
@@ -92,7 +91,7 @@ static void assert_merge_and_or_remote_key_missing(git_repository *repository, c
 	git_reference *branch;
 
 	cl_assert_equal_i(GIT_OBJ_COMMIT, git_object_type((git_object*)target));
-	cl_git_pass(git_branch_create(&branch, repository, entry_name, (git_commit*)target, 0));
+	cl_git_pass(git_branch_create(&branch, repository, entry_name, (git_commit*)target, 0, NULL, NULL));
 
 	cl_assert_equal_i(GIT_ENOTFOUND, git_branch_upstream(&upstream, branch));
 
@@ -124,6 +123,8 @@ void test_refs_branches_upstream__set_unset_upstream(void)
 {
 	git_reference *branch;
 	git_repository *repository;
+	const char *value;
+	git_config *config;
 
 	repository = cl_git_sandbox_init("testrepo.git");
 
@@ -131,8 +132,11 @@ void test_refs_branches_upstream__set_unset_upstream(void)
 	cl_git_pass(git_reference_lookup(&branch, repository, "refs/heads/test"));
 	cl_git_pass(git_branch_set_upstream(branch, "test/master"));
 
-	assert_config_entry_value(repository, "branch.test.remote", "test");
-	assert_config_entry_value(repository, "branch.test.merge", "refs/heads/master");
+	cl_git_pass(git_repository_config(&config, repository));
+	cl_git_pass(git_config_get_string(&value, config, "branch.test.remote"));
+	cl_assert_equal_s(value, "test");
+	cl_git_pass(git_config_get_string(&value, config, "branch.test.merge"));
+	cl_assert_equal_s(value, "refs/heads/master");
 
 	git_reference_free(branch);
 
@@ -140,54 +144,25 @@ void test_refs_branches_upstream__set_unset_upstream(void)
 	cl_git_pass(git_reference_lookup(&branch, repository, "refs/heads/test"));
 	cl_git_pass(git_branch_set_upstream(branch, "master"));
 
-	assert_config_entry_value(repository, "branch.test.remote", ".");
-	assert_config_entry_value(repository, "branch.test.merge", "refs/heads/master");
+	cl_git_pass(git_config_get_string(&value, config, "branch.test.remote"));
+	cl_assert_equal_s(value, ".");
+	cl_git_pass(git_config_get_string(&value, config, "branch.test.merge"));
+	cl_assert_equal_s(value, "refs/heads/master");
 
 	/* unset */
 	cl_git_pass(git_branch_set_upstream(branch, NULL));
-	assert_config_entry_existence(repository, "branch.test.remote", false);
-	assert_config_entry_existence(repository, "branch.test.merge", false);
+	cl_git_fail_with(git_config_get_string(&value, config, "branch.test.merge"), GIT_ENOTFOUND);
+	cl_git_fail_with(git_config_get_string(&value, config, "branch.test.remote"), GIT_ENOTFOUND);
 
 	git_reference_free(branch);
 
 	cl_git_pass(git_reference_lookup(&branch, repository, "refs/heads/master"));
 	cl_git_pass(git_branch_set_upstream(branch, NULL));
-	assert_config_entry_existence(repository, "branch.test.remote", false);
-	assert_config_entry_existence(repository, "branch.test.merge", false);
+	cl_git_fail_with(git_config_get_string(&value, config, "branch.master.merge"), GIT_ENOTFOUND);
+	cl_git_fail_with(git_config_get_string(&value, config, "branch.master.remote"), GIT_ENOTFOUND);
 
 	git_reference_free(branch);
 
-	cl_git_sandbox_cleanup();
-}
-
-void test_refs_branches_upstream__no_fetch_refspec(void)
-{
-	git_reference *ref, *branch;
-	git_repository *repo;
-	git_remote *remote;
-	git_config *cfg;
-
-	repo = cl_git_sandbox_init("testrepo.git");
-
-	cl_git_pass(git_remote_create_with_fetchspec(&remote, repo, "matching", ".", NULL));
-	cl_git_pass(git_remote_add_push(repo, "matching", ":"));
-
-	cl_git_pass(git_reference_lookup(&branch, repo, "refs/heads/test"));
-	cl_git_pass(git_reference_create(&ref, repo, "refs/remotes/matching/master", git_reference_target(branch), 1, "fetch"));
-	cl_git_fail(git_branch_set_upstream(branch, "matching/master"));
-	cl_assert_equal_s("Could not determine remote for 'refs/remotes/matching/master'",
-			  giterr_last()->message);
-
-	/* we can't set it automatically, so let's test the user setting it by hand */
-	cl_git_pass(git_repository_config(&cfg, repo));
-	cl_git_pass(git_config_set_string(cfg, "branch.test.remote", "matching"));
-	cl_git_pass(git_config_set_string(cfg, "branch.test.merge", "refs/heads/master"));
-	/* we still can't find it because there is no rule for that reference */
-	cl_git_fail_with(GIT_ENOTFOUND, git_branch_upstream(&ref, branch));
-
-	git_reference_free(ref);
-	git_reference_free(branch);
-	git_remote_free(remote);
-
+	git_config_free(config);
 	cl_git_sandbox_cleanup();
 }
