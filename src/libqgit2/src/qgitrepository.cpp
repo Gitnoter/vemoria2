@@ -118,7 +118,7 @@ Repository::Repository(git_repository *repository, bool own)
 }
 
 Repository::Repository(const Repository& other)
-    : d_ptr(new Private(*other.d_ptr, *this))
+    : QObject(), d_ptr(new Private(*other.d_ptr, *this))
 {
 }
 
