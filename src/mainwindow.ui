@@ -265,7 +265,10 @@ border-color:#fff;
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true">background-color:#FFF;</string>
+         <string notr="true">#gridContent{
+	background-color:#FFF;
+	border-top:1px solid #e3e3e3;
+}</string>
         </property>
         <layout class="QGridLayout" name="gridLayout_10" rowstretch="0" columnstretch="0"/>
        </widget>
@@ -285,7 +288,11 @@ border-color:#fff;
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true">background-color:blue;</string>
+         <string notr="true">#gridDetail{
+	background-color:#FFF;
+	border-left:1px solid #e3e3e3;
+	border-top:1px solid #e3e3e3;
+}</string>
         </property>
         <layout class="QGridLayout" name="gridLayout_8"/>
        </widget>
