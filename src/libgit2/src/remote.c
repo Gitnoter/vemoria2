@@ -2011,7 +2011,6 @@ int git_remote_add_push(git_remote *remote, const char *refspec)
 	return add_refspec(remote, refspec, false);
 }
 
-#if 0 /* seems to be unused */
 static int set_refspecs(git_remote *remote, git_strarray *array, int push)
 {
 	git_vector *vec = &remote->refspecs;
@@ -2039,7 +2038,6 @@ static int set_refspecs(git_remote *remote, git_strarray *array, int push)
 
 	return 0;
 }
-#endif
 
 int git_remote_set_fetch_refspecs(git_remote *remote, git_strarray *array)
 {
