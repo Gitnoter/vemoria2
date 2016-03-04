@@ -36,7 +36,7 @@ QMAKE_DISTCLEAN += $${DESTDIR}/$${QMAKE_PREFIX_STATICLIB}$${TARGET}.$${QMAKE_EXT
 }
 
 win32-g++ {
-  DEFINES += _GNU_SOURCE
+#  DEFINES += _GNU_SOURCE
 
   INCLUDEPATH += \
     deps/regex \
@@ -61,7 +61,6 @@ win32-g++ {
     ./src/win32/reparse.h \
     ./src/win32/utf-conv.h \
     ./src/win32/version.h \
-    ./src/win32/w32_buffer.h \
     ./src/win32/w32_util.h \
 
   SOURCES += \
@@ -79,7 +78,6 @@ win32-g++ {
     ./src/win32/precompiled.c \
     ./src/win32/pthread.c \
     ./src/win32/utf-conv.c \
-    ./src/win32/w32_buffer.c \
     ./src/win32/w32_util.c \
 
 } else {
