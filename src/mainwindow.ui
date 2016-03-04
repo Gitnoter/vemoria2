@@ -115,16 +115,20 @@ border-color:#fff;
                <number>0</number>
               </property>
               <item row="0" column="0">
-               <widget class="QPushButton" name="pushButton">
-                <property name="text">
-                 <string>PushButton</string>
+               <widget class="Line" name="line">
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>1</height>
+                 </size>
                 </property>
-               </widget>
-              </item>
-              <item row="1" column="0">
-               <widget class="QPushButton" name="pushButton_2">
-                <property name="text">
-                 <string>PushButton</string>
+                <property name="styleSheet">
+                 <string notr="true">background-color:#e3e3e3;
+border:none;
+height:1px;</string>
+                </property>
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
                 </property>
                </widget>
               </item>
