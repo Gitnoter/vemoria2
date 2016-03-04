@@ -155,6 +155,4 @@ void test_network_refspecs__matching(void)
 	cl_assert_equal_s(":", spec.string);
 	cl_assert_equal_s("", spec.src);
 	cl_assert_equal_s("", spec.dst);
-
-	git_refspec__free(&spec);
 }

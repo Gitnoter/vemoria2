@@ -7,13 +7,10 @@
 #include "common.h"
 #include "fileops.h"
 #include "global.h"
-#include "strmap.h"
 #include <ctype.h>
 #if GIT_WIN32
 #include "win32/findfile.h"
 #endif
-
-GIT__USE_STRMAP
 
 int git_futils_mkpath2file(const char *file_path, const mode_t mode)
 {
@@ -124,17 +121,10 @@ mode_t git_futils_canonical_mode(mode_t raw_mode)
 int git_futils_readbuffer_fd(git_buf *buf, git_file fd, size_t len)
 {
 	ssize_t read_size = 0;
-	size_t alloc_len;
 
 	git_buf_clear(buf);
 
-	if (!git__is_ssizet(len)) {
-		giterr_set(GITERR_INVALID, "Read too large.");
-		return -1;
-	}
-
-	GITERR_CHECK_ALLOC_ADD(&alloc_len, len, 1);
-	if (git_buf_grow(buf, alloc_len) < 0)
+	if (git_buf_grow(buf, len + 1) < 0)
 		return -1;
 
 	/* p_read loops internally to read len bytes */
@@ -184,7 +174,7 @@ int git_futils_readbuffer_updated(
 	 */
 	if (size && *size != (size_t)st.st_size)
 		changed = true;
-	if (mtime && *mtime != (time_t)st.st_mtime)
+	if (mtime && *mtime != st.st_mtime)
 		changed = true;
 	if (!size && !mtime)
 		changed = true;
@@ -323,7 +313,7 @@ GIT_INLINE(int) validate_existing(
 	}
 
 	else if (!S_ISDIR(st->st_mode)) {
-		giterr_set(GITERR_FILESYSTEM,
+		giterr_set(GITERR_INVALID,
 			"Failed to make directory '%s': directory exists", make_path);
 		return GIT_EEXISTS;
 	}
@@ -331,12 +321,12 @@ GIT_INLINE(int) validate_existing(
 	return 0;
 }
 
-int git_futils_mkdir_ext(
+int git_futils_mkdir_withperf(
 	const char *path,
 	const char *base,
 	mode_t mode,
 	uint32_t flags,
-	struct git_futils_mkdir_options *opts)
+	struct git_futils_mkdir_perfdata *perfdata)
 {
 	int error = -1;
 	git_buf make_path = GIT_BUF_INIT;
@@ -399,7 +389,6 @@ int git_futils_mkdir_ext(
 
 	/* walk down tail of path making each directory */
 	for (tail = &make_path.ptr[root]; *tail; *tail = lastch) {
-		bool mkdir_attempted = false;
 
 		/* advance tail to include next path component */
 		while (*tail == '/')
@@ -412,40 +401,29 @@ int git_futils_mkdir_ext(
 		*tail = '\0';
 		st.st_mode = 0;
 
-		if (opts->dir_map && git_strmap_exists(opts->dir_map, make_path.ptr))
-			continue;
-
 		/* See what's going on with this path component */
-		opts->perfdata.stat_calls++;
+		perfdata->stat_calls++;
 
-retry_lstat:
 		if (p_lstat(make_path.ptr, &st) < 0) {
-			if (mkdir_attempted || errno != ENOENT) {
-				giterr_set(GITERR_OS, "Cannot access component in path '%s'", make_path.ptr);
-				error = -1;
+			perfdata->mkdir_calls++;
+
+			if (errno != ENOENT || p_mkdir(make_path.ptr, mode) < 0) {
+				giterr_set(GITERR_OS, "Failed to make directory '%s'", make_path.ptr);
+				error = GIT_EEXISTS;
 				goto done;
 			}
 
 			giterr_clear();
-			opts->perfdata.mkdir_calls++;
-			mkdir_attempted = true;
-			if (p_mkdir(make_path.ptr, mode) < 0) {
-				if (errno == EEXIST)
-					goto retry_lstat;
-				giterr_set(GITERR_OS, "Failed to make directory '%s'", make_path.ptr);
-				error = -1;
-				goto done;
-			}
 		} else {
 			/* with exclusive create, existing dir is an error */
 			if ((flags & GIT_MKDIR_EXCL) != 0) {
-				giterr_set(GITERR_FILESYSTEM, "Failed to make directory '%s': directory exists", make_path.ptr);
+				giterr_set(GITERR_INVALID, "Failed to make directory '%s': directory exists", make_path.ptr);
 				error = GIT_EEXISTS;
 				goto done;
 			}
 
 			if ((error = validate_existing(
-				make_path.ptr, &st, mode, flags, &opts->perfdata)) < 0)
+				make_path.ptr, &st, mode, flags, perfdata)) < 0)
 					goto done;
 		}
 
@@ -454,7 +432,7 @@ retry_lstat:
 			 (lastch == '\0' && (flags & GIT_MKDIR_CHMOD) != 0)) &&
 			st.st_mode != mode) {
 
-			opts->perfdata.chmod_calls++;
+			perfdata->chmod_calls++;
 
 			if ((error = p_chmod(make_path.ptr, mode)) < 0 &&
 				lastch == '\0') {
@@ -463,23 +441,6 @@ retry_lstat:
 				goto done;
 			}
 		}
-
-		if (opts->dir_map && opts->pool) {
-			char *cache_path;
-			size_t alloc_size;
-
-			GITERR_CHECK_ALLOC_ADD(&alloc_size, make_path.size, 1);
-			if (!git__is_uint32(alloc_size))
-				return -1;
-			cache_path = git_pool_malloc(opts->pool, (uint32_t)alloc_size);
-			GITERR_CHECK_ALLOC(cache_path);
-
-			memcpy(cache_path, make_path.ptr, make_path.size + 1);
-
-			git_strmap_insert(opts->dir_map, cache_path, cache_path, error);
-			if (error < 0)
-				goto done;
-		}
 	}
 
 	error = 0;
@@ -487,7 +448,7 @@ retry_lstat:
 	/* check that full path really is a directory if requested & needed */
 	if ((flags & GIT_MKDIR_VERIFY_DIR) != 0 &&
 		lastch != '\0') {
-		opts->perfdata.stat_calls++;
+		perfdata->stat_calls++;
 
 		if (p_stat(make_path.ptr, &st) < 0 || !S_ISDIR(st.st_mode)) {
 			giterr_set(GITERR_OS, "Path is not a directory '%s'",
@@ -507,8 +468,8 @@ int git_futils_mkdir(
 	mode_t mode,
 	uint32_t flags)
 {
-	struct git_futils_mkdir_options options = {0};
-	return git_futils_mkdir_ext(path, base, mode, flags, &options);
+	struct git_futils_mkdir_perfdata perfdata = {0};
+	return git_futils_mkdir_withperf(path, base, mode, flags, &perfdata);
 }
 
 int git_futils_mkdir_r(const char *path, const char *base, const mode_t mode)
@@ -689,7 +650,7 @@ int git_futils_fake_symlink(const char *old, const char *new)
 static int cp_by_fd(int ifd, int ofd, bool close_fd_when_done)
 {
 	int error = 0;
-	char buffer[FILEIO_BUFSIZE];
+	char buffer[4096];
 	ssize_t len = 0;
 
 	while (!error && (len = p_read(ifd, buffer, sizeof(buffer))) > 0)
@@ -733,11 +694,7 @@ static int cp_link(const char *from, const char *to, size_t link_size)
 {
 	int error = 0;
 	ssize_t read_len;
-	char *link_data;
-	size_t alloc_size;
-
-	GITERR_CHECK_ALLOC_ADD(&alloc_size, link_size, 1);
-	link_data = git__malloc(alloc_size);
+	char *link_data = git__malloc(link_size + 1);
 	GITERR_CHECK_ALLOC(link_data);
 
 	read_len = p_readlink(from, link_data, link_size);

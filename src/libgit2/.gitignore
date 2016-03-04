@@ -28,6 +28,5 @@ msvc/Release/
 !cmake/Modules/*.cmake
 .DS_Store
 *~
-.*.swp
 tags
 mkmf.log

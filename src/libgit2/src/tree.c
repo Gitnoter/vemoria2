@@ -17,7 +17,7 @@
 #define DEFAULT_TREE_SIZE 16
 #define MAX_FILEMODE_BYTES 6
 
-GIT__USE_STRMAP
+GIT__USE_STRMAP;
 
 static bool valid_filemode(const int filemode)
 {
@@ -84,11 +84,10 @@ int git_tree_entry_icmp(const git_tree_entry *e1, const git_tree_entry *e2)
 static git_tree_entry *alloc_entry(const char *filename)
 {
 	git_tree_entry *entry = NULL;
-	size_t filename_len = strlen(filename), tree_len;
+	size_t filename_len = strlen(filename);
 
-	if (GIT_ADD_SIZET_OVERFLOW(&tree_len, sizeof(git_tree_entry), filename_len) ||
-		GIT_ADD_SIZET_OVERFLOW(&tree_len, tree_len, 1) ||
-		!(entry = git__malloc(tree_len)))
+	entry = git__malloc(sizeof(git_tree_entry) + filename_len + 1);
+	if (!entry)
 		return NULL;
 
 	memset(entry, 0x0, sizeof(git_tree_entry));
@@ -211,8 +210,7 @@ int git_tree_entry_dup(git_tree_entry **dest, const git_tree_entry *source)
 
 	assert(source);
 
-	GITERR_CHECK_ALLOC_ADD(&total_size, sizeof(git_tree_entry), source->filename_len);
-	GITERR_CHECK_ALLOC_ADD(&total_size, total_size, 1);
+	total_size = sizeof(git_tree_entry) + source->filename_len + 1;
 
 	copy = git__malloc(total_size);
 	GITERR_CHECK_ALLOC(copy);
@@ -858,7 +856,7 @@ int git_tree_entry_bypath(
 
 	if (entry == NULL) {
 		giterr_set(GITERR_TREE,
-			   "the path '%.*s' does not exist in the given tree", filename_len, path);
+			"The path '%s' does not exist in the given tree", path);
 		return GIT_ENOTFOUND;
 	}
 
@@ -868,7 +866,7 @@ int git_tree_entry_bypath(
 		 * then this entry *must* be a tree */
 		if (!git_tree_entry__is_tree(entry)) {
 			giterr_set(GITERR_TREE,
-				   "the path '%.*s' exists but is not a tree", filename_len, path);
+				"The path '%s' does not exist in the given tree", path);
 			return GIT_ENOTFOUND;
 		}
 

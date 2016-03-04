@@ -46,9 +46,8 @@ void test_config_global__open_global(void)
 void test_config_global__open_xdg(void)
 {
 	git_config *cfg, *xdg, *selected;
-	const char *str = "teststring";
+	const char *val, *str = "teststring";
 	const char *key = "this.variable";
-	git_buf buf = {0};
 
 	cl_git_mkfile("xdg/git/config", "# XDG config\n[core]\n  test = 1\n");
 
@@ -57,10 +56,9 @@ void test_config_global__open_xdg(void)
 	cl_git_pass(git_config_open_global(&selected, cfg));
 
 	cl_git_pass(git_config_set_string(xdg, key, str));
-	cl_git_pass(git_config_get_string_buf(&buf, selected, key));
-	cl_assert_equal_s(str, buf.ptr);
+	cl_git_pass(git_config_get_string(&val, selected, key));
+	cl_assert_equal_s(str, val);
 
-	git_buf_free(&buf);
 	git_config_free(selected);
 	git_config_free(xdg);
 	git_config_free(cfg);
