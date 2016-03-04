@@ -26,6 +26,7 @@ void ItemManager::setItemDetails(string itemname, string Details[]/*, specific I
 string *ItemManager::getItemList()
 {
 
+    return NULL;
 }
 
 void ItemManager::saveItem()
@@ -48,7 +49,7 @@ void ItemManager::exportItems(string ItemList[])
 
 }
 
-void ItemManager::ItemManager::createItem()
+void ItemManager::createItem()
 {
 
 }
