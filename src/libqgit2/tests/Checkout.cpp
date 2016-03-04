@@ -153,7 +153,7 @@ void TestCheckout::checkoutPaths()
 }
 
 
-QTEST_MAIN(TestCheckout)
+AUTO_TEST_SUITE(TestCheckout);
 
 #include "Checkout.moc"
 

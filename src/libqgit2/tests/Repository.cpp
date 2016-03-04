@@ -137,6 +137,6 @@ void TestRepository::testShouldIgnore()
     EXPECT_THROW(repo->shouldIgnore(dir.absoluteFilePath(ignoredFileName)), Exception);
 }
 
-QTEST_MAIN(TestRepository)
+AUTO_TEST_SUITE(TestRepository);
 
 #include "Repository.moc"

@@ -107,6 +107,6 @@ TestInit::~TestInit()
 }
 
 
-QTEST_MAIN(TestInit);
+AUTO_TEST_SUITE(TestInit);
 
 #include "Init.moc"

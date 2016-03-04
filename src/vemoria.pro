@@ -12,6 +12,7 @@ TEMPLATE = subdirs
 SUBDIRS = main \
           libgit2 \
           libqgit2 \
+          test-libqgit2 \
 #          unittest
 
 main.depends = libgit2 libqgit2

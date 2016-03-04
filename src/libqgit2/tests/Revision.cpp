@@ -81,6 +81,6 @@ void TestRevision::revwalk()
     }
 }
 
-QTEST_MAIN(TestRevision);
+AUTO_TEST_SUITE(TestRevision);
 
 #include "Revision.moc"

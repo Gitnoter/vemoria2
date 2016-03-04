@@ -245,6 +245,6 @@ void TestFetch::remoteBranches()
 }
 
 
-QTEST_MAIN(TestFetch)
+AUTO_TEST_SUITE(TestFetch);
 
 #include "Fetch.moc"

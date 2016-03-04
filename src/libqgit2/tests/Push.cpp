@@ -90,6 +90,6 @@ void TestPush::pushToNewTargetBranch()
     QVERIFY(repo.remoteBranches("origin").contains(targetBranch));
 }
 
-QTEST_MAIN(TestPush)
+AUTO_TEST_SUITE(TestPush);
 
 #include "Push.moc"

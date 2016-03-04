@@ -1,6 +1,7 @@
 #ifndef LIBQGIT2_TEST_HELPERS_H
 #define LIBQGIT2_TEST_HELPERS_H
 
+#include "AutoTest.h"
 #include <QTest>
 #include <QDebug>
 

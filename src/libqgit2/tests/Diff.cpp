@@ -57,6 +57,6 @@ void TestDiff::testDiffFileList()
     }
 }
 
-QTEST_MAIN(TestDiff)
+AUTO_TEST_SUITE(TestDiff);
 
 #include "Diff.moc"

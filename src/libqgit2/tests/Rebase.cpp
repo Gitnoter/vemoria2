@@ -131,6 +131,6 @@ void TestRebase::TestRebasingMasterOntoAnotherBranchProducesCorrectTopology()
 }
 
 
-QTEST_MAIN(TestRebase);
+AUTO_TEST_SUITE(TestRebase);
 
 #include "Rebase.moc"

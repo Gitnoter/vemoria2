@@ -136,6 +136,6 @@ void TestClone::sshProtocol()
 }
 
 
-QTEST_MAIN(TestClone)
+AUTO_TEST_SUITE(TestClone);
 
 #include "Clone.moc"
