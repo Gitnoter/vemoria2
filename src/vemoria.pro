@@ -10,8 +10,8 @@
 TEMPLATE = subdirs
 #CONFIG = ordered
 SUBDIRS = main \
-#          libgit2 \
+          libgit2 \
 #          unittest
 
-#main.depends = libgit2
+main.depends = libgit2
 #unittest.depends = libgit2
