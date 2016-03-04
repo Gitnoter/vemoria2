@@ -11,7 +11,9 @@ INCLUDEPATH += \
   include \
   src \
   deps/zlib \
-# $$DESTDIR
+  deps/http-parser \
+
+DEFINES += STDC
 
 # Currently qmake (version 3.0) does not remove a library
 # target if the destination directory is not the build directory,
@@ -19,6 +21,12 @@ INCLUDEPATH += \
 # as we need to guess the real filename.
 # See target 'distclean' in build/app-lib/Makefile
 QMAKE_DISTCLEAN += $${DESTDIR}/$${QMAKE_PREFIX_STATICLIB}$${TARGET}.$${QMAKE_EXTENSION_STATICLIB}
+
+*-g++ {
+    # standard GNU c++ behaviour is to complain about this, but the
+    # sources are not prepared to fullfill all initializations
+    QMAKE_CFLAGS += -Wno-missing-field-initializers
+}
 
 win32-g++ {
   INCLUDEPATH += \
@@ -32,12 +40,29 @@ win32-g++ {
     ./deps/regex/config.h \
     ./deps/regex/regex.h \
     ./deps/regex/regex_internal.h \
+    ./src/hash/hash_win32.h \
 
   SOURCES += \
     ./deps/regex/regcomp.c \
     ./deps/regex/regex.c \
     ./deps/regex/regexec.c \
     ./deps/regex/regex_internal.c \
+    #
+    ./src/hash/hash_win32.c \
+    #
+    ./src/win32/dir.c \
+    ./src/win32/error.c \
+    ./src/win32/findfile.c \
+    ./src/win32/map.c \
+    ./src/win32/path_w32.c \
+    ./src/win32/posix_w32.c \
+    ./src/win32/precompiled.c \
+    ./src/win32/pthread.c \
+    ./src/win32/utf-conv.c \
+    ./src/win32/w32_buffer.c \
+    ./src/win32/w32_crtdbg_stacktrace.c \
+    ./src/win32/w32_stack.c \
+    ./src/win32/w32_util.c \
 
 }
 
@@ -132,8 +157,6 @@ HEADERS += \
   ./include/git2/types.h \
   ./include/git2/version.h \
 #
-  ./script/user_nodefs.h \
-#
   ./src/annotated_commit.h \
   ./src/array.h \
   ./src/attrcache.h \
@@ -174,8 +197,6 @@ HEADERS += \
   ./src/hash/hash_common_crypto.h \
   ./src/hash/hash_generic.h \
   ./src/hash/hash_openssl.h \
-  ./src/hash/hash_win32.h \
-  ./src/idxmap.h \
   ./src/ignore.h \
   ./src/index.h \
   ./src/integer.h \
@@ -226,7 +247,6 @@ HEADERS += \
   ./src/thread-utils.h \
   ./src/tls_stream.h \
   ./src/trace.h \
-  ./src/transaction.h \
   ./src/transports/auth.h \
   ./src/transports/auth_negotiate.h \
   ./src/transports/cred.h \
@@ -250,10 +270,7 @@ HEADERS += \
   ./src/win32/utf-conv.h \
   ./src/win32/version.h \
   ./src/win32/w32_buffer.h \
-  ./src/win32/w32_crtdbg_stacktrace.h \
-  ./src/win32/w32_stack.h \
   ./src/win32/w32_util.h \
-  ./src/win32/win32-compat.h \
   ./src/xdiff/xdiff.h \
   ./src/xdiff/xdiffi.h \
   ./src/xdiff/xemit.h \
@@ -266,166 +283,152 @@ HEADERS += \
 
 
 SOURCES += \
-# ./src/annotated_commit.c \
+  ./src/annotated_commit.c \
   ./src/attr.c \
   ./src/attrcache.c \
   ./src/attr_file.c \
-# ./src/blame.c \
-# ./src/blame_git.c \
-# ./src/blob.c \
-# ./src/branch.c \
-# ./src/buffer.c \
-# ./src/buf_text.c \
-# ./src/cache.c \
-# ./src/checkout.c \
-# ./src/cherrypick.c \
-# ./src/clone.c \
-# ./src/commit.c \
-# ./src/commit_list.c \
-# ./src/config.c \
-# ./src/config_cache.c \
-# ./src/config_file.c \
-# ./src/crlf.c \
-# ./src/curl_stream.c \
-# ./src/date.c \
-# ./src/delta-apply.c \
-# ./src/delta.c \
-# ./src/describe.c \
-# ./src/diff.c \
-# ./src/diff_driver.c \
-# ./src/diff_file.c \
-# ./src/diff_patch.c \
-# ./src/diff_print.c \
-# ./src/diff_stats.c \
-# ./src/diff_tform.c \
-# ./src/diff_xdiff.c \
-# ./src/errors.c \
-# ./src/fetch.c \
-# ./src/fetchhead.c \
-# ./src/filebuf.c \
-# ./src/fileops.c \
-# ./src/filter.c \
-# ./src/fnmatch.c \
-# ./src/global.c \
-# ./src/graph.c \
-# ./src/hash.c \
-# ./src/hashsig.c \
-# ./src/ident.c \
-# ./src/ignore.c \
-# ./src/index.c \
-# ./src/indexer.c \
-# ./src/iterator.c \
-# ./src/merge.c \
-# ./src/merge_file.c \
-# ./src/message.c \
-# ./src/mwindow.c \
-# ./src/netops.c \
-# ./src/notes.c \
-# ./src/object_api.c \
-# ./src/object.c \
-# ./src/odb.c \
-# ./src/odb_loose.c \
-# ./src/odb_mempack.c \
-# ./src/odb_pack.c \
-# ./src/oidarray.c \
-# ./src/oid.c \
-# ./src/openssl_stream.c \
-# ./src/pack.c \
-# ./src/pack-objects.c \
-# ./src/path.c \
-# ./src/pathspec.c \
-# ./src/pool.c \
-# ./src/posix.c \
-# ./src/pqueue.c \
-# ./src/push.c \
-# ./src/rebase.c \
-# ./src/refdb.c \
-# ./src/refdb_fs.c \
-# ./src/reflog.c \
-# ./src/refs.c \
-# ./src/refspec.c \
-# ./src/remote.c \
-# ./src/repository.c \
-# ./src/reset.c \
-# ./src/revert.c \
-# ./src/revparse.c \
-# ./src/revwalk.c \
-# ./src/settings.c \
-# ./src/sha1_lookup.c \
-# ./src/signature.c \
-# ./src/socket_stream.c \
-# ./src/sortedcache.c \
-# ./src/stash.c \
-# ./src/status.c \
-# ./src/stransport_stream.c \
-# ./src/strmap.c \
-# ./src/submodule.c \
-# ./src/sysdir.c \
-# ./src/tag.c \
-# ./src/thread-utils.c \
-# ./src/tls_stream.c \
-# ./src/trace.c \
-# ./src/transaction.c \
-# ./src/transport.c \
-# ./src/tree.c \
-# ./src/tree-cache.c \
-# ./src/tsort.c \
-# ./src/util.c \
-# ./src/vector.c \
-# ./src/zstream.c \
+  ./src/blame.c \
+  ./src/blame_git.c \
+  ./src/blob.c \
+  ./src/branch.c \
+  ./src/buffer.c \
+  ./src/buf_text.c \
+  ./src/cache.c \
+  ./src/checkout.c \
+  ./src/cherrypick.c \
+  ./src/clone.c \
+  ./src/commit.c \
+  ./src/commit_list.c \
+  ./src/config.c \
+  ./src/config_cache.c \
+  ./src/config_file.c \
+  ./src/crlf.c \
+  ./src/curl_stream.c \
+  ./src/date.c \
+  ./src/delta-apply.c \
+  ./src/delta.c \
+  ./src/describe.c \
+  ./src/diff.c \
+  ./src/diff_driver.c \
+  ./src/diff_file.c \
+  ./src/diff_patch.c \
+  ./src/diff_print.c \
+  ./src/diff_stats.c \
+  ./src/diff_tform.c \
+  ./src/diff_xdiff.c \
+  ./src/errors.c \
+  ./src/fetch.c \
+  ./src/fetchhead.c \
+  ./src/filebuf.c \
+  ./src/fileops.c \
+  ./src/filter.c \
+  ./src/fnmatch.c \
+  ./src/global.c \
+  ./src/graph.c \
+  ./src/hash.c \
+  ./src/hashsig.c \
+  ./src/ident.c \
+  ./src/ignore.c \
+  ./src/index.c \
+  ./src/indexer.c \
+  ./src/iterator.c \
+  ./src/merge.c \
+  ./src/merge_file.c \
+  ./src/message.c \
+  ./src/mwindow.c \
+  ./src/netops.c \
+  ./src/notes.c \
+  ./src/object_api.c \
+  ./src/object.c \
+  ./src/odb.c \
+  ./src/odb_loose.c \
+  ./src/odb_mempack.c \
+  ./src/odb_pack.c \
+  ./src/oidarray.c \
+  ./src/oid.c \
+  ./src/openssl_stream.c \
+  ./src/pack.c \
+  ./src/pack-objects.c \
+  ./src/path.c \
+  ./src/pathspec.c \
+  ./src/pool.c \
+  ./src/posix.c \
+  ./src/pqueue.c \
+  ./src/push.c \
+  ./src/rebase.c \
+  ./src/refdb.c \
+  ./src/refdb_fs.c \
+  ./src/reflog.c \
+  ./src/refs.c \
+  ./src/refspec.c \
+  ./src/remote.c \
+  ./src/repository.c \
+  ./src/reset.c \
+  ./src/revert.c \
+  ./src/revparse.c \
+  ./src/revwalk.c \
+  ./src/settings.c \
+  ./src/sha1_lookup.c \
+  ./src/signature.c \
+  ./src/socket_stream.c \
+  ./src/sortedcache.c \
+  ./src/stash.c \
+  ./src/status.c \
+  ./src/stransport_stream.c \
+  ./src/strmap.c \
+  ./src/submodule.c \
+  ./src/sysdir.c \
+  ./src/tag.c \
+  ./src/thread-utils.c \
+  ./src/tls_stream.c \
+  ./src/trace.c \
+  ./src/transaction.c \
+  ./src/transport.c \
+  ./src/tree.c \
+  ./src/tree-cache.c \
+  ./src/tsort.c \
+  ./src/util.c \
+  ./src/vector.c \
+  ./src/zstream.c \
+#
+  ./deps/http-parser/http_parser.c \
+#
+  ./src/unix/map.c \
+  ./src/unix/realpath.c \
+#
+  ./src/hash/hash_generic.c \
+#
+  ./src/transports/auth.c \
+  ./src/transports/auth_negotiate.c \
+  ./src/transports/cred.c \
+  ./src/transports/cred_helpers.c \
+  ./src/transports/git.c \
+  ./src/transports/http.c \
+  ./src/transports/local.c \
+  ./src/transports/smart.c \
+  ./src/transports/smart_pkt.c \
+  ./src/transports/smart_protocol.c \
+  ./src/transports/ssh.c \
+  ./src/transports/winhttp.c \
+#
+  ./src/xdiff/xdiffi.c \
+  ./src/xdiff/xemit.c \
+  ./src/xdiff/xhistogram.c \
+  ./src/xdiff/xmerge.c \
+  ./src/xdiff/xpatience.c \
+  ./src/xdiff/xprepare.c \
+  ./src/xdiff/xutils.c \
+#
+  ./deps/zlib/adler32.c \
+  ./deps/zlib/crc32.c \
+  ./deps/zlib/deflate.c \
+  ./deps/zlib/infback.c \
+  ./deps/zlib/inffast.c \
+  ./deps/zlib/inflate.c \
+  ./deps/zlib/inftrees.c \
+  ./deps/zlib/trees.c \
+  ./deps/zlib/zutil.c \
 
-# ./src/unix/map.c \
-# ./src/unix/realpath.c \
-
-# ./src/hash/hash_generic.c \
-# ./src/hash/hash_win32.c \
-
-# ./src/transports/auth.c \
-# ./src/transports/auth_negotiate.c \
-# ./src/transports/cred.c \
-# ./src/transports/cred_helpers.c \
-# ./src/transports/git.c \
-# ./src/transports/http.c \
-# ./src/transports/local.c \
-# ./src/transports/smart.c \
-# ./src/transports/smart_pkt.c \
-# ./src/transports/smart_protocol.c \
-# ./src/transports/ssh.c \
-# ./src/transports/winhttp.c \
-
-# ./src/win32/dir.c \
-# ./src/win32/error.c \
-# ./src/win32/findfile.c \
-# ./src/win32/map.c \
-# ./src/win32/path_w32.c \
-# ./src/win32/posix_w32.c \
-# ./src/win32/precompiled.c \
-# ./src/win32/pthread.c \
-# ./src/win32/utf-conv.c \
-# ./src/win32/w32_buffer.c \
-# ./src/win32/w32_crtdbg_stacktrace.c \
-# ./src/win32/w32_stack.c \
-# ./src/win32/w32_util.c \
-
-# ./src/xdiff/xdiffi.c \
-# ./src/xdiff/xemit.c \
-# ./src/xdiff/xhistogram.c \
-# ./src/xdiff/xmerge.c \
-# ./src/xdiff/xpatience.c \
-# ./src/xdiff/xprepare.c \
-# ./src/xdiff/xutils.c \
-
-# ./deps/zlib/adler32.c \
-# ./deps/zlib/crc32.c \
-# ./deps/zlib/deflate.c \
-# ./deps/zlib/infback.c \
-# ./deps/zlib/inffast.c \
-# ./deps/zlib/inflate.c \
-# ./deps/zlib/inftrees.c \
-# ./deps/zlib/trees.c \
-# ./deps/zlib/zutil.c \
-
-# ./deps/http-parser/http_parser.c \
 
 OTHER_FILES += \
   ./examples/common.h \

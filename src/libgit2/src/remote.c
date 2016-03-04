@@ -547,6 +547,7 @@ static int lookup_remote_prune_config(git_remote *remote, git_config *config, co
 	return error;
 }
 
+#if 0 /* seems to be unused */
 static int update_config_refspec(const git_remote *remote, git_config *config, int direction)
 {
 	git_buf name = GIT_BUF_INIT;
@@ -593,6 +594,7 @@ cleanup:
 
 	return error;
 }
+#endif
 
 const char *git_remote_name(const git_remote *remote)
 {
@@ -2066,6 +2068,7 @@ int git_remote_add_push(git_repository *repo, const char *remote, const char *re
 	return write_add_refspec(repo, remote, refspec, false);
 }
 
+#if 0 /* seems to be unused */
 static int set_refspecs(git_remote *remote, git_strarray *array, int push)
 {
 	git_vector *vec = &remote->refspecs;
@@ -2093,6 +2096,7 @@ static int set_refspecs(git_remote *remote, git_strarray *array, int push)
 
 	return 0;
 }
+#endif
 
 static int copy_refspecs(git_strarray *array, const git_remote *remote, unsigned int push)
 {

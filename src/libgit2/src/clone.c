@@ -461,6 +461,7 @@ int git_clone_init_options(git_clone_options *opts, unsigned int version)
 	return 0;
 }
 
+#if 0 /* seems to be unused */
 static const char *repository_base(git_repository *repo)
 {
 	if (git_repository_is_bare(repo))
@@ -468,6 +469,7 @@ static const char *repository_base(git_repository *repo)
 
 	return git_repository_workdir(repo);
 }
+#endif
 
 static bool can_link(const char *src, const char *dst, int link)
 {
