@@ -13,11 +13,38 @@ INCLUDEPATH += \
   deps/zlib \
 # $$DESTDIR
 
+win32-g++ {
+  INCLUDEPATH += \
+    deps/regex \
+
+  HEADERS += \
+    ./deps/regex/config.h \
+    ./deps/regex/regex.h \
+    ./deps/regex/regex_internal.h \
+
+  SOURCES += \
+    ./deps/regex/regcomp.c \
+    ./deps/regex/regex.c \
+    ./deps/regex/regexec.c \
+    ./deps/regex/regex_internal.c \
+
+} else {
+  # Show windows specific files on Linux in other_files section of QtCreator
+  # Note: QtCreator reads OTHER_FILES on Windows too, so it's showing up
+  # at two locations on Windows :-(
+  OTHER_FILES += \
+    ./deps/regex/config.h \
+    ./deps/regex/regex.h \
+    ./deps/regex/regex_internal.h \
+    ./deps/regex/regcomp.c \
+    ./deps/regex/regex.c \
+    ./deps/regex/regexec.c \
+    ./deps/regex/regex_internal.c \
+
+}
+
 HEADERS += \
   ./deps/http-parser/http_parser.h \
-  ./deps/regex/config.h \
-  ./deps/regex/regex.h \
-  ./deps/regex/regex_internal.h \
   ./deps/winhttp/urlmon.h \
   ./deps/winhttp/winhttp.h \
   ./deps/zlib/crc32.h \
@@ -439,10 +466,6 @@ SOURCES += \
 # ./deps/zlib/zutil.c \
 
 # ./deps/http-parser/http_parser.c \
-# ./deps/regex/regcomp.c \
-# ./deps/regex/regex.c \
-# ./deps/regex/regexec.c \
-# ./deps/regex/regex_internal.c \
 
 # ./examples/add.c \
 # ./examples/blame.c \
