@@ -1,7 +1,5 @@
 /******************************************************************************
  * This file is part of the libqgit2 library
- * Copyright (c) 2011 Laszlo Papp <djszapi@archlinux.us>
- * Copyright (C) 2013 Leonardo Giordani
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -18,50 +16,44 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
-#include "qgitindexentry.h"
-#include "qgitoid.h"
-
-#include "private/pathcodec.h"
+#include "annotatedcommit.h"
+#include "git2.h"
+#include "qgitexception.h"
 
 namespace LibQGit2
 {
+namespace internal
+{
 
-IndexEntry::IndexEntry(const git_index_entry *data)
-    : d(data)
+inline static void no_op(git_annotated_commit *) {}
+
+inline git_annotated_commit *gitAnnotatedCommitFromRef(Repository &repo, const Reference &ref)
+{
+    git_annotated_commit *commit = 0;
+    if (!ref.isNull()) {
+        qGitThrow(git_annotated_commit_from_ref(&commit, repo.data(), ref.constData()));
+    }
+    return commit;
+}
+
+AnnotatedCommit::AnnotatedCommit(git_annotated_commit *annotated_commit)
+    : d(annotated_commit, git_annotated_commit_free)
 {
 }
 
-IndexEntry::IndexEntry(const IndexEntry& other)
+AnnotatedCommit::AnnotatedCommit(Repository &repo, const Reference &ref)
+    : d(gitAnnotatedCommitFromRef(repo, ref), ref.isNull() ? no_op : git_annotated_commit_free)
+{
+}
+
+AnnotatedCommit::AnnotatedCommit(const AnnotatedCommit &other)
     : d(other.d)
 {
 }
 
-IndexEntry::~IndexEntry()
+const git_annotated_commit *AnnotatedCommit::constData() const
 {
+    return d.data();
 }
-
-OId IndexEntry::id() const
-{
-    return OId(&d->id);
 }
-
-QString IndexEntry::path() const
-{
-    return PathCodec::fromLibGit2(d->path);
 }
-
-qint64 IndexEntry::fileSize() const
-{
-    return d->file_size;
-}
-
-int IndexEntry::stage() const {
-    return git_index_entry_stage(d);
-}
-
-const git_index_entry *IndexEntry::data() const
-{
-    return d;
-}
-
-} // namespace LibQGit2

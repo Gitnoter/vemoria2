@@ -16,19 +16,29 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
-#include "qgitdifffile.h"
+#ifndef LIBQGIT2_ANNOTATEDCOMMIT_H
+#define LIBQGIT2_ANNOTATEDCOMMIT_H
 
-#include "private/pathcodec.h"
+#include "qgitref.h"
+#include "qgitrepository.h"
+#include "git2.h"
+#include <QSharedPointer>
 
-namespace LibQGit2 {
-
-DiffFile::DiffFile(const git_diff_file *diff) : m_diff_file(diff)
+namespace LibQGit2
 {
-}
-
-QString DiffFile::path() const
+namespace internal
 {
-    return PathCodec::fromLibGit2(m_diff_file != NULL ? m_diff_file->path : "");
-}
+class AnnotatedCommit
+{
+public:
+    explicit AnnotatedCommit(git_annotated_commit *annotated_commit);
+    explicit AnnotatedCommit(Repository &repo, const Reference &ref);
+    AnnotatedCommit(const AnnotatedCommit &other);
 
+    const git_annotated_commit *constData() const;
+private:
+    QSharedPointer<git_annotated_commit> d;
+};
 }
+}
+#endif // LIBQGIT2_ANNOTATEDCOMMIT_H

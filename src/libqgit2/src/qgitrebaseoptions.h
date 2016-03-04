@@ -16,19 +16,40 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
-#include "qgitdifffile.h"
+#ifndef REBASEOPTIONS_H
+#define REBASEOPTIONS_H
 
-#include "private/pathcodec.h"
+#include "libqgit2_config.h"
+#include "git2.h"
+#include <QSharedPointer>
 
-namespace LibQGit2 {
-
-DiffFile::DiffFile(const git_diff_file *diff) : m_diff_file(diff)
+namespace LibQGit2
 {
-}
+class CheckoutOptions;
 
-QString DiffFile::path() const
+/**
+ * Options that specify how a rebase is performed.
+ *
+ * @ingroup LibQGit2
+ * @{
+ */
+class LIBQGIT2_EXPORT RebaseOptions
 {
-    return PathCodec::fromLibGit2(m_diff_file != NULL ? m_diff_file->path : "");
+public:
+    /**
+     * Constructs a new RebaseOptions object.
+     * @param checkoutOpts Specifies the checkout options to be used when applying patches
+     */
+    RebaseOptions(const CheckoutOptions &checkoutOpts);
+
+    const CheckoutOptions &checkoutOptions() const;
+
+    const git_rebase_options *constData() const;
+private:
+    struct Private;
+    QSharedPointer<Private> d_ptr;
+};
+/** @} */
 }
 
-}
+#endif // REBASEOPTIONS_H

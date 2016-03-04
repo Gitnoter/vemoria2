@@ -16,19 +16,36 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
-#include "qgitdifffile.h"
+#include "pathcodec.h"
+#include <QFile>
 
-#include "private/pathcodec.h"
-
-namespace LibQGit2 {
-
-DiffFile::DiffFile(const git_diff_file *diff) : m_diff_file(diff)
+// POSIX emulation in libgit2 assumes all i/o to be UTF-8 encoded
+#ifdef _WIN32
+QByteArray PathCodec::toLibGit2(const QString &path)
 {
+    return path.toUtf8();
 }
 
-QString DiffFile::path() const
+QString PathCodec::fromLibGit2(const QByteArray &path)
 {
-    return PathCodec::fromLibGit2(m_diff_file != NULL ? m_diff_file->path : "");
+    return QString::fromUtf8(path);
+}
+// in every other system the POSIX functions probably expect
+// encoding to be the same as system locale, so let's not
+// fix that which isn't broken
+#else
+QByteArray PathCodec::toLibGit2(const QString &path)
+{
+    return QFile::encodeName(path);
 }
 
+QString PathCodec::fromLibGit2(const QByteArray &path)
+{
+    return QFile::decodeName(path);
+}
+#endif
+
+QString PathCodec::fromLibGit2(const char *path)
+{
+    return fromLibGit2(QByteArray(path));
 }

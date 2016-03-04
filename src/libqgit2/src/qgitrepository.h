@@ -39,6 +39,8 @@
 #include "qgitcheckoutoptions.h"
 #include "qgitmergeoptions.h"
 #include "qgitcherrypickoptions.h"
+#include "qgitrebase.h"
+#include "qgitrebaseoptions.h"
 
 namespace LibQGit2
 {
@@ -652,11 +654,39 @@ namespace LibQGit2
              */
             void reset(const Object &target, ResetType type = Mixed, const Signature &signature = Signature(), const QString &message = QString());
 
+            /**
+             * Initializes a rebase object for rebasing the changes in \a branch
+             * relative to \a upstream onto another branch.
+             *
+             * @param branch The terminal commit to rebase
+             * @param upstream The commit to begin rebasing from, or \c null to rebase all
+             *                 reachable commits
+             * @param onto The branch to rebase onto, or \c null to rebase onto the given
+             *             upstream
+             * @param opts Options to specify how rebase is performed
+             * @param signature The signature of the rebaser
+             * @return The initialized rebase object
+             * @throws LibQGit2::Exception
+             */
+            Rebase rebase(const Reference &branch, const Reference &upstream, const Reference &onto, const RebaseOptions &opts, const Signature &signature = Signature());
+
+            /**
+             * Checks if the repository's ignore rules would ignore the given \a path.
+             *
+             * If \a path is relative it is considered to be relative to the Repository's
+             * working directory. If \a path is absolute it must point to a location
+             * within this Repository's working directory or an exception is thrown.
+             *
+             * @throws LibQGit2::Exception
+             */
+            bool shouldIgnore(const QString &path) const;
+
             git_repository* data() const;
             const git_repository* constData() const;
 
         signals:
             void cloneProgress(int);
+            void fetchProgress(int);
 
         private:
             class Private;
