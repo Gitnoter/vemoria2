@@ -1,0 +1,88 @@
+#!/bin/bash
+#
+# Small wrapper to call appropriate make / package build commands on
+# Unix and Windows.
+#
+# Arguments are given to make (e.g. make targets, so you may call
+# "run-build clean" to clean the build area).
+#
+ME=${0##*/}
+LINE="======================================================================"
+echo $LINE
+echo "Started $ME on $(hostname) (${OS:-$ARCH})"
+echo "Called as \"$0 $@\""
+echo $LINE
+PS4='[\D{%F} \t $ME:$LINENO] '
+export PS4
+set -x
+
+MAKE=make        # make, will be modified depending on the os
+QMAKE=qmake      # qmake, will be modified depending on the os
+PROJECT=../src/vemoria.pro
+
+addpath() {
+    set +x
+    local arg
+    for arg; do
+	[ -d "$arg" -a -x "$arg" ] || continue
+	# assume bash here
+	if ! [[ $PATH =~ "$arg" ]]; then
+		PATH="$arg:$PATH"
+	fi
+    done
+    set -x
+}
+
+for name in /opt/Qt/*/gcc*/bin; do
+    [ -d "$name" ] || continue
+    addpath "$name"
+done
+addpath $PWD/bin/share
+# even standard paths are needed on Windows (Cygwin) :-(
+addpath /bin /usr/bin /usr/local/bin
+
+echo "PATH=$PATH"
+OSTYPE=$(uname -s | tr [:upper:] [:lower:])
+ARCH=$(uname -m | tr [:upper:] [:lower:])
+
+case "$OSTYPE" in
+    darwin)
+       OSTYPE="macosx"
+       ARCH=x86_64
+       # qmake is installed in local path
+       PATH=$PATH:$HOME/Qt5.2.1/5.2.1/clang_64/bin
+       # parameters special for macosx
+       MAKE="make CC=/opt/local/bin/gcc CXX=/opt/local/bin/g++ LINK=/opt/local/bin/g++"
+       QMAKE="qmake -spec macx-g++"
+       ;;
+    cygwin*)
+       ARCH=x86_64
+       # default make on Windows is "nmake", but we need a GNU like make
+       MAKE="mingw32-make" 
+esac
+
+# unify 32 bit names
+case "$ARCH" in
+    i686|i386) ARCH="x86" ;;
+esac
+
+# tell make to run simulataneous jobs on multiprocessor systems
+# (make option "-j2" on two processor systems etc.)
+# maybe you could force qmake doing this automatically
+if [ -x /usr/bin/getconf ]; then
+    MAKEFLAGS="${MAKEFLAGS}${MAKEFLAGS:+" "}j$(/usr/bin/getconf _NPROCESSORS_ONLN)"
+    export MAKEFLAGS
+fi
+
+(
+    cd build 
+      
+    # be sure we have the build config ready
+    [ -e "MakeFile" ] || $QMAKE "$PROJECT" || exit $?
+
+    $MAKE $@
+    exit $?
+) || exit $?
+
+exit $?       # just to get another PS4 output
+
