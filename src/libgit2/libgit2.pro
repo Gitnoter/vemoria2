@@ -3,7 +3,7 @@
 QT -= gui
 TARGET = git2
 TEMPLATE = lib
-CONFIG += staticlib
+CONFIG += staticlib c++11
 
 # note: paths relative to _PRO_FILE_PWD_ which is the profile path of
 # the subprojects in src/*
@@ -25,10 +25,16 @@ QMAKE_DISTCLEAN += $${DESTDIR}/$${QMAKE_PREFIX_STATICLIB}$${TARGET}.$${QMAKE_EXT
 *-g++ {
     # standard GNU c++ behaviour is to complain about this, but the
     # sources are not prepared to fullfill all initializations
-    QMAKE_CFLAGS += -Wno-missing-field-initializers
+    # Some flags just taken from the original CMakeLists.txt settings
+    QMAKE_CFLAGS += \
+        -Wno-missing-field-initializers \
+        -Wno-unused-function \
+
 }
 
 win32-g++ {
+  DEFINES += _GNU_SOURCE
+
   INCLUDEPATH += \
     deps/regex \
 
@@ -40,15 +46,26 @@ win32-g++ {
     ./deps/regex/config.h \
     ./deps/regex/regex.h \
     ./deps/regex/regex_internal.h \
-    ./src/hash/hash_win32.h \
+    ./src/win32/dir.h \
+    ./src/win32/error.h \
+    ./src/win32/findfile.h \
+    ./src/win32/mingw-compat.h \
+    ./src/win32/msvc-compat.h \
+    ./src/win32/path_w32.h \
+    ./src/win32/posix.h \
+    ./src/win32/precompiled.h \
+    ./src/win32/pthread.h \
+    ./src/win32/reparse.h \
+    ./src/win32/utf-conv.h \
+    ./src/win32/version.h \
+    ./src/win32/w32_buffer.h \
+    ./src/win32/w32_util.h \
 
   SOURCES += \
     ./deps/regex/regcomp.c \
     ./deps/regex/regex.c \
     ./deps/regex/regexec.c \
     ./deps/regex/regex_internal.c \
-    #
-    ./src/hash/hash_win32.c \
     #
     ./src/win32/dir.c \
     ./src/win32/error.c \
@@ -60,9 +77,13 @@ win32-g++ {
     ./src/win32/pthread.c \
     ./src/win32/utf-conv.c \
     ./src/win32/w32_buffer.c \
-    ./src/win32/w32_crtdbg_stacktrace.c \
-    ./src/win32/w32_stack.c \
     ./src/win32/w32_util.c \
+
+} else {
+    # Non-Windows = Unix :)
+  SOURCES += \
+    ./src/unix/map.c \
+    ./src/unix/realpath.c \
 
 }
 
@@ -257,20 +278,6 @@ HEADERS += \
   ./src/userdiff.h \
   ./src/util.h \
   ./src/vector.h \
-  ./src/win32/dir.h \
-  ./src/win32/error.h \
-  ./src/win32/findfile.h \
-  ./src/win32/mingw-compat.h \
-  ./src/win32/msvc-compat.h \
-  ./src/win32/path_w32.h \
-  ./src/win32/posix.h \
-  ./src/win32/precompiled.h \
-  ./src/win32/pthread.h \
-  ./src/win32/reparse.h \
-  ./src/win32/utf-conv.h \
-  ./src/win32/version.h \
-  ./src/win32/w32_buffer.h \
-  ./src/win32/w32_util.h \
   ./src/xdiff/xdiff.h \
   ./src/xdiff/xdiffi.h \
   ./src/xdiff/xemit.h \
@@ -393,9 +400,6 @@ SOURCES += \
 #
   ./deps/http-parser/http_parser.c \
 #
-  ./src/unix/map.c \
-  ./src/unix/realpath.c \
-#
   ./src/hash/hash_generic.c \
 #
   ./src/transports/auth.c \
@@ -431,6 +435,10 @@ SOURCES += \
 
 
 OTHER_FILES += \
+  # these are not intended for MINGW, see CMakeLists.txt
+  ./src/hash/hash_win32.h \
+  ./src/hash/hash_win32.c \
+  # examples and tests
   ./examples/common.h \
   ./examples/network/common.h \
   \
