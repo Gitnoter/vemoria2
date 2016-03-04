@@ -75,15 +75,7 @@ border-color:#fff;
         <property name="styleSheet">
          <string notr="true">background-color:green;</string>
         </property>
-        <layout class="QGridLayout" name="gridLayout_11">
-         <item row="0" column="0" alignment="Qt::AlignTop">
-          <widget class="QPushButton" name="pushButton">
-           <property name="text">
-            <string>PushButton</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
+        <layout class="QGridLayout" name="gridLayout_11"/>
        </widget>
       </item>
       <item>
@@ -97,15 +89,7 @@ border-color:#fff;
         <property name="styleSheet">
          <string notr="true">background-color:red;</string>
         </property>
-        <layout class="QGridLayout" name="gridLayout_10" rowstretch="0" columnstretch="0" columnminimumwidth="0">
-         <item row="0" column="0">
-          <widget class="QPushButton" name="pushButton_2">
-           <property name="text">
-            <string>PushButton</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
+        <layout class="QGridLayout" name="gridLayout_10" rowstretch="0" columnstretch="0"/>
        </widget>
       </item>
       <item>
