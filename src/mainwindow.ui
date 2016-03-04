@@ -129,13 +129,13 @@ border-color:#fff;
                 <property name="minimumSize">
                  <size>
                   <width>0</width>
-                  <height>0</height>
+                  <height>40</height>
                  </size>
                 </property>
                 <property name="maximumSize">
                  <size>
                   <width>16777215</width>
-                  <height>16777215</height>
+                  <height>40</height>
                  </size>
                 </property>
                 <property name="styleSheet">
@@ -144,29 +144,66 @@ border-color:#fff;
 }</string>
                 </property>
                 <layout class="QFormLayout" name="formSearch">
+                 <property name="labelAlignment">
+                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="formAlignment">
+                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+                 </property>
                  <property name="horizontalSpacing">
                   <number>0</number>
                  </property>
                  <property name="verticalSpacing">
                   <number>0</number>
                  </property>
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>0</number>
+                 </property>
                  <item row="0" column="0">
-                  <widget class="QPushButton" name="pushButton_2">
+                  <widget class="QLabel" name="searchIcon">
                    <property name="styleSheet">
-                    <string notr="true"/>
+                    <string notr="true">#searchIcon{
+	padding-right:10px;
+	padding-top:8px;
+	padding-left:26px;
+	padding-bottom:0px;
+}</string>
                    </property>
                    <property name="text">
-                    <string>PushButton</string>
+                    <string/>
+                   </property>
+                   <property name="pixmap">
+                    <pixmap>../../../../../Dennis/Desktop/pic/search.png</pixmap>
                    </property>
                   </widget>
                  </item>
                  <item row="0" column="1">
-                  <widget class="QPushButton" name="pushButton">
+                  <widget class="QLineEdit" name="searchInput">
                    <property name="styleSheet">
-                    <string notr="true">height:40px;</string>
+                    <string notr="true">#searchInput{
+	height:30px;
+	border:none;
+	color:#bbbbbb;
+	background:#FFF;
+	font-size:16px;
+	font-family:'Source Sans Pro';
+	padding-left:5px;
+	margin-top:5px;
+	padding-right:10px;
+	margin-right:3px;
+}</string>
                    </property>
                    <property name="text">
-                    <string>PushButton</string>
+                    <string>Search ..</string>
                    </property>
                   </widget>
                  </item>
