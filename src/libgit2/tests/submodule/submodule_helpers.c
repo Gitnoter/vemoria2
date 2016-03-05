@@ -156,18 +156,21 @@ void refute__submodule_exists(
 	git_repository *repo, const char *name, int expected_error,
 	const char *msg, const char *file, int line)
 {
+	git_submodule *sm;
 	clar__assert_equal(
 		file, line, msg, 1, "%i",
-		expected_error, (int)(git_submodule_lookup(NULL, repo, name)));
+		expected_error, (int)(git_submodule_lookup(&sm, repo, name)));
 }
 
 unsigned int get_submodule_status(git_repository *repo, const char *name)
 {
+	git_submodule *sm = NULL;
 	unsigned int status = 0;
 
-	assert(repo && name);
-
-	cl_git_pass(git_submodule_status(&status, repo, name, GIT_SUBMODULE_IGNORE_UNSPECIFIED));
+	cl_git_pass(git_submodule_lookup(&sm, repo, name));
+	cl_assert(sm);
+	cl_git_pass(git_submodule_status(&status, sm));
+	git_submodule_free(sm);
 
 	return status;
 }

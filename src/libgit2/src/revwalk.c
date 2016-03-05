@@ -14,8 +14,6 @@
 #include "git2/revparse.h"
 #include "merge.h"
 
-GIT__USE_OIDMAP
-
 git_commit_list_node *git_revwalk__commit_lookup(
 	git_revwalk *walk, const git_oid *oid)
 {
@@ -529,8 +527,12 @@ static int prepare_walk(git_revwalk *walk)
 
 int git_revwalk_new(git_revwalk **revwalk_out, git_repository *repo)
 {
-	git_revwalk *walk = git__calloc(1, sizeof(git_revwalk));
+	git_revwalk *walk;
+
+	walk = git__malloc(sizeof(git_revwalk));
 	GITERR_CHECK_ALLOC(walk);
+
+	memset(walk, 0x0, sizeof(git_revwalk));
 
 	walk->commits = git_oidmap_alloc();
 	GITERR_CHECK_ALLOC(walk->commits);

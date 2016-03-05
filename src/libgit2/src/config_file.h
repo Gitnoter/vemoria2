@@ -21,7 +21,7 @@ GIT_INLINE(void) git_config_file_free(git_config_backend *cfg)
 }
 
 GIT_INLINE(int) git_config_file_get_string(
-	git_config_entry **out, git_config_backend *cfg, const char *name)
+	const git_config_entry **out, git_config_backend *cfg, const char *name)
 {
 	return cfg->get(cfg, name, out);
 }

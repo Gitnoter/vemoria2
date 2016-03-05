@@ -38,7 +38,7 @@ static int merge_trivial(const char *ours, const char *theirs)
 	checkout_opts.checkout_strategy = GIT_CHECKOUT_FORCE;
 
 	git_buf_printf(&branch_buf, "%s%s", GIT_REFS_HEADS_DIR, ours);
-	cl_git_pass(git_reference_symbolic_create(&our_ref, repo, "HEAD", branch_buf.ptr, 1, NULL));
+	cl_git_pass(git_reference_symbolic_create(&our_ref, repo, "HEAD", branch_buf.ptr, 1, NULL, NULL));
 
 	cl_git_pass(git_checkout_head(repo, &checkout_opts));
 
@@ -66,7 +66,7 @@ static size_t merge_trivial_conflict_entrycount(void)
 	for (i = 0; i < git_index_entrycount(repo_index); i++) {
 		cl_assert(entry = git_index_get_byindex(repo_index, i));
 
-		if (git_index_entry_is_conflict(entry))
+		if (git_index_entry_stage(entry) > 0)
 			count++;
 	}
 

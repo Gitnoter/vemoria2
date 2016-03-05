@@ -1,7 +1,9 @@
 # qmake project file to build the static library libgit2
 
+include(../qmake/common.pri)
+
 QT -= gui
-TARGET = git2
+TARGET = libgit2
 TEMPLATE = lib
 CONFIG += staticlib
 
@@ -29,11 +31,14 @@ QMAKE_DISTCLEAN += $${DESTDIR}/$${QMAKE_PREFIX_STATICLIB}$${TARGET}.$${QMAKE_EXT
     QMAKE_CFLAGS += \
         -Wno-missing-field-initializers \
         -Wno-unused-function \
+        -Wno-parentheses \
+        -Wno-unused-parameter \
+        -Wno-implicit-function-declaration \
 
 }
 
 win32-g++ {
-  DEFINES += _GNU_SOURCE
+#  DEFINES += _GNU_SOURCE
 
   INCLUDEPATH += \
     deps/regex \
@@ -58,7 +63,6 @@ win32-g++ {
     ./src/win32/reparse.h \
     ./src/win32/utf-conv.h \
     ./src/win32/version.h \
-    ./src/win32/w32_buffer.h \
     ./src/win32/w32_util.h \
 
   SOURCES += \
@@ -76,7 +80,6 @@ win32-g++ {
     ./src/win32/precompiled.c \
     ./src/win32/pthread.c \
     ./src/win32/utf-conv.c \
-    ./src/win32/w32_buffer.c \
     ./src/win32/w32_util.c \
 
 } else {
@@ -89,8 +92,6 @@ win32-g++ {
 
 HEADERS += \
   ./deps/http-parser/http_parser.h \
-  ./deps/winhttp/urlmon.h \
-  ./deps/winhttp/winhttp.h \
   ./deps/zlib/crc32.h \
   ./deps/zlib/deflate.h \
   ./deps/zlib/inffast.h \
@@ -138,6 +139,7 @@ HEADERS += \
   ./include/git2/pack.h \
   ./include/git2/patch.h \
   ./include/git2/pathspec.h \
+  ./include/git2/push.h \
   ./include/git2/rebase.h \
   ./include/git2/refdb.h \
   ./include/git2/reflog.h \
@@ -188,6 +190,7 @@ HEADERS += \
   ./src/blame.h \
   ./src/blob.h \
   ./src/branch.h \
+  ./src/bswap.h \
   ./src/buffer.h \
   ./src/buf_text.h \
   ./src/cache.h \
@@ -199,7 +202,6 @@ HEADERS += \
   ./src/common.h \
   ./src/config_file.h \
   ./src/config.h \
-  ./src/curl_stream.h \
   ./src/delta-apply.h \
   ./src/delta.h \
   ./src/diff_driver.h \
@@ -220,11 +222,11 @@ HEADERS += \
   ./src/hash/hash_openssl.h \
   ./src/ignore.h \
   ./src/index.h \
-  ./src/integer.h \
   ./src/iterator.h \
   ./src/khash.h \
   ./src/map.h \
   ./src/merge.h \
+  ./src/merge_file.h \
   ./src/message.h \
   ./src/mwindow.h \
   ./src/netops.h \
@@ -258,7 +260,6 @@ HEADERS += \
   ./src/socket_stream.h \
   ./src/sortedcache.h \
   ./src/status.h \
-  ./src/stransport_stream.h \
   ./src/stream.h \
   ./src/strmap.h \
   ./src/strnlen.h \
@@ -266,7 +267,6 @@ HEADERS += \
   ./src/sysdir.h \
   ./src/tag.h \
   ./src/thread-utils.h \
-  ./src/tls_stream.h \
   ./src/trace.h \
   ./src/transports/auth.h \
   ./src/transports/auth_negotiate.h \
@@ -310,7 +310,6 @@ SOURCES += \
   ./src/config_cache.c \
   ./src/config_file.c \
   ./src/crlf.c \
-  ./src/curl_stream.c \
   ./src/date.c \
   ./src/delta-apply.c \
   ./src/delta.c \
@@ -381,13 +380,11 @@ SOURCES += \
   ./src/sortedcache.c \
   ./src/stash.c \
   ./src/status.c \
-  ./src/stransport_stream.c \
   ./src/strmap.c \
   ./src/submodule.c \
   ./src/sysdir.c \
   ./src/tag.c \
   ./src/thread-utils.c \
-  ./src/tls_stream.c \
   ./src/trace.c \
   ./src/transaction.c \
   ./src/transport.c \
@@ -810,6 +807,7 @@ OTHER_FILES += \
   ./tests/status/worktree.c \
   ./tests/status/worktree_init.c \
   ./tests/stress/diff.c \
+  ./tests/structinit/structinit.c \
   ./tests/submodule/add.c \
   ./tests/submodule/init.c \
   ./tests/submodule/lookup.c \

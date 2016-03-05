@@ -3,7 +3,6 @@
 #include "repository.h"
 #include "config.h"
 #include "path.h"
-#include "config/config_helpers.h"
 
 enum repo_mode {
 	STANDARD_REPOSITORY = 0,
@@ -371,6 +370,8 @@ void test_repo_init__extended_1(void)
 void test_repo_init__relative_gitdir(void)
 {
 	git_repository_init_options opts = GIT_REPOSITORY_INIT_OPTIONS_INIT;
+	git_config *cfg;
+	const char *worktree_path;
 	git_buf dot_git_content = GIT_BUF_INIT;
 
 	opts.workdir_path = "../c_wd";
@@ -390,19 +391,24 @@ void test_repo_init__relative_gitdir(void)
 	/* Verify that the gitlink and worktree entries are relative */
 
 	/* Verify worktree */
-	assert_config_entry_value(_repo, "core.worktree", "../c_wd/");
+	cl_git_pass(git_repository_config(&cfg, _repo));
+	cl_git_pass(git_config_get_string(&worktree_path, cfg, "core.worktree"));
+	cl_assert_equal_s("../c_wd/", worktree_path);
 
 	/* Verify gitlink */
 	cl_git_pass(git_futils_readbuffer(&dot_git_content, "root/b/c_wd/.git"));
 	cl_assert_equal_s("gitdir: ../my_repository/", dot_git_content.ptr);
 
 	git_buf_free(&dot_git_content);
+	git_config_free(cfg);
 	cleanup_repository("root");
 }
 
 void test_repo_init__relative_gitdir_2(void)
 {
 	git_repository_init_options opts = GIT_REPOSITORY_INIT_OPTIONS_INIT;
+	git_config *cfg;
+	const char *worktree_path;
 	git_buf dot_git_content = GIT_BUF_INIT;
 	git_buf full_path = GIT_BUF_INIT;
 
@@ -427,13 +433,16 @@ void test_repo_init__relative_gitdir_2(void)
 	/* Verify that the gitlink and worktree entries are relative */
 
 	/* Verify worktree */
-	assert_config_entry_value(_repo, "core.worktree", "../c_wd/");
+	cl_git_pass(git_repository_config(&cfg, _repo));
+	cl_git_pass(git_config_get_string(&worktree_path, cfg, "core.worktree"));
+	cl_assert_equal_s("../c_wd/", worktree_path);
 
 	/* Verify gitlink */
 	cl_git_pass(git_futils_readbuffer(&dot_git_content, "root/b/c_wd/.git"));
 	cl_assert_equal_s("gitdir: ../my_repository/", dot_git_content.ptr);
 
 	git_buf_free(&dot_git_content);
+	git_config_free(cfg);
 	cleanup_repository("root");
 }
 
@@ -713,7 +722,7 @@ void test_repo_init__at_filesystem_root(void)
 	git_buf root = GIT_BUF_INIT;
 	int root_len;
 
-	if (!cl_getenv("GITTEST_INVASIVE_FS_STRUCTURE"))
+	if (!cl_getenv("GITTEST_INVASIVE_FILESYSTEM"))
 		cl_skip();
 
 	root_len = git_path_root(sandbox);

@@ -196,7 +196,7 @@ void test_attr_ignore__expand_tilde_to_homedir(void)
  * items in the subdirectory. */
 void test_attr_ignore__gitignore_in_subdir(void)
 {
-	cl_git_rmfile("attr/.gitignore");
+	cl_git_pass(p_unlink("attr/.gitignore"));
 
 	cl_must_pass(p_mkdir("attr/dir1", 0777));
 	cl_must_pass(p_mkdir("attr/dir1/dir2", 0777));
@@ -224,7 +224,7 @@ void test_attr_ignore__gitignore_in_subdir(void)
 /* Ensure that files do not match folder cases */
 void test_attr_ignore__dont_ignore_files_for_folder(void)
 {
-	cl_git_rmfile("attr/.gitignore");
+	cl_git_pass(p_unlink("attr/.gitignore"));
 
 	cl_git_mkfile("attr/dir/.gitignore", "test/\n");
 
@@ -236,7 +236,7 @@ void test_attr_ignore__dont_ignore_files_for_folder(void)
 		assert_is_ignored(false, "dir/TeSt");
 
 	/* Create "test" as a directory; ensure it is ignored. */
-	cl_git_rmfile("attr/dir/test");
+	cl_git_pass(p_unlink("attr/dir/test"));
 	cl_must_pass(p_mkdir("attr/dir/test", 0777));
 
 	assert_is_ignored(true, "dir/test");

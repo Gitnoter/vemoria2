@@ -96,14 +96,14 @@ void test_submodule_update__update_submodule(void)
 	update_options.checkout_opts.progress_cb = checkout_progress_cb;
 	update_options.checkout_opts.progress_payload = &update_payload;
 
-	update_options.fetch_opts.callbacks.update_tips = update_tips;
-	update_options.fetch_opts.callbacks.payload = &update_payload;
+	update_options.remote_callbacks.update_tips = update_tips;
+	update_options.remote_callbacks.payload = &update_payload;
 
 	/* get the submodule */
 	cl_git_pass(git_submodule_lookup(&sm, g_repo, "testrepo"));
 
 	/* verify the initial state of the submodule */
-	cl_git_pass(git_submodule_status(&submodule_status, g_repo, "testrepo", GIT_SUBMODULE_IGNORE_UNSPECIFIED));
+	cl_git_pass(git_submodule_status(&submodule_status, sm));
 	cl_assert_equal_i(submodule_status, GIT_SUBMODULE_STATUS_IN_HEAD |
 		GIT_SUBMODULE_STATUS_IN_INDEX |
 		GIT_SUBMODULE_STATUS_IN_CONFIG |
@@ -114,7 +114,7 @@ void test_submodule_update__update_submodule(void)
 	cl_git_pass(git_submodule_update(sm, 0, &update_options));
 
 	/* verify state */
-	cl_git_pass(git_submodule_status(&submodule_status, g_repo, "testrepo", GIT_SUBMODULE_IGNORE_UNSPECIFIED));
+	cl_git_pass(git_submodule_status(&submodule_status, sm));
 	cl_assert_equal_i(submodule_status, GIT_SUBMODULE_STATUS_IN_HEAD |
 		GIT_SUBMODULE_STATUS_IN_INDEX |
 		GIT_SUBMODULE_STATUS_IN_CONFIG |
@@ -142,7 +142,7 @@ void test_submodule_update__update_and_init_submodule(void)
 	/* get the submodule */
 	cl_git_pass(git_submodule_lookup(&sm, g_repo, "testrepo"));
 
-	cl_git_pass(git_submodule_status(&submodule_status, g_repo, "testrepo", GIT_SUBMODULE_IGNORE_UNSPECIFIED));
+	cl_git_pass(git_submodule_status(&submodule_status, sm));
 	cl_assert_equal_i(submodule_status, GIT_SUBMODULE_STATUS_IN_HEAD |
 		GIT_SUBMODULE_STATUS_IN_INDEX |
 		GIT_SUBMODULE_STATUS_IN_CONFIG |
@@ -177,7 +177,7 @@ void test_submodule_update__update_already_checked_out_submodule(void)
 	/* Initialize and update the sub repository */
 	cl_git_pass(git_submodule_lookup(&sm, g_repo, "testrepo"));
 
-	cl_git_pass(git_submodule_status(&submodule_status, g_repo, "testrepo", GIT_SUBMODULE_IGNORE_UNSPECIFIED));
+	cl_git_pass(git_submodule_status(&submodule_status, sm));
 	cl_assert_equal_i(submodule_status, GIT_SUBMODULE_STATUS_IN_HEAD |
 		GIT_SUBMODULE_STATUS_IN_INDEX |
 		GIT_SUBMODULE_STATUS_IN_CONFIG |
@@ -196,18 +196,14 @@ void test_submodule_update__update_already_checked_out_submodule(void)
 	cl_git_pass(git_reference_lookup(&branch_reference, g_repo, "refs/heads/alternate_1"));
 	cl_git_pass(git_reference_peel(&branch_commit, branch_reference, GIT_OBJ_COMMIT));
 	cl_git_pass(git_checkout_tree(g_repo, branch_commit, &checkout_options));
-	cl_git_pass(git_repository_set_head(g_repo, git_reference_name(branch_reference)));
+	cl_git_pass(git_repository_set_head(g_repo, git_reference_name(branch_reference), NULL, NULL));
 
 	/*
 	 * Verify state after checkout of parent repository. The submodule ID in the
 	 * HEAD commit and index should be updated, but not the workdir.
 	 */
 
-	cl_git_pass(git_submodule_status(&submodule_status, g_repo, "testrepo", GIT_SUBMODULE_IGNORE_UNSPECIFIED));
-
-	git_submodule_free(sm);
-	cl_git_pass(git_submodule_lookup(&sm, g_repo, "testrepo"));
-
+	cl_git_pass(git_submodule_status(&submodule_status, sm));
 	cl_assert_equal_i(submodule_status, GIT_SUBMODULE_STATUS_IN_HEAD |
 		GIT_SUBMODULE_STATUS_IN_INDEX |
 		GIT_SUBMODULE_STATUS_IN_CONFIG |
@@ -255,7 +251,7 @@ void test_submodule_update__update_blocks_on_dirty_wd(void)
 	/* Initialize and update the sub repository */
 	cl_git_pass(git_submodule_lookup(&sm, g_repo, "testrepo"));
 
-	cl_git_pass(git_submodule_status(&submodule_status, g_repo, "testrepo", GIT_SUBMODULE_IGNORE_UNSPECIFIED));
+	cl_git_pass(git_submodule_status(&submodule_status, sm));
 	cl_assert_equal_i(submodule_status, GIT_SUBMODULE_STATUS_IN_HEAD |
 		GIT_SUBMODULE_STATUS_IN_INDEX |
 		GIT_SUBMODULE_STATUS_IN_CONFIG |
@@ -274,18 +270,14 @@ void test_submodule_update__update_blocks_on_dirty_wd(void)
 	cl_git_pass(git_reference_lookup(&branch_reference, g_repo, "refs/heads/alternate_1"));
 	cl_git_pass(git_reference_peel(&branch_commit, branch_reference, GIT_OBJ_COMMIT));
 	cl_git_pass(git_checkout_tree(g_repo, branch_commit, &checkout_options));
-	cl_git_pass(git_repository_set_head(g_repo, git_reference_name(branch_reference)));
+	cl_git_pass(git_repository_set_head(g_repo, git_reference_name(branch_reference), NULL, NULL));
 
 	/*
 	 * Verify state after checkout of parent repository. The submodule ID in the
 	 * HEAD commit and index should be updated, but not the workdir.
 	 */
 
-	cl_git_pass(git_submodule_status(&submodule_status, g_repo, "testrepo", GIT_SUBMODULE_IGNORE_UNSPECIFIED));
-
-	git_submodule_free(sm);
-	cl_git_pass(git_submodule_lookup(&sm, g_repo, "testrepo"));
-
+	cl_git_pass(git_submodule_status(&submodule_status, sm));
 	cl_assert_equal_i(submodule_status, GIT_SUBMODULE_STATUS_IN_HEAD |
 		GIT_SUBMODULE_STATUS_IN_INDEX |
 		GIT_SUBMODULE_STATUS_IN_CONFIG |
@@ -332,7 +324,7 @@ void test_submodule_update__can_force_update(void)
 	/* Initialize and update the sub repository */
 	cl_git_pass(git_submodule_lookup(&sm, g_repo, "testrepo"));
 
-	cl_git_pass(git_submodule_status(&submodule_status, g_repo, "testrepo", GIT_SUBMODULE_IGNORE_UNSPECIFIED));
+	cl_git_pass(git_submodule_status(&submodule_status, sm));
 	cl_assert_equal_i(submodule_status, GIT_SUBMODULE_STATUS_IN_HEAD |
 		GIT_SUBMODULE_STATUS_IN_INDEX |
 		GIT_SUBMODULE_STATUS_IN_CONFIG |
@@ -351,17 +343,13 @@ void test_submodule_update__can_force_update(void)
 	cl_git_pass(git_reference_lookup(&branch_reference, g_repo, "refs/heads/alternate_1"));
 	cl_git_pass(git_reference_peel(&branch_commit, branch_reference, GIT_OBJ_COMMIT));
 	cl_git_pass(git_checkout_tree(g_repo, branch_commit, &checkout_options));
-	cl_git_pass(git_repository_set_head(g_repo, git_reference_name(branch_reference)));
+	cl_git_pass(git_repository_set_head(g_repo, git_reference_name(branch_reference), NULL, NULL));
 
 	/*
 	 * Verify state after checkout of parent repository. The submodule ID in the
 	 * HEAD commit and index should be updated, but not the workdir.
 	 */
-	cl_git_pass(git_submodule_status(&submodule_status, g_repo, "testrepo", GIT_SUBMODULE_IGNORE_UNSPECIFIED));
-
-	git_submodule_free(sm);
-	cl_git_pass(git_submodule_lookup(&sm, g_repo, "testrepo"));
-
+	cl_git_pass(git_submodule_status(&submodule_status, sm));
 	cl_assert_equal_i(submodule_status, GIT_SUBMODULE_STATUS_IN_HEAD |
 		GIT_SUBMODULE_STATUS_IN_INDEX |
 		GIT_SUBMODULE_STATUS_IN_CONFIG |

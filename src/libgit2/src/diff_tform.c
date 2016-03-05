@@ -15,7 +15,7 @@
 #include "fileops.h"
 #include "config.h"
 
-git_diff_delta *git_diff__delta_dup(
+static git_diff_delta *diff_delta__dup(
 	const git_diff_delta *d, git_pool *pool)
 {
 	git_diff_delta *delta = git__malloc(sizeof(git_diff_delta));
@@ -46,7 +46,7 @@ fail:
 	return NULL;
 }
 
-git_diff_delta *git_diff__merge_like_cgit(
+static git_diff_delta *diff_delta__merge_like_cgit(
 	const git_diff_delta *a,
 	const git_diff_delta *b,
 	git_pool *pool)
@@ -65,26 +65,19 @@ git_diff_delta *git_diff__merge_like_cgit(
 	 *  f3 = b->new_file
 	 */
 
-	/* If one of the diffs is a conflict, just dup it */
-	if (b->status == GIT_DELTA_CONFLICTED)
-		return git_diff__delta_dup(b, pool);
-	if (a->status == GIT_DELTA_CONFLICTED)
-		return git_diff__delta_dup(a, pool);
-
 	/* if f2 == f3 or f2 is deleted, then just dup the 'a' diff */
 	if (b->status == GIT_DELTA_UNMODIFIED || a->status == GIT_DELTA_DELETED)
-		return git_diff__delta_dup(a, pool);
+		return diff_delta__dup(a, pool);
 
 	/* otherwise, base this diff on the 'b' diff */
-	if ((dup = git_diff__delta_dup(b, pool)) == NULL)
+	if ((dup = diff_delta__dup(b, pool)) == NULL)
 		return NULL;
 
 	/* If 'a' status is uninteresting, then we're done */
-	if (a->status == GIT_DELTA_UNMODIFIED ||
-		a->status == GIT_DELTA_UNTRACKED ||
-		a->status == GIT_DELTA_UNREADABLE)
+	if (a->status == GIT_DELTA_UNMODIFIED)
 		return dup;
 
+	assert(a->status != GIT_DELTA_UNMODIFIED);
 	assert(b->status != GIT_DELTA_UNMODIFIED);
 
 	/* A cgit exception is that the diff of a file that is only in the
@@ -109,8 +102,43 @@ git_diff_delta *git_diff__merge_like_cgit(
 	return dup;
 }
 
-int git_diff__merge(
-	git_diff *onto, const git_diff *from, git_diff__merge_cb cb)
+static git_diff_delta *diff_delta__merge_like_cgit_reversed(
+	const git_diff_delta *a,
+	const git_diff_delta *b,
+	git_pool *pool)
+{
+	git_diff_delta *dup;
+
+	/* reversed version of above logic */
+
+	if (a->status == GIT_DELTA_UNMODIFIED)
+		return diff_delta__dup(b, pool);
+
+	if ((dup = diff_delta__dup(a, pool)) == NULL)
+		return NULL;
+
+	if (b->status == GIT_DELTA_UNMODIFIED || b->status == GIT_DELTA_UNTRACKED || b->status == GIT_DELTA_UNREADABLE)
+		return dup;
+
+	if (dup->status == GIT_DELTA_DELETED) {
+		if (b->status == GIT_DELTA_ADDED) {
+			dup->status = GIT_DELTA_UNMODIFIED;
+			dup->nfiles = 2;
+		}
+	} else {
+		dup->status = b->status;
+		dup->nfiles = b->nfiles;
+	}
+
+	git_oid_cpy(&dup->old_file.id, &b->old_file.id);
+	dup->old_file.mode  = b->old_file.mode;
+	dup->old_file.size  = b->old_file.size;
+	dup->old_file.flags = b->old_file.flags;
+
+	return dup;
+}
+
+int git_diff_merge(git_diff *onto, const git_diff *from)
 {
 	int error = 0;
 	git_pool onto_pool;
@@ -146,16 +174,15 @@ int git_diff__merge(
 			STRCMP_CASESELECT(ignore_case, o->old_file.path, f->old_file.path);
 
 		if (cmp < 0) {
-			delta = git_diff__delta_dup(o, &onto_pool);
+			delta = diff_delta__dup(o, &onto_pool);
 			i++;
 		} else if (cmp > 0) {
-			delta = git_diff__delta_dup(f, &onto_pool);
+			delta = diff_delta__dup(f, &onto_pool);
 			j++;
 		} else {
-			const git_diff_delta *left = reversed ? f : o;
-			const git_diff_delta *right = reversed ? o : f;
-
-			delta = cb(left, right, &onto_pool);
+			delta = reversed ?
+				diff_delta__merge_like_cgit_reversed(o, f, &onto_pool) :
+				diff_delta__merge_like_cgit(o, f, &onto_pool);
 			i++;
 			j++;
 		}
@@ -163,7 +190,7 @@ int git_diff__merge(
 		/* the ignore rules for the target may not match the source
 		 * or the result of a merged delta could be skippable...
 		 */
-		if (delta && git_diff_delta__should_skip(&onto->opts, delta)) {
+		if (git_diff_delta__should_skip(&onto->opts, delta)) {
 			git__free(delta);
 			continue;
 		}
@@ -194,27 +221,38 @@ int git_diff__merge(
 	return error;
 }
 
-int git_diff_merge(git_diff *onto, const git_diff *from)
-{
-	return git_diff__merge(onto, from, git_diff__merge_like_cgit);
-}
-
 int git_diff_find_similar__hashsig_for_file(
 	void **out, const git_diff_file *f, const char *path, void *p)
 {
 	git_hashsig_option_t opt = (git_hashsig_option_t)(intptr_t)p;
+	int error = 0;
 
 	GIT_UNUSED(f);
-	return git_hashsig_create_fromfile((git_hashsig **)out, path, opt);
+	error = git_hashsig_create_fromfile((git_hashsig **)out, path, opt);
+
+	if (error == GIT_EBUFS) {
+		error = 0;
+		giterr_clear();
+	}
+
+	return error;
 }
 
 int git_diff_find_similar__hashsig_for_buf(
 	void **out, const git_diff_file *f, const char *buf, size_t len, void *p)
 {
 	git_hashsig_option_t opt = (git_hashsig_option_t)(intptr_t)p;
+	int error = 0;
 
 	GIT_UNUSED(f);
-	return git_hashsig_create((git_hashsig **)out, buf, len, opt);
+	error = git_hashsig_create((git_hashsig **)out, buf, len, opt);
+
+	if (error == GIT_EBUFS) {
+		error = 0;
+		giterr_clear();
+	}
+
+	return error;
 }
 
 void git_diff_find_similar__hashsig_free(void *sig, void *payload)
@@ -226,14 +264,8 @@ void git_diff_find_similar__hashsig_free(void *sig, void *payload)
 int git_diff_find_similar__calc_similarity(
 	int *score, void *siga, void *sigb, void *payload)
 {
-	int error;
-
 	GIT_UNUSED(payload);
-	error = git_hashsig_compare(siga, sigb);
-	if (error < 0)
-		return error;
-
-	*score = error;
+	*score = git_hashsig_compare(siga, sigb);
 	return 0;
 }
 
@@ -247,7 +279,6 @@ static int normalize_find_opts(
 	const git_diff_find_options *given)
 {
 	git_config *cfg = NULL;
-	git_hashsig_option_t hashsig_opts;
 
 	GITERR_CHECK_VERSION(given, GIT_DIFF_FIND_OPTIONS_VERSION, "git_diff_find_options");
 
@@ -261,7 +292,7 @@ static int normalize_find_opts(
 	if (!given ||
 		 (given->flags & GIT_DIFF_FIND_ALL) == GIT_DIFF_FIND_BY_CONFIG)
 	{
-		char *rule =
+		const char *rule =
 			git_config__get_string_force(cfg, "diff.renames", "true");
 		int boolval;
 
@@ -271,8 +302,6 @@ static int normalize_find_opts(
 			opts->flags |= GIT_DIFF_FIND_RENAMES | GIT_DIFF_FIND_COPIES;
 		else
 			opts->flags |= GIT_DIFF_FIND_RENAMES;
-
-		git__free(rule);
 	}
 
 	/* some flags imply others */
@@ -331,13 +360,11 @@ static int normalize_find_opts(
 		opts->metric->similarity = git_diff_find_similar__calc_similarity;
 
 		if (opts->flags & GIT_DIFF_FIND_IGNORE_WHITESPACE)
-			hashsig_opts = GIT_HASHSIG_IGNORE_WHITESPACE;
+			opts->metric->payload = (void *)GIT_HASHSIG_IGNORE_WHITESPACE;
 		else if (opts->flags & GIT_DIFF_FIND_DONT_IGNORE_WHITESPACE)
-			hashsig_opts = GIT_HASHSIG_NORMAL;
+			opts->metric->payload = (void *)GIT_HASHSIG_NORMAL;
 		else
-			hashsig_opts = GIT_HASHSIG_SMART_WHITESPACE;
-		hashsig_opts |= GIT_HASHSIG_ALLOW_SMALL_FILES;
-		opts->metric->payload = (void *)hashsig_opts;
+			opts->metric->payload = (void *)GIT_HASHSIG_SMART_WHITESPACE;
 	}
 
 	return 0;
@@ -347,7 +374,7 @@ static int insert_delete_side_of_split(
 	git_diff *diff, git_vector *onto, const git_diff_delta *delta)
 {
 	/* make new record for DELETED side of split */
-	git_diff_delta *deleted = git_diff__delta_dup(delta, &diff->pool);
+	git_diff_delta *deleted = diff_delta__dup(delta, &diff->pool);
 	GITERR_CHECK_ALLOC(deleted);
 
 	deleted->status = GIT_DELTA_DELETED;
@@ -654,13 +681,11 @@ static bool is_rename_target(
 		return false;
 
 	/* only consider ADDED, RENAMED, COPIED, and split MODIFIED as
-	 * targets; maybe include UNTRACKED if requested.
+	 * targets; maybe include UNTRACKED and IGNORED if requested.
 	 */
 	switch (delta->status) {
 	case GIT_DELTA_UNMODIFIED:
 	case GIT_DELTA_DELETED:
-	case GIT_DELTA_IGNORED:
-	case GIT_DELTA_CONFLICTED:
 		return false;
 
 	case GIT_DELTA_MODIFIED:
@@ -687,6 +712,9 @@ static bool is_rename_target(
 			return false;
 		break;
 
+	case GIT_DELTA_IGNORED:
+		return false;
+
 	default: /* all other status values should be checked */
 		break;
 	}
@@ -712,7 +740,6 @@ static bool is_rename_source(
 	case GIT_DELTA_UNTRACKED:
 	case GIT_DELTA_UNREADABLE:
 	case GIT_DELTA_IGNORED:
-	case GIT_DELTA_CONFLICTED:
 		return false;
 
 	case GIT_DELTA_DELETED:
@@ -797,7 +824,6 @@ int git_diff_find_similar(
 	size_t num_deltas, num_srcs = 0, num_tgts = 0;
 	size_t tried_srcs = 0, tried_tgts = 0;
 	size_t num_rewrites = 0, num_updates = 0, num_bumped = 0;
-	size_t sigcache_size;
 	void **sigcache = NULL; /* cache of similarity metric file signatures */
 	diff_find_match *tgt2src = NULL;
 	diff_find_match *src2tgt = NULL;
@@ -818,8 +844,7 @@ int git_diff_find_similar(
 	if ((opts.flags & GIT_DIFF_FIND_ALL) == 0)
 		goto cleanup;
 
-	GITERR_CHECK_ALLOC_MULTIPLY(&sigcache_size, num_deltas, 2);
-	sigcache = git__calloc(sigcache_size, sizeof(void *));
+	sigcache = git__calloc(num_deltas * 2, sizeof(void *));
 	GITERR_CHECK_ALLOC(sigcache);
 
 	/* Label rename sources and targets

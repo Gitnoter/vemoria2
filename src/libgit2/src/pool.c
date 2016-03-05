@@ -107,22 +107,21 @@ static void pool_insert_page(git_pool *pool, git_pool_page *page)
 static void *pool_alloc_page(git_pool *pool, uint32_t size)
 {
 	git_pool_page *page;
-	uint32_t new_page_size;
-	size_t alloc_size;
+	uint32_t alloc_size;
 
 	if (size <= pool->page_size)
-		new_page_size = pool->page_size;
+		alloc_size = pool->page_size;
 	else {
-		new_page_size = size;
+		alloc_size = size;
 		pool->has_large_page_alloc = 1;
 	}
 
-	if (GIT_ADD_SIZET_OVERFLOW(&alloc_size, new_page_size, sizeof(git_pool_page)) ||
-		!(page = git__calloc(1, alloc_size)))
+	page = git__calloc(1, alloc_size + sizeof(git_pool_page));
+	if (!page)
 		return NULL;
 
-	page->size  = new_page_size;
-	page->avail = new_page_size - size;
+	page->size  = alloc_size;
+	page->avail = alloc_size - size;
 
 	if (page->avail > 0)
 		pool_insert_page(pool, page);
@@ -226,7 +225,7 @@ char *git_pool_strcat(git_pool *pool, const char *a, const char *b)
 	void *ptr;
 	size_t len_a, len_b;
 
-	assert(pool && pool->item_size == sizeof(char));
+	assert(pool && a && b && pool->item_size == sizeof(char));
 
 	len_a = a ? strlen(a) : 0;
 	len_b = b ? strlen(b) : 0;

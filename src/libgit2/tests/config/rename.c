@@ -21,12 +21,11 @@ void test_config_rename__cleanup(void)
 
 void test_config_rename__can_rename(void)
 {
-	git_config_entry *ce;
+	const git_config_entry *ce;
 
 	cl_git_pass(git_config_get_entry(
 		&ce, g_config, "branch.track-local.remote"));
 	cl_assert_equal_s(".", ce->value);
-	git_config_entry_free(ce);
 
 	cl_git_fail(git_config_get_entry(
 		&ce, g_config, "branch.local-track.remote"));
@@ -37,7 +36,6 @@ void test_config_rename__can_rename(void)
 	cl_git_pass(git_config_get_entry(
 		&ce, g_config, "branch.local-track.remote"));
 	cl_assert_equal_s(".", ce->value);
-	git_config_entry_free(ce);
 
 	cl_git_fail(git_config_get_entry(
 		&ce, g_config, "branch.track-local.remote"));
@@ -45,7 +43,7 @@ void test_config_rename__can_rename(void)
 
 void test_config_rename__prevent_overwrite(void)
 {
-	git_config_entry *ce;
+	const git_config_entry *ce;
 
 	cl_git_pass(git_config_set_string(
 		g_config, "branch.local-track.remote", "yellow"));
@@ -53,7 +51,6 @@ void test_config_rename__prevent_overwrite(void)
 	cl_git_pass(git_config_get_entry(
 		&ce, g_config, "branch.local-track.remote"));
 	cl_assert_equal_s("yellow", ce->value);
-	git_config_entry_free(ce);
 
 	cl_git_pass(git_config_rename_section(
 		g_repo, "branch.track-local", "branch.local-track"));
@@ -61,7 +58,6 @@ void test_config_rename__prevent_overwrite(void)
 	cl_git_pass(git_config_get_entry(
 		&ce, g_config, "branch.local-track.remote"));
 	cl_assert_equal_s(".", ce->value);
-	git_config_entry_free(ce);
 
 	/* so, we don't currently prevent overwrite... */
 	/* {
