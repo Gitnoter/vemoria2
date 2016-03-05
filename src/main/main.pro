@@ -1,3 +1,5 @@
+# qmake project file of the main application
+
 QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
@@ -17,4 +19,6 @@ FORMS    += mainwindow.ui
 DISTFILES += \
     version.sh \
 
-#LIBS += $${DESTDIR}/libgit2.a
+# tell includes.pri which libs we need
+DEPENDENCY_LIBRARIES = libqgit2 libgit2
+include(../qmake/includes.pri)

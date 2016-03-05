@@ -1,7 +1,9 @@
 # qmake project file to build the static library libqgit2
 
+include(../qmake/common.pri)
+
 QT -= gui
-TARGET = qgit2
+TARGET = libqgit2
 TEMPLATE = lib
 CONFIG += staticlib C++11
 

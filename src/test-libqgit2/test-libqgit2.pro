@@ -1,14 +1,15 @@
+# qmake project file of libqgit2 examples
+
 QT -= gui
 QT += testlib
 CONFIG += console
 CONFIG += testcase
 CONFIG -= app_bundle    # for Mac users
 
-TARGET = test-libqgit2-init
+TARGET = run-test-libqgit2
 TEMPLATE = app
 
 INCLUDEPATH += \
-  ../libqgit2 \
   ../libqgit2/qgit2 \
   ../libgit2/include \
 
@@ -29,4 +30,6 @@ SOURCES += \
   ../libqgit2/tests/Repository.cpp \
   ../libqgit2/tests/Revision.cpp \
 
-LIBS += ../libqgit2/libqgit2.a ../libgit2/libgit2.a
+# tell includes.pri which libs we need
+DEPENDENCY_LIBRARIES = libqgit2 libgit2
+include(../qmake/includes.pri)
