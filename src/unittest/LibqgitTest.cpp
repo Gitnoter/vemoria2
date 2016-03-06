@@ -17,6 +17,7 @@ class TestLibqgit : public QObject
     private Q_SLOTS:
         void canBeInitialized();
         void refusesShutdownWithoutInit();
+        void countsInitializations();
 };
 
 void TestLibqgit::canBeInitialized()
@@ -27,6 +28,20 @@ void TestLibqgit::canBeInitialized()
 
 void TestLibqgit::refusesShutdownWithoutInit()
 {
+    QVERIFY( ! LibQGit2::shutdownLibQGit2() );
+}
+
+void TestLibqgit::countsInitializations()
+{
+    // first init is o.k.
+    QVERIFY( LibQGit2::initLibQGit2() );
+    // second init return false - already initialized
+    QVERIFY( ! LibQGit2::initLibQGit2() );
+    // first shutdown returns false - not yet down
+    QVERIFY( ! LibQGit2::shutdownLibQGit2() );
+    // second shutdown returns true - down
+    QVERIFY( LibQGit2::shutdownLibQGit2() );
+    // third shutdown returns false - not initialized
     QVERIFY( ! LibQGit2::shutdownLibQGit2() );
 }
 

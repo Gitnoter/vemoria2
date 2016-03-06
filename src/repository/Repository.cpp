@@ -6,19 +6,24 @@
 ///                                                                    /
 /// This project is licensed under the EUPL v.1.1 or a later version.  /
 ////////////////////////////////////////////////////////////////////////
-#include <QApplication>
-#include "mainwindow.h"
-#include "picture.h"
 #include "Repository.h"
+#include "qgit2.h"
 
-int main(int argc, char *argv[])
+Repository::Repository()
 {
-    QApplication a(argc, argv);
-    MainWindow w;
-    w.show();
+    // TODO: What should we do if init... returns false?
+    // raise an exception?
+    (void) LibQGit2::initLibQGit2();
+}
 
-    Picture pic;
-    pic.hello();
+Repository::~Repository()
+{
+    // we ignore the return code silently - what should we do?
+    (void) LibQGit2::shutdownLibQGit2();
+}
 
-    return a.exec();
+bool Repository::isOk()
+{
+    // TODO: Implement
+    return false;
 }
