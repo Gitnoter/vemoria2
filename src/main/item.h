@@ -6,25 +6,18 @@
 ///                                                                    /
 /// This project is licensed under the EUPL v.1.1 or a later version.  /
 ////////////////////////////////////////////////////////////////////////
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef ITEM_H
+#define ITEM_H
+#include <iostream>
+using namespace std;
 
-#include <QMainWindow>
-
-namespace Ui {
-class MainWindow;
-}
-
-class MainWindow : public QMainWindow
+class Item
 {
-    Q_OBJECT
-
+    string FileEnding;
 public:
-    explicit MainWindow(QWidget *parent = 0);
-    ~MainWindow();
-
-private:
-    Ui::MainWindow *ui;
+    Item();
+    ~Item();
+    void hello();
 };
 
-#endif // MAINWINDOW_H
+#endif // ITEM_H

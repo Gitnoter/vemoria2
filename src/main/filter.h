@@ -6,25 +6,14 @@
 ///                                                                    /
 /// This project is licensed under the EUPL v.1.1 or a later version.  /
 ////////////////////////////////////////////////////////////////////////
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef FILTER_H
+#define FILTER_H
 
-#include <QMainWindow>
 
-namespace Ui {
-class MainWindow;
-}
-
-class MainWindow : public QMainWindow
+class Filter
 {
-    Q_OBJECT
-
 public:
-    explicit MainWindow(QWidget *parent = 0);
-    ~MainWindow();
-
-private:
-    Ui::MainWindow *ui;
+    Filter();
 };
 
-#endif // MAINWINDOW_H
+#endif // FILTER_H
