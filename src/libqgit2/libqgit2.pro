@@ -28,6 +28,12 @@ QMAKE_DISTCLEAN += $${DESTDIR}/$${QMAKE_PREFIX_STATICLIB}$${TARGET}.$${QMAKE_EXT
 
 }
 
+win32 {
+    # currently we build a static library, so avoid declspec for dllimport/dllexport
+    # just define an empty LIBQGIT2_EXPORT, see libgit2_config.h
+    DEFINES += LIBQGIT2_EXPORT=""
+}
+
 HEADERS += \
   ./qgit2.h \
   ./qgit2/private/annotatedcommit.cpp \
