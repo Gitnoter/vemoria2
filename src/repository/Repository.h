@@ -6,19 +6,18 @@
 ///                                                                    /
 /// This project is licensed under the EUPL v.1.1 or a later version.  /
 ////////////////////////////////////////////////////////////////////////
-#include <QApplication>
-#include "mainwindow.h"
-#include "picture.h"
-#include "Repository.h"
+#ifndef REPOSITORY_H
+#define REPOSITORY_H
 
-int main(int argc, char *argv[])
+
+class Repository
 {
-    QApplication a(argc, argv);
-    MainWindow w;
-    w.show();
+    public:
+        Repository();
+        ~Repository();
 
-    Picture pic;
-    pic.hello();
+        bool isOk();
+        operator bool () { return isOk(); }
+};
 
-    return a.exec();
-}
+#endif // REPOSITORY_H

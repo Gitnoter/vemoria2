@@ -23,8 +23,10 @@ SOURCES += \
 DEFINES += SRCDIR=\\\"$$PWD/\\\"
 
 # tell includes.pri which libs we need
-DEPENDENCY_LIBRARIES = libqgit2 libgit2
+DEPENDENCY_LIBRARIES = libqgit2 libgit2 repository
 include(../qmake/includes.pri)
+
+INCLUDEPATH += ../libgit2/include
 
 win32 {
     # currently we use a static libqgit2 library, so avoid declspec for dllimport/dllexport

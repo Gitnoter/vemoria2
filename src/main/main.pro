@@ -51,7 +51,7 @@ OTHER_FILES += \
     version.sh \
 
 # tell includes.pri which libs we need
-DEPENDENCY_LIBRARIES = libqgit2 libgit2
+DEPENDENCY_LIBRARIES = libqgit2 libgit2 repository
 include(../qmake/includes.pri)
 
 win32 {
