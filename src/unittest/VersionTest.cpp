@@ -6,25 +6,29 @@
 ///                                                                    /
 /// This project is licensed under the EUPL v.1.1 or a later version.  /
 ////////////////////////////////////////////////////////////////////////
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
 
-#include <QMainWindow>
+#include "../version.h"
+#include "AutoTest.h"
+#include <QString>
+#include <QtTest>
 
-namespace Ui {
-class MainWindow;
-}
-
-class MainWindow : public QMainWindow
+class TestVersion : public QObject
 {
     Q_OBJECT
 
-public:
-    explicit MainWindow(QWidget *parent = 0);
-    ~MainWindow();
-
-private:
-    Ui::MainWindow *ui;
+    private Q_SLOTS:
+        void isNotEmpty();
 };
 
-#endif // MAINWINDOW_H
+void TestVersion::isNotEmpty()
+{
+    // Arrange + "Act"
+    QString version = VERSION;
+    // Assert
+    QVERIFY(!version.isEmpty());
+    qDebug() << "Version:" << VERSION;
+}
+
+AUTO_TEST_SUITE(TestVersion);
+
+#include "VersionTest.moc"

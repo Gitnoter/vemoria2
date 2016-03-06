@@ -8,13 +8,17 @@
 #-------------------------------------------------
 
 TEMPLATE = subdirs
-#CONFIG = ordered
+
 SUBDIRS = main \
-          libgit2 \
-          libqgit2 \
-          test-libqgit2 \
-#          unittest
+	unittest \
+	test-libqgit2 \
+	libgit2 \
+	libqgit2 \
+
+OTHER_FILES = \
+	../bin/run-build
 
 main.depends = libgit2 libqgit2
 test-libqgit2.depends = libgit2 libqgit2
-#unittest.depends = libgit2 libqgit2
+unittest.depends = libgit2 libqgit2
+

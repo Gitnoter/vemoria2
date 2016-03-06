@@ -6,25 +6,19 @@
 ///                                                                    /
 /// This project is licensed under the EUPL v.1.1 or a later version.  /
 ////////////////////////////////////////////////////////////////////////
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#include "collection.h"
 
-#include <QMainWindow>
+Collection::Collection()
+{
 
-namespace Ui {
-class MainWindow;
 }
 
-class MainWindow : public QMainWindow
+void Collection::fillCollection()
 {
-    Q_OBJECT
 
-public:
-    explicit MainWindow(QWidget *parent = 0);
-    ~MainWindow();
+}
 
-private:
-    Ui::MainWindow *ui;
-};
+void Collection::updateItem()
+{
 
-#endif // MAINWINDOW_H
+}

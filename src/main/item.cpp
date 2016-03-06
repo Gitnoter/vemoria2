@@ -6,25 +6,19 @@
 ///                                                                    /
 /// This project is licensed under the EUPL v.1.1 or a later version.  /
 ////////////////////////////////////////////////////////////////////////
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#include "item.h"
 
-#include <QMainWindow>
+Item::Item()
+{
 
-namespace Ui {
-class MainWindow;
 }
 
-class MainWindow : public QMainWindow
+void Item::hello()
 {
-    Q_OBJECT
+    cout << "Hello World" << endl;
+}
 
-public:
-    explicit MainWindow(QWidget *parent = 0);
-    ~MainWindow();
-
-private:
-    Ui::MainWindow *ui;
-};
-
-#endif // MAINWINDOW_H
+Item::~Item()
+{
+    cout << "The object has been deleted" << endl;
+}

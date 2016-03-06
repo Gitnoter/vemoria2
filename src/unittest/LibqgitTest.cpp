@@ -6,25 +6,30 @@
 ///                                                                    /
 /// This project is licensed under the EUPL v.1.1 or a later version.  /
 ////////////////////////////////////////////////////////////////////////
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
 
-#include <QMainWindow>
+#include "AutoTest.h"
+#include "qgit2/qgitglobal.h"
 
-namespace Ui {
-class MainWindow;
-}
-
-class MainWindow : public QMainWindow
+class TestLibqgit : public QObject
 {
     Q_OBJECT
 
-public:
-    explicit MainWindow(QWidget *parent = 0);
-    ~MainWindow();
-
-private:
-    Ui::MainWindow *ui;
+    private Q_SLOTS:
+        void canBeInitialized();
+        void refusesShutdownWithoutInit();
 };
 
-#endif // MAINWINDOW_H
+void TestLibqgit::canBeInitialized()
+{
+    QVERIFY( LibQGit2::initLibQGit2() );
+    QVERIFY( LibQGit2::shutdownLibQGit2() );
+}
+
+void TestLibqgit::refusesShutdownWithoutInit()
+{
+    QVERIFY( ! LibQGit2::shutdownLibQGit2() );
+}
+
+AUTO_TEST_SUITE(TestLibqgit);
+
+#include "LibqgitTest.moc"

@@ -6,25 +6,22 @@
 ///                                                                    /
 /// This project is licensed under the EUPL v.1.1 or a later version.  /
 ////////////////////////////////////////////////////////////////////////
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
 
-#include <QMainWindow>
+#include "AutoTest.h"
 
-namespace Ui {
-class MainWindow;
-}
-
-class MainWindow : public QMainWindow
+class TestRepository : public QObject
 {
     Q_OBJECT
 
-public:
-    explicit MainWindow(QWidget *parent = 0);
-    ~MainWindow();
-
-private:
-    Ui::MainWindow *ui;
+    private Q_SLOTS:
+        void canBeCreated();
 };
 
-#endif // MAINWINDOW_H
+void TestRepository::canBeCreated()
+{
+    QWARN("missing test");
+}
+
+AUTO_TEST_SUITE(TestRepository);
+
+#include "RepositoryTest.moc"

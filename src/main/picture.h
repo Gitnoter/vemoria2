@@ -6,25 +6,16 @@
 ///                                                                    /
 /// This project is licensed under the EUPL v.1.1 or a later version.  /
 ////////////////////////////////////////////////////////////////////////
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef PICTURE_H
+#define PICTURE_H
+#include <item.h>
 
-#include <QMainWindow>
 
-namespace Ui {
-class MainWindow;
-}
 
-class MainWindow : public QMainWindow
+class Picture: public Item
 {
-    Q_OBJECT
-
 public:
-    explicit MainWindow(QWidget *parent = 0);
-    ~MainWindow();
-
-private:
-    Ui::MainWindow *ui;
+    Picture();
 };
 
-#endif // MAINWINDOW_H
+#endif // PICTURE_H

@@ -6,25 +6,30 @@
 ///                                                                    /
 /// This project is licensed under the EUPL v.1.1 or a later version.  /
 ////////////////////////////////////////////////////////////////////////
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef COLLECTION_H
+#define COLLECTION_H
+#include <filter.h>
+#include <picture.h>
+#include <video.h>
+#include <document.h>
+#include <audio.h>
+#include <undefined.h>
+#include <itemmanager.h>
+#include <cachemanager.h>
 
-#include <QMainWindow>
 
-namespace Ui {
-class MainWindow;
-}
-
-class MainWindow : public QMainWindow
+class Collection
 {
-    Q_OBJECT
-
+    bool shared;
 public:
-    explicit MainWindow(QWidget *parent = 0);
-    ~MainWindow();
+    Collection();
+    //!
+    //!\return Please change the return value if necessary
+    //!
+    void fillCollection();
+    void updateItem();
 
-private:
-    Ui::MainWindow *ui;
+
 };
 
-#endif // MAINWINDOW_H
+#endif // COLLECTION_H

@@ -6,25 +6,19 @@
 ///                                                                    /
 /// This project is licensed under the EUPL v.1.1 or a later version.  /
 ////////////////////////////////////////////////////////////////////////
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#include "cache.h"
 
-#include <QMainWindow>
+Cache::Cache()
+{
 
-namespace Ui {
-class MainWindow;
 }
 
-class MainWindow : public QMainWindow
+void Cache::listCache()
 {
-    Q_OBJECT
 
-public:
-    explicit MainWindow(QWidget *parent = 0);
-    ~MainWindow();
+}
 
-private:
-    Ui::MainWindow *ui;
-};
+void Cache::createCache()
+{
 
-#endif // MAINWINDOW_H
+}
