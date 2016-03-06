@@ -11,6 +11,6 @@ include(../qmake/common.pri)
 # DEPENDENCY_LIBRARIES and this will add.
 for(dep, DEPENDENCY_LIBRARIES) {
     INCLUDEPATH += ../$${dep}
-    LIBS += $${DESTDIR}/$${QMAKE_PREFIX_STATICLIB}$${dep}.$${QMAKE_EXTENSION_STATICLIB}
+    LIBS += -L$${DESTDIR} -l$${dep}
     PRE_TARGETDEPS += $${DESTDIR}/$${QMAKE_PREFIX_STATICLIB}$${dep}.$${QMAKE_EXTENSION_STATICLIB}
 }
