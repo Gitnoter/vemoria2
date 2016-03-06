@@ -1,13 +1,22 @@
+# qmake project file of vemoria unit tests
+#
+# these tests will be executed by Jenkins automatically
+
 QT += testlib
 QT -= gui
-
+CONFIG += console
+CONFIG += testcase
+CONFIG -= app_bundle    # for Mac users
 
 TARGET = unittest
-CONFIG += console
-CONFIG -= app_bundle
-
 TEMPLATE = app
 
+HEADERS += \
+    AutoTest.h \
+
 SOURCES += \
-    tests.cpp
+    testmain.cpp \
+    VersionTest.cpp \
+    RepositoryTest.cpp
+
 DEFINES += SRCDIR=\\\"$$PWD/\\\"

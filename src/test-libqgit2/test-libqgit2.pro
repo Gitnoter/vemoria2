@@ -14,11 +14,11 @@ INCLUDEPATH += \
   ../libgit2/include \
 
 HEADERS += \
-  AutoTest.h \
+  ../unittest/AutoTest.h \
   ../libqgit2/tests/TestHelpers.h \
 
 SOURCES += \
-  testmain.cpp \
+  ../unittest/testmain.cpp \
   ../libqgit2/tests/TestHelpers.cpp \
   ../libqgit2/tests/Init.cpp \
   ../libqgit2/tests/Checkout.cpp \
