@@ -38,6 +38,10 @@ border-color:#fff;
 QPushButton:hover{
 	color:#1ca3c4;
 	cursor:pointer;
+}
+
+QGroupBox{
+	border:none;
 }</string>
    </property>
    <layout class="QGridLayout" name="gridLayout">
@@ -826,6 +830,18 @@ QPushButton:hover{
            </item>
            <item alignment="Qt::AlignBottom">
             <widget class="QWidget" name="gridSidebarBottomWidget" native="true">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">#gridSidebarBottomWidget{
+	background-color:#f8f8f8;
+	margin-right:1px;
+}</string>
+             </property>
              <layout class="QGridLayout" name="gridLayout_3">
               <property name="leftMargin">
                <number>0</number>
@@ -843,10 +859,248 @@ QPushButton:hover{
                <number>0</number>
               </property>
               <item row="0" column="0">
-               <widget class="QPushButton" name="pushButton_3">
-                <property name="text">
-                 <string>PushButton</string>
+               <widget class="QGroupBox" name="groupBox_6">
+                <property name="styleSheet">
+                 <string notr="true">#groupBox_6{
+	border:none;
+}</string>
                 </property>
+                <property name="title">
+                 <string/>
+                </property>
+                <layout class="QGridLayout" name="gridLayout_14">
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="spacing">
+                  <number>0</number>
+                 </property>
+                 <item row="0" column="0">
+                  <layout class="QFormLayout" name="formLayout_11">
+                   <property name="horizontalSpacing">
+                    <number>0</number>
+                   </property>
+                   <property name="verticalSpacing">
+                    <number>0</number>
+                   </property>
+                   <item row="0" column="0" colspan="2">
+                    <widget class="QGroupBox" name="groupBox_7">
+                     <property name="styleSheet">
+                      <string notr="true"/>
+                     </property>
+                     <property name="title">
+                      <string/>
+                     </property>
+                     <layout class="QGridLayout" name="gridLayout_15">
+                      <property name="leftMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="topMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="rightMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="bottomMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="spacing">
+                       <number>0</number>
+                      </property>
+                      <item row="0" column="0">
+                       <layout class="QFormLayout" name="formLayout_12">
+                        <property name="horizontalSpacing">
+                         <number>0</number>
+                        </property>
+                        <property name="verticalSpacing">
+                         <number>0</number>
+                        </property>
+                        <item row="0" column="0" colspan="2">
+                         <widget class="QPushButton" name="addButton">
+                          <property name="cursor">
+                           <cursorShape>PointingHandCursor</cursorShape>
+                          </property>
+                          <property name="styleSheet">
+                           <string notr="true">#addButton{
+	text-align:left;
+	padding-top:15px;
+	padding-bottom:15px;
+	padding-left:26px;
+	margin-right:1px;
+	background-color:#f8f8f8;
+	border:none;
+	border-top:1px solid #e3e3e3;
+	border-bottom:1px solid #e3e3e3;
+}
+
+#addButton:hover{
+	color:#191919;
+	background-color:#eeeeee;
+}</string>
+                          </property>
+                          <property name="text">
+                           <string>      Add files</string>
+                          </property>
+                          <property name="icon">
+                           <iconset>
+                            <normaloff>../../../pic/add-files.png</normaloff>../../../pic/add-files.png</iconset>
+                          </property>
+                          <property name="iconSize">
+                           <size>
+                            <width>18</width>
+                            <height>17</height>
+                           </size>
+                          </property>
+                          <property name="autoRepeat">
+                           <bool>false</bool>
+                          </property>
+                          <property name="flat">
+                           <bool>true</bool>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                   <item row="1" column="1">
+                    <widget class="QGroupBox" name="groupBox_8">
+                     <property name="styleSheet">
+                      <string notr="true">#groupBox_8{
+	padding-left:26px;
+}</string>
+                     </property>
+                     <property name="title">
+                      <string/>
+                     </property>
+                     <layout class="QGridLayout" name="gridLayout_16">
+                      <property name="leftMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="topMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="rightMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="bottomMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="spacing">
+                       <number>0</number>
+                      </property>
+                      <item row="0" column="0">
+                       <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="6,3,3">
+                        <property name="spacing">
+                         <number>0</number>
+                        </property>
+                        <item>
+                         <widget class="QLabel" name="label_4">
+                          <property name="text">
+                           <string>432 Elements</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QPushButton" name="syncButton">
+                          <property name="cursor">
+                           <cursorShape>PointingHandCursor</cursorShape>
+                          </property>
+                          <property name="toolTip">
+                           <string>Sync</string>
+                          </property>
+                          <property name="styleSheet">
+                           <string notr="true">#syncButton{
+	padding-top:13px;
+	padding-bottom:13px;
+	border:none;
+	background-color:none;
+	border-left:1px solid #e3e3e3;
+	padding-left:1px;
+	border-right:1px solid #e3e3e3;
+	padding-right:1px;
+}
+
+#syncButton:hover{
+	background-color:#eeeeee;
+}</string>
+                          </property>
+                          <property name="text">
+                           <string/>
+                          </property>
+                          <property name="icon">
+                           <iconset>
+                            <normaloff>../../../pic/sync.png</normaloff>../../../pic/sync.png</iconset>
+                          </property>
+                          <property name="iconSize">
+                           <size>
+                            <width>18</width>
+                            <height>23</height>
+                           </size>
+                          </property>
+                          <property name="flat">
+                           <bool>true</bool>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QPushButton" name="saveButton">
+                          <property name="cursor">
+                           <cursorShape>PointingHandCursor</cursorShape>
+                          </property>
+                          <property name="toolTip">
+                           <string>Save</string>
+                          </property>
+                          <property name="styleSheet">
+                           <string notr="true">#saveButton{
+	padding-top:16px;
+	padding-bottom:16px;
+	border:none;
+	background-color:none;
+	margin:0;
+	margin-right:1px;
+}
+
+#saveButton:hover{
+	background-color:#eeeeee;
+}</string>
+                          </property>
+                          <property name="text">
+                           <string/>
+                          </property>
+                          <property name="icon">
+                           <iconset>
+                            <normaloff>../../../pic/save-button.png</normaloff>../../../pic/save-button.png</iconset>
+                          </property>
+                          <property name="iconSize">
+                           <size>
+                            <width>18</width>
+                            <height>17</height>
+                           </size>
+                          </property>
+                          <property name="flat">
+                           <bool>true</bool>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                </layout>
                </widget>
               </item>
              </layout>
