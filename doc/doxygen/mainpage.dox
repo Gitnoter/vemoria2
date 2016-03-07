@@ -1,0 +1,25 @@
+// vim: syntax=c++.doxygen sw=2
+
+/** 
+\mainpage Vemoria Source Code Design Documentation
+
+\section contents Table of Contents
+\li \subpage p_libqgit2 
+
+\section links Links
+
+\subsection external_links External Pages
+  \li <a href="http://en.cppreference.com/w/cpp">C++ Reference</a>
+  \li <a href="http://qt-project.org/doc/">Qt Project</a>
+  \li <a href="http://www.doxygen.org">Doxygen Homepage</a>
+  \li <a
+    href="http://gcc.gnu.org/onlinedocs/libstdc++/latest-doxygen/">Standard
+    C++ Library (GNU)</a>
+
+\subsection vemoria_links Vemoria Links
+
+  \li <a
+    href="https://atlas.ai.it.hs-worms.de/confluence/display/VEM">Vemoria
+    Confluence Space</a>
+
+*/
