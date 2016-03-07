@@ -17,6 +17,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QPixmap pix13 ("/Users/Dennis/Desktop/pic/pic2.jpg");
     ui->previewPic->setPixmap( pix13.scaled ( 300, 120, Qt::IgnoreAspectRatio, Qt::FastTransformation ));
+
+
+    ui->userLabel2->hide();
 }
 
 MainWindow::~MainWindow()
