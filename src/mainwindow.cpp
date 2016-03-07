@@ -14,6 +14,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    QPixmap pix13 ("/Users/Dennis/Desktop/pic/pic2.jpg");
+    ui->previewPic->setPixmap( pix13.scaled ( 300, 120, Qt::IgnoreAspectRatio, Qt::FastTransformation ));
 }
 
 MainWindow::~MainWindow()
