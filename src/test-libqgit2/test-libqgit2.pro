@@ -12,6 +12,7 @@ TEMPLATE = app
 INCLUDEPATH += \
   ../libqgit2/qgit2 \
   ../libgit2/include \
+  ../unittest \
 
 HEADERS += \
   ../unittest/AutoTest.h \
