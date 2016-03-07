@@ -22,7 +22,7 @@ public:
     //!
     void getItemDetails(string itemname); //for example grandma.jpg
     void setItemDetails(string itemname, string Details[]/*, specific Item(Pointer?)*/);//Überladen notwendig für verschiedene Itemtypen?
-    string *getItemList();
+    string getItemList();
     void saveItem();
     void deleteItem();
     void restoreItem();

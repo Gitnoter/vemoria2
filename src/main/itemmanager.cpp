@@ -13,19 +13,19 @@ ItemManager::ItemManager()
 
 }
 
-void ItemManager::getItemDetails(string itemname)
+void ItemManager::getItemDetails(string /*itemname*/)
 {
 
 }
 
-void ItemManager::setItemDetails(string itemname, string Details[]/*, specific Item(Pointer?)*/)
+void ItemManager::setItemDetails(string /*itemname*/, string /*Details*/[] /*, specific Item(Pointer?)*/)
 {
 
 }
 
-string *ItemManager::getItemList()
+string ItemManager::getItemList()
 {
-
+    return "";
 }
 
 void ItemManager::saveItem()
@@ -43,7 +43,7 @@ void ItemManager::restoreItem()
 
 }
 
-void ItemManager::exportItems(string ItemList[])
+void ItemManager::exportItems(string /*ItemList*/[])
 {
 
 }
@@ -53,7 +53,7 @@ void ItemManager::ItemManager::createItem()
 
 }
 
-void ItemManager::openItemExternally(string itemname)
+void ItemManager::openItemExternally(string /*itemname*/)
 {
 
 }

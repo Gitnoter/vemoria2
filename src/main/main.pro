@@ -1,8 +1,4 @@
-#-------------------------------------------------
-#
-# Project created by QtCreator 2016-03-01T09:29:13
-#
-#-------------------------------------------------
+# qmake project file of the main application
 
 QT       += core gui
 
@@ -11,44 +7,58 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = vemoria
 TEMPLATE = app
 
-
-SOURCES += main.cpp\
-        mainwindow.cpp \
+SOURCES += \
+    main.cpp \
+    audio.cpp \
+    cache.cpp \
     cachemanager.cpp \
     collection.cpp \
+    collectionmanager.cpp \
     collections.cpp \
+    document.cpp \
     filter.cpp \
     item.cpp \
-    cache.cpp \
-    collectionmanager.cpp \
     itemmanager.cpp \
+    mainwindow.cpp \
     picture.cpp \
-    video.cpp \
-    document.cpp \
-    audio.cpp \
     undefined.cpp \
     undefinedgui_1.cpp \
-    undefinedgui_2.cpp
+    video.cpp \
 
-HEADERS  += mainwindow.h \
+HEADERS  += \
+    audio.h \
+    cache.h \
     cachemanager.h \
     collection.h \
+    collectionmanager.h \
     collections.h \
+    document.h \
     filter.h \
     item.h \
-    cache.h \
-    collectionmanager.h \
     itemmanager.h \
+    mainwindow.h \
     picture.h \
-    video.h \
-    document.h \
-    audio.h \
-    undefined.h \
     undefinedgui_1.h \
-    undefinedgui_2.h
+    undefinedgui_2.h \
+    undefined.h \
+    video.h \
+    version.h \
 
-FORMS    += mainwindow.ui
+FORMS += \
+    mainwindow.ui \
 
-DISTFILES += \
+OTHER_FILES += \
     version.sh \
-    VERSION
+
+# tell includes.pri which libs we need
+DEPENDENCY_LIBRARIES = libqgit2 libgit2 repository
+include(../qmake/includes.pri)
+
+win32 {
+    # currently we use a static libqgit2 library, so avoid declspec for dllimport/dllexport
+    # just define an empty LIBQGIT2_EXPORT, see libgit2_config.h
+    DEFINES += LIBQGIT2_EXPORT=""
+
+    # additionally, we need the windows socket library
+    LIBS += -lws2_32
+}

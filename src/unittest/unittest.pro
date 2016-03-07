@@ -1,13 +1,38 @@
+# qmake project file of vemoria unit tests
+#
+# these tests will be executed by Jenkins automatically
+
 QT += testlib
 QT -= gui
-
-
-TARGET = unittest
 CONFIG += console
-CONFIG -= app_bundle
+CONFIG += testcase
+CONFIG -= app_bundle    # for Mac users
 
+TARGET = run-unittest
 TEMPLATE = app
 
+HEADERS += \
+    AutoTest.h \
+
 SOURCES += \
-    tests.cpp
+    testmain.cpp \
+    VersionTest.cpp \
+    LibqgitTest.cpp \
+    RepositoryTest.cpp \
+
 DEFINES += SRCDIR=\\\"$$PWD/\\\"
+
+# tell includes.pri which libs we need
+DEPENDENCY_LIBRARIES = libqgit2 libgit2 repository
+include(../qmake/includes.pri)
+
+INCLUDEPATH += ../libgit2/include
+
+win32 {
+    # currently we use a static libqgit2 library, so avoid declspec for dllimport/dllexport
+    # just define an empty LIBQGIT2_EXPORT, see libgit2_config.h
+    DEFINES += LIBQGIT2_EXPORT=""
+
+    # additionally, we need the windows socket library
+    LIBS += -lws2_32
+}

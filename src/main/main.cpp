@@ -6,9 +6,10 @@
 ///                                                                    /
 /// This project is licensed under the EUPL v.1.1 or a later version.  /
 ////////////////////////////////////////////////////////////////////////
-#include "mainwindow.h"
 #include <QApplication>
-#include <picture.h>
+#include "mainwindow.h"
+#include "picture.h"
+#include "Repository.h"
 
 int main(int argc, char *argv[])
 {
@@ -16,11 +17,8 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.show();
 
-    Picture *pic;
-    pic = new Picture();
-    pic->hello();
+    Picture pic;
+    pic.hello();
 
-
-    delete pic;
     return a.exec();
 }
