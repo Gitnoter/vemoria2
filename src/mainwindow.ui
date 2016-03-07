@@ -29,9 +29,16 @@ border-color:#fff;
   </property>
   <widget class="QWidget" name="centralWidget">
    <property name="styleSheet">
-    <string notr="true">font-family:'Source Sans Pro';
-font-size:16px;
-color:#191919;</string>
+    <string notr="true">*{
+	font-family:'Source Sans Pro';
+	font-size:16px;
+	color:#191919;
+}
+
+QPushButton:hover{
+	color:#1ca3c4;
+	cursor:pointer;
+}</string>
    </property>
    <layout class="QGridLayout" name="gridLayout">
     <property name="leftMargin">
@@ -216,6 +223,9 @@ color:#191919;</string>
 }</string>
                    </property>
                    <property name="text">
+                    <string/>
+                   </property>
+                   <property name="placeholderText">
                     <string>Search ..</string>
                    </property>
                   </widget>
@@ -388,6 +398,9 @@ color:#191919;</string>
                             </property>
                             <item row="0" column="1">
                              <widget class="QPushButton" name="openButton">
+                              <property name="cursor">
+                               <cursorShape>PointingHandCursor</cursorShape>
+                              </property>
                               <property name="styleSheet">
                                <string notr="true">#openButton{
 	text-align:left;
@@ -565,6 +578,9 @@ color:#191919;</string>
                              <property name="enabled">
                               <bool>true</bool>
                              </property>
+                             <property name="cursor">
+                              <cursorShape>PointingHandCursor</cursorShape>
+                             </property>
                              <property name="styleSheet">
                               <string notr="true">#filterImagesButton{
 	text-align:left;
@@ -583,6 +599,9 @@ color:#191919;</string>
                            </item>
                            <item row="1" column="1">
                             <widget class="QPushButton" name="filterVideoButton">
+                             <property name="cursor">
+                              <cursorShape>PointingHandCursor</cursorShape>
+                             </property>
                              <property name="styleSheet">
                               <string notr="true">#filterVideoButton{
 	text-align:left;
@@ -617,6 +636,9 @@ color:#191919;</string>
                            </item>
                            <item row="2" column="1">
                             <widget class="QPushButton" name="filterDocumentsButton">
+                             <property name="cursor">
+                              <cursorShape>PointingHandCursor</cursorShape>
+                             </property>
                              <property name="styleSheet">
                               <string notr="true">#filterDocumentsButton{
 	text-align:left;
@@ -754,6 +776,9 @@ color:#191919;</string>
                            </property>
                            <item row="0" column="0" colspan="2">
                             <widget class="QRadioButton" name="doneButton">
+                             <property name="cursor">
+                              <cursorShape>PointingHandCursor</cursorShape>
+                             </property>
                              <property name="styleSheet">
                               <string notr="true"/>
                              </property>
@@ -770,6 +795,9 @@ color:#191919;</string>
                            </item>
                            <item row="1" column="0" colspan="2">
                             <widget class="QRadioButton" name="todoButton">
+                             <property name="cursor">
+                              <cursorShape>PointingHandCursor</cursorShape>
+                             </property>
                              <property name="styleSheet">
                               <string notr="true">#todoButton{
 	margin-top:6px;
