@@ -19,7 +19,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->previewPic->setPixmap( pix13.scaled ( 300, 120, Qt::IgnoreAspectRatio, Qt::FastTransformation ));
 
 
-    ui->userLabel2->hide();
+    ui->userLabel2->show();
+    ui->gridDetail->hide();
+
 }
 
 MainWindow::~MainWindow()
@@ -28,3 +30,8 @@ MainWindow::~MainWindow()
 }
 
 
+void MainWindow::on_pushButton_2_clicked()
+{
+    ui->userLabel2->hide();
+    ui->gridDetail->show();
+}
