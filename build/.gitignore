@@ -1,2 +1,3 @@
-# empty file to make git create the build folder even though it's empty
-
+# empty .gitignore just to force creating the build directory on git checkout
+#
+# real .gitignore settings are in the top directory .gitignore file

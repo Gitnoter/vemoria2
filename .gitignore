@@ -17,6 +17,11 @@
 # dot-files which should NOT be ignored
 !.gitignore
 
+# ignore generated doxygen files, see
+# bin/run-doxygen
+/project-number.dox
+/doc/doxygen/project-number.dox
+
 # ignore generated files
 *.a
 *.core
