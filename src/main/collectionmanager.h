@@ -12,17 +12,20 @@
 #include <QDir>
 #include <QString>
 #include <QPointer>
-
+#include "qgit2.h"
 class CollectionManager
 {
 public:
     CollectionManager();
+    ~CollectionManager();
     //!
     //!\return Please change the return value if necessary
     //!
     void getCollectionList();
     bool createCollection(QString collectionName);
     void deleteCollection();
+private:
+    QPointer<LibQGit2::Repository> repo;
 };
 
 #endif // COLLECTIONMANAGER_H

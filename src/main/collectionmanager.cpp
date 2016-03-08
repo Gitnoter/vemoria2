@@ -7,7 +7,7 @@
 /// This project is licensed under the EUPL v.1.1 or a later version.  /
 ////////////////////////////////////////////////////////////////////////
 #include "collectionmanager.h"
-#include "qgit2.h"
+
 CollectionManager::CollectionManager()
 {
     ///
@@ -49,12 +49,12 @@ bool CollectionManager::createCollection(QString collectionName)
         return true;
 }
 
-bool CollectionManager::addFile(QFile file)
-{
+//bool CollectionManager::addFile(QFile file)
+//{
 //        try {
 //            repo->
 //        }
-}
+//}
 
 void CollectionManager::deleteCollection()
 {
