@@ -15,9 +15,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    CollectionManager *collman;
-    collman = new CollectionManager();
-    collman->createCollection("peter");
+//    CollectionManager *collman;
+//    collman = new CollectionManager();
+//    collman->createCollection("peter");
+//    delete collman;
 }
 
 MainWindow::~MainWindow()
