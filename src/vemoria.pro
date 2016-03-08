@@ -28,7 +28,8 @@ SOURCES += main.cpp\
     audio.cpp \
     undefined.cpp \
     undefinedgui_1.cpp \
-    undefinedgui_2.cpp
+    undefinedgui_2.cpp \
+    popupcollection.cpp
 
 HEADERS  += mainwindow.h \
     version.h \
@@ -46,9 +47,11 @@ HEADERS  += mainwindow.h \
     audio.h \
     undefined.h \
     undefinedgui_1.h \
-    undefinedgui_2.h
+    undefinedgui_2.h \
+    popupcollection.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    popupcollection.ui
 
 DISTFILES += \
     version.sh \

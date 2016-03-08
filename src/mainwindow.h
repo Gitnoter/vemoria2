@@ -26,6 +26,8 @@ public:
 private slots:
     void on_pushButton_2_clicked();
 
+    void on_actionNew_Collection_triggered();
+
 private:
     Ui::MainWindow *ui;
 };

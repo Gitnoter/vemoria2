@@ -9,6 +9,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "version.h"
+#include "popupcollection.h"
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -34,4 +36,12 @@ void MainWindow::on_pushButton_2_clicked()
 {
     ui->userLabel2->hide();
     ui->gridDetail->show();
+}
+
+void MainWindow::on_actionNew_Collection_triggered()
+{
+      popupCollection popwindows;
+      popwindows.setModal(true);
+      popwindows.exec();
+
 }
