@@ -1,6 +1,7 @@
 # qmake project file of the main application
 
 QT       += core gui
+QT       += xml
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -28,7 +29,9 @@ SOURCES += \
     picture.cpp \
     undefined.cpp \
     undefinedgui_1.cpp \
+    undefinedgui_2.cpp \
     video.cpp \
+    xmlhandler.cpp
 
 HEADERS  += \
     audio.h \
@@ -48,6 +51,7 @@ HEADERS  += \
     undefined.h \
     video.h \
     version.h \
+    xmlhandler.h
 
 FORMS += \
     mainwindow.ui \

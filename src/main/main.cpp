@@ -10,15 +10,23 @@
 #include "mainwindow.h"
 #include "picture.h"
 #include "Repository.h"
+#include "xmlhandler.h"
+#include <iostream>
+#include <QTextStream.h>
+using namespace std;
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     MainWindow w;
     w.show();
+    QString s;
 
     Picture pic;
     pic.hello();
+    XMLHandler handy;
+    //Putput in Application Output is chaotic. Two ways to Output the Elements
+    QTextStream(stdout) /*<< endl << endl*/ << handy.readXMLFile("C:/beispiel.xml") << endl;
 
     return a.exec();
 }
