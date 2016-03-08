@@ -10,6 +10,7 @@
 TEMPLATE = subdirs
 
 SUBDIRS = main \
+	gui \
 	logic \
 	repository \
 	unittest \
@@ -20,6 +21,6 @@ SUBDIRS = main \
 OTHER_FILES = \
 	../bin/run-build
 
-main.depends = libgit2 libqgit2 repository logic
-unittest.depends = libgit2 libqgit2 repository logic
+main.depends          = libgit2 libqgit2 repository logic gui
+unittest.depends      = libgit2 libqgit2 repository logic
 test-libqgit2.depends = libgit2 libqgit2

@@ -15,8 +15,8 @@ HEADERS += \
 OTHER_FILES += \
     version.sh \
 
-# tell includes.pri which libs we need
-DEPENDENCY_LIBRARIES = libqgit2 libgit2 repository logic
+# tell includes.pri which libs we need to link
+DEPENDENCY_LIBRARIES = libqgit2 libgit2 repository logic gui
 include(../qmake/includes.pri)
 
 win32 {

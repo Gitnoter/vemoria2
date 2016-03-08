@@ -2,8 +2,7 @@
 
 include(../qmake/common.pri)
 
-QT       += core gui
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+QT       += core
 
 TARGET = logic
 TEMPLATE = lib
@@ -17,11 +16,8 @@ SOURCES += \
     filter.cpp \
     item.cpp \
     itemmanager.cpp \
-    mainwindow.cpp \
     picture.cpp \
-    popupcollection.cpp \
     undefined.cpp \
-    undefinedgui_1.cpp \
     video.cpp \
 
 HEADERS  += \
@@ -32,16 +28,8 @@ HEADERS  += \
     filter.h \
     item.h \
     itemmanager.h \
-    mainwindow.h \
     picture.h \
-    popupcollection.h \
-    undefinedgui_1.h \
-    undefinedgui_2.h \
     undefined.h \
     video.h \
     version.h \
-
-FORMS += \
-    mainwindow.ui \
-    popupcollection.ui \
 

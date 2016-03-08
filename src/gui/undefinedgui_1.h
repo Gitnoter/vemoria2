@@ -9,7 +9,7 @@
 #ifndef UNDEFINEDGUI_1_H
 #define UNDEFINEDGUI_1_H
 #include <repository/collections.h>
-#include <logic/undefinedgui_2.h>
+#include <gui/undefinedgui_2.h>
 
 
 class UndefinedGUI_1
