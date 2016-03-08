@@ -12,7 +12,7 @@
 #include "Repository.h"
 #include "xmlhandler.h"
 #include <iostream>
-#include <QTextStream.h>
+#include <QTextStream>
 using namespace std;
 
 int main(int argc, char *argv[])
