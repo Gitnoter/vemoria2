@@ -6,30 +6,15 @@
 ///                                                                    /
 /// This project is licensed under the EUPL v.1.1 or a later version.  /
 ////////////////////////////////////////////////////////////////////////
-#ifndef COLLECTION_H
-#define COLLECTION_H
-#include <filter.h>
-#include <picture.h>
-#include <video.h>
-#include <document.h>
-#include <audio.h>
-#include <undefined.h>
-#include <itemmanager.h>
-#include <cachemanager.h>
+#ifndef VIDEO_H
+#define VIDEO_H
+#include <logic/item.h>
 
 
-class Collection
+class Video: Item
 {
-    bool shared;
 public:
-    Collection();
-    //!
-    //!\return Please change the return value if necessary
-    //!
-    void fillCollection();
-    void updateItem();
-
-
+    Video();
 };
 
-#endif // COLLECTION_H
+#endif // VIDEO_H

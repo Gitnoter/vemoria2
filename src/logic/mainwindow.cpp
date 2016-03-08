@@ -9,7 +9,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "../version.h"
-#include "collectionmanager.h"
+#include "repository/collectionmanager.h"
 #include "popupcollection.h"
 
 MainWindow::MainWindow(QWidget *parent) :

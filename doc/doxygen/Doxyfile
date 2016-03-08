@@ -774,6 +774,7 @@ INPUT                  = \
 			doc/doxygen \
 			build \
 			src/main \
+			src/logic \
 			src/repository \
 			src/libqgit2/qgit2 \
 

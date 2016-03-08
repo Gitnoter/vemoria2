@@ -8,8 +8,8 @@
 ////////////////////////////////////////////////////////////////////////
 #ifndef COLLECTIONS_H
 #define COLLECTIONS_H
-#include <collection.h>
-#include<collectionmanager.h>
+#include "repository/collection.h"
+#include "repository/collectionmanager.h"
 
 
 class Collections

@@ -6,26 +6,19 @@
 ///                                                                    /
 /// This project is licensed under the EUPL v.1.1 or a later version.  /
 ////////////////////////////////////////////////////////////////////////
-#ifndef COLLECTIONMANAGER_H
-#define COLLECTIONMANAGER_H
+#ifndef CACHEMANAGER_H
+#define CACHEMANAGER_H
+#include <logic/cache.h>
 
-#include <QDir>
-#include <QString>
-#include <QPointer>
-#include "qgit2.h"
-class CollectionManager
+
+class CacheManager
 {
 public:
-    CollectionManager();
-    ~CollectionManager();
+    CacheManager();
     //!
     //!\return Please change the return value if necessary
     //!
-    void getCollectionList();
-    bool createCollection(QString collectionName);
-    void deleteCollection();
-private:
-    QPointer<LibQGit2::Repository> repo;
+    void checkCache();
 };
 
-#endif // COLLECTIONMANAGER_H
+#endif // CACHEMANAGER_H

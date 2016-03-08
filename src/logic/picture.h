@@ -6,15 +6,16 @@
 ///                                                                    /
 /// This project is licensed under the EUPL v.1.1 or a later version.  /
 ////////////////////////////////////////////////////////////////////////
-#ifndef DOCUMENT_H
-#define DOCUMENT_H
-#include <item.h>
+#ifndef PICTURE_H
+#define PICTURE_H
+#include "logic/item.h"
 
 
-class Document: Item
+
+class Picture: public Item
 {
 public:
-    Document();
+    Picture();
 };
 
-#endif // DOCUMENT_H
+#endif // PICTURE_H

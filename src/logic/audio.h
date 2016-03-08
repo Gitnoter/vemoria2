@@ -6,19 +6,15 @@
 ///                                                                    /
 /// This project is licensed under the EUPL v.1.1 or a later version.  /
 ////////////////////////////////////////////////////////////////////////
-#ifndef CACHEMANAGER_H
-#define CACHEMANAGER_H
-#include <cache.h>
+#ifndef AUDIO_H
+#define AUDIO_H
+#include "logic/item.h"
 
 
-class CacheManager
+class Audio: Item
 {
 public:
-    CacheManager();
-    //!
-    //!\return Please change the return value if necessary
-    //!
-    void checkCache();
+    Audio();
 };
 
-#endif // CACHEMANAGER_H
+#endif // AUDIO_H
