@@ -10,7 +10,17 @@
 #include "qgit2.h"
 CollectionManager::CollectionManager()
 {
+    ///
+    ///@brief CollectionManager provides an overview of what
+    /// Collections are available.
+    ///
 
+    repo = new LibQGit2::Repository();
+}
+
+CollectionManager::~CollectionManager()
+{
+    delete repo;
 }
 
 void CollectionManager::getCollectionList()
@@ -20,10 +30,6 @@ void CollectionManager::getCollectionList()
 
 bool CollectionManager::createCollection(QString collectionName)
 {
-    QPointer<LibQGit2::Repository> repo;
-
-    const QString repoPath;
-
 
         if(!QDir(collectionName).exists())
         {
@@ -32,8 +38,6 @@ bool CollectionManager::createCollection(QString collectionName)
         }
         else return false;
 
-        // Create a new repository object
-        repo = new LibQGit2::Repository();
         try {
             repo->init(collectionName,false);
 
@@ -43,6 +47,13 @@ bool CollectionManager::createCollection(QString collectionName)
             return false;
         }
         return true;
+}
+
+bool CollectionManager::addFile(QFile file)
+{
+//        try {
+//            repo->
+//        }
 }
 
 void CollectionManager::deleteCollection()
