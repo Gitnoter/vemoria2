@@ -30,7 +30,6 @@ string ItemManager::getItemList()
 
 void ItemManager::saveItem()
 {
-
 }
 
 void ItemManager::deleteItem()
@@ -48,7 +47,7 @@ void ItemManager::exportItems(string /*ItemList*/[])
 
 }
 
-void ItemManager::ItemManager::createItem()
+void ItemManager::createItem()
 {
 
 }

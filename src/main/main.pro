@@ -26,6 +26,7 @@ SOURCES += \
     itemmanager.cpp \
     mainwindow.cpp \
     picture.cpp \
+    popupcollection.cpp \
     undefined.cpp \
     undefinedgui_1.cpp \
     video.cpp \
@@ -43,6 +44,7 @@ HEADERS  += \
     itemmanager.h \
     mainwindow.h \
     picture.h \
+    popupcollection.h \
     undefinedgui_1.h \
     undefinedgui_2.h \
     undefined.h \
@@ -51,6 +53,7 @@ HEADERS  += \
 
 FORMS += \
     mainwindow.ui \
+    popupcollection.ui \
 
 OTHER_FILES += \
     version.sh \

@@ -23,6 +23,11 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+private slots:
+    void on_pushButton_2_clicked();
+
+    void on_actionNew_Collection_triggered();
+
 private:
     Ui::MainWindow *ui;
 };
