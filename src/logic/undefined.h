@@ -6,16 +6,15 @@
 ///                                                                    /
 /// This project is licensed under the EUPL v.1.1 or a later version.  /
 ////////////////////////////////////////////////////////////////////////
-#ifndef UNDEFINEDGUI_1_H
-#define UNDEFINEDGUI_1_H
-#include <collections.h>
-#include <undefinedgui_2.h>
+#ifndef UNDEFINED_H
+#define UNDEFINED_H
+#include <logic/item.h>
 
 
-class UndefinedGUI_1
+class Undefined: Item
 {
 public:
-    UndefinedGUI_1();
+    Undefined();
 };
 
-#endif // UNDEFINEDGUI_1_H
+#endif // UNDEFINED_H

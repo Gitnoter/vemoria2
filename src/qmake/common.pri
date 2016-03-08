@@ -5,6 +5,7 @@
 DESTDIR = ..            # target directory one level above
 
 CONFIG += c++11         # enable features of C++11 standard
+INCLUDEPATH += ..	# to allow includes of other libs
 
 *-g++ {
     # -Wall / -Wextra are enabled by default

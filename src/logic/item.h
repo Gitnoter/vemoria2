@@ -6,18 +6,17 @@
 ///                                                                    /
 /// This project is licensed under the EUPL v.1.1 or a later version.  /
 ////////////////////////////////////////////////////////////////////////
-#ifndef UNDEFINEDGUI_2_H
-#define UNDEFINEDGUI_2_H
-#include <collection.h>
-#include <filter.h>
+#ifndef ITEM_H
+#define ITEM_H
+#include <string>
 
-//!
-//! \brief Start-GUI to lead the user to his Collection
-//!
-class UndefinedGUI_2
+class Item
 {
+    std::string FileEnding;
 public:
-    UndefinedGUI_2();
+    Item();
+    ~Item();
+    void hello();
 };
 
-#endif // UNDEFINEDGUI_2_H
+#endif // ITEM_H

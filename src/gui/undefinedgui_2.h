@@ -6,15 +6,18 @@
 ///                                                                    /
 /// This project is licensed under the EUPL v.1.1 or a later version.  /
 ////////////////////////////////////////////////////////////////////////
-#ifndef AUDIO_H
-#define AUDIO_H
-#include <item.h>
+#ifndef UNDEFINEDGUI_2_H
+#define UNDEFINEDGUI_2_H
+#include "repository/collection.h"
+#include "logic/filter.h"
 
-
-class Audio: Item
+//!
+//! \brief Start-GUI to lead the user to his Collection
+//!
+class UndefinedGUI_2
 {
 public:
-    Audio();
+    UndefinedGUI_2();
 };
 
-#endif // AUDIO_H
+#endif // UNDEFINEDGUI_2_H

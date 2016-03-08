@@ -7,6 +7,7 @@
 /// This project is licensed under the EUPL v.1.1 or a later version.  /
 ////////////////////////////////////////////////////////////////////////
 #include "collectionmanager.h"
+#include "qgit2.h"
 
 CollectionManager::CollectionManager()
 {

@@ -6,18 +6,30 @@
 ///                                                                    /
 /// This project is licensed under the EUPL v.1.1 or a later version.  /
 ////////////////////////////////////////////////////////////////////////
-#ifndef ITEM_H
-#define ITEM_H
-#include <iostream>
-using namespace std;
+#ifndef COLLECTIONMANAGER_H
+#define COLLECTIONMANAGER_H
 
-class Item
+#include <QDir>
+#include <QString>
+#include <QPointer>
+
+namespace LibQGit2 {
+  class Repository; // forward declaration
+}
+
+class CollectionManager
 {
-    string FileEnding;
 public:
-    Item();
-    ~Item();
-    void hello();
+    CollectionManager();
+    ~CollectionManager();
+    //!
+    //!\return Please change the return value if necessary
+    //!
+    void getCollectionList();
+    bool createCollection(QString collectionName);
+    void deleteCollection();
+private:
+    QPointer<LibQGit2::Repository> repo;
 };
 
-#endif // ITEM_H
+#endif // COLLECTIONMANAGER_H
