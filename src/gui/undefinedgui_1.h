@@ -6,18 +6,16 @@
 ///                                                                    /
 /// This project is licensed under the EUPL v.1.1 or a later version.  /
 ////////////////////////////////////////////////////////////////////////
-#ifndef UNDEFINEDGUI_2_H
-#define UNDEFINEDGUI_2_H
-#include <collection.h>
-#include <filter.h>
+#ifndef UNDEFINEDGUI_1_H
+#define UNDEFINEDGUI_1_H
+#include <repository/collections.h>
+#include <gui/undefinedgui_2.h>
 
-//!
-//! \brief Start-GUI to lead the user to his Collection
-//!
-class UndefinedGUI_2
+
+class UndefinedGUI_1
 {
 public:
-    UndefinedGUI_2();
+    UndefinedGUI_1();
 };
 
-#endif // UNDEFINEDGUI_2_H
+#endif // UNDEFINEDGUI_1_H

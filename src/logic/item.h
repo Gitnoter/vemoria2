@@ -6,19 +6,17 @@
 ///                                                                    /
 /// This project is licensed under the EUPL v.1.1 or a later version.  /
 ////////////////////////////////////////////////////////////////////////
-#ifndef CACHEMANAGER_H
-#define CACHEMANAGER_H
-#include <cache.h>
+#ifndef ITEM_H
+#define ITEM_H
+#include <string>
 
-
-class CacheManager
+class Item
 {
+    std::string FileEnding;
 public:
-    CacheManager();
-    //!
-    //!\return Please change the return value if necessary
-    //!
-    void checkCache();
+    Item();
+    ~Item();
+    void hello();
 };
 
-#endif // CACHEMANAGER_H
+#endif // ITEM_H

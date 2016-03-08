@@ -1,7 +1,7 @@
 #!/bin/bash
 action="$1"
 version=$(cat "VERSION")
-build=$(git describe --tags --always --long)
+build=$(git describe --tags --always --long --dirty)
 IFS=. read release minor <<< "$version"
 if [ "$action" = "minor" ]; then
 let "minor=minor+1"

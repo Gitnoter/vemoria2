@@ -6,21 +6,15 @@
 ///                                                                    /
 /// This project is licensed under the EUPL v.1.1 or a later version.  /
 ////////////////////////////////////////////////////////////////////////
-#ifndef COLLECTIONS_H
-#define COLLECTIONS_H
-#include <collection.h>
-#include<collectionmanager.h>
+#ifndef AUDIO_H
+#define AUDIO_H
+#include "logic/item.h"
 
 
-class Collections
+class Audio: Item
 {
 public:
-    Collections();
-    //!
-    //!\return Please change the return value if necessary
-    //!
-    void Init();
-    void Load();
+    Audio();
 };
 
-#endif // COLLECTIONS_H
+#endif // AUDIO_H

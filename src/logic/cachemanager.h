@@ -6,15 +6,19 @@
 ///                                                                    /
 /// This project is licensed under the EUPL v.1.1 or a later version.  /
 ////////////////////////////////////////////////////////////////////////
-#ifndef DOCUMENT_H
-#define DOCUMENT_H
-#include <item.h>
+#ifndef CACHEMANAGER_H
+#define CACHEMANAGER_H
+#include <logic/cache.h>
 
 
-class Document: Item
+class CacheManager
 {
 public:
-    Document();
+    CacheManager();
+    //!
+    //!\return Please change the return value if necessary
+    //!
+    void checkCache();
 };
 
-#endif // DOCUMENT_H
+#endif // CACHEMANAGER_H

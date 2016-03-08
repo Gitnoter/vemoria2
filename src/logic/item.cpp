@@ -6,16 +6,21 @@
 ///                                                                    /
 /// This project is licensed under the EUPL v.1.1 or a later version.  /
 ////////////////////////////////////////////////////////////////////////
-#ifndef PICTURE_H
-#define PICTURE_H
-#include <item.h>
+#include "item.h"
+#include <iostream>
+using namespace std;
 
-
-
-class Picture: public Item
+Item::Item()
 {
-public:
-    Picture();
-};
 
-#endif // PICTURE_H
+}
+
+void Item::hello()
+{
+    cout << "Hello World" << endl;
+}
+
+Item::~Item()
+{
+    cout << "The object has been deleted" << endl;
+}

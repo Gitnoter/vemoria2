@@ -6,15 +6,15 @@
 ///                                                                    /
 /// This project is licensed under the EUPL v.1.1 or a later version.  /
 ////////////////////////////////////////////////////////////////////////
-#ifndef AUDIO_H
-#define AUDIO_H
-#include <item.h>
+#ifndef UNDEFINED_H
+#define UNDEFINED_H
+#include <logic/item.h>
 
 
-class Audio: Item
+class Undefined: Item
 {
 public:
-    Audio();
+    Undefined();
 };
 
-#endif // AUDIO_H
+#endif // UNDEFINED_H

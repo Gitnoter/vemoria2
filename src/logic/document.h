@@ -6,19 +6,15 @@
 ///                                                                    /
 /// This project is licensed under the EUPL v.1.1 or a later version.  /
 ////////////////////////////////////////////////////////////////////////
-#include "item.h"
+#ifndef DOCUMENT_H
+#define DOCUMENT_H
+#include "logic/item.h"
 
-Item::Item()
+
+class Document: Item
 {
+public:
+    Document();
+};
 
-}
-
-void Item::hello()
-{
-    cout << "Hello World" << endl;
-}
-
-Item::~Item()
-{
-    cout << "The object has been deleted" << endl;
-}
+#endif // DOCUMENT_H

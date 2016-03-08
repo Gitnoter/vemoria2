@@ -6,25 +6,18 @@
 ///                                                                    /
 /// This project is licensed under the EUPL v.1.1 or a later version.  /
 ////////////////////////////////////////////////////////////////////////
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef UNDEFINEDGUI_2_H
+#define UNDEFINEDGUI_2_H
+#include "repository/collection.h"
+#include "logic/filter.h"
 
-#include <QMainWindow>
-
-namespace Ui {
-class MainWindow;
-}
-
-class MainWindow : public QMainWindow
+//!
+//! \brief Start-GUI to lead the user to his Collection
+//!
+class UndefinedGUI_2
 {
-    Q_OBJECT
-
 public:
-    explicit MainWindow(QWidget *parent = 0);
-    ~MainWindow();
-
-private:
-    Ui::MainWindow *ui;
+    UndefinedGUI_2();
 };
 
-#endif // MAINWINDOW_H
+#endif // UNDEFINEDGUI_2_H

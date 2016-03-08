@@ -5,12 +5,18 @@ include(../qmake/common.pri)
 QT -= gui
 TARGET = repository
 TEMPLATE = lib
-CONFIG += staticlib C++11
+CONFIG += staticlib
 
 HEADERS += \
+    collection.h \
+    collectionmanager.h \
+    collections.h \
     Repository.h \
 
 SOURCES += \
+    collection.cpp \
+    collectionmanager.cpp \
+    collections.cpp \
     Repository.cpp \
 
 # note: paths relative to _PRO_FILE_PWD_ which is the profile path of
