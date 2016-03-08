@@ -5,7 +5,7 @@ include(../qmake/common.pri)
 QT -= gui
 TARGET = repository
 TEMPLATE = lib
-CONFIG += staticlib C++11
+CONFIG += staticlib
 
 HEADERS += \
     Repository.h \
