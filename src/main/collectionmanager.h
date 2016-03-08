@@ -9,6 +9,9 @@
 #ifndef COLLECTIONMANAGER_H
 #define COLLECTIONMANAGER_H
 
+#include <QDir>
+#include <QString>
+#include <QPointer>
 
 class CollectionManager
 {
@@ -18,7 +21,7 @@ public:
     //!\return Please change the return value if necessary
     //!
     void getCollectionList();
-    void createCollection();
+    bool createCollection(QString collectionName);
     void deleteCollection();
 };
 

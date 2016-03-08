@@ -7,6 +7,11 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = vemoria
 TEMPLATE = app
 
+INCLUDEPATH += \
+  ../libqgit2/qgit2 \
+  ../libgit2/include \
+  ../unittest \
+
 SOURCES += \
     main.cpp \
     audio.cpp \
