@@ -9,6 +9,7 @@
 #ifndef DOCUMENT_H
 #define DOCUMENT_H
 #include "logic/item.h"
+#include <QString>
 
 
 class Document: Item

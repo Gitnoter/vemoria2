@@ -9,6 +9,7 @@
 #ifndef AUDIO_H
 #define AUDIO_H
 #include "logic/item.h"
+#include <QString>
 
 
 class Audio: Item
@@ -30,10 +31,10 @@ class Audio: Item
     QString title;
     QString interpreter[];
     QString publicationdate;
-    Qstring length;
-    Qstring album;
+    QString length;
+    QString album;
     QString genre[];
-    Qstring titlenumber;
+    QString titlenumber;
     QString description;
     QString license;
     QString recordlabel;

@@ -9,6 +9,7 @@
 #ifndef VIDEO_H
 #define VIDEO_H
 #include <logic/item.h>
+#include <QString>
 
 
 class Video: Item
@@ -32,13 +33,13 @@ class Video: Item
     QString title;
     QString date;
     QString time;
-    Qstring location[];
-    Qstring geoposition;
+    QString location[];
+    QString geoposition;
     QString creator;
     QString people[];
     QString event[];
-    Qstring playbacktime;
-    Qstring framerate;
+    QString playbacktime;
+    QString framerate;
     QString description;
     QString license;
     QString miscellaneous[];

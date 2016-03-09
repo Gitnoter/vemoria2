@@ -9,6 +9,7 @@
 #ifndef PICTURE_H
 #define PICTURE_H
 #include "logic/item.h"
+#include <QString>
 
 
 
