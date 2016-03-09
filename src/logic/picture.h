@@ -14,6 +14,31 @@
 
 class Picture: public Item
 {
+    //!
+    //! \brief Metadata of Class Picture
+    //! \param title
+    //! \param date
+    //! \param time
+    //! \param geoposition
+    //! \param description
+    //! \param creator
+    //! \param license
+    //! \param people[]
+    //! \param event[]
+    //! \param location[]
+    //! \param miscellaneous[]
+    //!
+    QString title;
+    QString date;
+    QString time;
+    QString geoposition;
+    QString description;
+    QString creator;
+    QString license;
+    QString people[];
+    QString event[];
+    QString location[];
+    QString miscellaneous[];
 public:
     Picture();
 };

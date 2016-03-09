@@ -13,6 +13,23 @@
 
 class Document: Item
 {
+    //!
+    //! \brief Metadata of Class Document
+    //! \param title;
+    //! \param subject;
+    //! \param creator;
+    //! \param company;
+    //! \param alterationdate;
+    //! \param numberofpages;
+    //! \param miscellaneous;
+    //!
+    QString title;
+    QString subject;
+    QString creator;
+    QString company;
+    QString alterationdate;
+    QString numberofpages;
+    QString miscellaneous;
 public:
     Document();
 };
