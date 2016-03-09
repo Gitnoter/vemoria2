@@ -42,6 +42,7 @@ bool CollectionManager::createCollection(QString collectionName)
         try {
             repo->init(collectionName,false);
 
+
         }
         catch (const LibQGit2::Exception& ex)
         {
