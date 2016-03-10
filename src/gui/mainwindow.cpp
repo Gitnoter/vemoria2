@@ -9,7 +9,10 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "../version.h"
-#include <QDebug>
+
+#include <QDebug> //currently here for debugging purposes, obviously
+=======
+
 #include "popupcollection.h"
 #include "QFontDatabase"
 
@@ -31,6 +34,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //    qDebug() << dir.entryList();
     //    ui->label_12->setText( dir.entryList());
     //    ui->label_12->setPixmap(pixmap);
+
 }
 
 MainWindow::~MainWindow()
