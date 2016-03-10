@@ -1,5 +1,5 @@
 <RCC>
-    <qresource prefix="/new/images">
+    <qresource prefix="/images">
         <file>add-files.png</file>
         <file>filter.png</file>
         <file>save-button.png</file>
@@ -13,7 +13,7 @@
         <file>Unbenannt-1.png</file>
         <file>close-icon.png</file>
     </qresource>
-    <qresource prefix="/new/fonts">
+    <qresource prefix="/fonts">
         <file>fonts.qrc</file>
     </qresource>
 </RCC>

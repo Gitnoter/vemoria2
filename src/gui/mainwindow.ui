@@ -1141,6 +1141,23 @@ QGroupBox{
          <property name="spacing">
           <number>0</number>
          </property>
+         <item row="1" column="0">
+          <widget class="QLabel" name="label_9">
+           <property name="text">
+            <string>quick brown fox jumps over the lazy dogs</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="label_11">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="pixmap">
+            <pixmap>:/new/prefix1/12122947_1027131440672810_7175649518355430536_n.jpg</pixmap>
+           </property>
+          </widget>
+         </item>
          <item row="2" column="0">
           <widget class="QPushButton" name="pushButton_2">
            <property name="text">
@@ -1383,23 +1400,6 @@ border-bottom:1px solid #e3e3e3;
            </layout>
           </widget>
          </item>
-         <item row="1" column="0">
-          <widget class="QLabel" name="label_9">
-           <property name="text">
-            <string>quick brown fox jumps over the lazy dogs</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QLabel" name="label_11">
-           <property name="text">
-            <string/>
-           </property>
-           <property name="pixmap">
-            <pixmap>:/new/prefix1/12122947_1027131440672810_7175649518355430536_n.jpg</pixmap>
-           </property>
-          </widget>
-         </item>
         </layout>
        </widget>
       </item>
@@ -1479,6 +1479,12 @@ font-family: 'Source Sans Pro';
               </property>
               <item row="0" column="0">
                <widget class="QWidget" name="formWidget" native="true">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>300</height>
+                 </size>
+                </property>
                 <layout class="QFormLayout" name="formLayout">
                  <property name="labelAlignment">
                   <set>Qt::AlignJustify|Qt::AlignVCenter</set>
@@ -1518,7 +1524,7 @@ font-family: 'Source Sans Pro';
                     <bool>false</bool>
                    </property>
                    <layout class="QGridLayout" name="gridLayout_19">
-                    <item row="1" column="0">
+                    <item row="0" column="0">
                      <layout class="QFormLayout" name="formClose">
                       <property name="labelAlignment">
                        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1576,54 +1582,102 @@ font-family: 'Source Sans Pro';
                   </widget>
                  </item>
                  <item row="1" column="0" colspan="2">
-                  <widget class="QLabel" name="label_10">
-                   <property name="minimumSize">
-                    <size>
-                     <width>0</width>
-                     <height>150</height>
-                    </size>
+                  <widget class="QGroupBox" name="groupBox_11">
+                   <property name="title">
+                    <string/>
                    </property>
-                   <property name="text">
-                    <string>PlacholderPic</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="2" column="0" colspan="2">
-                  <widget class="QLineEdit" name="lineEdit">
-                   <property name="styleSheet">
-                    <string notr="true">background-color:white;
-padding:5px;
-margin-left:10px;
-margin-right:10px;</string>
-                   </property>
-                   <property name="text">
-                    <string>Rechnung.pdf</string>
-                   </property>
-                   <property name="alignment">
-                    <set>Qt::AlignCenter</set>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="3" column="0" colspan="2">
-                  <widget class="QPushButton" name="pushButton_3">
-                   <property name="minimumSize">
-                    <size>
-                     <width>0</width>
-                     <height>50</height>
-                    </size>
-                   </property>
-                   <property name="styleSheet">
-                    <string notr="true">background-color:#1ca3c4;
-border:none;
-padding:5px;
-margin-top:10px;
-color:white;
-margin-left:10px;
-margin-right:10px;</string>
-                   </property>
-                   <property name="text">
-                    <string>Open</string>
-                   </property>
+                   <layout class="QGridLayout" name="gridLayout_20">
+                    <property name="spacing">
+                     <number>0</number>
+                    </property>
+                    <item row="0" column="0">
+                     <layout class="QFormLayout" name="formLayout_2">
+                      <property name="horizontalSpacing">
+                       <number>0</number>
+                      </property>
+                      <property name="verticalSpacing">
+                       <number>10</number>
+                      </property>
+                      <item row="1" column="0" colspan="2">
+                       <widget class="QLabel" name="label_10">
+                        <property name="minimumSize">
+                         <size>
+                          <width>0</width>
+                          <height>150</height>
+                         </size>
+                        </property>
+                        <property name="maximumSize">
+                         <size>
+                          <width>16777215</width>
+                          <height>150</height>
+                         </size>
+                        </property>
+                        <property name="styleSheet">
+                         <string notr="true">#label_10{
+	background-color:#f8f8f8;
+}</string>
+                        </property>
+                        <property name="text">
+                         <string/>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="2" column="0" colspan="2">
+                       <widget class="QLineEdit" name="editFiles">
+                        <property name="minimumSize">
+                         <size>
+                          <width>0</width>
+                          <height>40</height>
+                         </size>
+                        </property>
+                        <property name="styleSheet">
+                         <string notr="true">#editFiles{
+	background-color:#FFF;
+}</string>
+                        </property>
+                        <property name="text">
+                         <string>Rechnung.pdf</string>
+                        </property>
+                        <property name="alignment">
+                         <set>Qt::AlignCenter</set>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="3" column="0" colspan="2">
+                       <widget class="QPushButton" name="openFileBtn">
+                        <property name="minimumSize">
+                         <size>
+                          <width>0</width>
+                          <height>40</height>
+                         </size>
+                        </property>
+                        <property name="font">
+                         <font>
+                          <family>Source Sans Pro</family>
+                          <pointsize>-1</pointsize>
+                          <weight>50</weight>
+                          <bold>false</bold>
+                         </font>
+                        </property>
+                        <property name="styleSheet">
+                         <string notr="true">#openFileBtn{
+	background-color:#1ca3c4;
+	color:white;
+	border: 1px solid #178aa6;
+ }
+
+#openFileBtn:hover{
+	background-color:#178aa6;
+ }</string>
+                        </property>
+                        <property name="text">
+                         <string>OPEN</string>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </item>
+                   </layout>
                   </widget>
                  </item>
                 </layout>
@@ -1822,6 +1876,7 @@ border-radius: 4px;
     <property name="title">
      <string>Help</string>
     </property>
+    <addaction name="actionInfo"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuView"/>
@@ -1830,6 +1885,11 @@ border-radius: 4px;
   <action name="actionNew_Collection">
    <property name="text">
     <string>New Collection</string>
+   </property>
+  </action>
+  <action name="actionInfo">
+   <property name="text">
+    <string>Info</string>
    </property>
   </action>
  </widget>
