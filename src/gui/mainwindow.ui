@@ -316,14 +316,14 @@ QGroupBox{
                          <string/>
                         </property>
                         <property name="pixmap">
-                         <pixmap>../../../pic/root-image.png</pixmap>
+                         <pixmap>:/new/prefix1/root-image.png</pixmap>
                         </property>
                        </widget>
                       </item>
                       <item row="1" column="1">
                        <widget class="QLabel" name="RootLabel">
                         <property name="text">
-                         <string>Root</string>
+                         <string>Collections</string>
                         </property>
                        </widget>
                       </item>
@@ -414,7 +414,7 @@ QGroupBox{
 }</string>
                               </property>
                               <property name="text">
-                               <string>Open</string>
+                               <string>Example</string>
                               </property>
                               <property name="autoDefault">
                                <bool>false</bool>
@@ -433,7 +433,7 @@ QGroupBox{
                                <string/>
                               </property>
                               <property name="pixmap">
-                               <pixmap>../../../pic/dialog.png</pixmap>
+                               <pixmap>:/new/prefix1/root-image.png</pixmap>
                               </property>
                              </widget>
                             </item>
@@ -509,7 +509,7 @@ QGroupBox{
                                <string/>
                               </property>
                               <property name="pixmap">
-                               <pixmap>../../../pic/filter.png</pixmap>
+                               <pixmap>:/new/prefix1/filter.png</pixmap>
                               </property>
                              </widget>
                             </item>
@@ -573,7 +573,7 @@ QGroupBox{
                               <string/>
                              </property>
                              <property name="pixmap">
-                              <pixmap>../../../pic/filter-images.png</pixmap>
+                              <pixmap>:/new/prefix1/filter-images.png</pixmap>
                              </property>
                             </widget>
                            </item>
@@ -634,7 +634,7 @@ QGroupBox{
                               <string/>
                              </property>
                              <property name="pixmap">
-                              <pixmap>../../../pic/filter-videos.png</pixmap>
+                              <pixmap>:/new/prefix1/filter-videos.png</pixmap>
                              </property>
                             </widget>
                            </item>
@@ -671,7 +671,7 @@ QGroupBox{
                               <string/>
                              </property>
                              <property name="pixmap">
-                              <pixmap>../../../pic/filter-documents.png</pixmap>
+                              <pixmap>:/new/prefix1/filter-documents.png</pixmap>
                              </property>
                             </widget>
                            </item>
@@ -726,7 +726,7 @@ QGroupBox{
                               <string/>
                              </property>
                              <property name="pixmap">
-                              <pixmap>../../../pic/progress.png</pixmap>
+                              <pixmap>:/new/prefix1/progress.png</pixmap>
                              </property>
                             </widget>
                            </item>
@@ -952,7 +952,7 @@ QGroupBox{
                           </property>
                           <property name="icon">
                            <iconset>
-                            <normaloff>../../../pic/add-files.png</normaloff>../../../pic/add-files.png</iconset>
+                            <normaloff>:/new/prefix1/add-files.png</normaloff>:/new/prefix1/add-files.png</iconset>
                           </property>
                           <property name="iconSize">
                            <size>
@@ -1040,7 +1040,7 @@ QGroupBox{
                           </property>
                           <property name="icon">
                            <iconset>
-                            <normaloff>../../../pic/sync.png</normaloff>../../../pic/sync.png</iconset>
+                            <normaloff>:/new/prefix1/sync.png</normaloff>:/new/prefix1/sync.png</iconset>
                           </property>
                           <property name="iconSize">
                            <size>
@@ -1080,7 +1080,7 @@ QGroupBox{
                           </property>
                           <property name="icon">
                            <iconset>
-                            <normaloff>../../../pic/save-button.png</normaloff>../../../pic/save-button.png</iconset>
+                            <normaloff>:/new/prefix1/save-button.png</normaloff>:/new/prefix1/save-button.png</iconset>
                           </property>
                           <property name="iconSize">
                            <size>
@@ -1125,7 +1125,7 @@ QGroupBox{
        border-top:1px solid #e3e3e3;
 }</string>
         </property>
-        <layout class="QGridLayout" name="gridLayout_10" rowstretch="0,0,0" columnstretch="0">
+        <layout class="QGridLayout" name="gridLayout_10" rowstretch="0,0,0,0" columnstretch="0">
          <property name="leftMargin">
           <number>0</number>
          </property>
@@ -1141,6 +1141,20 @@ QGroupBox{
          <property name="spacing">
           <number>0</number>
          </property>
+         <item row="2" column="0">
+          <widget class="QPushButton" name="pushButton_2">
+           <property name="text">
+            <string>test open detail</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <widget class="QGroupBox" name="groupBox_10">
+           <property name="title">
+            <string/>
+           </property>
+          </widget>
+         </item>
          <item row="0" column="0" alignment="Qt::AlignTop">
           <widget class="QWidget" name="horizontalWidget" native="true">
            <property name="sizePolicy">
@@ -1227,7 +1241,7 @@ padding-right:3px;</string>
                     <string/>
                    </property>
                    <property name="pixmap">
-                    <pixmap>../../../pic/home2.png</pixmap>
+                    <pixmap>:/new/prefix1/Unbenannt-1.png</pixmap>
                    </property>
                   </widget>
                  </item>
@@ -1369,79 +1383,11 @@ border-bottom:1px solid #e3e3e3;
            </layout>
           </widget>
          </item>
-         <item row="2" column="0">
-          <widget class="QGroupBox" name="groupBox_10">
-           <property name="title">
-            <string/>
+         <item row="1" column="0">
+          <widget class="QLabel" name="label_9">
+           <property name="text">
+            <string>quick brown fox jumps over the lazy dogs</string>
            </property>
-           <widget class="QPushButton" name="pushButton_2">
-            <property name="geometry">
-             <rect>
-              <x>70</x>
-              <y>50</y>
-              <width>200</width>
-              <height>180</height>
-             </rect>
-            </property>
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>200</width>
-              <height>175</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>200</width>
-              <height>180</height>
-             </size>
-            </property>
-            <property name="cursor">
-             <cursorShape>PointingHandCursor</cursorShape>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">#pushButton_2{
-	background-color:#f2f2f2;
-	border:none;
-}
-
-#pushButton_2:hover:!pressed
-{
-  	border: 1px solid #1ca3c4;
-}</string>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="icon">
-             <iconset>
-              <normaloff>../../../pic/pic2.jpg</normaloff>../../../pic/pic2.jpg</iconset>
-            </property>
-            <property name="iconSize">
-             <size>
-              <width>200</width>
-              <height>180</height>
-             </size>
-            </property>
-           </widget>
-           <widget class="QLabel" name="label_9">
-            <property name="geometry">
-             <rect>
-              <x>116</x>
-              <y>10</y>
-              <width>181</width>
-              <height>20</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>Bild klicken!!!  (Test)</string>
-            </property>
-           </widget>
           </widget>
          </item>
          <item row="1" column="0">
@@ -1461,7 +1407,7 @@ border-bottom:1px solid #e3e3e3;
        <widget class="QWidget" name="gridDetail" native="true">
         <property name="minimumSize">
          <size>
-          <width>250</width>
+          <width>300</width>
           <height>0</height>
          </size>
         </property>
@@ -1531,15 +1477,21 @@ font-family: 'Source Sans Pro';
               <property name="spacing">
                <number>0</number>
               </property>
-              <item row="0" column="0" alignment="Qt::AlignTop">
-               <widget class="QWidget" name="verticalWidget_2" native="true">
-                <property name="minimumSize">
-                 <size>
-                  <width>0</width>
-                  <height>0</height>
-                 </size>
-                </property>
-                <layout class="QGridLayout" name="gridLayout_21">
+              <item row="0" column="0">
+               <widget class="QWidget" name="formWidget" native="true">
+                <layout class="QFormLayout" name="formLayout">
+                 <property name="labelAlignment">
+                  <set>Qt::AlignJustify|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="formAlignment">
+                  <set>Qt::AlignRight|Qt::AlignTop|Qt::AlignTrailing</set>
+                 </property>
+                 <property name="horizontalSpacing">
+                  <number>0</number>
+                 </property>
+                 <property name="verticalSpacing">
+                  <number>0</number>
+                 </property>
                  <property name="leftMargin">
                   <number>0</number>
                  </property>
@@ -1552,74 +1504,69 @@ font-family: 'Source Sans Pro';
                  <property name="bottomMargin">
                   <number>0</number>
                  </property>
-                 <property name="spacing">
-                  <number>0</number>
-                 </property>
-                 <item row="0" column="0">
+                 <item row="0" column="0" colspan="2">
                   <widget class="QGroupBox" name="groupBox_9">
+                   <property name="styleSheet">
+                    <string notr="true">#groupBox_9{
+	padding-top:6px;
+}</string>
+                   </property>
                    <property name="title">
                     <string/>
                    </property>
-                   <property name="alignment">
-                    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+                   <property name="flat">
+                    <bool>false</bool>
                    </property>
-                   <layout class="QGridLayout" name="gridLayout_20">
-                    <property name="leftMargin">
-                     <number>0</number>
-                    </property>
-                    <property name="topMargin">
-                     <number>0</number>
-                    </property>
-                    <property name="rightMargin">
-                     <number>0</number>
-                    </property>
-                    <property name="bottomMargin">
-                     <number>0</number>
-                    </property>
-                    <property name="spacing">
-                     <number>0</number>
-                    </property>
+                   <layout class="QGridLayout" name="gridLayout_19">
                     <item row="0" column="0">
-                     <layout class="QVBoxLayout" name="verticalLayout_5">
-                      <property name="spacing">
+                     <layout class="QFormLayout" name="formClose">
+                      <property name="labelAlignment">
+                       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                      </property>
+                      <property name="formAlignment">
+                       <set>Qt::AlignRight|Qt::AlignTop|Qt::AlignTrailing</set>
+                      </property>
+                      <property name="horizontalSpacing">
                        <number>0</number>
                       </property>
-                      <item>
-                       <widget class="QLabel" name="accLabel">
-                        <property name="maximumSize">
+                      <property name="verticalSpacing">
+                       <number>0</number>
+                      </property>
+                      <item row="0" column="1">
+                       <widget class="QPushButton" name="pushButton">
+                        <property name="minimumSize">
                          <size>
-                          <width>16777215</width>
-                          <height>46</height>
+                          <width>18</width>
+                          <height>17</height>
                          </size>
                         </property>
-                        <property name="styleSheet">
-                         <string notr="true">#accLabel{
-	margin-top:14px;
-	margin-bottom:14px;
-}</string>
+                        <property name="maximumSize">
+                         <size>
+                          <width>18</width>
+                          <height>17</height>
+                         </size>
+                        </property>
+                        <property name="cursor">
+                         <cursorShape>PointingHandCursor</cursorShape>
+                        </property>
+                        <property name="toolTip">
+                         <string>Close</string>
                         </property>
                         <property name="text">
-                         <string>inf2179@hs-worms.de</string>
+                         <string/>
                         </property>
-                        <property name="alignment">
-                         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                        <property name="icon">
+                         <iconset>
+                          <normaloff>:/new/prefix1/close-icon.png</normaloff>:/new/prefix1/close-icon.png</iconset>
                         </property>
-                       </widget>
-                      </item>
-                      <item>
-                       <widget class="Line" name="line">
-                        <property name="maximumSize">
+                        <property name="iconSize">
                          <size>
-                          <width>16777215</width>
-                          <height>1</height>
+                          <width>18</width>
+                          <height>17</height>
                          </size>
                         </property>
-                        <property name="styleSheet">
-                         <string notr="true">background-color:#e3e3e3;
-border:none;</string>
-                        </property>
-                        <property name="orientation">
-                         <enum>Qt::Horizontal</enum>
+                        <property name="flat">
+                         <bool>true</bool>
                         </property>
                        </widget>
                       </item>
@@ -1631,30 +1578,7 @@ border:none;</string>
                 </layout>
                </widget>
               </item>
-              <item row="1" column="0">
-               <widget class="QLabel" name="previewPic">
-                <property name="styleSheet">
-                 <string notr="true">padding:10px;</string>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-               </widget>
-              </item>
              </layout>
-            </widget>
-           </item>
-           <item alignment="Qt::AlignHCenter|Qt::AlignTop">
-            <widget class="QLabel" name="label_10">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="text">
-              <string>Jetzt bist du dran ;)</string>
-             </property>
             </widget>
            </item>
            <item>
@@ -1674,9 +1598,8 @@ border:none;</string>
              <property name="styleSheet">
               <string notr="true">#gridDetailBottomWidget{
 border:none;
-background-color:none;
-border-top:1px solid #e3e3e3;
 background-color:#f8f8f8;
+margin-left:1px;
 }</string>
              </property>
              <layout class="QGridLayout" name="gridLayout_17">
@@ -1716,19 +1639,20 @@ background-color:#f8f8f8;
 border:none;
 background-color:none;
 border-right:1px solid #e3e3e3;
-padding-right:1px;
-border-left:1px solid #e3e3e3;
-padding-left:1px;
+border-top:1px solid #e3e3e3;
+margin-left:1px;
 }
 
 #deleteBtn:hover{
 	background-color:#eeeeee;
+	color:#191919;
 }
 
+/*
 #deleteBtn:hover:pressed
 {
   border: 1px solid #1ca3c4;
-}
+}*/
 </string>
                   </property>
                   <property name="text">
@@ -1736,7 +1660,7 @@ padding-left:1px;
                   </property>
                   <property name="icon">
                    <iconset>
-                    <normaloff>../../../pic/trash.png</normaloff>../../../pic/trash.png</iconset>
+                    <normaloff>:/new/prefix1/trash.png</normaloff>:/new/prefix1/trash.png</iconset>
                   </property>
                   <property name="iconSize">
                    <size>
@@ -1761,24 +1685,22 @@ padding-left:1px;
                    <cursorShape>PointingHandCursor</cursorShape>
                   </property>
                   <property name="styleSheet">
-                   <string notr="true">QPushButton:hover:!pressed
-{
-  	background-color:#eeeeee;
+                   <string notr="true">#saveBtn{
+border:none;
+border-top:1px solid #e3e3e3;
 }
 
-QPushButton:hover:pressed
-{
-  border: 1px solid #1ca3c4;
-}
-
-</string>
+#saveBtn:hover{
+	background-color:#eeeeee;
+	color:#191919;
+}</string>
                   </property>
                   <property name="text">
                    <string>  Save</string>
                   </property>
                   <property name="icon">
                    <iconset>
-                    <normaloff>../../../pic/ok.png</normaloff>../../../pic/ok.png</iconset>
+                    <normaloff>:/new/prefix1/save-button.png</normaloff>:/new/prefix1/save-button.png</iconset>
                   </property>
                   <property name="iconSize">
                    <size>
