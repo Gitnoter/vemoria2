@@ -1,5 +1,5 @@
 /// \file
-/// \brief	Vemoria audio metadata header file
+/// \brief	Vemoria document metadata header file
 /// \ingroup	g_logic
 //----------------------------------------------------------------------
 // This file is part of the Vemoria project.
