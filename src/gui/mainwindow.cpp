@@ -25,10 +25,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->userLabel2->show();
     ui->gridDetail->hide();
 
-//    CollectionManager *collman;
-//    collman = new CollectionManager();
-//    collman->createCollection("peter");
-//    delete collman;
+    CollectionManager *collman;
+    collman = new CollectionManager();
+    collman->createCollection("peter");
+    delete collman;
 }
 
 MainWindow::~MainWindow()
