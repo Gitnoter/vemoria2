@@ -9,7 +9,6 @@
 #ifndef COLLECTIONMANAGER_H
 #define COLLECTIONMANAGER_H
 
-#include <QDir>
 #include <QString>
 #include <QPointer>
 

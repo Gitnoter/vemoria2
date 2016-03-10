@@ -24,4 +24,3 @@ HEADERS  += \
 FORMS += \
     mainwindow.ui \
     popupcollection.ui \
-
