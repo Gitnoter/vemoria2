@@ -1508,7 +1508,7 @@ font-family: 'Source Sans Pro';
                     <bool>false</bool>
                    </property>
                    <layout class="QGridLayout" name="gridLayout_19">
-                    <item row="0" column="0">
+                    <item row="1" column="0">
                      <layout class="QFormLayout" name="formClose">
                       <property name="labelAlignment">
                        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
