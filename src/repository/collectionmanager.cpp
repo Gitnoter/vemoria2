@@ -37,7 +37,7 @@ bool CollectionManager::createCollection(QString collectionName)
     ///
 
     QString date = QDateTime::currentDateTime().toString();
-    QString version = "1.0";
+    QString vemoriaVersion = "1.0";
 
 
         if(!QDir(collectionName).exists())
@@ -50,7 +50,7 @@ bool CollectionManager::createCollection(QString collectionName)
             QTextStream stream(&file);
             stream<<"<?xml version=\"1.0\" encoding=\"UTF-8\" ?>"<<endl;
             stream<<"<notes>"<<endl;
-            stream<<"\t<version>"+version+"</version>"<<endl;
+            stream<<"\t<version>"+vemoriaVersion+"</version>"<<endl;
             stream<<"\t<repName>" + collectionName + "</repName>"<<endl;
             stream<<"\t<createDate>"<< date <<"</createDate>"<<endl;
             stream<<"</notes>"<<endl;
