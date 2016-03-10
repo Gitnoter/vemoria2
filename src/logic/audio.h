@@ -1,36 +1,31 @@
-////////////////////////////////////////////////////////////////////////
-/// Project Vemoria                                                    /
-///                                                                    /
-/// Vemoria aims to be an environment for archiving multimedia files.  /
-///                                                                    /
-///                                                                    /
-/// This project is licensed under the EUPL v.1.1 or a later version.  /
-////////////////////////////////////////////////////////////////////////
+/// \file
+/// \brief	Vemoria audio metadata header file
+/// \ingroup	g_logic
+//----------------------------------------------------------------------
+// This file is part of the Vemoria project.
+// Vemoria aims to be an environment for archiving multimedia files.
+//
+// This file is licensed under the EUPL v.1.1 or a later version.
+//----------------------------------------------------------------------
+
 #ifndef AUDIO_H
 #define AUDIO_H
+
 #include "logic/item.h"
-#include <QString>
 
-
-class Audio: Item
+/// \class
+/// Metadata of audio items.
+class Audio: public Item
 {
-    //!
-    //! \brief Metadata of Class Audio
-    //! \param title
-    //! \param interpreter[]
-    //! \param publicationdate
-    //! \param length
-    //! \param album
-    //! \param genre[]
-    //! \param titlenumber
-    //! \param description
-    //! \param license
-    //! \param recordlabel
-    //! \param miscellaneous[]
-    //!
-    QString title;
-    QString interpreter[];
-    QString publicationdate;
+  public:
+    // Default constructors will do.
+    virtual ~Audio();
+
+    /// \todo add setters and getters here
+
+  private:
+    QString interpreter[];	///< \todo use QArray or similar
+    QString publicationdate;	///< \todo add more documentation
     QString length;
     QString album;
     QString genre[];
@@ -38,9 +33,6 @@ class Audio: Item
     QString description;
     QString license;
     QString recordlabel;
-    QString miscellaneous[];
-public:
-    Audio();
 };
 
 #endif // AUDIO_H
