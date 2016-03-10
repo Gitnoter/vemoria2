@@ -1,6 +1,6 @@
 /// \file
 /// \brief	Vemoria collectionmanager cpp file
-/// \ingroup	g_repositiory
+/// \ingroup	g_repository
 //----------------------------------------------------------------------
 // This file is part of the Vemoria project.
 // Vemoria aims to be an environment for archiving multimedia files.
