@@ -18,9 +18,13 @@ SUBDIRS = main \
 	libqgit2 \
 	test-libqgit2 \
 
-OTHER_FILES = \
-	../bin/run-build
-
 main.depends          = libgit2 libqgit2 repository logic gui
 unittest.depends      = libgit2 libqgit2 repository logic
 test-libqgit2.depends = libgit2 libqgit2
+
+OTHER_FILES = \
+        ../bin/run-build \
+        ../doc/doxygen/Doxyfile \
+        ../doc/doxygen/mainpage.dox \
+        ../doc/doxygen/libqgit2.dox \
+        ../doc/doxygen/modules.dox \
