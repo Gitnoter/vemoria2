@@ -15,7 +15,6 @@
 #include <QDateTime>
 #include "vemoria-config.h"
 
-
 CollectionManager::CollectionManager()
 {
     ///
@@ -48,7 +47,7 @@ bool CollectionManager::createCollection(QString collectionName)
             QDir directory;
             directory.mkdir(collectionName);
             QFile file;
-            file.setFileName(collectionName + "/" + collectionName + ".xml");
+            file.setFileName(collectionName + "/." + collectionName + ".xml");
             file.open(QIODevice::ReadWrite | QIODevice::Text);
             QTextStream stream(&file);
             stream<<"<?xml version=\"1.0\" encoding=\"UTF-8\" ?>"<<endl;
@@ -58,6 +57,11 @@ bool CollectionManager::createCollection(QString collectionName)
             stream<<"\t<createDate>"<< date <<"</createDate>"<<endl;
             stream<<"</notes>"<<endl;
             file.close();
+
+#ifdef _WIN32
+            QByteArray ba = collectionName.toLatin1();
+    system("attrib +h " + ba + "\\." + ba + ".xml");
+#endif
 
         }
         else return false;
