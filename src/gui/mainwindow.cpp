@@ -21,7 +21,7 @@ MainWindow::MainWindow(QWidget *parent) :
 //    QPixmap pix13 ("/Users/Dennis/Desktop/pic/pic2.jpg");
 //    ui->previewPic->setPixmap( pix13.scaled ( 300, 120, Qt::IgnoreAspectRatio, Qt::FastTransformation ));
 
-    ui->userLabel2->show();
+
     ui->gridDetail->hide();
 
     //RESOURCE SYSTEM TEST
@@ -39,7 +39,6 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_2_clicked()
 {
-      ui->userLabel2->hide();
       ui->gridDetail->show();
 }
 
@@ -48,4 +47,9 @@ void MainWindow::on_actionNew_Collection_triggered()
       popupCollection popwindows;
       popwindows.setModal(true);
       popwindows.exec();
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+    ui->gridDetail->close();
 }

@@ -28,6 +28,8 @@ private slots:
 
     void on_actionNew_Collection_triggered();
 
+    void on_pushButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 };
