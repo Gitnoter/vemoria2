@@ -11,8 +11,6 @@
 #include "../version.h"
 
 #include <QDebug> //currently here for debugging purposes, obviously
-=======
-
 #include "popupcollection.h"
 #include "QFontDatabase"
 

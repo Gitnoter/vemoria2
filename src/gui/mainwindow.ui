@@ -1396,7 +1396,7 @@ border-bottom:1px solid #e3e3e3;
             <string/>
            </property>
            <property name="pixmap">
-            <pixmap resource="resource.qrc">:/new/prefix1/12122947_1027131440672810_7175649518355430536_n.jpg</pixmap>
+            <pixmap>:/new/prefix1/12122947_1027131440672810_7175649518355430536_n.jpg</pixmap>
            </property>
           </widget>
          </item>
@@ -1573,6 +1573,57 @@ font-family: 'Source Sans Pro';
                      </layout>
                     </item>
                    </layout>
+                  </widget>
+                 </item>
+                 <item row="1" column="0" colspan="2">
+                  <widget class="QLabel" name="label_10">
+                   <property name="minimumSize">
+                    <size>
+                     <width>0</width>
+                     <height>150</height>
+                    </size>
+                   </property>
+                   <property name="text">
+                    <string>PlacholderPic</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="0" colspan="2">
+                  <widget class="QLineEdit" name="lineEdit">
+                   <property name="styleSheet">
+                    <string notr="true">background-color:white;
+padding:5px;
+margin-left:10px;
+margin-right:10px;</string>
+                   </property>
+                   <property name="text">
+                    <string>Rechnung.pdf</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="0" colspan="2">
+                  <widget class="QPushButton" name="pushButton_3">
+                   <property name="minimumSize">
+                    <size>
+                     <width>0</width>
+                     <height>50</height>
+                    </size>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">background-color:#1ca3c4;
+border:none;
+padding:5px;
+margin-top:10px;
+color:white;
+margin-left:10px;
+margin-right:10px;</string>
+                   </property>
+                   <property name="text">
+                    <string>Open</string>
+                   </property>
                   </widget>
                  </item>
                 </layout>
@@ -1783,8 +1834,6 @@ border-radius: 4px;
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources>
-  <include location="resource.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
