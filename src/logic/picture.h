@@ -9,6 +9,7 @@
 //----------------------------------------------------------------------
 #ifndef PICTURE_H
 #define PICTURE_H
+#include <QVector>
 #include "logic/item.h"
 
 /// \class
@@ -41,7 +42,16 @@ class Picture: public Item
     QString getLicense() const { return license; }
     void setLicense(const QString & value) { license=value; }
 
-    /// \todo add setters and getters for people, event, location
+    QVector<QString> getPeople() const { return people; }
+    void setPeople(const QVector<QString> & value) { people=value; }
+
+    QVector<QString> getEvent() const { return event; }
+    void setEvent(const QVector<QString> & value) { event=value; }
+
+    QVector<QString> getLocation() const { return location; }
+    void setLocation(const QVector<QString> & value) { location=value; }
+
+    ///
     ///@}
 
   private:
@@ -51,9 +61,9 @@ class Picture: public Item
     QString description;
     QString creator;
     QString license;
-    QString people[];		///< \todo use QArray or similar
-    QString event[];
-    QString location[];
+    QVector <QString> people;		///< \todo use QArray or similar
+    QVector<QString> event;
+    QVector<QString> location;
 };
 
 #endif // PICTURE_H
