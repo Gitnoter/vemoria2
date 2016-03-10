@@ -25,3 +25,5 @@ FORMS += \
     mainwindow.ui \
     popupcollection.ui \
 
+RESOURCES +=
+
