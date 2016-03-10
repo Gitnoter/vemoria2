@@ -61,7 +61,7 @@ class Picture: public Item
     QString description;
     QString creator;
     QString license;
-    QVector <QString> people;		///< \todo use QArray or similar
+    QVector <QString> people;
     QVector<QString> event;
     QVector<QString> location;
 };

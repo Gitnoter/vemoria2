@@ -56,7 +56,7 @@ class Audio: public Item
     ///@}
 
   private:
-    QVector<QString> interpreter;	///< \todo use QArray or similar
+    QVector<QString> interpreter;
     QString publicationdate;	///< \todo add more documentation
     QString length;
     QString album;
