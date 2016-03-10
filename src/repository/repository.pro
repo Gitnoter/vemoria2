@@ -12,6 +12,7 @@ HEADERS += \
     collectionmanager.h \
     collections.h \
     Repository.h \
+    vemoria-config.h
 
 SOURCES += \
     collection.cpp \

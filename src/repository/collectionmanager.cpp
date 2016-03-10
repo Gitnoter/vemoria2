@@ -1,16 +1,19 @@
-////////////////////////////////////////////////////////////////////////
-/// Project Vemoria                                                    /
-///                                                                    /
-/// Vemoria aims to be an environment for archiving multimedia files.  /
-///                                                                    /
-///                                                                    /
-/// This project is licensed under the EUPL v.1.1 or a later version.  /
-////////////////////////////////////////////////////////////////////////
+/// \file
+/// \brief	Vemoria item base class header file
+/// \ingroup	g_repositiory
+//----------------------------------------------------------------------
+// This file is part of the Vemoria project.
+// Vemoria aims to be an environment for archiving multimedia files.
+//
+// This file is licensed under the EUPL v.1.1 or a later version.
+//----------------------------------------------------------------------
+
 #include "collectionmanager.h"
 #include "qgit2.h"
 #include <QDir>
 #include <QTextStream>
 #include <QDateTime>
+#include "vemoria-config.h"
 
 
 CollectionManager::CollectionManager()
@@ -38,13 +41,10 @@ bool CollectionManager::createCollection(QString collectionName)
     ///
     /// \brief new collection with xml-file in the collection folder
     ///
-
-    QString date = QDateTime::currentDateTime().toString();
-    QString vemoriaVersion = "1.0";
-
-
         if(!QDir(collectionName).exists())
         {
+            QString date = QDateTime::currentDateTime().toString();
+            QString vemoriaVersion = VEMORIA_VERSION;
             QDir directory;
             directory.mkdir(collectionName);
             QFile file;
@@ -61,6 +61,9 @@ bool CollectionManager::createCollection(QString collectionName)
 
         }
         else return false;
+    ///
+    /// \todo gui has to check if return is false or true to give information to the user
+    ///
 
         try {
             repo->init(collectionName,false);
