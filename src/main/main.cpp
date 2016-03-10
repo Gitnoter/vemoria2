@@ -17,8 +17,5 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.showMaximized();
 
-    Picture pic;
-    pic.hello();
-
     return a.exec();
 }
