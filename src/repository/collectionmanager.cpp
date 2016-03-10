@@ -1,5 +1,5 @@
 /// \file
-/// \brief	Vemoria item base class header file
+/// \brief	Vemoria collectionmanager cpp file
 /// \ingroup	g_repositiory
 //----------------------------------------------------------------------
 // This file is part of the Vemoria project.
