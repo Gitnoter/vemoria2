@@ -16,7 +16,6 @@ popupCollection::~popupCollection()
 
 void popupCollection::on_pushButton_clicked()
 {
-
     QString nameString = ui->lineEdit->text();
 
     CollectionManager collman;

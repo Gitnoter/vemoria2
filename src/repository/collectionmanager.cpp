@@ -36,7 +36,7 @@ void CollectionManager::getCollectionList()
 bool CollectionManager::createCollection(QString collectionName)
 {
     ///
-    /// \brief new collection with xlm-file in the collection folder
+    /// \brief new collection with xml-file in the collection folder
     ///
 
     QString date = QDateTime::currentDateTime().toString();
@@ -48,7 +48,7 @@ bool CollectionManager::createCollection(QString collectionName)
             QDir directory;
             directory.mkdir(collectionName);
             QFile file;
-            file.setFileName(collectionName + "/" + collectionName + ".xml"); // wie wird / gehandelt???
+            file.setFileName(collectionName + "/" + collectionName + ".xml");
             file.open(QIODevice::ReadWrite | QIODevice::Text);
             QTextStream stream(&file);
             stream<<"<?xml version=\"1.0\" encoding=\"UTF-8\" ?>"<<endl;
