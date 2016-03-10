@@ -9,11 +9,8 @@
 #ifndef COLLECTIONMANAGER_H
 #define COLLECTIONMANAGER_H
 
-#include <QDir>
 #include <QString>
 #include <QPointer>
-#include <QTextStream>
-#include <QDateTime>
 
 namespace LibQGit2 {
   class Repository; // forward declaration

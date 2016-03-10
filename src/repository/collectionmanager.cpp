@@ -8,6 +8,9 @@
 ////////////////////////////////////////////////////////////////////////
 #include "collectionmanager.h"
 #include "qgit2.h"
+#include <QDir>
+#include <QTextStream>
+#include <QDateTime>
 
 
 CollectionManager::CollectionManager()

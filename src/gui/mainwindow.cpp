@@ -9,7 +9,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "../version.h"
-#include "repository/collectionmanager.h"
 #include "popupcollection.h"
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -24,8 +23,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->userLabel2->show();
     ui->gridDetail->hide();
-
-
 }
 
 MainWindow::~MainWindow()

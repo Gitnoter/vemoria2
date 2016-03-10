@@ -19,10 +19,8 @@ void popupCollection::on_pushButton_clicked()
 
     QString nameString = ui->lineEdit->text();
 
-    CollectionManager *collman;
-    collman = new CollectionManager();
-    collman->createCollection(nameString);
-    delete collman;
+    CollectionManager collman;
+    collman.createCollection(nameString);
 
     this->close();
 }
