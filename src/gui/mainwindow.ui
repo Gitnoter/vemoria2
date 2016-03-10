@@ -316,7 +316,7 @@ QGroupBox{
                          <string/>
                         </property>
                         <property name="pixmap">
-                         <pixmap>../../../pic/root-image.png</pixmap>
+                         <pixmap resource="resource.qrc">:/new/prefix1/root-image.png</pixmap>
                         </property>
                        </widget>
                       </item>
@@ -509,7 +509,7 @@ QGroupBox{
                                <string/>
                               </property>
                               <property name="pixmap">
-                               <pixmap>../../../pic/filter.png</pixmap>
+                               <pixmap resource="resource.qrc">:/new/prefix1/filter.png</pixmap>
                               </property>
                              </widget>
                             </item>
@@ -573,7 +573,7 @@ QGroupBox{
                               <string/>
                              </property>
                              <property name="pixmap">
-                              <pixmap>../../../pic/filter-images.png</pixmap>
+                              <pixmap resource="resource.qrc">:/new/prefix1/filter-images.png</pixmap>
                              </property>
                             </widget>
                            </item>
@@ -634,7 +634,7 @@ QGroupBox{
                               <string/>
                              </property>
                              <property name="pixmap">
-                              <pixmap>../../../pic/filter-videos.png</pixmap>
+                              <pixmap resource="resource.qrc">:/new/prefix1/filter-videos.png</pixmap>
                              </property>
                             </widget>
                            </item>
@@ -671,7 +671,7 @@ QGroupBox{
                               <string/>
                              </property>
                              <property name="pixmap">
-                              <pixmap>../../../pic/filter-documents.png</pixmap>
+                              <pixmap resource="resource.qrc">:/new/prefix1/filter-documents.png</pixmap>
                              </property>
                             </widget>
                            </item>
@@ -726,7 +726,7 @@ QGroupBox{
                               <string/>
                              </property>
                              <property name="pixmap">
-                              <pixmap>../../../pic/progress.png</pixmap>
+                              <pixmap resource="resource.qrc">:/new/prefix1/progress.png</pixmap>
                              </property>
                             </widget>
                            </item>
@@ -951,8 +951,8 @@ QGroupBox{
                            <string>      Add files</string>
                           </property>
                           <property name="icon">
-                           <iconset>
-                            <normaloff>../../../pic/add-files.png</normaloff>../../../pic/add-files.png</iconset>
+                           <iconset resource="resource.qrc">
+                            <normaloff>:/new/prefix1/add-files.png</normaloff>:/new/prefix1/add-files.png</iconset>
                           </property>
                           <property name="iconSize">
                            <size>
@@ -1039,8 +1039,8 @@ QGroupBox{
                            <string/>
                           </property>
                           <property name="icon">
-                           <iconset>
-                            <normaloff>../../../pic/sync.png</normaloff>../../../pic/sync.png</iconset>
+                           <iconset resource="resource.qrc">
+                            <normaloff>:/new/prefix1/sync.png</normaloff>:/new/prefix1/sync.png</iconset>
                           </property>
                           <property name="iconSize">
                            <size>
@@ -1079,8 +1079,8 @@ QGroupBox{
                            <string/>
                           </property>
                           <property name="icon">
-                           <iconset>
-                            <normaloff>../../../pic/save-button.png</normaloff>../../../pic/save-button.png</iconset>
+                           <iconset resource="resource.qrc">
+                            <normaloff>:/new/prefix1/save-button.png</normaloff>:/new/prefix1/save-button.png</iconset>
                           </property>
                           <property name="iconSize">
                            <size>
@@ -1708,6 +1708,10 @@ padding-left:1px;
                   <property name="text">
                    <string>  Delete</string>
                   </property>
+                  <property name="icon">
+                   <iconset resource="resource.qrc">
+                    <normaloff>:/new/prefix1/trash.png</normaloff>:/new/prefix1/trash.png</iconset>
+                  </property>
                   <property name="iconSize">
                    <size>
                     <width>18</width>
@@ -1747,8 +1751,8 @@ QPushButton:hover:pressed
                    <string>  Save</string>
                   </property>
                   <property name="icon">
-                   <iconset>
-                    <normaloff>../../../pic/ok.png</normaloff>../../../pic/ok.png</iconset>
+                   <iconset resource="resource.qrc">
+                    <normaloff>:/new/prefix1/save-button.png</normaloff>:/new/prefix1/save-button.png</iconset>
                   </property>
                   <property name="iconSize">
                    <size>
@@ -1831,6 +1835,8 @@ border-radius: 4px;
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="resource.qrc"/>
+ </resources>
  <connections/>
 </ui>

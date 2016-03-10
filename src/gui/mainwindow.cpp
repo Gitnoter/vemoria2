@@ -47,8 +47,5 @@ void MainWindow::on_pushButton_2_clicked()
 
 void MainWindow::on_actionNew_Collection_triggered()
 {
-      popupCollection popwindows;
-      popwindows.setModal(true);
-      popwindows.exec();
 
 }
