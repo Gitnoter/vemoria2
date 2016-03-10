@@ -5,23 +5,27 @@
 /// \ingroup	g_logic
 ///
 #include "itemmanager.h"
+#include <QDesktopServices>
+#include <QUrl>
+#include <QFileInfo>
+#include <QDateTime>
 
 ItemManager::ItemManager()
 {
 
 }
 
-void ItemManager::getItemDetails(string /*itemname*/)
+void ItemManager::getItemDetails(QString const & /*itemname*/) const
 {
 
 }
 
-void ItemManager::setItemDetails(string /*itemname*/, string /*Details*/[] /*, specific Item(Pointer?)*/)
+void ItemManager::setItemDetails(QString const & /*itemname*/, QString /*Details*/[] /*, specific Item(Pointer?)*/)
 {
 
 }
 
-string ItemManager::getItemList()
+QString ItemManager::getItemList() const
 {
     return "";
 }
@@ -40,7 +44,7 @@ void ItemManager::restoreItem()
 
 }
 
-void ItemManager::exportItems(string /*ItemList*/[])
+void ItemManager::exportItems(QString /*ItemList*/[])
 {
 
 }
@@ -50,14 +54,14 @@ void ItemManager::createItem()
 
 }
 
-void ItemManager::openItemExternally( Item &itemToOpen)
+void ItemManager::openItemExternally( Item & /*itemToOpen*/ )
 {
     ///
     /// \brief ItemManager::openItemExternally
     /// We kindly ask QDesktopSerivices to open the file.
     ///
     ///
-    QDesktopServices::openUrl(QUrl("file:///"+itemToOpen.getPath(),QUrl::TolerantMode));
+    // QDesktopServices::openUrl(QUrl("file:///"+itemToOpen.getPath(),QUrl::TolerantMode));
 }
 
 void ItemManager::createDir()
