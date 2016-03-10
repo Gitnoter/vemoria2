@@ -1,11 +1,9 @@
-////////////////////////////////////////////////////////////////////////
-/// Project Vemoria                                                    /
-///                                                                    /
-/// Vemoria aims to be an environment for archiving multimedia files.  /
-///                                                                    /
-///                                                                    /
-/// This project is licensed under the EUPL v.1.1 or a later version.  /
-////////////////////////////////////////////////////////////////////////
+/// \file
+/// \brief	Vemoria ItemManager implementation.
+/// The ItemManager will instantly apply changes to files in the repository (Items) and provide
+/// functionality around files in general.
+/// \ingroup	g_logic
+///
 #include "itemmanager.h"
 
 ItemManager::ItemManager()
@@ -52,9 +50,14 @@ void ItemManager::createItem()
 
 }
 
-void ItemManager::openItemExternally(string /*itemname*/)
+void ItemManager::openItemExternally( Item &itemToOpen)
 {
-
+    ///
+    /// \brief ItemManager::openItemExternally
+    /// We kindly ask QDesktopSerivices to open the file.
+    ///
+    ///
+    QDesktopServices::openUrl(QUrl("file:///"+itemToOpen.getPath(),QUrl::TolerantMode));
 }
 
 void ItemManager::createDir()

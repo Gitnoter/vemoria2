@@ -3,6 +3,7 @@
 include(../qmake/common.pri)
 
 QT       += core
+QT       += gui
 
 TARGET = logic
 TEMPLATE = lib
