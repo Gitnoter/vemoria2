@@ -9,8 +9,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "../version.h"
-#include "repository/collectionmanager.h"
 #include <QDebug>
+#include "popupcollection.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -24,14 +24,12 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->userLabel2->show();
     ui->gridDetail->hide();
 
-
     //RESOURCE SYSTEM TEST
 
     //    QDir dir(":/");
     //    qDebug() << dir.entryList();
     //    ui->label_12->setText( dir.entryList());
     //    ui->label_12->setPixmap(pixmap);
-
 }
 
 MainWindow::~MainWindow()
@@ -41,11 +39,13 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_2_clicked()
 {
-    ui->userLabel2->hide();
-    ui->gridDetail->show();
+      ui->userLabel2->hide();
+      ui->gridDetail->show();
 }
 
 void MainWindow::on_actionNew_Collection_triggered()
 {
-
+      popupCollection popwindows;
+      popwindows.setModal(true);
+      popwindows.exec();
 }

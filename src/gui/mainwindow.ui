@@ -433,7 +433,7 @@ QGroupBox{
                                <string/>
                               </property>
                               <property name="pixmap">
-                               <pixmap>../../../pic/dialog.png</pixmap>
+                               <pixmap resource="resource.qrc">:/new/prefix1/root-image.png</pixmap>
                               </property>
                              </widget>
                             </item>
@@ -1235,9 +1235,6 @@ padding-right:3px;</string>
                    </property>
                    <property name="text">
                     <string/>
-                   </property>
-                   <property name="pixmap">
-                    <pixmap>../../../pic/home2.png</pixmap>
                    </property>
                   </widget>
                  </item>
