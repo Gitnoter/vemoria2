@@ -16,16 +16,19 @@
 
 /// \class
 /// Metadata of document items.
-//
+
+/*! \brief Document Class.
+ *         .
+ *
+ *  Containing the Metadata and Tags for a specific document item.
+ */
+ 
 class Document: public Item
 {
   public:
     // Default constructors will do.
     virtual ~Document();
 
-    ///@{
-    /// Setters and Getters for the attributes.
-    /// Nothing special about this.
 
     QVector<QString> getSubject() const { return subject; }
     void setSubject(const QVector<QString> & value) { subject=value; }
@@ -42,8 +45,6 @@ class Document: public Item
     QString getNumberofpages() const { return numberofpages; }
     void setNumberofpages(const QString & value) { numberofpages=value; }
 
-    ///
-    ///@}
 
   private:
 

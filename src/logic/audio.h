@@ -15,15 +15,18 @@
 
 /// \class
 /// Metadata of audio items.
-class Audio: public Item
+
+/*! \brief Audio Class.
+ *         .
+ *
+ *  Containing the Metadata and Tags for a specific audio item.
+ */
+ class Audio: public Item
 {
   public:
     // Default constructors will do.
     virtual ~Audio();
 
-    ///@{
-    /// Setters and Getters for the attributes.
-    /// Nothing special about this.
 
     QVector<QString> getInterpreter() const { return interpreter; }
     void setInterpreter(const QVector<QString> & value) { interpreter=value; }
@@ -52,12 +55,9 @@ class Audio: public Item
     QString getRecordlabel() const { return recordlabel; }
     void setRecordlabel(const QString & value) { recordlabel=value; }
 
-    ///
-    ///@}
-
   private:
     QVector<QString> interpreter;
-    QString publicationdate;	///< \todo add more documentation
+    QString publicationdate;	
     QString length;
     QString album;
     QVector<QString> genre;

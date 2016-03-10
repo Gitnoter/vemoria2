@@ -20,15 +20,19 @@
 /// suitable, as it doesn't hold UTF-8, and std::wstring conversion to
 /// QString for GUI etc. is effort we can avoid by using QString as general
 /// string class.
+
+/*! \brief Item Base Class.
+ *         .
+ *
+ *  Containing the Metadata and Tags generic for any item.
+ */
+ 
 class Item
 {
   public:
     // Default constructors will do.
     virtual ~Item();	///< As Item is a base class, the destructor must be virtual.
 
-    ///@{
-    /// Setters and Getters for the attributes.
-    /// Nothing special about this.
 
     QString getTitle() const { return title; }
     void setTitle(QString & newTitle) { title=newTitle; }
@@ -36,7 +40,6 @@ class Item
     QString getNotes() const { return notes; }
     void setNotes(QString & newNotes) { notes=newNotes; }
 
-    ///@}
 
   private:
     QString title;		///< The Item's title.

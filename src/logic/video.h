@@ -14,15 +14,18 @@
 
 /// \class
 /// Metadata of video items.
-class Video: public Item
+
+
+/*! \brief Video Class.
+ *         .
+ *
+ *  Containing the Metadata and Tags for a specific video item.
+ */
+ class Video: public Item
 {
   public:
     // Default constructors will do.
     virtual ~Video();
-
-    ///@{
-    /// Setters and Getters for the attributes.
-    /// Nothing special about this.
 
     QString getDate() const { return date; }
     void setDate(const QString & value) { date=value; }
@@ -56,9 +59,6 @@ class Video: public Item
 
     QString getLicense() const { return license; }
     void setLicense(const QString & value) { license=value; }
-
-    ///
-    ///@}
 
   private:
     QString date;
