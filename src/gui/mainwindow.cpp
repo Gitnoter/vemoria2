@@ -11,6 +11,7 @@
 #include "../version.h"
 #include <QDebug>
 #include "popupcollection.h"
+#include "QFontDatabase"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -37,6 +38,16 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::add_Font(){
+
+    QFontDatabase database;
+    database.addApplicationFont(":/new/fonts/SourceSansPro-Regular.tff");
+
+    QFont f = database.font("myFont", "normal", 12);
+    ui->label_9->setFont(f);
+
+}
+
 void MainWindow::on_pushButton_2_clicked()
 {
       ui->gridDetail->show();
@@ -52,4 +63,14 @@ void MainWindow::on_actionNew_Collection_triggered()
 void MainWindow::on_pushButton_clicked()
 {
     ui->gridDetail->close();
+}
+
+void MainWindow::on_deleteBtn_clicked()
+{
+
+}
+
+void MainWindow::on_saveBtn_clicked()
+{
+
 }
