@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/new/prefix1">
+        <file>add-files.png</file>
+        <file>filter.png</file>
+        <file>save-button.png</file>
+        <file>sync.png</file>
+        <file>trash.png</file>
+        <file>root-image.png</file>
+        <file>progress.png</file>
+        <file>filter-images.png</file>
+        <file>filter-videos.png</file>
+        <file>filter-documents.png</file>
+    </qresource>
+</RCC>

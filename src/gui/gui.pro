@@ -25,5 +25,5 @@ FORMS += \
     mainwindow.ui \
     popupcollection.ui \
 
-RESOURCES +=
-
+RESOURCES += \
+    resource.qrc

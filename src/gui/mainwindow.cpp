@@ -11,6 +11,7 @@
 #include "../version.h"
 #include "repository/collectionmanager.h"
 #include "popupcollection.h"
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -24,7 +25,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->userLabel2->show();
     ui->gridDetail->hide();
-
+    QDir dir(":/");
+    qDebug() << dir.entryList();
+    //ui->label_12->setText( dir.entryList());
+    //ui->label_12->setPixmap(pixmap);
     CollectionManager *collman;
     collman = new CollectionManager();
     collman->createCollection("peter");

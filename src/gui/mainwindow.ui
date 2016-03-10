@@ -1141,6 +1141,16 @@ QGroupBox{
          <property name="spacing">
           <number>0</number>
          </property>
+         <item row="1" column="0">
+          <widget class="QLabel" name="label_11">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="pixmap">
+            <pixmap>:/new/prefix1/vemoria.png</pixmap>
+           </property>
+          </widget>
+         </item>
          <item row="0" column="0" alignment="Qt::AlignTop">
           <widget class="QWidget" name="horizontalWidget" native="true">
            <property name="sizePolicy">
@@ -1429,29 +1439,6 @@ border-bottom:1px solid #e3e3e3;
              </size>
             </property>
            </widget>
-           <widget class="QLabel" name="label_9">
-            <property name="geometry">
-             <rect>
-              <x>116</x>
-              <y>10</y>
-              <width>181</width>
-              <height>20</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>Bild klicken!!!  (Test)</string>
-            </property>
-           </widget>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QLabel" name="label_11">
-           <property name="text">
-            <string/>
-           </property>
-           <property name="pixmap">
-            <pixmap resource="resource.qrc">:/new/prefix1/vemoria.png</pixmap>
-           </property>
           </widget>
          </item>
         </layout>
@@ -1644,19 +1631,6 @@ border:none;</string>
              </layout>
             </widget>
            </item>
-           <item alignment="Qt::AlignHCenter|Qt::AlignTop">
-            <widget class="QLabel" name="label_10">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="text">
-              <string>Jetzt bist du dran ;)</string>
-             </property>
-            </widget>
-           </item>
            <item>
             <widget class="QWidget" name="gridDetailBottomWidget" native="true">
              <property name="sizePolicy">
@@ -1733,10 +1707,6 @@ padding-left:1px;
                   </property>
                   <property name="text">
                    <string>  Delete</string>
-                  </property>
-                  <property name="icon">
-                   <iconset>
-                    <normaloff>../../../pic/trash.png</normaloff>../../../pic/trash.png</iconset>
                   </property>
                   <property name="iconSize">
                    <size>
@@ -1861,8 +1831,6 @@ border-radius: 4px;
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources>
-  <include location="resource.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
