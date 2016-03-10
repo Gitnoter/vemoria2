@@ -1124,7 +1124,7 @@ QGroupBox{
        border-top:1px solid #e3e3e3;
 }</string>
         </property>
-        <layout class="QGridLayout" name="gridLayout_10" rowstretch="0,0,0,0" columnstretch="0">
+        <layout class="QGridLayout" name="gridLayout_10" rowstretch="0,0,0,0,0" columnstretch="0">
          <property name="leftMargin">
           <number>0</number>
          </property>
@@ -1140,37 +1140,6 @@ QGroupBox{
          <property name="spacing">
           <number>0</number>
          </property>
-         <item row="1" column="0">
-          <widget class="QLabel" name="label_9">
-           <property name="text">
-            <string>quick brown fox jumps over the lazy dogs</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QLabel" name="label_11">
-           <property name="text">
-            <string/>
-           </property>
-           <property name="pixmap">
-            <pixmap>:/new/prefix1/12122947_1027131440672810_7175649518355430536_n.jpg</pixmap>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="0">
-          <widget class="QPushButton" name="pushButton_2">
-           <property name="text">
-            <string>test open detail</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="0">
-          <widget class="QGroupBox" name="groupBox_10">
-           <property name="title">
-            <string/>
-           </property>
-          </widget>
-         </item>
          <item row="0" column="0" alignment="Qt::AlignTop">
           <widget class="QWidget" name="horizontalWidget" native="true">
            <property name="sizePolicy">
@@ -1399,6 +1368,40 @@ border-bottom:1px solid #e3e3e3;
            </layout>
           </widget>
          </item>
+         <item row="4" column="0">
+          <widget class="QGroupBox" name="groupBox_10">
+           <property name="title">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="label_9">
+           <property name="text">
+            <string>quick brown fox jumps over the lazy dogs</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="label_11">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="pixmap">
+            <pixmap>:/new/prefix1/12122947_1027131440672810_7175649518355430536_n.jpg</pixmap>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <widget class="QPushButton" name="pushButton_2">
+           <property name="text">
+            <string>test open detail</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <layout class="QGridLayout" name="gridLayout_21"/>
+         </item>
         </layout>
        </widget>
       </item>
@@ -1457,7 +1460,7 @@ font-family: 'Source Sans Pro';
              <property name="minimumSize">
               <size>
                <width>0</width>
-               <height>200</height>
+               <height>400</height>
               </size>
              </property>
              <layout class="QGridLayout" name="gridLayout_4">
@@ -1586,78 +1589,151 @@ font-family: 'Source Sans Pro';
                     <string/>
                    </property>
                    <layout class="QGridLayout" name="gridLayout_20">
+                    <property name="leftMargin">
+                     <number>15</number>
+                    </property>
+                    <property name="rightMargin">
+                     <number>0</number>
+                    </property>
                     <property name="spacing">
                      <number>0</number>
                     </property>
                     <item row="0" column="0">
-                     <layout class="QFormLayout" name="formLayout_2">
-                      <property name="horizontalSpacing">
-                       <number>0</number>
+                     <widget class="QScrollArea" name="scrollArea">
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>300</height>
+                       </size>
                       </property>
-                      <property name="verticalSpacing">
-                       <number>10</number>
+                      <property name="styleSheet">
+                       <string notr="true">#scrollArea{
+	background-color:#FFF;
+	border:none;
+}</string>
                       </property>
-                      <item row="1" column="0" colspan="2">
-                       <widget class="QLabel" name="label_10">
-                        <property name="minimumSize">
-                         <size>
-                          <width>0</width>
-                          <height>150</height>
-                         </size>
+                      <property name="verticalScrollBarPolicy">
+                       <enum>Qt::ScrollBarAlwaysOff</enum>
+                      </property>
+                      <property name="horizontalScrollBarPolicy">
+                       <enum>Qt::ScrollBarAsNeeded</enum>
+                      </property>
+                      <property name="widgetResizable">
+                       <bool>true</bool>
+                      </property>
+                      <widget class="QWidget" name="scrollAreaWidgetContents">
+                       <property name="geometry">
+                        <rect>
+                         <x>0</x>
+                         <y>0</y>
+                         <width>283</width>
+                         <height>300</height>
+                        </rect>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>0</width>
+                         <height>0</height>
+                        </size>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true">#scrollAreaWidgetContents{
+	background-color:#FFF;
+	border:none;
+}</string>
+                       </property>
+                       <layout class="QGridLayout" name="gridLayout_23">
+                        <property name="leftMargin">
+                         <number>0</number>
                         </property>
-                        <property name="maximumSize">
-                         <size>
-                          <width>16777215</width>
-                          <height>150</height>
-                         </size>
+                        <property name="topMargin">
+                         <number>0</number>
                         </property>
-                        <property name="styleSheet">
-                         <string notr="true">#label_10{
+                        <property name="rightMargin">
+                         <number>0</number>
+                        </property>
+                        <property name="bottomMargin">
+                         <number>0</number>
+                        </property>
+                        <property name="spacing">
+                         <number>0</number>
+                        </property>
+                        <item row="0" column="0">
+                         <layout class="QFormLayout" name="formLayout_2">
+                          <property name="horizontalSpacing">
+                           <number>0</number>
+                          </property>
+                          <property name="verticalSpacing">
+                           <number>10</number>
+                          </property>
+                          <property name="rightMargin">
+                           <number>15</number>
+                          </property>
+                          <item row="0" column="0" colspan="2">
+                           <widget class="QLabel" name="label_10">
+                            <property name="minimumSize">
+                             <size>
+                              <width>0</width>
+                              <height>150</height>
+                             </size>
+                            </property>
+                            <property name="maximumSize">
+                             <size>
+                              <width>16777215</width>
+                              <height>150</height>
+                             </size>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">#label_10{
 	background-color:#f8f8f8;
 }</string>
-                        </property>
-                        <property name="text">
-                         <string/>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="2" column="0" colspan="2">
-                       <widget class="QLineEdit" name="editFiles">
-                        <property name="minimumSize">
-                         <size>
-                          <width>0</width>
-                          <height>40</height>
-                         </size>
-                        </property>
-                        <property name="styleSheet">
-                         <string notr="true">#editFiles{
+                            </property>
+                            <property name="text">
+                             <string/>
+                            </property>
+                           </widget>
+                          </item>
+                          <item row="1" column="0" colspan="2">
+                           <widget class="QLineEdit" name="editFiles">
+                            <property name="minimumSize">
+                             <size>
+                              <width>0</width>
+                              <height>40</height>
+                             </size>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">#editFiles{
 	background-color:#FFF;
+	border: 1px solid #e3e3e3;
 }</string>
-                        </property>
-                        <property name="text">
-                         <string>Rechnung.pdf</string>
-                        </property>
-                        <property name="alignment">
-                         <set>Qt::AlignCenter</set>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="3" column="0" colspan="2">
-                       <widget class="QPushButton" name="openFileBtn">
-                        <property name="minimumSize">
-                         <size>
-                          <width>0</width>
-                          <height>40</height>
-                         </size>
-                        </property>
-                        <property name="font">
-                         <font>
-                          <family>Source Sans Pro</family>
-                          <pointsize>-1</pointsize>
-                         </font>
-                        </property>
-                        <property name="styleSheet">
-                         <string notr="true">#openFileBtn{
+                            </property>
+                            <property name="text">
+                             <string>Rechnung.pdf</string>
+                            </property>
+                            <property name="alignment">
+                             <set>Qt::AlignCenter</set>
+                            </property>
+                           </widget>
+                          </item>
+                          <item row="2" column="0" colspan="2">
+                           <widget class="QPushButton" name="openFileBtn">
+                            <property name="minimumSize">
+                             <size>
+                              <width>0</width>
+                              <height>40</height>
+                             </size>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <family>Source Sans Pro</family>
+                              <pointsize>-1</pointsize>
+                             </font>
+                            </property>
+                            <property name="cursor">
+                             <cursorShape>PointingHandCursor</cursorShape>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">#openFileBtn{
 	background-color:#1ca3c4;
 	color:white;
 	border: 1px solid #178aa6;
@@ -1666,13 +1742,19 @@ font-family: 'Source Sans Pro';
 #openFileBtn:hover{
 	background-color:#178aa6;
  }</string>
-                        </property>
-                        <property name="text">
-                         <string>OPEN</string>
-                        </property>
-                       </widget>
-                      </item>
-                     </layout>
+                            </property>
+                            <property name="text">
+                             <string>OPEN</string>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </item>
+                       </layout>
+                       <zorder></zorder>
+                       <zorder></zorder>
+                      </widget>
+                     </widget>
                     </item>
                    </layout>
                   </widget>
