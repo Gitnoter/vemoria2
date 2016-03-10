@@ -10,7 +10,6 @@
 #include "ui_mainwindow.h"
 #include "../version.h"
 #include "repository/collectionmanager.h"
-#include "popupcollection.h"
 #include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -22,24 +21,23 @@ MainWindow::MainWindow(QWidget *parent) :
     QPixmap pix13 ("/Users/Dennis/Desktop/pic/pic2.jpg");
     ui->previewPic->setPixmap( pix13.scaled ( 300, 120, Qt::IgnoreAspectRatio, Qt::FastTransformation ));
 
-
     ui->userLabel2->show();
     ui->gridDetail->hide();
-    QDir dir(":/");
-    qDebug() << dir.entryList();
-    //ui->label_12->setText( dir.entryList());
-    //ui->label_12->setPixmap(pixmap);
-    CollectionManager *collman;
-    collman = new CollectionManager();
-    collman->createCollection("peter");
-    delete collman;
+
+
+    //RESOURCE SYSTEM TEST
+
+    //    QDir dir(":/");
+    //    qDebug() << dir.entryList();
+    //    ui->label_12->setText( dir.entryList());
+    //    ui->label_12->setPixmap(pixmap);
+
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
 }
-
 
 void MainWindow::on_pushButton_2_clicked()
 {
