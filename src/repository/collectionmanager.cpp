@@ -9,6 +9,7 @@
 #include "collectionmanager.h"
 #include "qgit2.h"
 
+
 CollectionManager::CollectionManager()
 {
     ///
@@ -31,11 +32,30 @@ void CollectionManager::getCollectionList()
 
 bool CollectionManager::createCollection(QString collectionName)
 {
+    ///
+    /// \brief new collection with xlm-file in the collection folder
+    ///
+
+    QString date = QDateTime::currentDateTime().toString();
+    QString version = "1.0";
+
 
         if(!QDir(collectionName).exists())
         {
             QDir directory;
             directory.mkdir(collectionName);
+            QFile file;
+            file.setFileName(collectionName + "/" + collectionName + ".xml"); // wie wird / gehandelt???
+            file.open(QIODevice::ReadWrite | QIODevice::Text);
+            QTextStream stream(&file);
+            stream<<"<?xml version=\"1.0\" encoding=\"UTF-8\" ?>"<<endl;
+            stream<<"<notes>"<<endl;
+            stream<<"\t<version>"+version+"</version>"<<endl;
+            stream<<"\t<repName>" + collectionName + "</repName>"<<endl;
+            stream<<"\t<createDate>"<< date <<"</createDate>"<<endl;
+            stream<<"</notes>"<<endl;
+            file.close();
+
         }
         else return false;
 
@@ -46,17 +66,12 @@ bool CollectionManager::createCollection(QString collectionName)
         }
         catch (const LibQGit2::Exception& ex)
         {
+
             return false;
         }
         return true;
 }
 
-//bool CollectionManager::addFile(QFile file)
-//{
-//        try {
-//            repo->
-//        }
-//}
 
 void CollectionManager::deleteCollection()
 {
