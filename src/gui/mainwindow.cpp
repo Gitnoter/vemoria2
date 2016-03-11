@@ -12,6 +12,7 @@
 #include "../version.h"
 #include "popupcollection.h"
 #include "QMessageBox"
+#include <QTextEdit>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -19,11 +20,36 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->gridDetail->hide();
+
+    addTags();
+
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::addTags(){
+
+    QLabel *label = new QLabel();
+    label->setText("Description");
+
+    QTextEdit *lineedit = new QTextEdit();
+    lineedit->setPlaceholderText("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut");
+
+    QLabel *label2 = new QLabel();
+    label2->setText("Personen");
+
+
+    QTextEdit *lineedit2 = new QTextEdit();
+    lineedit2->setPlaceholderText("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut");
+
+    ui->formLayout_2->addWidget(label);
+    ui->formLayout_2->addWidget(lineedit);
+    ui->formLayout_2->addWidget(label2);
+    ui->formLayout_2->addWidget(lineedit2);
+
 }
 
 void MainWindow::on_pushButton_2_clicked()
