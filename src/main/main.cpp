@@ -1,31 +1,27 @@
-////////////////////////////////////////////////////////////////////////
-/// Project Vemoria                                                    /
-///                                                                    /
-/// Vemoria aims to be an environment for archiving multimedia files.  /
-///                                                                    /
-///                                                                    /
-/// This project is licensed under the EUPL v.1.1 or a later version.  /
-////////////////////////////////////////////////////////////////////////
-#include <QApplication>
-#include "mainwindow.h"
-#include "picture.h"
-#include "Repository.h"
-#include "xmlhandler.h"
-#include <iostream>
-#include <QTextStream>
-using namespace std;
+//----------------------------------------------------------------------
+/// \file
+/// \brief	Vemoria main function.
+/// This is the place where all life starts.
+/// \ingroup	g_main
+//----------------------------------------------------------------------
+// This file is part of the Vemoria project.
+// Vemoria aims to be an environment for archiving multimedia files.
+//
+// This file is licensed under the EUPL v.1.1 or a later version.
+//----------------------------------------------------------------------
 
+#include <QApplication>
+#include "gui/mainwindow.h"
+
+/// The usual program entry.
+/// The main function is as short as possible, as we cannot easily test in in a unit test.
+/// Therefore all functionality is held in libraries which are more testable.
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
-    MainWindow w;
-    w.showMaximized();
+    ///\todo We should parse the command line arguments here.
+    QApplication app(argc, argv);
+    MainWindow mainwindow;
+    mainwindow.showMaximized();
 
-    Picture pic;
-    pic.hello();
-    XMLHandler handy;
-    //Putput in Application Output is chaotic. Two ways to Output the Elements
-    QTextStream(stdout) /*<< endl << endl*/ << handy.readXMLFile("C:/beispiel.xml") << endl;
-
-    return a.exec();
+    return app.exec();
 }

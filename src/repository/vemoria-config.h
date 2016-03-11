@@ -1,7 +1,6 @@
 /// \file
-/// \brief	Vemoria video metadata implementation.
-/// There is nothing special in here except the (empty) virtual destructor.
-/// \ingroup	g_logic
+/// \brief	Vemoria config header file
+/// \ingroup	g_repository
 //----------------------------------------------------------------------
 // This file is part of the Vemoria project.
 // Vemoria aims to be an environment for archiving multimedia files.
@@ -9,10 +8,8 @@
 // This file is licensed under the EUPL v.1.1 or a later version.
 //----------------------------------------------------------------------
 
-#include "video.h"
+#ifndef VEMORIACONFIG_H
+#define VEMORIACONFIG_H
+ char const * const VEMORIA_VERSION = "1.0";
+#endif // VEMORIACONFIG_H
 
-/// The destructor is virtual, so it can't be inlined, and we place
-/// it in the *.cpp even it's empty and could easily been placed in *.h.
-Video::~Video()
-{
-}
