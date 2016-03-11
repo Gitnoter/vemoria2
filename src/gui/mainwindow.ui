@@ -1384,6 +1384,12 @@ border-bottom:1px solid #e3e3e3;
          </item>
          <item row="2" column="0">
           <widget class="QLabel" name="label_11">
+           <property name="font">
+            <font>
+             <family>Source Sans Pro</family>
+             <pointsize>-1</pointsize>
+            </font>
+           </property>
            <property name="text">
             <string/>
            </property>
@@ -1526,13 +1532,16 @@ font-family: 'Source Sans Pro';
                     <bool>false</bool>
                    </property>
                    <layout class="QGridLayout" name="gridLayout_19">
+                    <property name="leftMargin">
+                     <number>15</number>
+                    </property>
                     <item row="0" column="0">
                      <layout class="QFormLayout" name="formClose">
                       <property name="labelAlignment">
-                       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                       <set>Qt::AlignCenter</set>
                       </property>
                       <property name="formAlignment">
-                       <set>Qt::AlignRight|Qt::AlignTop|Qt::AlignTrailing</set>
+                       <set>Qt::AlignHCenter|Qt::AlignTop</set>
                       </property>
                       <property name="horizontalSpacing">
                        <number>0</number>
@@ -1540,41 +1549,27 @@ font-family: 'Source Sans Pro';
                       <property name="verticalSpacing">
                        <number>0</number>
                       </property>
-                      <item row="0" column="1">
-                       <widget class="QPushButton" name="pushButton">
+                      <item row="0" column="0" colspan="2">
+                       <widget class="QPushButton" name="pushButton_3">
                         <property name="minimumSize">
                          <size>
-                          <width>18</width>
-                          <height>17</height>
+                          <width>0</width>
+                          <height>30</height>
                          </size>
                         </property>
                         <property name="maximumSize">
                          <size>
-                          <width>18</width>
-                          <height>17</height>
+                          <width>150</width>
+                          <height>100</height>
                          </size>
                         </property>
-                        <property name="cursor">
-                         <cursorShape>PointingHandCursor</cursorShape>
-                        </property>
-                        <property name="toolTip">
-                         <string>Close</string>
+                        <property name="styleSheet">
+                         <string notr="true">color:white;
+background-color:#f33f58;
+border:1px solid #e8293f;</string>
                         </property>
                         <property name="text">
-                         <string/>
-                        </property>
-                        <property name="icon">
-                         <iconset resource="resource.qrc">
-                          <normaloff>:/icons/icons/close-icon.png</normaloff>:/icons/icons/close-icon.png</iconset>
-                        </property>
-                        <property name="iconSize">
-                         <size>
-                          <width>18</width>
-                          <height>17</height>
-                         </size>
-                        </property>
-                        <property name="flat">
-                         <bool>true</bool>
+                         <string>CLOSE</string>
                         </property>
                        </widget>
                       </item>
@@ -1751,7 +1746,6 @@ font-family: 'Source Sans Pro';
                          </layout>
                         </item>
                        </layout>
-                       <zorder></zorder>
                        <zorder></zorder>
                       </widget>
                      </widget>

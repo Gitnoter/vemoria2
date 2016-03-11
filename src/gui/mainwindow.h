@@ -35,7 +35,7 @@ private slots:
 
     void on_saveBtn_clicked();
 
-    void add_Font();
+    void on_actionInfo_triggered();
 
 private:
     Ui::MainWindow *ui;

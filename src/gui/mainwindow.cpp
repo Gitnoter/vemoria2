@@ -12,20 +12,14 @@
 
 #include <QDebug> //currently here for debugging purposes, obviously
 #include "popupcollection.h"
-#include "QFontDatabase"
+#include "QMessageBox"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
-//    QPixmap pix13 ("/Users/Dennis/Desktop/pic/pic2.jpg");
-//    ui->previewPic->setPixmap( pix13.scaled ( 300, 120, Qt::IgnoreAspectRatio, Qt::FastTransformation ));
-
-
     ui->gridDetail->hide();
-    add_Font();
 
     //RESOURCE SYSTEM TEST
 
@@ -39,16 +33,6 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
-}
-
-void MainWindow::add_Font(){
-
-    QFontDatabase database;
-    database.addApplicationFont(":/new/fonts/SourceSansPro-Regular.tff");
-
-    QFont f = database.font("myFont", "normal", 30);
-    ui->label_9->setFont(f);
-
 }
 
 void MainWindow::on_pushButton_2_clicked()
@@ -76,4 +60,15 @@ void MainWindow::on_deleteBtn_clicked()
 void MainWindow::on_saveBtn_clicked()
 {
 
+}
+
+void MainWindow::on_actionInfo_triggered()
+{
+         QMessageBox msgBox;
+         msgBox.setText("\nThe License of this Sotware is EUPL V. 1.1.\n\n"
+                        "Fonts License: SIL Open Font License, 1.1\n\n"
+                        "Icons License: MIT\n\n"
+                        "Libqgit2 - C++ Qt License: LGPL\n\n"
+                        "Version Number: " + QString::fromUtf8(VERSION));
+         msgBox.exec();
 }
