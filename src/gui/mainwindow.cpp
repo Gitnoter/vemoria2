@@ -40,16 +40,24 @@ void MainWindow::addTags(){
     lineedit->setPlaceholderText("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut");
 
     QLabel *label2 = new QLabel();
-    label2->setText("Personen");
-
+    label2->setText("Persons");
 
     QTextEdit *lineedit2 = new QTextEdit();
     lineedit2->setPlaceholderText("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut");
+
+
+    QLabel *label3 = new QLabel();
+    label3->setText("Other");
+
+    QTextEdit *lineedit3 = new QTextEdit();
+    lineedit3->setPlaceholderText("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut");
 
     ui->formLayout_2->addWidget(label);
     ui->formLayout_2->addWidget(lineedit);
     ui->formLayout_2->addWidget(label2);
     ui->formLayout_2->addWidget(lineedit2);
+    ui->formLayout_2->addWidget(label3);
+    ui->formLayout_2->addWidget(lineedit3);
 
 }
 
