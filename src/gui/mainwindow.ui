@@ -17,7 +17,11 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Vemoria</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="resource.qrc">
+    <normaloff>:/icons/icons/VEM.png</normaloff>:/icons/icons/VEM.png</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">QMainWindow{

@@ -12,6 +12,9 @@
 
 #include <QApplication>
 #include "gui/mainwindow.h"
+#include "QFile"
+#include "QFont"
+#include "QDebug"
 
 /// The usual program entry.
 /// The main function is as short as possible, as we cannot easily test in in a unit test.
@@ -23,6 +26,18 @@ int main(int argc, char *argv[])
 
     MainWindow mainwindow;
     mainwindow.showMaximized();
+
+
+     QFile file(":/fonts/fonts/SourceSansPro-Regular.ttf");
+
+     if(!file.open(QIODevice::ReadOnly)){
+        qDebug() << "unable to open font";
+     }
+
+     QFont f;
+     f.setFamily("Source Sans Pro");
+     f.setPointSize(10);
+     app.setFont(f);
 
     return app.exec();
 }

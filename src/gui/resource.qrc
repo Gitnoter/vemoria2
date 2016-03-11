@@ -13,6 +13,7 @@
         <file>icons/sync.png</file>
         <file>icons/trash.png</file>
         <file>icons/home.png</file>
+        <file>icons/VEM.png</file>
     </qresource>
     <qresource prefix="/fonts">
         <file>fonts/SourceSansPro-Black.ttf</file>

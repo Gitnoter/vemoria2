@@ -9,8 +9,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "../version.h"
-
-#include <QDebug> //currently here for debugging purposes, obviously
 #include "popupcollection.h"
 #include "QMessageBox"
 
@@ -20,14 +18,6 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->gridDetail->hide();
-
-    //RESOURCE SYSTEM TEST
-
-    //    QDir dir(":/");
-    //    qDebug() << dir.entryList();
-    //    ui->label_12->setText( dir.entryList());
-    //    ui->label_12->setPixmap(pixmap);
-
 }
 
 MainWindow::~MainWindow()
