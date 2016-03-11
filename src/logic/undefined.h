@@ -10,7 +10,11 @@
 #define UNDEFINED_H
 #include <logic/item.h>
 
-
+/*! \brief Undefined Class.
+ *         .
+ *
+ *  Containing the Metadata and Tags for a specific item of undefined type.
+ */
 class Undefined: Item
 {
 public:
