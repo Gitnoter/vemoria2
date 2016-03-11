@@ -30,6 +30,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+//test
 void MainWindow::addTags(){
 
     QLabel *label = new QLabel();
