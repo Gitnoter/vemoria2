@@ -3,6 +3,7 @@
 include(../qmake/common.pri)
 
 QT       += core
+QT       += xml
 
 TARGET = logic
 TEMPLATE = lib
@@ -19,6 +20,7 @@ SOURCES += \
     picture.cpp \
     undefined.cpp \
     video.cpp \
+    xmlhandler.cpp \
 
 HEADERS  += \
     audio.h \
@@ -31,4 +33,6 @@ HEADERS  += \
     picture.h \
     undefined.h \
     video.h \
+    version.h \
+    xmlhandler.h \
 
