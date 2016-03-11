@@ -51,10 +51,14 @@ void MainWindow::on_saveBtn_clicked()
 void MainWindow::on_actionInfo_triggered()
 {
          QMessageBox msgBox;
-         msgBox.setText("\nThe License of this Sotware is EUPL V. 1.1.\n\n"
-                        "Fonts License: SIL Open Font License, 1.1\n\n"
-                        "Icons License: MIT\n\n"
-                        "Libqgit2 - C++ Qt License: LGPL\n\n"
+         QPixmap pix (":/icons/icons/VEM.png");
+         msgBox.setWindowIcon(pix);
+         msgBox.setTextFormat(Qt::RichText);
+         msgBox.setText(
+                        "\nThe License of this Sotware is EUPL V. 1.1.<br><br>"
+                        "Fonts License: SIL Open Font License, 1.1 &nbsp;<a href='https://www.google.com/fonts#UsePlace:use/Collection:Source+Sans+Pro'>google.com/fonts</a><br><br>"
+                        "Icons License: MIT &nbsp;<a href='http://ionicons.com/'>ionicons.com</a><br><br>"
+                        "Libqgit2 - C++ Qt License: LGPL &nbsp;<a href='https://projects.kde.org/projects/playground/libs/libqgit2/repository'>projects.kde.org</a><br><br>"
                         "Version Number: " + QString::fromUtf8(VERSION));
          msgBox.exec();
 }
