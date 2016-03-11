@@ -10,19 +10,45 @@
 //
 #ifndef DOCUMENT_H
 #define DOCUMENT_H
+#include <QVector>
 #include "logic/item.h"
+
 
 /// \class
 /// Metadata of document items.
-//
+
+/*! \brief Document Class.
+ *         .
+ *
+ *  Containing the Metadata and Tags for a specific document item.
+ */
+ 
 class Document: public Item
 {
   public:
     // Default constructors will do.
     virtual ~Document();
 
+
+    QVector<QString> getSubject() const { return subject; }
+    void setSubject(const QVector<QString> & value) { subject=value; }
+
+    QString getCreator() const { return creator; }
+    void setCreator(const QString & value) { creator=value; }
+
+    QString getCompany() const { return company; }
+    void setCompany(const QString & value) { company=value; }
+
+    QString getAlterationdate() const { return alterationdate; }
+    void setAlterationdate(const QString & value) { alterationdate=value; }
+
+    QString getNumberofpages() const { return numberofpages; }
+    void setNumberofpages(const QString & value) { numberofpages=value; }
+
+
   private:
-    QString subject;
+
+    QVector<QString> subject;
     QString creator;
     QString company;
     QString alterationdate;

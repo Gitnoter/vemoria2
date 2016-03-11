@@ -9,19 +9,28 @@
 //----------------------------------------------------------------------
 #ifndef PICTURE_H
 #define PICTURE_H
+#include <QVector>
 #include "logic/item.h"
+
+
+/*! \brief Picture Class. 
+ *  Containing the Metadata and Tags for a specific picture item.
+ */
+
 
 /// \class
 /// Metadata of picture items.
+
+/*! \brief Picture Class.
+ *         .
+ *
+ *  Containing the Metadata and Tags for a specific picture item.
+ */
 class Picture: public Item
 {
   public:
     // Default constructors will do.
     virtual ~Picture();
-
-    ///@{
-    /// Setters and Getters for the attributes.
-    /// Nothing special about this.
 
     QString getDate() const { return date; }
     void setDate(const QString & value) { date=value; }
@@ -41,8 +50,14 @@ class Picture: public Item
     QString getLicense() const { return license; }
     void setLicense(const QString & value) { license=value; }
 
-    /// \todo add setters and getters for people, event, location
-    ///@}
+    QVector<QString> getPeople() const { return people; }
+    void setPeople(const QVector<QString> & value) { people=value; }
+
+    QVector<QString> getEvent() const { return event; }
+    void setEvent(const QVector<QString> & value) { event=value; }
+
+    QVector<QString> getLocation() const { return location; }
+    void setLocation(const QVector<QString> & value) { location=value; }
 
   private:
     QString date;
@@ -51,9 +66,9 @@ class Picture: public Item
     QString description;
     QString creator;
     QString license;
-    QString people[];		///< \todo use QArray or similar
-    QString event[];
-    QString location[];
+    QVector <QString> people;
+    QVector<QString> event;
+    QVector<QString> location;
 };
 
 #endif // PICTURE_H
