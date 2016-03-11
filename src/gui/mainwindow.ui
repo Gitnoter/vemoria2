@@ -200,9 +200,8 @@ QGroupBox{
                     <string/>
                    </property>
                    <property name="icon">
-                    <iconset>
-                     <normalon>../../../pic/search.png</normalon>
-                    </iconset>
+                    <iconset resource="resource.qrc">
+                     <normaloff>:/icons/icons/search.png</normaloff>:/icons/icons/search.png</iconset>
                    </property>
                    <property name="iconSize">
                     <size>
@@ -316,7 +315,7 @@ QGroupBox{
                          <string/>
                         </property>
                         <property name="pixmap">
-                         <pixmap>:/new/prefix1/root-image.png</pixmap>
+                         <pixmap resource="resource.qrc">:/icons/icons/root-image.png</pixmap>
                         </property>
                        </widget>
                       </item>
@@ -433,7 +432,7 @@ QGroupBox{
                                <string/>
                               </property>
                               <property name="pixmap">
-                               <pixmap>:/new/prefix1/root-image.png</pixmap>
+                               <pixmap resource="resource.qrc">:/icons/icons/root-image.png</pixmap>
                               </property>
                              </widget>
                             </item>
@@ -471,7 +470,7 @@ QGroupBox{
                           <number>0</number>
                          </property>
                          <item row="0" column="0">
-                          <widget class="QWidget" name="formWidget_2" native="true">
+                          <widget class="QWidget" name="formWidget_21" native="true">
                            <property name="minimumSize">
                             <size>
                              <width>0</width>
@@ -509,7 +508,7 @@ QGroupBox{
                                <string/>
                               </property>
                               <property name="pixmap">
-                               <pixmap>:/new/prefix1/filter.png</pixmap>
+                               <pixmap resource="resource.qrc">:/icons/icons/progress.png</pixmap>
                               </property>
                              </widget>
                             </item>
@@ -573,7 +572,7 @@ QGroupBox{
                               <string/>
                              </property>
                              <property name="pixmap">
-                              <pixmap>:/new/prefix1/filter-images.png</pixmap>
+                              <pixmap resource="resource.qrc">:/icons/icons/filter-images.png</pixmap>
                              </property>
                             </widget>
                            </item>
@@ -634,7 +633,7 @@ QGroupBox{
                               <string/>
                              </property>
                              <property name="pixmap">
-                              <pixmap>:/new/prefix1/filter-videos.png</pixmap>
+                              <pixmap resource="resource.qrc">:/icons/icons/filter-videos.png</pixmap>
                              </property>
                             </widget>
                            </item>
@@ -671,7 +670,7 @@ QGroupBox{
                               <string/>
                              </property>
                              <property name="pixmap">
-                              <pixmap>:/new/prefix1/filter-documents.png</pixmap>
+                              <pixmap resource="resource.qrc">:/icons/icons/filter-documents.png</pixmap>
                              </property>
                             </widget>
                            </item>
@@ -726,7 +725,7 @@ QGroupBox{
                               <string/>
                              </property>
                              <property name="pixmap">
-                              <pixmap>:/new/prefix1/progress.png</pixmap>
+                              <pixmap resource="resource.qrc">:/icons/icons/progress.png</pixmap>
                              </property>
                             </widget>
                            </item>
@@ -951,8 +950,8 @@ QGroupBox{
                            <string>      Add files</string>
                           </property>
                           <property name="icon">
-                           <iconset>
-                            <normaloff>:/new/prefix1/add-files.png</normaloff>:/new/prefix1/add-files.png</iconset>
+                           <iconset resource="resource.qrc">
+                            <normaloff>:/icons/icons/add-files.png</normaloff>:/icons/icons/add-files.png</iconset>
                           </property>
                           <property name="iconSize">
                            <size>
@@ -1039,8 +1038,8 @@ QGroupBox{
                            <string/>
                           </property>
                           <property name="icon">
-                           <iconset>
-                            <normaloff>:/new/prefix1/sync.png</normaloff>:/new/prefix1/sync.png</iconset>
+                           <iconset resource="resource.qrc">
+                            <normaloff>:/icons/icons/sync.png</normaloff>:/icons/icons/sync.png</iconset>
                           </property>
                           <property name="iconSize">
                            <size>
@@ -1079,8 +1078,8 @@ QGroupBox{
                            <string/>
                           </property>
                           <property name="icon">
-                           <iconset>
-                            <normaloff>:/new/prefix1/save-button.png</normaloff>:/new/prefix1/save-button.png</iconset>
+                           <iconset resource="resource.qrc">
+                            <normaloff>:/icons/icons/save-button.png</normaloff>:/icons/icons/save-button.png</iconset>
                           </property>
                           <property name="iconSize">
                            <size>
@@ -1125,7 +1124,7 @@ QGroupBox{
        border-top:1px solid #e3e3e3;
 }</string>
         </property>
-        <layout class="QGridLayout" name="gridLayout_10" rowstretch="0,0,0,0" columnstretch="0">
+        <layout class="QGridLayout" name="gridLayout_10" rowstretch="0,0,0,0,0" columnstretch="0">
          <property name="leftMargin">
           <number>0</number>
          </property>
@@ -1141,20 +1140,6 @@ QGroupBox{
          <property name="spacing">
           <number>0</number>
          </property>
-         <item row="2" column="0">
-          <widget class="QPushButton" name="pushButton_2">
-           <property name="text">
-            <string>test open detail</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="0">
-          <widget class="QGroupBox" name="groupBox_10">
-           <property name="title">
-            <string/>
-           </property>
-          </widget>
-         </item>
          <item row="0" column="0" alignment="Qt::AlignTop">
           <widget class="QWidget" name="horizontalWidget" native="true">
            <property name="sizePolicy">
@@ -1241,7 +1226,7 @@ padding-right:3px;</string>
                     <string/>
                    </property>
                    <property name="pixmap">
-                    <pixmap>:/new/prefix1/Unbenannt-1.png</pixmap>
+                    <pixmap resource="resource.qrc">:/icons/icons/home.png</pixmap>
                    </property>
                   </widget>
                  </item>
@@ -1383,22 +1368,39 @@ border-bottom:1px solid #e3e3e3;
            </layout>
           </widget>
          </item>
-         <item row="1" column="0">
+         <item row="4" column="0">
+          <widget class="QGroupBox" name="groupBox_10">
+           <property name="title">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
           <widget class="QLabel" name="label_9">
            <property name="text">
             <string>quick brown fox jumps over the lazy dogs</string>
            </property>
           </widget>
          </item>
-         <item row="1" column="0">
+         <item row="2" column="0">
           <widget class="QLabel" name="label_11">
            <property name="text">
             <string/>
            </property>
            <property name="pixmap">
-            <pixmap resource="resource.qrc">:/new/prefix1/12122947_1027131440672810_7175649518355430536_n.jpg</pixmap>
+            <pixmap>:/new/prefix1/12122947_1027131440672810_7175649518355430536_n.jpg</pixmap>
            </property>
           </widget>
+         </item>
+         <item row="3" column="0">
+          <widget class="QPushButton" name="pushButton_2">
+           <property name="text">
+            <string>test open detail</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <layout class="QGridLayout" name="gridLayout_21"/>
          </item>
         </layout>
        </widget>
@@ -1458,7 +1460,7 @@ font-family: 'Source Sans Pro';
              <property name="minimumSize">
               <size>
                <width>0</width>
-               <height>200</height>
+               <height>400</height>
               </size>
              </property>
              <layout class="QGridLayout" name="gridLayout_4">
@@ -1479,6 +1481,12 @@ font-family: 'Source Sans Pro';
               </property>
               <item row="0" column="0">
                <widget class="QWidget" name="formWidget" native="true">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>300</height>
+                 </size>
+                </property>
                 <layout class="QFormLayout" name="formLayout">
                  <property name="labelAlignment">
                   <set>Qt::AlignJustify|Qt::AlignVCenter</set>
@@ -1556,8 +1564,8 @@ font-family: 'Source Sans Pro';
                          <string/>
                         </property>
                         <property name="icon">
-                         <iconset>
-                          <normaloff>:/new/prefix1/close-icon.png</normaloff>:/new/prefix1/close-icon.png</iconset>
+                         <iconset resource="resource.qrc">
+                          <normaloff>:/icons/icons/close-icon.png</normaloff>:/icons/icons/close-icon.png</iconset>
                         </property>
                         <property name="iconSize">
                          <size>
@@ -1571,6 +1579,180 @@ font-family: 'Source Sans Pro';
                        </widget>
                       </item>
                      </layout>
+                    </item>
+                   </layout>
+                  </widget>
+                 </item>
+                 <item row="1" column="0" colspan="2">
+                  <widget class="QGroupBox" name="groupBox_11">
+                   <property name="title">
+                    <string/>
+                   </property>
+                   <layout class="QGridLayout" name="gridLayout_20">
+                    <property name="leftMargin">
+                     <number>15</number>
+                    </property>
+                    <property name="rightMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="spacing">
+                     <number>0</number>
+                    </property>
+                    <item row="0" column="0">
+                     <widget class="QScrollArea" name="scrollArea">
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>300</height>
+                       </size>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">#scrollArea{
+	background-color:#FFF;
+	border:none;
+}</string>
+                      </property>
+                      <property name="verticalScrollBarPolicy">
+                       <enum>Qt::ScrollBarAlwaysOff</enum>
+                      </property>
+                      <property name="horizontalScrollBarPolicy">
+                       <enum>Qt::ScrollBarAsNeeded</enum>
+                      </property>
+                      <property name="widgetResizable">
+                       <bool>true</bool>
+                      </property>
+                      <widget class="QWidget" name="scrollAreaWidgetContents">
+                       <property name="geometry">
+                        <rect>
+                         <x>0</x>
+                         <y>0</y>
+                         <width>283</width>
+                         <height>300</height>
+                        </rect>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>0</width>
+                         <height>0</height>
+                        </size>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true">#scrollAreaWidgetContents{
+	background-color:#FFF;
+	border:none;
+}</string>
+                       </property>
+                       <layout class="QGridLayout" name="gridLayout_23">
+                        <property name="leftMargin">
+                         <number>0</number>
+                        </property>
+                        <property name="topMargin">
+                         <number>0</number>
+                        </property>
+                        <property name="rightMargin">
+                         <number>0</number>
+                        </property>
+                        <property name="bottomMargin">
+                         <number>0</number>
+                        </property>
+                        <property name="spacing">
+                         <number>0</number>
+                        </property>
+                        <item row="0" column="0">
+                         <layout class="QFormLayout" name="formLayout_2">
+                          <property name="horizontalSpacing">
+                           <number>0</number>
+                          </property>
+                          <property name="verticalSpacing">
+                           <number>10</number>
+                          </property>
+                          <property name="rightMargin">
+                           <number>15</number>
+                          </property>
+                          <item row="0" column="0" colspan="2">
+                           <widget class="QLabel" name="label_10">
+                            <property name="minimumSize">
+                             <size>
+                              <width>0</width>
+                              <height>150</height>
+                             </size>
+                            </property>
+                            <property name="maximumSize">
+                             <size>
+                              <width>16777215</width>
+                              <height>150</height>
+                             </size>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">#label_10{
+	background-color:#f8f8f8;
+}</string>
+                            </property>
+                            <property name="text">
+                             <string/>
+                            </property>
+                           </widget>
+                          </item>
+                          <item row="1" column="0" colspan="2">
+                           <widget class="QLineEdit" name="editFiles">
+                            <property name="minimumSize">
+                             <size>
+                              <width>0</width>
+                              <height>40</height>
+                             </size>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">#editFiles{
+	background-color:#FFF;
+	border: 1px solid #e3e3e3;
+}</string>
+                            </property>
+                            <property name="text">
+                             <string>Rechnung.pdf</string>
+                            </property>
+                            <property name="alignment">
+                             <set>Qt::AlignCenter</set>
+                            </property>
+                           </widget>
+                          </item>
+                          <item row="2" column="0" colspan="2">
+                           <widget class="QPushButton" name="openFileBtn">
+                            <property name="minimumSize">
+                             <size>
+                              <width>0</width>
+                              <height>40</height>
+                             </size>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <family>Source Sans Pro</family>
+                              <pointsize>-1</pointsize>
+                             </font>
+                            </property>
+                            <property name="cursor">
+                             <cursorShape>PointingHandCursor</cursorShape>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">#openFileBtn{
+	background-color:#1ca3c4;
+	color:white;
+	border: 1px solid #178aa6;
+ }
+
+#openFileBtn:hover{
+	background-color:#178aa6;
+ }</string>
+                            </property>
+                            <property name="text">
+                             <string>OPEN</string>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </item>
+                       </layout>
+                      </widget>
+                     </widget>
                     </item>
                    </layout>
                   </widget>
@@ -1659,8 +1841,8 @@ margin-left:1px;
                    <string>  Delete</string>
                   </property>
                   <property name="icon">
-                   <iconset>
-                    <normaloff>:/new/prefix1/trash.png</normaloff>:/new/prefix1/trash.png</iconset>
+                   <iconset resource="resource.qrc">
+                    <normaloff>:/icons/icons/trash.png</normaloff>:/icons/icons/trash.png</iconset>
                   </property>
                   <property name="iconSize">
                    <size>
@@ -1699,8 +1881,8 @@ border-top:1px solid #e3e3e3;
                    <string>  Save</string>
                   </property>
                   <property name="icon">
-                   <iconset>
-                    <normaloff>:/new/prefix1/save-button.png</normaloff>:/new/prefix1/save-button.png</iconset>
+                   <iconset resource="resource.qrc">
+                    <normaloff>:/icons/icons/save-button.png</normaloff>:/icons/icons/save-button.png</iconset>
                   </property>
                   <property name="iconSize">
                    <size>
@@ -1771,6 +1953,7 @@ border-radius: 4px;
     <property name="title">
      <string>Help</string>
     </property>
+    <addaction name="actionInfo"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuView"/>
@@ -1781,9 +1964,15 @@ border-radius: 4px;
     <string>New Collection</string>
    </property>
   </action>
+  <action name="actionInfo">
+   <property name="text">
+    <string>Info</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>
+  <include location="resource.qrc"/>
   <include location="resource.qrc"/>
  </resources>
  <connections/>

@@ -1,19 +1,31 @@
 <RCC>
-    <qresource prefix="/new/images">
-        <file>add-files.png</file>
-        <file>filter.png</file>
-        <file>save-button.png</file>
-        <file>sync.png</file>
-        <file>trash.png</file>
-        <file>root-image.png</file>
-        <file>progress.png</file>
-        <file>filter-images.png</file>
-        <file>filter-videos.png</file>
-        <file>filter-documents.png</file>
-        <file>Unbenannt-1.png</file>
-        <file>close-icon.png</file>
+    <qresource prefix="/icons">
+        <file>icons/add-files.png</file>
+        <file>icons/close-icon.png</file>
+        <file>icons/filter.png</file>
+        <file>icons/filter-documents.png</file>
+        <file>icons/filter-images.png</file>
+        <file>icons/filter-videos.png</file>
+        <file>icons/progress.png</file>
+        <file>icons/root-image.png</file>
+        <file>icons/save-button.png</file>
+        <file>icons/search.png</file>
+        <file>icons/sync.png</file>
+        <file>icons/trash.png</file>
+        <file>icons/home.png</file>
     </qresource>
-    <qresource prefix="/new/fonts">
-        <file>fonts.qrc</file>
+    <qresource prefix="/fonts">
+        <file>fonts/SourceSansPro-Black.ttf</file>
+        <file>fonts/SourceSansPro-BlackItalic.ttf</file>
+        <file>fonts/SourceSansPro-Bold.ttf</file>
+        <file>fonts/SourceSansPro-BoldItalic.ttf</file>
+        <file>fonts/SourceSansPro-ExtraLight.ttf</file>
+        <file>fonts/SourceSansPro-ExtraLightItalic.ttf</file>
+        <file>fonts/SourceSansPro-Italic.ttf</file>
+        <file>fonts/SourceSansPro-Light.ttf</file>
+        <file>fonts/SourceSansPro-LightItalic.ttf</file>
+        <file>fonts/SourceSansPro-Regular.ttf</file>
+        <file>fonts/SourceSansPro-Semibold.ttf</file>
+        <file>fonts/SourceSansPro-SemiboldItalic.ttf</file>
     </qresource>
 </RCC>

@@ -11,7 +11,6 @@
 #include "../version.h"
 
 #include <QDebug> //currently here for debugging purposes, obviously
-
 #include "popupcollection.h"
 #include "QFontDatabase"
 
@@ -26,6 +25,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     ui->gridDetail->hide();
+    add_Font();
 
     //RESOURCE SYSTEM TEST
 
@@ -46,7 +46,7 @@ void MainWindow::add_Font(){
     QFontDatabase database;
     database.addApplicationFont(":/new/fonts/SourceSansPro-Regular.tff");
 
-    QFont f = database.font("myFont", "normal", 12);
+    QFont f = database.font("myFont", "normal", 30);
     ui->label_9->setFont(f);
 
 }
