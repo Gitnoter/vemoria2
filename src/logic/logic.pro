@@ -31,5 +31,4 @@ HEADERS  += \
     picture.h \
     undefined.h \
     video.h \
-    version.h \
 

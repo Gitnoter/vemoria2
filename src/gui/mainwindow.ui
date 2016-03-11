@@ -470,7 +470,7 @@ QGroupBox{
                           <number>0</number>
                          </property>
                          <item row="0" column="0">
-                          <widget class="QWidget" name="formWidget_2" native="true">
+                          <widget class="QWidget" name="formWidget_21" native="true">
                            <property name="minimumSize">
                             <size>
                              <width>0</width>
@@ -1746,7 +1746,6 @@ border:1px solid #e8293f;</string>
                          </layout>
                         </item>
                        </layout>
-                       <zorder></zorder>
                       </widget>
                      </widget>
                     </item>
