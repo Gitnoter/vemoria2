@@ -13,18 +13,16 @@
 
 #include <QString>
 
-/// \class
-/// The base class of all items.
-///
-/// We use QString for easy interaction with Qt libs. std::string is not
-/// suitable, as it doesn't hold UTF-8, and std::wstring conversion to
-/// QString for GUI etc. is effort we can avoid by using QString as general
-/// string class.
+
 
 /*! \brief Item Base Class.
  *         .
  *
  *  Containing the Metadata and Tags generic for any item.
+ *  We use QString for easy interaction with Qt libs. std::string is not
+ *  suitable, as it doesn't hold UTF-8, and std::wstring conversion to
+ *  QString for GUI etc. is effort we can avoid by using QString as general
+ *  string class.
  */
  
 class Item
