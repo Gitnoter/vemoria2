@@ -10,10 +10,6 @@
 
 #ifndef XMLHANDLER_H
 #define XMLHANDLER_H
-#include <QCoreApplication>
-#include <QtCore>
-#include <QtXml/QtXml>
-#include <QDebug>
 #include <picture.h>
 
 //!

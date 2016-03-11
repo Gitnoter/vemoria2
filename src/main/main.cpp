@@ -23,6 +23,7 @@ int main(int argc, char *argv[])
 {
     ///\todo We should parse the command line arguments here.
     QApplication app(argc, argv);
+
     MainWindow mainwindow;
     mainwindow.showMaximized();
 
