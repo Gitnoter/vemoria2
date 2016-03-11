@@ -1,11 +1,12 @@
-////////////////////////////////////////////////////////////////////////
-/// Project Vemoria                                                    /
-///                                                                    /
-/// Vemoria aims to be an environment for archiving multimedia files.  /
-///                                                                    /
-///                                                                    /
-/// This project is licensed under the EUPL v.1.1 or a later version.  /
-////////////////////////////////////////////////////////////////////////
+/// \file
+/// \brief	Vemoria mainwindow header file
+/// \ingroup	gui
+//----------------------------------------------------------------------
+// This file is part of the Vemoria project.
+// Vemoria aims to be an environment for archiving multimedia files.
+//
+// This file is licensed under the EUPL v.1.1 or a later version.
+//----------------------------------------------------------------------
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
@@ -29,13 +30,13 @@ private slots:
 
     void on_actionNew_Collection_triggered();
 
-    void on_pushButton_clicked();
-
     void on_deleteBtn_clicked();
 
     void on_saveBtn_clicked();
 
     void on_actionInfo_triggered();
+
+    void on_pushButton_3_clicked();
 
 private:
     Ui::MainWindow *ui;
