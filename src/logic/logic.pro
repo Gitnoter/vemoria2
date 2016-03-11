@@ -20,6 +20,7 @@ SOURCES += \
     picture.cpp \
     undefined.cpp \
     video.cpp \
+    uiservices.cpp
 
 HEADERS  += \
     audio.h \
@@ -32,3 +33,4 @@ HEADERS  += \
     picture.h \
     undefined.h \
     video.h \
+    uiservices.h

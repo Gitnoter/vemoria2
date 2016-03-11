@@ -13,11 +13,12 @@
 
 #include "item.h"
 #include <QString>
+#include "uiservices.h"
 
 class ItemManager
 {
 public:
-    ItemManager();
+    ItemManager(UiServices *uiservices);
     //!
     //!\return Please change the return value if necessary
     //!\param der Parameter 'Item' bezieht sich auf mögliche Items wie Picture etc, dies muss geändert werden (Als Übergabeparameter, abhängig von dem jeweiligen Itemtyp (Pciture, video,...)
@@ -34,6 +35,8 @@ public:
     void createDir();
     void removeDir();
     void moveItemInDir();
+private:
+    UiServices *uiservices;
 };
 
 #endif // ITEMMANAGER_H

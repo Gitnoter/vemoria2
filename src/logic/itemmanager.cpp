@@ -10,9 +10,10 @@
 #include <QFileInfo>
 #include <QDateTime>
 
-ItemManager::ItemManager()
-{
 
+ItemManager::ItemManager(UiServices *newUiservices)
+{
+    this->uiservices = newUiservices;
 }
 
 void ItemManager::getItemDetails(QString const & /*itemname*/) const

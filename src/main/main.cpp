@@ -12,6 +12,8 @@
 
 #include <QApplication>
 #include "gui/mainwindow.h"
+#include "itemmanager.h"
+#include "uiservices.h"
 
 /// The usual program entry.
 /// The main function is as short as possible, as we cannot easily test in in a unit test.
@@ -21,8 +23,12 @@ int main(int argc, char *argv[])
     ///\todo We should parse the command line arguments here.
     QApplication app(argc, argv);
 
+
+    UiServices* uiservices = new UiServices();
+    ItemManager* itemmanager = new ItemManager(uiservices);
     MainWindow mainwindow;
     mainwindow.showMaximized();
+    (void) itemmanager;
 
     return app.exec();
 }
