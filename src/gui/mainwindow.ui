@@ -17,7 +17,11 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Vemoria</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="resource.qrc">
+    <normaloff>:/icons/icons/VEM.png</normaloff>:/icons/icons/VEM.png</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">QMainWindow{
@@ -1124,7 +1128,7 @@ QGroupBox{
        border-top:1px solid #e3e3e3;
 }</string>
         </property>
-        <layout class="QGridLayout" name="gridLayout_10" rowstretch="0,0,0,0,0" columnstretch="0">
+        <layout class="QGridLayout" name="gridLayout_10" rowstretch="0,0,0" columnstretch="0">
          <property name="leftMargin">
           <number>0</number>
          </property>
@@ -1368,39 +1372,19 @@ border-bottom:1px solid #e3e3e3;
            </layout>
           </widget>
          </item>
-         <item row="4" column="0">
+         <item row="2" column="0">
           <widget class="QGroupBox" name="groupBox_10">
            <property name="title">
             <string/>
            </property>
           </widget>
          </item>
-         <item row="2" column="0">
-          <widget class="QLabel" name="label_9">
-           <property name="text">
-            <string>quick brown fox jumps over the lazy dogs</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="0">
-          <widget class="QLabel" name="label_11">
-           <property name="text">
-            <string/>
-           </property>
-           <property name="pixmap">
-            <pixmap>:/new/prefix1/12122947_1027131440672810_7175649518355430536_n.jpg</pixmap>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="0">
+         <item row="1" column="0">
           <widget class="QPushButton" name="pushButton_2">
            <property name="text">
             <string>test open detail</string>
            </property>
           </widget>
-         </item>
-         <item row="1" column="0">
-          <layout class="QGridLayout" name="gridLayout_21"/>
          </item>
         </layout>
        </widget>
@@ -1526,13 +1510,16 @@ font-family: 'Source Sans Pro';
                     <bool>false</bool>
                    </property>
                    <layout class="QGridLayout" name="gridLayout_19">
+                    <property name="leftMargin">
+                     <number>15</number>
+                    </property>
                     <item row="0" column="0">
                      <layout class="QFormLayout" name="formClose">
                       <property name="labelAlignment">
-                       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                       <set>Qt::AlignCenter</set>
                       </property>
                       <property name="formAlignment">
-                       <set>Qt::AlignRight|Qt::AlignTop|Qt::AlignTrailing</set>
+                       <set>Qt::AlignHCenter|Qt::AlignTop</set>
                       </property>
                       <property name="horizontalSpacing">
                        <number>0</number>
@@ -1540,41 +1527,27 @@ font-family: 'Source Sans Pro';
                       <property name="verticalSpacing">
                        <number>0</number>
                       </property>
-                      <item row="0" column="1">
-                       <widget class="QPushButton" name="pushButton">
+                      <item row="0" column="0" colspan="2">
+                       <widget class="QPushButton" name="pushButton_3">
                         <property name="minimumSize">
                          <size>
-                          <width>18</width>
-                          <height>17</height>
+                          <width>0</width>
+                          <height>30</height>
                          </size>
                         </property>
                         <property name="maximumSize">
                          <size>
-                          <width>18</width>
-                          <height>17</height>
+                          <width>150</width>
+                          <height>100</height>
                          </size>
                         </property>
-                        <property name="cursor">
-                         <cursorShape>PointingHandCursor</cursorShape>
-                        </property>
-                        <property name="toolTip">
-                         <string>Close</string>
+                        <property name="styleSheet">
+                         <string notr="true">color:white;
+background-color:#f33f58;
+border:1px solid #e8293f;</string>
                         </property>
                         <property name="text">
-                         <string/>
-                        </property>
-                        <property name="icon">
-                         <iconset resource="resource.qrc">
-                          <normaloff>:/icons/icons/close-icon.png</normaloff>:/icons/icons/close-icon.png</iconset>
-                        </property>
-                        <property name="iconSize">
-                         <size>
-                          <width>18</width>
-                          <height>17</height>
-                         </size>
-                        </property>
-                        <property name="flat">
-                         <bool>true</bool>
+                         <string>CLOSE</string>
                         </property>
                        </widget>
                       </item>
