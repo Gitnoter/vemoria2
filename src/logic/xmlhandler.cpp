@@ -1,11 +1,13 @@
-////////////////////////////////////////////////////////////////////////
-/// Project Vemoria                                                    /
-///                                                                    /
-/// Vemoria aims to be an environment for archiving multimedia files.  /
-///                                                                    /
-///                                                                    /
-/// This project is licensed under the EUPL v.1.1 or a later version.  /
-////////////////////////////////////////////////////////////////////////
+/// \file
+/// \brief	Vemoria XML-Handler base class header file
+/// \ingroup	g_logic
+//----------------------------------------------------------------------
+// This file is part of the Vemoria project.
+// Vemoria aims to be an environment for archiving multimedia files.
+//
+// This file is licensed under the EUPL v.1.1 or a later version.
+//----------------------------------------------------------------------
+
 #include "xmlhandler.h"
 
 XMLHandler::XMLHandler()
