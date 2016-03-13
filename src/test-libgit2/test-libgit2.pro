@@ -19,8 +19,8 @@ TEMPLATE = app
 
 }
 
-DEFINES += CLAR_FIXTURE_PATH=\\\"../libgit2/tests/resources\\\" \
-        CLAR_RESOURCES=\\\"../libgit2/tests/resources\\\" \
+DEFINES += CLAR_FIXTURE_PATH=\\\"$$_PRO_FILE_PWD_/../libgit2/tests/resources\\\" \
+        CLAR_RESOURCES=\\\"$$_PRO_FILE_PWD_/../libgit2/tests/resources\\\" \
         CLAR_TMPDIR=\\\"libgit2_tests\\\"
 
 INCLUDEPATH += \
