@@ -15,6 +15,7 @@ SUBDIRS = main \
 	repository \
 	unittest \
 	libgit2 \
+        test-libgit2 \
 	libqgit2 \
 	test-libqgit2 \
 
