@@ -1,17 +1,37 @@
-////////////////////////////////////////////////////////////////////////
-/// Project Vemoria                                                    /
-///                                                                    /
-/// Vemoria aims to be an environment for archiving multimedia files.  /
-///                                                                    /
-///                                                                    /
-/// This project is licensed under the EUPL v.1.1 or a later version.  /
-////////////////////////////////////////////////////////////////////////
+/// \file
+/// \brief	Vemoria collectionmanager cpp file
+/// \ingroup	g_repository
+//----------------------------------------------------------------------
+// This file is part of the Vemoria project.
+// Vemoria aims to be an environment for archiving multimedia files.
+//
+// This file is licensed under the EUPL v.1.1 or a later version.
+//----------------------------------------------------------------------
+
 #include "collectionmanager.h"
 #include "qgit2.h"
+#include "qgit2/qgitsignature.h"
 #include <QDir>
 #include <QTextStream>
 #include <QDateTime>
+#include "vemoria-config.h"
 
+
+
+#include "qgit2/qgitindex.h"
+#include "qgit2/qgitrebase.h"
+#include "qgit2/qgitremote.h"
+#include "qgit2/qgitrepository.h"
+#include "qgit2/qgitrevwalk.h"
+#include "qgit2/qgitdiff.h"
+#include "qgit2/qgitdiffdelta.h"
+#include "qgit2/qgittree.h"
+
+#include <QFile>
+#include <QFileInfo>
+#include <QPointer>
+
+using namespace LibQGit2;
 
 CollectionManager::CollectionManager()
 {
@@ -20,7 +40,7 @@ CollectionManager::CollectionManager()
     /// Collections are available.
     ///
 
-    repo = new LibQGit2::Repository();
+
 }
 
 CollectionManager::~CollectionManager()
@@ -38,17 +58,14 @@ bool CollectionManager::createCollection(QString collectionName)
     ///
     /// \brief new collection with xml-file in the collection folder
     ///
-
-    QString date = QDateTime::currentDateTime().toString();
-    QString vemoriaVersion = "1.0";
-
-
         if(!QDir(collectionName).exists())
         {
+            QString date = QDateTime::currentDateTime().toString();
+            QString vemoriaVersion = VEMORIA_VERSION;
             QDir directory;
             directory.mkdir(collectionName);
             QFile file;
-            file.setFileName(collectionName + "/" + collectionName + ".xml");
+            file.setFileName(collectionName + "/." + collectionName + ".xml");
             file.open(QIODevice::ReadWrite | QIODevice::Text);
             QTextStream stream(&file);
             stream<<"<?xml version=\"1.0\" encoding=\"UTF-8\" ?>"<<endl;
@@ -59,11 +76,33 @@ bool CollectionManager::createCollection(QString collectionName)
             stream<<"</notes>"<<endl;
             file.close();
 
+            ///
+            ///\todo replace this by appropriate function calls
+            ///
+            #ifdef _WIN32
+                QByteArray ba = collectionName.toLatin1();
+                system("attrib +h " + ba + "\\." + ba + ".xml");
+            #endif
+
         }
         else return false;
+    ///
+    /// \todo gui has to check if return is false or true to give information to the user
+    ///
 
         try {
+            LibQGit2::initLibQGit2();
+            repo = new LibQGit2::Repository();
             repo->init(collectionName,false);
+
+
+
+
+
+
+
+
+
 
 
         }

@@ -24,3 +24,7 @@ HEADERS  += \
 FORMS += \
     mainwindow.ui \
     popupcollection.ui \
+
+RESOURCES += \
+    resource.qrc
+

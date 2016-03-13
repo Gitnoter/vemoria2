@@ -1,0 +1,71 @@
+//-------------------------------------------------------------------------
+// This file is part of the Vemoria project.
+// Vemoria aims to be an environment for archiving multimedia files.
+//
+// This file is licensed under the EUPL v.1.1 or a later version.
+//-------------------------------------------------------------------------
+
+//-------------------------------------------------------------------------
+// This file contains doxygen module definitions.
+// Source files may add themselves to modules with `\ingroup'
+//-------------------------------------------------------------------------
+
+/**
+\defgroup g_main Application startup (src/main)
+\defgroup g_gui The GUI parts (src/gui)
+\defgroup g_logic The application logic (src/logic)
+\defgroup g_repository The repository interfaces (src/repository)
+
+
+\addtogroup g_main
+Not much in here - just the minimal equipment to start life.
+Kept small and simple, as it's hard to create automated unit tests for the stuff
+in main() (due to duplicated main() functions, you know ... makes linker's life very
+hard).
+The files are located in \ref src/main.
+
+\dir src/main
+Contains the application main function - could you have guessed that? See \ref g_main.
+
+
+\addtogroup g_gui
+The graphical user interface layer elements.
+The user interface is designed with Qt Creator (builtin designer).
+
+This layer should be as "small" as possible, i.e. most of the application logic should
+reside in \ref g_logic so that it's easier to create (automated) unit tests
+(which are hard to develop for GUI).
+
+The files are located in \ref src/gui.
+
+\dir src/gui
+Contains the GUI elements which are based on Qt. See \ref g_gui.
+
+
+\addtogroup g_logic
+The real application logic.
+
+It's separated both from \ref g_main and \ref g_gui to allow creation of automated
+unit tests.
+
+The files are located in \ref src/logic.
+
+\dir src/logic
+Contains the applications "business logic". See \ref g_logic.
+
+
+\addtogroup g_repository
+Provides the real archive.
+
+We use git as underlying archive (see \ref p_libqgit2), but the gory details are hidden
+by this layer. So if at some time there would be a better solution than git, we just
+have to change the implementation of this layer and the rest of the application is not
+involved. The \ref g_logic layer heavily uses this layer.
+
+The files are located in \ref src/repository.
+
+\dir src/repository
+Contains the repository (archive) interface. See \ref g_repository.
+
+*/
+// vim: syntax=c++.doxygen sw=2

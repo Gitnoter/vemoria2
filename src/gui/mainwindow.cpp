@@ -9,7 +9,11 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "../version.h"
+
+#include <QDebug> //currently here for debugging purposes, obviously
+
 #include "popupcollection.h"
+#include "QFontDatabase"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -17,12 +21,19 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    QPixmap pix13 ("/Users/Dennis/Desktop/pic/pic2.jpg");
-    ui->previewPic->setPixmap( pix13.scaled ( 300, 120, Qt::IgnoreAspectRatio, Qt::FastTransformation ));
+//    QPixmap pix13 ("/Users/Dennis/Desktop/pic/pic2.jpg");
+//    ui->previewPic->setPixmap( pix13.scaled ( 300, 120, Qt::IgnoreAspectRatio, Qt::FastTransformation ));
 
 
-    ui->userLabel2->show();
     ui->gridDetail->hide();
+
+    //RESOURCE SYSTEM TEST
+
+    //    QDir dir(":/");
+    //    qDebug() << dir.entryList();
+    //    ui->label_12->setText( dir.entryList());
+    //    ui->label_12->setPixmap(pixmap);
+
 }
 
 MainWindow::~MainWindow()
@@ -30,11 +41,19 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::add_Font(){
+
+    QFontDatabase database;
+    database.addApplicationFont(":/new/fonts/SourceSansPro-Regular.tff");
+
+    QFont f = database.font("myFont", "normal", 12);
+    ui->label_9->setFont(f);
+
+}
 
 void MainWindow::on_pushButton_2_clicked()
 {
-    ui->userLabel2->hide();
-    ui->gridDetail->show();
+      ui->gridDetail->show();
 }
 
 void MainWindow::on_actionNew_Collection_triggered()
@@ -42,5 +61,19 @@ void MainWindow::on_actionNew_Collection_triggered()
       popupCollection popwindows;
       popwindows.setModal(true);
       popwindows.exec();
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+    ui->gridDetail->close();
+}
+
+void MainWindow::on_deleteBtn_clicked()
+{
+
+}
+
+void MainWindow::on_saveBtn_clicked()
+{
 
 }
