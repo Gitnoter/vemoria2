@@ -25,3 +25,4 @@ OTHER_FILES = \
 main.depends          = libgit2 libqgit2 repository logic gui
 unittest.depends      = libgit2 libqgit2 repository logic
 test-libqgit2.depends = libgit2 libqgit2
+test-libgit2.depends  = libgit2
