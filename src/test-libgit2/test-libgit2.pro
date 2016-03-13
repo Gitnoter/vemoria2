@@ -26,6 +26,7 @@ DEFINES += CLAR_FIXTURE_PATH=\\\"../libgit2/tests/resources\\\" \
 INCLUDEPATH += \
   ../libgit2/include \
   ../libgit2/src \
+  ../libgit2/deps/zlib \
   ../libgit2/tests \
 
 win32-g++ {
