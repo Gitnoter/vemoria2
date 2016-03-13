@@ -19,6 +19,10 @@ TEMPLATE = app
 
 }
 
+contains(QT_ARCH, .*64.*) {
+    DEFINES += GIT_ARCH_64
+}
+
 DEFINES += CLAR_FIXTURE_PATH=\\\"$$_PRO_FILE_PWD_/../libgit2/tests/resources\\\" \
         CLAR_RESOURCES=\\\"$$_PRO_FILE_PWD_/../libgit2/tests/resources\\\" \
         CLAR_TMPDIR=\\\"libgit2_tests\\\"

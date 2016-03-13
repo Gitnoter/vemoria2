@@ -15,6 +15,9 @@ INCLUDEPATH += \
   deps/zlib \
   deps/http-parser \
 
+contains(QT_ARCH, .*64.*) {
+    DEFINES += GIT_ARCH_64
+}
 DEFINES += STDC
 
 # Currently qmake (version 3.0) does not remove a library
