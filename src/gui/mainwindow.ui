@@ -1141,20 +1141,6 @@ QGroupBox{
          <property name="spacing">
           <number>0</number>
          </property>
-         <item row="2" column="0">
-          <widget class="QPushButton" name="pushButton_2">
-           <property name="text">
-            <string>test open detail</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="0">
-          <widget class="QGroupBox" name="groupBox_10">
-           <property name="title">
-            <string/>
-           </property>
-          </widget>
-         </item>
          <item row="0" column="0" alignment="Qt::AlignTop">
           <widget class="QWidget" name="horizontalWidget" native="true">
            <property name="sizePolicy">
@@ -1383,6 +1369,13 @@ border-bottom:1px solid #e3e3e3;
            </layout>
           </widget>
          </item>
+         <item row="2" column="0">
+          <widget class="QPushButton" name="pushButton_2">
+           <property name="text">
+            <string>test open detail</string>
+           </property>
+          </widget>
+         </item>
          <item row="1" column="0">
           <widget class="QLabel" name="label_9">
            <property name="text">
@@ -1396,8 +1389,41 @@ border-bottom:1px solid #e3e3e3;
             <string/>
            </property>
            <property name="pixmap">
-            <pixmap resource="resource.qrc">:/new/prefix1/12122947_1027131440672810_7175649518355430536_n.jpg</pixmap>
+            <pixmap>:/new/prefix1/12122947_1027131440672810_7175649518355430536_n.jpg</pixmap>
            </property>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <widget class="QGroupBox" name="groupBox_10">
+           <property name="title">
+            <string/>
+           </property>
+           <widget class="QPushButton" name="pushButton_3">
+            <property name="geometry">
+             <rect>
+              <x>70</x>
+              <y>70</y>
+              <width>75</width>
+              <height>23</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>openwith</string>
+            </property>
+           </widget>
+           <widget class="QPushButton" name="pushButton_4">
+            <property name="geometry">
+             <rect>
+              <x>330</x>
+              <y>70</y>
+              <width>75</width>
+              <height>23</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>delete</string>
+            </property>
+           </widget>
           </widget>
          </item>
         </layout>
@@ -1783,8 +1809,6 @@ border-radius: 4px;
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources>
-  <include location="resource.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

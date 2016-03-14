@@ -9,11 +9,15 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "../version.h"
-
 #include <QDebug> //currently here for debugging purposes, obviously
-
 #include "popupcollection.h"
 #include "QFontDatabase"
+#include <QDesktopServices>
+#include <QUrl>
+#include <QFile>
+#include <QFileDialog>
+#include <QMessageBox>
+#include "qtguiservices.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -76,4 +80,25 @@ void MainWindow::on_deleteBtn_clicked()
 void MainWindow::on_saveBtn_clicked()
 {
 
+}
+
+
+void MainWindow::on_pushButton_3_clicked()
+{
+
+    QtGuiServices guiServices;
+    guiServices.openURL();
+
+    QString filename = QFileDialog::getOpenFileName(
+                this,
+                tr("Open File"), //tr ist der Fenstername
+                   "C://",
+                   "All files (*.*);;Text File (*.txt);;Music file(*.mp3)" //*.* bedeutet alle Files,
+                   );
+    QDesktopServices::openUrl(QUrl("file:///"+filename,QUrl::TolerantMode));
+}
+
+void MainWindow::on_pushButton_4_clicked()
+{
+        QFile::remove("C:/Users/Sulfi/Desktop/QTremove/bla.txt");
 }
