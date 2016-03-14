@@ -14,3 +14,8 @@ void UiServices::openURL()
 {
 
 }
+
+void UiServices::deleteURL()
+{
+
+}

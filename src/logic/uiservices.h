@@ -18,6 +18,7 @@ public:
     UiServices();
     virtual ~UiServices();
     virtual void openURL();
+    virtual void deleteURL();
 };
 
 #endif // UISERVICES_H

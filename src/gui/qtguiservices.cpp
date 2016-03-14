@@ -10,6 +10,7 @@ QtGuiServices::QtGuiServices()
 {
 
 }
+
 void QtGuiServices::openURL(MainWindow *window, QUrl path)
 {
 
@@ -23,4 +24,9 @@ void QtGuiServices::openURL(MainWindow *window, QUrl path)
 
     path.clear(); //temp
 
+}
+
+void QtGuiServices::deleteURL(QUrl path)
+{
+    path.clear();
 }
