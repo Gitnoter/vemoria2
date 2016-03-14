@@ -7,7 +7,8 @@
 //
 // This file is licensed under the EUPL v.1.1 or a later version.
 //----------------------------------------------------------------------
-
+#include "gui/mainwindow.h"
+#include <QUrl>
 
 
 #ifndef QTGUISERVICES_H
@@ -19,7 +20,7 @@ class QtGuiServices : public UiServices
 {
 public:
     QtGuiServices();
-    void openURL();
+    void openURL(MainWindow *window, QUrl path);
 };
 
 

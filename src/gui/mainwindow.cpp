@@ -87,15 +87,15 @@ void MainWindow::on_pushButton_3_clicked()
 {
 
     QtGuiServices guiServices;
-    guiServices.openURL();
+    guiServices.openURL(this, QUrl("",QUrl::TolerantMode));
 
-    QString filename = QFileDialog::getOpenFileName(
-                this,
-                tr("Open File"), //tr ist der Fenstername
-                   "C://",
-                   "All files (*.*);;Text File (*.txt);;Music file(*.mp3)" //*.* bedeutet alle Files,
-                   );
-    QDesktopServices::openUrl(QUrl("file:///"+filename,QUrl::TolerantMode));
+//    QString filename = QFileDialog::getOpenFileName(
+//                this,
+//                tr("Open File"), //tr ist der Fenstername
+//                   "C://",
+//                   "All files (*.*);;Text File (*.txt);;Music file(*.mp3)" //*.* bedeutet alle Files,
+//                   );
+//    QDesktopServices::openUrl(QUrl("file:///"+filename,QUrl::TolerantMode));
 }
 
 void MainWindow::on_pushButton_4_clicked()
