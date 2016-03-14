@@ -40,8 +40,16 @@ private slots:
 
     void addTags();
 
+    void on_addButton_clicked();
+
+
 private:
     Ui::MainWindow *ui;
+    bool trigger;
+
+protected:
+ void resizeEvent(QResizeEvent *e);
+
 };
 
 #endif // MAINWINDOW_H

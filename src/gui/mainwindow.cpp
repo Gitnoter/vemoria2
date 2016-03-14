@@ -13,6 +13,8 @@
 #include "popupcollection.h"
 #include "QMessageBox"
 #include <QTextEdit>
+#include <QApplication>
+#include <QDesktopWidget>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -21,9 +23,25 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     ui->gridDetail->hide();
 
+    trigger = false;
+
     addTags();
 
 }
+
+void MainWindow::resizeEvent(QResizeEvent*)
+ {
+        QSize windowSize;
+        windowSize = size();
+
+        int y  = 0;
+        y = windowSize.height();
+        int size = y - 150;
+
+        ui->scrollArea->resize(298, size);
+
+        qApp->processEvents();
+ }
 
 MainWindow::~MainWindow()
 {
@@ -52,18 +70,44 @@ void MainWindow::addTags(){
     QTextEdit *lineedit3 = new QTextEdit();
     lineedit3->setPlaceholderText("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut");
 
+    QTextEdit *lineedit4 = new QTextEdit();
+    lineedit4->setPlaceholderText("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut");
+
+    QTextEdit *lineedit5 = new QTextEdit();
+    lineedit5->setPlaceholderText("lassst ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut ");
+
     ui->formLayout_2->addWidget(label);
     ui->formLayout_2->addWidget(lineedit);
     ui->formLayout_2->addWidget(label2);
     ui->formLayout_2->addWidget(lineedit2);
     ui->formLayout_2->addWidget(label3);
     ui->formLayout_2->addWidget(lineedit3);
-
+    ui->formLayout_2->addWidget(lineedit4);
+    ui->formLayout_2->addWidget(lineedit5);
 }
 
 void MainWindow::on_pushButton_2_clicked()
 {
-      ui->gridDetail->show();
+        ui->gridDetail->show();
+
+        //not the best solution....
+        if(trigger == false){
+
+        const int width = QApplication::desktop()->width();
+
+        QSize windowSize;
+        windowSize = size();
+
+        int y  = 0;
+        y = windowSize.height();
+
+        //trigger the resize event to expand the scrollarea
+        resize(width,  y - 1);
+        resize(width,  y + 1);
+
+        trigger = true;
+        }
+
 }
 
 void MainWindow::on_actionNew_Collection_triggered()
@@ -88,6 +132,7 @@ void MainWindow::on_actionInfo_triggered()
          QMessageBox msgBox;
          QPixmap pix (":/icons/icons/VEM.png");
          msgBox.setWindowIcon(pix);
+         msgBox.setWindowTitle("Vemoria");
          msgBox.setTextFormat(Qt::RichText);
          msgBox.setText(
                         "\nThe License of this Sotware is EUPL V. 1.1.<br><br>"
@@ -101,4 +146,10 @@ void MainWindow::on_actionInfo_triggered()
 void MainWindow::on_pushButton_3_clicked()
 {
     ui->gridDetail->hide();
+}
+
+
+void MainWindow::on_addButton_clicked()
+{
+
 }
