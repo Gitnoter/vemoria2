@@ -93,6 +93,5 @@ void MainWindow::on_pushButton_3_clicked()
 void MainWindow::on_pushButton_4_clicked()
 {
     QtGuiServices guiServices;
-    guiServices.deleteURL(QUrl("",QUrl::TolerantMode));
-    //QFile::remove("C:/Users/Sulfi/Desktop/QTremove/bla.txt");
+    guiServices.deleteURL(QUrl("C:/Users/Sulfi/Desktop/QTremove/test.txt",QUrl::TolerantMode));
 }

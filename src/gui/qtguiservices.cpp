@@ -28,5 +28,6 @@ void QtGuiServices::openURL(MainWindow *window, QUrl path)
 
 void QtGuiServices::deleteURL(QUrl path)
 {
-    path.clear();
+    qDebug() << path.toString() << endl;
+    QFile::remove(path.toString());
 }
