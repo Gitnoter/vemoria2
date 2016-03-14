@@ -11,17 +11,26 @@ TEMPLATE = app
     # sources are not prepared to fullfill all initializations
     # Some flags just taken from the original CMakeLists.txt settings
     QMAKE_CFLAGS += \
+        -Wall \
+        -Wextra \
         -Wno-missing-field-initializers \
         -Wno-unused-function \
         -Wno-parentheses \
         -Wno-unused-parameter \
         -Wno-implicit-function-declaration \
+        -Wno-unused-result \
 
+    DEFINES += _GNU_SOURCE
 }
 
 contains(QT_ARCH, .*64.*) {
     DEFINES += GIT_ARCH_64
+} else {
+    DEFINES += GIT_ARCH_32
 }
+
+DEFINES += STDC
+DEFINES += _FILE_OFFSET_BITS=64
 
 DEFINES += CLAR_FIXTURE_PATH=\\\"$$_PRO_FILE_PWD_/../libgit2/tests/resources\\\" \
         CLAR_RESOURCES=\\\"$$_PRO_FILE_PWD_/../libgit2/tests/resources\\\" \
@@ -34,6 +43,9 @@ INCLUDEPATH += \
   ../libgit2/tests \
 
 win32-g++ {
+  DEFINES += WIN32
+  DEFINES += _WIN32_WINNT=0x0501
+
   INCLUDEPATH += \
     ../libgit2/deps/regex \
 }

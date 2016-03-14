@@ -17,8 +17,12 @@ INCLUDEPATH += \
 
 contains(QT_ARCH, .*64.*) {
     DEFINES += GIT_ARCH_64
+} else {
+    DEFINES += GIT_ARCH_32
 }
+
 DEFINES += STDC
+DEFINES += _FILE_OFFSET_BITS=64
 
 # Currently qmake (version 3.0) does not remove a library
 # target if the destination directory is not the build directory,
@@ -33,15 +37,22 @@ QMAKE_DISTCLEAN += $${DESTDIR}/$${QMAKE_PREFIX_STATICLIB}$${TARGET}.$${QMAKE_EXT
     # Some flags just taken from the original CMakeLists.txt settings
     QMAKE_CFLAGS += \
         -Wno-missing-field-initializers \
+        -Wstrict-aliasing=2 \
+        -Wstrict-prototypes \
+        -Wdeclaration-after-statement \
+        -Wno-unused-const-variable \
         -Wno-unused-function \
         -Wno-parentheses \
         -Wno-unused-parameter \
         -Wno-implicit-function-declaration \
 
+    DEFINES += _GNU_SOURCE
 }
 
 win32-g++ {
-#  DEFINES += _GNU_SOURCE
+  DEFINES += WIN32
+  DEFINES += _WIN32_WINNT=0x0501
+
 
   INCLUDEPATH += \
     deps/regex \
