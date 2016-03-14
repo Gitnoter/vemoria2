@@ -14,16 +14,21 @@ SOURCES += \
     popupcollection.cpp \
     undefinedgui_1.cpp \
     undefinedgui_2.cpp \
+    copydialog.cpp \
+    timer.cpp
 
 HEADERS  += \
     mainwindow.h \
     popupcollection.h \
     undefinedgui_1.h \
     undefinedgui_2.h \
+    copydialog.h \
+    timer.h
 
 FORMS += \
     mainwindow.ui \
     popupcollection.ui \
+    copydialog.ui
 
 RESOURCES += \
     resource.qrc

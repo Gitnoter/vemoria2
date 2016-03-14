@@ -15,6 +15,7 @@
 #include <QTextEdit>
 #include <QApplication>
 #include <QDesktopWidget>
+#include <copydialog.h>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -24,9 +25,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->gridDetail->hide();
 
     trigger = false;
-
     addTags();
-
 }
 
 void MainWindow::resizeEvent(QResizeEvent*)
@@ -107,7 +106,6 @@ void MainWindow::on_pushButton_2_clicked()
 
         trigger = true;
         }
-
 }
 
 void MainWindow::on_actionNew_Collection_triggered()
@@ -151,5 +149,7 @@ void MainWindow::on_pushButton_3_clicked()
 
 void MainWindow::on_addButton_clicked()
 {
-
+    copyDialog cpyDialog;
+    cpyDialog.setModal(true);
+    cpyDialog.exec();
 }

@@ -1,0 +1,34 @@
+#ifndef COPYDIALOG_H
+#define COPYDIALOG_H
+
+#include <QDialog>
+
+namespace Ui {
+class copyDialog;
+}
+
+class copyDialog : public QDialog
+{
+    Q_OBJECT
+
+public:
+    explicit copyDialog(QWidget *parent = 0);
+    ~copyDialog();
+
+private slots:
+    void on_pushButton_clicked();
+
+private:
+    Ui::copyDialog *ui;
+
+    quint64 calculateDataRate(quint64 size);
+    void showDataRate(quint64 currentByte);
+    bool copyDir(QString sourcePath, QString targetPath, quint64 size);
+    quint64 dir_size(QString path);
+    quint64 file_size(QString path);
+    quint64 stackSize;
+    int itemsCounter;
+
+};
+
+#endif // COPYDIALOG_H

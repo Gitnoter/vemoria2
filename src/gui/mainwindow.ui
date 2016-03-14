@@ -1128,7 +1128,7 @@ QGroupBox{
        border-top:1px solid #e3e3e3;
 }</string>
         </property>
-        <layout class="QGridLayout" name="gridLayout_10" rowstretch="0,0,0" columnstretch="0">
+        <layout class="QGridLayout" name="gridLayout_10" rowstretch="0,0" columnstretch="0">
          <property name="leftMargin">
           <number>0</number>
          </property>
@@ -1144,13 +1144,6 @@ QGroupBox{
          <property name="spacing">
           <number>0</number>
          </property>
-         <item row="2" column="0">
-          <widget class="QGroupBox" name="groupBox_10">
-           <property name="title">
-            <string/>
-           </property>
-          </widget>
-         </item>
          <item row="0" column="0" alignment="Qt::AlignTop">
           <widget class="QWidget" name="horizontalWidget" native="true">
            <property name="sizePolicy">
@@ -1595,7 +1588,7 @@ border:1px solid #e8293f;</string>
                    <property name="maximumSize">
                     <size>
                      <width>298</width>
-                     <height>16777215</height>
+                     <height>2000</height>
                     </size>
                    </property>
                    <property name="styleSheet">
