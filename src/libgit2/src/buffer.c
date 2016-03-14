@@ -318,7 +318,13 @@ int git_buf_encode_base85(git_buf *buf, const char *data, size_t len)
 int git_buf_vprintf(git_buf *buf, const char *format, va_list ap)
 {
 	int len;
-	const size_t expected_size = buf->size + (strlen(format) * 2);
+    /// \todo The computation of expected_size seems suspicious - it takes the length of
+    /// the format while size is required for the *values*. On Linux it seems to be
+    /// sufficient by luck, while MINGW32 returns len=-1 for vsnprintf if the expanded
+    /// string just has 16 bytes + \0 when 16 bytes are available (should be sufficient,
+    /// but ....) - seen for "core.repository". Or Linux returns "15" while MINGW returns -1?
+    const size_t fixme_additional_space = 16; ///\todo FIXME Workaround VEM-120
+    const size_t expected_size = buf->size + (strlen(format) * 2) + fixme_additional_space; ///\todo FIXME
 
 	ENSURE_SIZE(buf, expected_size);
 
