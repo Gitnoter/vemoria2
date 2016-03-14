@@ -1,3 +1,13 @@
+/// \file
+/// \brief	Vemoria popupcollection cpp file
+/// \ingroup	gui
+//----------------------------------------------------------------------
+// This file is part of the Vemoria project.
+// Vemoria aims to be an environment for archiving multimedia files.
+//
+// This file is licensed under the EUPL v.1.1 or a later version.
+//----------------------------------------------------------------------
+
 #include "popupcollection.h"
 #include "ui_popupcollection.h"
 #include "repository/collectionmanager.h"

@@ -10,26 +10,55 @@
 
 #ifndef AUDIO_H
 #define AUDIO_H
-
+#include <QVector>
 #include "logic/item.h"
 
-/// \class
-/// Metadata of audio items.
-class Audio: public Item
+/*! \brief Audio Class.
+ *         .
+ *
+ *  Containing the Metadata and Tags for a specific audio item.
+ */
+ class Audio: public Item
 {
   public:
     // Default constructors will do.
     virtual ~Audio();
 
-    /// \todo add setters and getters here
+
+    QVector<QString> getInterpreter() const { return interpreter; }
+    void setInterpreter(const QVector<QString> & value) { interpreter=value; }
+
+    QString getPublicationdate() const { return publicationdate; }
+    void setPublicationdate(const QString & value) { publicationdate=value; }
+
+    QString getLength() const { return length; }
+    void setLength(const QString & value) { length=value; }
+
+    QString getAlbum() const { return album; }
+    void setAlbum(const QString & value) { album=value; }
+
+    QVector<QString> getGenre() const { return genre; }
+    void setGenre(const QVector<QString> & value) { genre=value; }
+
+    int getTitlenumber() const { return titlenumber; }
+    void setTitlenumber(const int & value) { titlenumber=value; }
+
+    QString getDescription() const { return description; }
+    void setDescription(const QString & value) { description=value; }
+
+    QString getLicense() const { return license; }
+    void setLicense(const QString & value) { license=value; }
+
+    QString getRecordlabel() const { return recordlabel; }
+    void setRecordlabel(const QString & value) { recordlabel=value; }
 
   private:
-    QString interpreter[];	///< \todo use QArray or similar
-    QString publicationdate;	///< \todo add more documentation
+    QVector<QString> interpreter;
+    QString publicationdate;	
     QString length;
     QString album;
-    QString genre[];
-    QString titlenumber;
+    QVector<QString> genre;
+    int titlenumber;
     QString description;
     QString license;
     QString recordlabel;
