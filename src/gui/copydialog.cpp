@@ -22,8 +22,8 @@ copyDialog::~copyDialog()
 }
 
 void copyDialog::setData(const QString &labelText){
-    ui->pathLabel->setText("Collection selected: ");
-    path = labelText;
+    ui->pathLabel->setText("Collection selected: " + labelText + "/");
+    path = labelText + "/";
 }
 
 void copyDialog::on_pushButton_clicked()
@@ -51,6 +51,7 @@ void copyDialog::on_pushButton_clicked()
         ui->progressBar->setValue(100);
         ui->speedLabel->setText("Data rate: 0 kb/s");
         QMessageBox::information(this, tr("File Name"), dirName);
+        this->close();
     }
 }
 

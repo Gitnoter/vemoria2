@@ -16,10 +16,16 @@ public:
     explicit selectCollection(QWidget *parent = 0);
     ~selectCollection();
 
+private slots:
+    void on_pushButton_clicked();
+
+    void on_listView_clicked(const QModelIndex &index);
+
 private:
     Ui::selectCollection *ui;
     QFileSystemModel *dirModel;
     QFileSystemModel *fileModel;
+    QString selectedPath;
 };
 
 #endif // SELECTCOLLECTION_H
