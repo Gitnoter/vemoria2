@@ -97,7 +97,7 @@ void CollectionManager::deleteCollection()
 void CollectionManager::create(QString& collectionName)
 {
     ///
-    /// \todo initial commit doesnt work :(
+    /// \todo initial commit doesnt work under windoof
     ///
 
     int error = 0;
@@ -106,6 +106,13 @@ void CollectionManager::create(QString& collectionName)
     git_repository *repo = NULL;
     /* With working directory: */
     git_repository_init(&repo, collectionName.toUtf8().constData(), false);
+
+
+    git_index *idx = NULL;
+    git_repository_index(&idx, repo);
+
+    git_index_update_all(idx, NULL, NULL, NULL);
+    git_index_write(idx);
 
     git_signature *me = NULL;
     git_signature_now(&me, "Tobi", "inf@hs-worms.de");
@@ -135,6 +142,11 @@ void CollectionManager::create(QString& collectionName)
 
 
     git_libgit2_shutdown();
+
+#ifdef _WIN32
+    system("git add -A");
+    system("git commit -m \"Initial commit\"");
+#endif
 }
 
 
