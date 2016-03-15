@@ -24,7 +24,11 @@ selectCollection::selectCollection(QWidget *parent) :
 
         ui->listView->setModel(fileModel);
 
-        ui->listView->setRootIndex(fileModel->setRootPath("C:/Vemoria"));
+       // if(!QDir(directory.path() + "/.vemoria").exists()){
+                    QDir directory = QDir::home();
+                    QString path = directory.path() + "/.vemoria";
+                    ui->listView->setRootIndex(fileModel->setRootPath(path));
+       // }
 }
 
 selectCollection::~selectCollection()
