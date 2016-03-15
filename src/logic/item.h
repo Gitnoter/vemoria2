@@ -12,6 +12,7 @@
 #define ITEM_H
 
 #include <QString>
+#include <QFile>
 
 /// \class
 /// The base class of all items.
@@ -27,7 +28,7 @@
  *  Containing the Metadata and Tags generic for any item.
  */
  
-class Item
+class Item: public QFile
 {
   public:
     // Default constructors will do.
