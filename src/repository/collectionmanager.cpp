@@ -13,10 +13,10 @@
 #include <QDir>
 #include <QTextStream>
 #include <QDateTime>
+
+
+#include <QDebug>
 #include "vemoria-config.h"
-
-
-
 #include <QFile>
 #include <QFileInfo>
 #include <QPointer>
@@ -55,10 +55,21 @@ bool CollectionManager::createCollection(QString collectionName)
         {
             QString date = QDateTime::currentDateTime().toString();
             QString vemoriaVersion = VEMORIA_VERSION;
-            QDir directory;
-            directory.mkdir(collectionName);
+            QDir directory = QDir::home();
+            if(!QDir(directory.path() + "/.vemoria").exists())
+                directory.mkdir(".vemoria");
+
+
+            directory.mkdir(".vemoria/"+ collectionName);
+
+
+
+
+
+
             QFile file;
-            file.setFileName(collectionName + "/." + collectionName + ".xml");
+            file.setFileName(directory.path()+ "/" + ".vemoria/" + collectionName + "/." + collectionName + ".xml");
+
             file.open(QIODevice::ReadWrite | QIODevice::Text);
             QTextStream stream(&file);
             stream<<"<?xml version=\"1.0\" encoding=\"UTF-8\" ?>"<<endl;
@@ -74,9 +85,10 @@ bool CollectionManager::createCollection(QString collectionName)
             ///
             #ifdef _WIN32
                 QByteArray ba = collectionName.toLatin1();
-                system("attrib +h " + ba + "\\." + ba + ".xml");
+                system("attrib +h " + directory.path().toLatin1() + "\\" + ".vemoria\\" + ba + "\\." + ba + ".xml");
             #endif
             create(collectionName);
+
         }
         else return false;
     ///
@@ -102,10 +114,15 @@ void CollectionManager::create(QString& collectionName)
 
     int error = 0;
     git_libgit2_init();
-
+    QDir directory = QDir::home();
     git_repository *repo = NULL;
+    QByteArray repopath;
+    QByteArray pather = directory.path().toUtf8().constData();
+    QByteArray vem = "/.vemoria/";
+    repopath =  pather + vem + collectionName.toUtf8().constData();
+
     /* With working directory: */
-    git_repository_init(&repo, collectionName.toUtf8().constData(), false);
+    git_repository_init(&repo,repopath, false);
 
     git_signature *me = NULL;
     git_signature_now(&me, "Tobi", "inf@hs-worms.de");
