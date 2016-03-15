@@ -15,7 +15,8 @@ SOURCES += \
     undefinedgui_1.cpp \
     undefinedgui_2.cpp \
     copydialog.cpp \
-    timer.cpp
+    timer.cpp \
+    selectcollection.cpp
 
 HEADERS  += \
     mainwindow.h \
@@ -23,12 +24,14 @@ HEADERS  += \
     undefinedgui_1.h \
     undefinedgui_2.h \
     copydialog.h \
-    timer.h
+    timer.h \
+    selectcollection.h
 
 FORMS += \
     mainwindow.ui \
     popupcollection.ui \
-    copydialog.ui
+    copydialog.ui \
+    selectcollection.ui
 
 RESOURCES += \
     resource.qrc

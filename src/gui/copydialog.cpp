@@ -21,6 +21,11 @@ copyDialog::~copyDialog()
     delete ui;
 }
 
+void copyDialog::setData(const QString &labelText){
+    ui->pathLabel->setText("Collection selected: ");
+    path = labelText;
+}
+
 void copyDialog::on_pushButton_clicked()
 {
     ui->progressBar->setValue(0);
@@ -37,9 +42,9 @@ void copyDialog::on_pushButton_clicked()
     ui->progressBar->setMaximum(size);
 
     //start copying files
-    bool copy = copyDir(dirName, "C:/Users/Dennis/Desktop/" + file.fileName(), size);
+    bool copy = copyDir(dirName, path + file.fileName(), size);
 
-    ui->pathLabel->setText("Copying items from " + dirName + " to C:/Users/");
+    //ui->pathLabel->setText("Copying items from " + dirName + " to C:/Users/");
 
     if(copy == true){
         ui->progressBar->setMaximum(100);

@@ -2,6 +2,7 @@
 #define COPYDIALOG_H
 
 #include <QDialog>
+#include <QFileInfo>
 
 namespace Ui {
 class copyDialog;
@@ -14,6 +15,8 @@ class copyDialog : public QDialog
 public:
     explicit copyDialog(QWidget *parent = 0);
     ~copyDialog();
+    void setData(const QString &labelText);
+    QString path;
 
 private slots:
     void on_pushButton_clicked();

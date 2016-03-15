@@ -16,6 +16,7 @@
 #include <QApplication>
 #include <QDesktopWidget>
 #include <copydialog.h>
+#include <selectcollection.h>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -149,7 +150,13 @@ void MainWindow::on_pushButton_3_clicked()
 
 void MainWindow::on_addButton_clicked()
 {
-    copyDialog cpyDialog;
-    cpyDialog.setModal(true);
-    cpyDialog.exec();
+//    copyDialog cpyDialog;
+//    cpyDialog.setModal(true);
+//    cpyDialog.setData("C:/Users/Dennis/Desktop/");
+//    cpyDialog.exec();
+
+      selectCollection selectColl;
+      selectColl.setModal(true);
+      selectColl.exec();
+
 }
