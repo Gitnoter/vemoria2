@@ -9,8 +9,7 @@
 //----------------------------------------------------------------------
 
 #include "collectionmanager.h"
-#include "qgit2.h"
-#include "qgit2/qgitsignature.h"
+#include "git2.h"
 #include <QDir>
 #include <QTextStream>
 #include <QDateTime>
@@ -18,20 +17,14 @@
 
 
 
-#include "qgit2/qgitindex.h"
-#include "qgit2/qgitrebase.h"
-#include "qgit2/qgitremote.h"
-#include "qgit2/qgitrepository.h"
-#include "qgit2/qgitrevwalk.h"
-#include "qgit2/qgitdiff.h"
-#include "qgit2/qgitdiffdelta.h"
-#include "qgit2/qgittree.h"
-
 #include <QFile>
 #include <QFileInfo>
 #include <QPointer>
 
+
+
 using namespace LibQGit2;
+
 
 CollectionManager::CollectionManager()
 {
@@ -45,7 +38,7 @@ CollectionManager::CollectionManager()
 
 CollectionManager::~CollectionManager()
 {
-    delete repo;
+    //delete repo;
 }
 
 void CollectionManager::getCollectionList()
@@ -83,35 +76,16 @@ bool CollectionManager::createCollection(QString collectionName)
                 QByteArray ba = collectionName.toLatin1();
                 system("attrib +h " + ba + "\\." + ba + ".xml");
             #endif
-
+            create(collectionName);
         }
         else return false;
     ///
     /// \todo gui has to check if return is false or true to give information to the user
     ///
 
-        try {
-            LibQGit2::initLibQGit2();
-            repo = new LibQGit2::Repository();
-            repo->init(collectionName,false);
 
+return true;
 
-
-
-
-
-
-
-
-
-
-        }
-        catch (const LibQGit2::Exception& ex)
-        {
-
-            return false;
-        }
-        return true;
 }
 
 
@@ -119,3 +93,48 @@ void CollectionManager::deleteCollection()
 {
 
 }
+
+void CollectionManager::create(QString& collectionName)
+{
+    ///
+    /// \todo initial commit doesnt work :(
+    ///
+
+    int error = 0;
+    git_libgit2_init();
+
+    git_repository *repo = NULL;
+    /* With working directory: */
+    git_repository_init(&repo, collectionName.toUtf8().constData(), false);
+
+    git_signature *me = NULL;
+    git_signature_now(&me, "Tobi", "inf@hs-worms.de");
+
+        git_index *index;
+        git_oid tree_id, commit_id;
+        git_tree *tree;
+
+        if (git_repository_index(&index, repo) < 0)
+            ++error;
+
+        if (git_index_write_tree(&tree_id, index) < 0)
+            ++error;
+
+        git_index_free(index);
+
+        if (git_tree_lookup(&tree, repo, &tree_id) < 0)
+                ++error;
+
+        if (git_commit_create_v(
+                  &commit_id, repo, "HEAD", me, me,
+                  NULL, "Initial commit", tree, 0) < 0)
+              ++error;
+
+        git_tree_free(tree);
+            git_signature_free(me);
+
+
+    git_libgit2_shutdown();
+}
+
+
