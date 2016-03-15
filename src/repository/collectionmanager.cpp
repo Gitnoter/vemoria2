@@ -97,7 +97,7 @@ void CollectionManager::deleteCollection()
 void CollectionManager::create(QString& collectionName)
 {
     ///
-    /// \todo initial commit doesnt work under windoof
+    /// \brief initial commit with repository-xml
     ///
 
     int error = 0;
@@ -144,8 +144,9 @@ void CollectionManager::create(QString& collectionName)
     git_libgit2_shutdown();
 
 #ifdef _WIN32
-    system("git add -A");
-    system("git commit -m \"Initial commit\"");
+    QByteArray ba = collectionName.toUtf8().constData();
+    QByteArray cmd = "cd " + ba + "&&git add -A&&git commit -m \"Initial commit\"";
+    system(cmd);
 #endif
 }
 
