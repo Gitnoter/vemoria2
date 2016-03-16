@@ -280,14 +280,13 @@ void MainWindow::countRepoItems(){
 //set image filter
 void MainWindow::on_filterImagesButton_clicked()
 {
-
         QFileInfo info = (pathFile);
         QString absolut = info.absolutePath();
         absolut = absolut + "/";
 
         QStringList filters;
         //extend filter
-        filters << "*.png" << "*.jpg" << "*.jpeg";
+        filters << "*.png" << "*.jpg" << "*.jpeg" << "*.gif" << "*.bmp" << "*.tif" << "*.ico" <<  "*.psd" << "*.pbm" <<  "*.msp" << "*.kdc" << "*.jng" << "*.jp2" << "*.img";
 
         fileModel->setNameFilters(filters);
         fileModel->setNameFilterDisables(false);
@@ -303,7 +302,7 @@ void MainWindow::on_filterVideoButton_clicked()
 
     QStringList filters;
     //extend filter
-    filters << "*.mp4" << "*.mkv";
+    filters << "*.mp4" << "*.mkv" << "*.avi" << "*.mov" << "*.mpg" << "*.wmv" << "*.mpg" << "*.flv";
 
     fileModel->setNameFilters(filters);
     fileModel->setNameFilterDisables(false);
@@ -319,10 +318,27 @@ void MainWindow::on_filterDocumentsButton_clicked()
 
     QStringList filters;
     //extend filter
-    filters << "*.pdf" << "*.doc" << "*.txt";
-
+    filters << "*.pdf" << "*.doc" << "*.txt" << "*.html";
     fileModel->setNameFilters(filters);
     fileModel->setNameFilterDisables(false);
 
     ui->imageList->setRootIndex(fileModel->setRootPath(absolut));
+}
+
+void MainWindow::on_searchButton_clicked()
+{
+    QString searchString = ui->searchInput->text();
+
+    QFileInfo info = (pathFile);
+    QString absolut = info.absolutePath();
+    absolut = absolut + "/";
+
+    QStringList filters;
+    //extend filter
+    filters << "*" + searchString;
+    fileModel->setNameFilters(filters);
+    fileModel->setNameFilterDisables(false);
+
+    ui->imageList->setRootIndex(fileModel->setRootPath(absolut));
+
 }
