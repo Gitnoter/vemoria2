@@ -148,12 +148,6 @@ void MainWindow::on_addButton_clicked()
 //count items in the contentWindow & show path
 void MainWindow::countItems(QString path){
 
-//    QDir dir(path);
-
-//    int total_files = dir.count();
-
-//    QString totalFilesString = QString::number(total_files);
-
     int counter = 0;
 
     //extend filter
@@ -174,6 +168,7 @@ void MainWindow::on_listView_clicked(const QModelIndex &index)
 {
         fileModel = new QFileSystemModel(this);
 
+
         ui->imageList->setModel(fileModel);
 
         QString mPath = dirModel->fileInfo(index).absoluteFilePath();
@@ -189,10 +184,19 @@ void MainWindow::on_listView_clicked(const QModelIndex &index)
 //show file in detail bar
 void MainWindow::on_imageList_clicked(const QModelIndex &index)
 {
-    QString mPath = dirModel->fileInfo(index).absoluteFilePath();
-    QFileInfo file(mPath);
-    qDebug() << mPath;
 
+    QString mPath = dirModel->fileInfo(index).absoluteFilePath();
+
+    QFileInfo filetester (mPath);
+
+    bool  trueDir =   filetester.isDir();
+
+    QString boolString = QString::number(trueDir);
+
+    qDebug() << "clicked " + boolString;
+
+    if(trueDir == false){
+    QFileInfo file(mPath);
     QPixmap pix(mPath);
 
     QSize picSize =  pix.size();
@@ -230,6 +234,20 @@ void MainWindow::on_imageList_clicked(const QModelIndex &index)
     resize(width,  y + 1);
 
     trigger = true;
+    }
+    }
+    else{
+
+        fileModel = new QFileSystemModel(this);
+        ui->imageList->setModel(fileModel);
+
+        QString mPath = dirModel->fileInfo(index).absoluteFilePath();
+
+        //warning no subdirs
+        QString newPath = mPath + "/files";
+        countItems(newPath);
+
+        ui->imageList->setRootIndex(fileModel->setRootPath(newPath));
     }
 }
 
@@ -273,7 +291,7 @@ void MainWindow::countRepoItems(){
     }
 
     QString itemsCounterString = QString::number(counter);
-    ui->repoItems->setText(itemsCounterString);
+    ui->repoItems->setText(itemsCounterString + " Elements");
 }
 
 
@@ -294,6 +312,7 @@ void MainWindow::on_filterImagesButton_clicked()
         ui->imageList->setRootIndex(fileModel->setRootPath(absolut));
 }
 
+//set video filter
 void MainWindow::on_filterVideoButton_clicked()
 {
     QFileInfo info = (pathFile);
@@ -310,6 +329,7 @@ void MainWindow::on_filterVideoButton_clicked()
     ui->imageList->setRootIndex(fileModel->setRootPath(absolut));
 }
 
+//set doc filter
 void MainWindow::on_filterDocumentsButton_clicked()
 {
     QFileInfo info = (pathFile);
@@ -325,6 +345,7 @@ void MainWindow::on_filterDocumentsButton_clicked()
     ui->imageList->setRootIndex(fileModel->setRootPath(absolut));
 }
 
+//search file
 void MainWindow::on_searchButton_clicked()
 {
     QString searchString = ui->searchInput->text();
@@ -340,5 +361,15 @@ void MainWindow::on_searchButton_clicked()
     fileModel->setNameFilterDisables(false);
 
     ui->imageList->setRootIndex(fileModel->setRootPath(absolut));
+
+}
+
+void MainWindow::on_collectionOpen_clicked()
+{
+    ui->imageList->setModel(fileModel);
+
+    QDir directory = QDir::home();
+    QString path = directory.path() + "/.vemoria";
+    ui->imageList->setRootIndex(fileModel->setRootPath(path));
 
 }

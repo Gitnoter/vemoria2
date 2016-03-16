@@ -149,7 +149,7 @@ QGroupBox{
                 <property name="minimumSize">
                  <size>
                   <width>0</width>
-                  <height>400</height>
+                  <height>420</height>
                  </size>
                 </property>
                 <property name="maximumSize">
@@ -392,7 +392,13 @@ QGroupBox{
                               <property name="minimumSize">
                                <size>
                                 <width>0</width>
-                                <height>80</height>
+                                <height>0</height>
+                               </size>
+                              </property>
+                              <property name="maximumSize">
+                               <size>
+                                <width>16777215</width>
+                                <height>63</height>
                                </size>
                               </property>
                               <property name="cursor" stdset="0">
@@ -409,6 +415,9 @@ border:none;
                               </property>
                               <property name="horizontalScrollBarPolicy">
                                <enum>Qt::ScrollBarAlwaysOff</enum>
+                              </property>
+                              <property name="autoScroll">
+                               <bool>false</bool>
                               </property>
                              </widget>
                             </item>
@@ -636,10 +645,28 @@ border:none;
                             <number>0</number>
                            </property>
                            <property name="verticalSpacing">
+                            <number>6</number>
+                           </property>
+                           <property name="topMargin">
                             <number>0</number>
                            </property>
                            <item row="0" column="1">
                             <widget class="QLabel" name="label">
+                             <property name="sizePolicy">
+                              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                               <horstretch>0</horstretch>
+                               <verstretch>0</verstretch>
+                              </sizepolicy>
+                             </property>
+                             <property name="minimumSize">
+                              <size>
+                               <width>0</width>
+                               <height>0</height>
+                              </size>
+                             </property>
+                             <property name="styleSheet">
+                              <string notr="true"/>
+                             </property>
                              <property name="text">
                               <string>Progress</string>
                              </property>
@@ -751,6 +778,9 @@ border:none;
                         <property name="title">
                          <string/>
                         </property>
+                        <property name="alignment">
+                         <set>Qt::AlignCenter</set>
+                        </property>
                         <layout class="QGridLayout" name="gridLayout_6">
                          <property name="leftMargin">
                           <number>0</number>
@@ -767,7 +797,7 @@ border:none;
                          <property name="spacing">
                           <number>0</number>
                          </property>
-                         <item row="0" column="0">
+                         <item row="1" column="0">
                           <widget class="QWidget" name="formWidget_21" native="true">
                            <property name="minimumSize">
                             <size>
@@ -806,7 +836,7 @@ border:none;
                                <string/>
                               </property>
                               <property name="pixmap">
-                               <pixmap resource="resource.qrc">:/icons/icons/progress.png</pixmap>
+                               <pixmap resource="resource.qrc">:/icons/icons/filter.png</pixmap>
                               </property>
                              </widget>
                             </item>
@@ -818,6 +848,34 @@ border:none;
                              </widget>
                             </item>
                            </layout>
+                          </widget>
+                         </item>
+                         <item row="0" column="0" alignment="Qt::AlignLeft">
+                          <widget class="QPushButton" name="collectionOpen">
+                           <property name="cursor">
+                            <cursorShape>PointingHandCursor</cursorShape>
+                           </property>
+                           <property name="layoutDirection">
+                            <enum>Qt::LeftToRight</enum>
+                           </property>
+                           <property name="styleSheet">
+                            <string notr="true">#collectionOpen{
+background-color:white;
+border:none;
+margin-left:40px;
+margin-bottom:10px;
+}</string>
+                           </property>
+                           <property name="text">
+                            <string/>
+                           </property>
+                           <property name="icon">
+                            <iconset resource="resource.qrc">
+                             <normaloff>:/icons/icons/more.png</normaloff>:/icons/icons/more.png</iconset>
+                           </property>
+                           <property name="flat">
+                            <bool>false</bool>
+                           </property>
                           </widget>
                          </item>
                         </layout>
