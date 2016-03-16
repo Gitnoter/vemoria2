@@ -41,7 +41,6 @@ border-color:#fff;
 
 QPushButton:hover{
 	color:#1ca3c4;
-	cursor:pointer;
 }
 
 QGroupBox{
@@ -2027,7 +2026,7 @@ border-top:1px solid #e3e3e3;
    </property>
    <property name="styleSheet">
     <string notr="true">QMenuBar{
-background-color:#F8F8F8;
+background-color:#f8f8f8;	
 font-family: 'Source Sans Pro';
 font-size:14px;
 font-weight:regular;
@@ -2041,7 +2040,7 @@ color : black;
 margin-top:4px;
 spacing: 3px;
 padding: 1px 20px;
-background-color: #F8F8F8t;
+background-color: #f8f8f8;
 border-radius: 4px;
 }</string>
    </property>

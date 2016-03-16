@@ -50,18 +50,18 @@ MainWindow::MainWindow(QWidget *parent) :
 }
 
 void MainWindow::resizeEvent(QResizeEvent*)
- {
-        QSize windowSize;
-        windowSize = size();
+{
+    QSize windowSize;
+    windowSize = size();
 
-        int y  = 0;
-        y = windowSize.height();
-        int size = y - 150;
+    int y  = 0;
+    y = windowSize.height();
+    int size = y - 150;
 
-        ui->scrollArea->resize(298, size);
+    ui->scrollArea->resize(298, size);
 
-        qApp->processEvents();
- }
+    qApp->processEvents();
+}
 
 MainWindow::~MainWindow()
 {
@@ -109,28 +109,27 @@ void MainWindow::addTags(){
 //show popupCollection
 void MainWindow::on_actionNew_Collection_triggered()
 {
-      popupCollection popwindows;
-      popwindows.setModal(true);
-      popwindows.exec();
+    popupCollection popwindows;
+    popwindows.setModal(true);
+    popwindows.exec();
 }
-
 
 //about message box
 void MainWindow::on_actionInfo_triggered()
 {
-         QMessageBox msgBox;
-         QPixmap pix (":/icons/icons/VEM.png");
-         msgBox.setWindowIcon(pix);
-         msgBox.setWindowTitle("Vemoria");
-         msgBox.setTextFormat(Qt::RichText);
-         msgBox.setText(
-                        "\nThe License of this Sotware is EUPL V. 1.1.<br><br>"
-                        "Fonts License: SIL Open Font License, 1.1 &nbsp;<a href='https://www.google.com/fonts#UsePlace:use/Collection:Source+Sans+Pro'>google.com/fonts</a><br><br>"
-                        "Icons License: MIT &nbsp;<a href='http://ionicons.com/'>ionicons.com</a><br><br>"
-                        "Icons Files License: Freebie License &nbsp;<a href='http://www.dreamstale.com/free-download-50-file-type-vector-icons/'>dreamstale.com</a><br><br>"
-                        "Libqgit2 - C++ Qt License: LGPL &nbsp;<a href='https://projects.kde.org/projects/playground/libs/libqgit2/repository'>projects.kde.org</a><br><br>"
-                        "Version Number: " + QString::fromUtf8(VERSION));
-         msgBox.exec();
+    QMessageBox msgBox;
+    QPixmap pix (":/icons/icons/VEM.png");
+    msgBox.setWindowIcon(pix);
+    msgBox.setWindowTitle("Vemoria");
+    msgBox.setTextFormat(Qt::RichText);
+    msgBox.setText(
+                "\nThe License of this Sotware is EUPL V. 1.1.<br><br>"
+                "Fonts License: SIL Open Font License, 1.1 &nbsp;<a href='https://www.google.com/fonts#UsePlace:use/Collection:Source+Sans+Pro'>google.com/fonts</a><br><br>"
+                "Icons License: MIT &nbsp;<a href='http://ionicons.com/'>ionicons.com</a><br><br>"
+                "Icons Files License: Freebie License &nbsp;<a href='http://www.dreamstale.com/free-download-50-file-type-vector-icons/'>dreamstale.com</a><br><br>"
+                "Libqgit2 - C++ Qt License: LGPL &nbsp;<a href='https://projects.kde.org/projects/playground/libs/libqgit2/repository'>projects.kde.org</a><br><br>"
+                "Version Number: " + QString::fromUtf8(VERSION));
+    msgBox.exec();
 }
 
 void MainWindow::on_pushButton_3_clicked()
@@ -141,9 +140,9 @@ void MainWindow::on_pushButton_3_clicked()
 
 void MainWindow::on_addButton_clicked()
 {
-      selectCollection selectColl;
-      selectColl.setModal(true);
-      selectColl.exec();
+    selectCollection selectColl;
+    selectColl.setModal(true);
+    selectColl.exec();
 }
 
 //count items in the contentWindow & show path
@@ -154,7 +153,7 @@ void MainWindow::countItems(QString path){
     //extend filter
     QDirIterator it(path, QStringList() << "*.png" << "*.jpg" << "*.jpeg", QDir::Files, QDirIterator::Subdirectories);
     while (it.hasNext()) {
-        qDebug() << it.next();
+        it.next();
         counter++;
     }
 
@@ -167,75 +166,79 @@ void MainWindow::countItems(QString path){
 //show files in contentWindow
 void MainWindow::on_listView_clicked(const QModelIndex &index)
 {
-        fileModel = new QFileSystemModel(this);
+    fileModel = new QFileSystemModel(this);
 
 
-        ui->imageList->setModel(fileModel);
+    ui->imageList->setModel(fileModel);
 
-        QString mPath = dirModel->fileInfo(index).absoluteFilePath();
+    QString mPath = dirModel->fileInfo(index).absoluteFilePath();
 
-        //warning no subdirs
-        QString newPath = mPath + "/files";
-        countItems(newPath);
+    //warning no subdirs
+    QString newPath = mPath + "/files";
+    countItems(newPath);
 
-        ui->imageList->setRootIndex(fileModel->setRootPath(newPath));
+    ui->imageList->setRootIndex(fileModel->setRootPath(newPath));
 }
 
 
 //show file in detail bar
 void MainWindow::on_imageList_clicked(const QModelIndex &index)
 {
-
     QString mPath = dirModel->fileInfo(index).absoluteFilePath();
 
     QFileInfo filetester (mPath);
 
     bool  trueDir =   filetester.isDir();
 
-    QString boolString = QString::number(trueDir);
-
-    qDebug() << "clicked " + boolString;
-
     if(trueDir == false){
-    QFileInfo file(mPath);
-    QPixmap pix(mPath);
+        QFileInfo file(mPath);
 
-    QSize picSize =  pix.size();
-    int height = picSize.height();
-    int width  = picSize.width();
+        QString suffix  =  file.suffix();
 
-    //resize Image to widget size
-    if(height > 265){
-    ui->imagePreview->setPixmap(pix.scaled (265, 150, Qt::IgnoreAspectRatio, Qt::FastTransformation ));
-    }
-    else{
-        ui->imagePreview->setPixmap(pix.scaled (width, height, Qt::IgnoreAspectRatio, Qt::FastTransformation ));
-    }
+        if(suffix == "png" || suffix == "jpg" || suffix == "jpeg" || suffix == "bmp" || suffix == "jng" || suffix == "jp2" || suffix  == "img"){
 
-    ui->editFiles->setText(file.fileName());
+            QPixmap pix(mPath);
+            QSize picSize =  pix.size();
+            int height = picSize.height();
+            int width  = picSize.width();
 
-    nameFile = file.fileName();
-    pathFile = mPath;
+            //resize Image to widget size
+            if(height > 265){
+                ui->imagePreview->setPixmap(pix.scaled (265, 150, Qt::IgnoreAspectRatio, Qt::FastTransformation ));
+            }
+            else{
+                ui->imagePreview->setPixmap(pix.scaled (width, height, Qt::IgnoreAspectRatio, Qt::FastTransformation ));
+            }
+        }
+        else{
+            QPixmap pix(":/fileIcons/fileIcons/"+ suffix +".png");
+            ui->imagePreview->setPixmap(pix.scaled (100, 100, Qt::IgnoreAspectRatio, Qt::FastTransformation ));
+        }
 
-    ui->gridDetail->show();
+        ui->editFiles->setText(file.fileName());
 
-    //not the best solution....
-    if(trigger == false){
+        nameFile = file.fileName();
+        pathFile = mPath;
 
-    const int width = QApplication::desktop()->width();
+        ui->gridDetail->show();
 
-    QSize windowSize;
-    windowSize = size();
+        //not the best solution....
+        if(trigger == false){
 
-    int y  = 0;
-    y = windowSize.height();
+            const int width = QApplication::desktop()->width();
 
-    //trigger the resize event to expand the scrollarea
-    resize(width,  y - 1);
-    resize(width,  y + 1);
+            QSize windowSize;
+            windowSize = size();
 
-    trigger = true;
-    }
+            int y  = 0;
+            y = windowSize.height();
+
+            //trigger the resize event to expand the scrollarea
+            resize(width,  y - 1);
+            resize(width,  y + 1);
+
+            trigger = true;
+        }
     }
     else{
 
@@ -263,15 +266,9 @@ void MainWindow::on_saveBtn_clicked()
     QString getFileName = ui->editFiles->text();
     QDir renameFile = (absolut);
 
-    qDebug() << pathFile;
-    qDebug() << getFileName;
-    qDebug() << renameFile;
-    qDebug() << nameFile;
-    qDebug() << absolut;
-
     if(nameFile != getFileName){
-    renameFile.rename(nameFile, getFileName);
-    ui->imageList->setRootIndex(fileModel->setRootPath(absolut));
+        renameFile.rename(nameFile, getFileName);
+        ui->imageList->setRootIndex(fileModel->setRootPath(absolut));
     }
 }
 
@@ -287,7 +284,7 @@ void MainWindow::countRepoItems(){
     //extend filter
     QDirIterator it("C:/Users/Dennis/.Vemoria", QStringList() << "*.png" << "*.jpg" << "*.jpeg", QDir::Files, QDirIterator::Subdirectories);
     while (it.hasNext()) {
-        qDebug() << it.next();
+        it.next();
         counter++;
     }
 
@@ -299,18 +296,18 @@ void MainWindow::countRepoItems(){
 //set image filter
 void MainWindow::on_filterImagesButton_clicked()
 {
-        QFileInfo info = (pathFile);
-        QString absolut = info.absolutePath();
-        absolut = absolut + "/";
+    QFileInfo info = (pathFile);
+    QString absolut = info.absolutePath();
+    absolut = absolut + "/";
 
-        QStringList filters;
-        //extend filter
-        filters << "*.png" << "*.jpg" << "*.jpeg" << "*.gif" << "*.bmp" << "*.tif" << "*.ico" <<  "*.psd" << "*.pbm" <<  "*.msp" << "*.kdc" << "*.jng" << "*.jp2" << "*.img";
+    QStringList filters;
+    //extend filter
+    filters << "*.png" << "*.jpg" << "*.jpeg" << "*.gif" << "*.bmp" << "*.tif" << "*.ico" <<  "*.psd" << "*.pbm" <<  "*.msp" << "*.kdc" << "*.jng" << "*.jp2" << "*.img";
 
-        fileModel->setNameFilters(filters);
-        fileModel->setNameFilterDisables(false);
+    fileModel->setNameFilters(filters);
+    fileModel->setNameFilterDisables(false);
 
-        ui->imageList->setRootIndex(fileModel->setRootPath(absolut));
+    ui->imageList->setRootIndex(fileModel->setRootPath(absolut));
 }
 
 //set video filter
