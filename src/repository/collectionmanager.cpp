@@ -9,11 +9,21 @@
 //----------------------------------------------------------------------
 
 #include "collectionmanager.h"
-#include "qgit2.h"
+#include "git2.h"
 #include <QDir>
 #include <QTextStream>
 #include <QDateTime>
+
+
+#include <QDebug>
 #include "vemoria-config.h"
+#include <QFile>
+#include <QFileInfo>
+#include <QPointer>
+
+
+
+using namespace LibQGit2;
 
 
 CollectionManager::CollectionManager()
@@ -23,12 +33,12 @@ CollectionManager::CollectionManager()
     /// Collections are available.
     ///
 
-    repo = new LibQGit2::Repository();
+
 }
 
 CollectionManager::~CollectionManager()
 {
-    delete repo;
+    //delete repo;
 }
 
 void CollectionManager::getCollectionList()
@@ -45,10 +55,21 @@ bool CollectionManager::createCollection(QString collectionName)
         {
             QString date = QDateTime::currentDateTime().toString();
             QString vemoriaVersion = VEMORIA_VERSION;
-            QDir directory;
-            directory.mkdir(collectionName);
+            QDir directory = QDir::home();
+            if(!QDir(directory.path() + "/.vemoria").exists())
+                directory.mkdir(".vemoria");
+
+
+            directory.mkdir(".vemoria/"+ collectionName);
+
+
+
+
+
+
             QFile file;
-            file.setFileName(collectionName + "/" + collectionName + ".xml");
+            file.setFileName(directory.path()+ "/" + ".vemoria/" + collectionName + "/." + collectionName + ".xml");
+
             file.open(QIODevice::ReadWrite | QIODevice::Text);
             QTextStream stream(&file);
             stream<<"<?xml version=\"1.0\" encoding=\"UTF-8\" ?>"<<endl;
@@ -59,23 +80,24 @@ bool CollectionManager::createCollection(QString collectionName)
             stream<<"</notes>"<<endl;
             file.close();
 
+            ///
+            ///\todo replace this by appropriate function calls
+            ///
+            #ifdef _WIN32
+                QByteArray ba = collectionName.toLatin1();
+                system("attrib +h " + directory.path().toLatin1() + "\\" + ".vemoria\\" + ba + "\\." + ba + ".xml");
+            #endif
+            create(collectionName);
+
         }
         else return false;
     ///
     /// \todo gui has to check if return is false or true to give information to the user
     ///
 
-        try {
-            repo->init(collectionName,false);
 
+return true;
 
-        }
-        catch (const LibQGit2::Exception& ex)
-        {
-
-            return false;
-        }
-        return true;
 }
 
 
@@ -83,3 +105,66 @@ void CollectionManager::deleteCollection()
 {
 
 }
+
+void CollectionManager::create(QString& collectionName)
+{
+    ///
+    /// \brief initial commit with repository-xml
+    ///
+
+    int error = 0;
+    git_libgit2_init();
+    QDir directory = QDir::home();
+    git_repository *repo = NULL;
+    QByteArray repopath;
+    QByteArray pather = directory.path().toUtf8().constData();
+    QByteArray vem = "/.vemoria/";
+    repopath =  pather + vem + collectionName.toUtf8().constData();
+
+    /* With working directory: */
+    git_repository_init(&repo,repopath, false);
+
+
+    git_index *idx = NULL;
+    git_repository_index(&idx, repo);
+
+    git_index_update_all(idx, NULL, NULL, NULL);
+    git_index_write(idx);
+
+    git_signature *me = NULL;
+    git_signature_now(&me, "Tobi", "inf@hs-worms.de");
+
+        git_index *index;
+        git_oid tree_id, commit_id;
+        git_tree *tree;
+
+        if (git_repository_index(&index, repo) < 0)
+            ++error;
+
+        if (git_index_write_tree(&tree_id, index) < 0)
+            ++error;
+
+        git_index_free(index);
+
+        if (git_tree_lookup(&tree, repo, &tree_id) < 0)
+                ++error;
+
+        if (git_commit_create_v(
+                  &commit_id, repo, "HEAD", me, me,
+                  NULL, "Initial commit", tree, 0) < 0)
+              ++error;
+
+        git_tree_free(tree);
+            git_signature_free(me);
+
+
+    git_libgit2_shutdown();
+
+#ifdef _WIN32
+    QByteArray ba = collectionName.toUtf8().constData();
+    QByteArray cmd = "cd .vemoria&&cd " + ba + "&&git add -A&&git commit -m \"Initial commit\"";
+    system(cmd);
+#endif
+}
+
+

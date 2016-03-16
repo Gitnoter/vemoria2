@@ -12,6 +12,8 @@
 
 #include <QApplication>
 #include "gui/mainwindow.h"
+#include "itemmanager.h"
+#include "uiservices.h"
 #include "QFile"
 #include "QFont"
 #include "QDebug"
@@ -33,8 +35,12 @@ int main(int argc, char *argv[])
     //pic = xmlhandler.readXMLFile_Picture("C:/Picture.xml");
 
 
+    UiServices* uiservices = new UiServices();
+    ItemManager* itemmanager = new ItemManager(uiservices);
+
     MainWindow mainwindow;
     mainwindow.showMaximized();
+    (void) itemmanager;
 
 
      QFile file(":/fonts/fonts/SourceSansPro-Regular.ttf");

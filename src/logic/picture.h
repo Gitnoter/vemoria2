@@ -12,15 +12,6 @@
 #include <QVector>
 #include "logic/item.h"
 
-
-/*! \brief Picture Class. 
- *  Containing the Metadata and Tags for a specific picture item.
- */
-
-
-/// \class
-/// Metadata of picture items.
-
 /*! \brief Picture Class.
  *         .
  *

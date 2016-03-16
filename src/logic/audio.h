@@ -13,9 +13,6 @@
 #include <QVector>
 #include "logic/item.h"
 
-/// \class
-/// Metadata of audio items.
-
 /*! \brief Audio Class.
  *         .
  *

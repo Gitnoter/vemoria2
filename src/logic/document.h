@@ -13,10 +13,6 @@
 #include <QVector>
 #include "logic/item.h"
 
-
-/// \class
-/// Metadata of document items.
-
 /*! \brief Document Class.
  *         .
  *

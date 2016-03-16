@@ -47,8 +47,9 @@ find_tmp_path(char *buffer, size_t length)
 	if (env_len > 0 && env_len < (DWORD)length)
 		return 0;
 
-	if (GetTempPath((DWORD)length, buffer))
-		return 0;
+    env_len = GetTempPath((DWORD)length, buffer);
+    if (env_len > 1 && buffer[1] ) // \todo fails for UTF-8 systems, need to convert
+        return 0;
 #endif
 
 	/* This system doesn't like us, try to use the current directory */
