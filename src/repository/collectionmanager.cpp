@@ -145,7 +145,7 @@ void CollectionManager::create(QString& collectionName)
 
 #ifdef _WIN32
     QByteArray ba = collectionName.toUtf8().constData();
-    QByteArray cmd = "cd " + ba + "&&git add -A&&git commit -m \"Initial commit\"";
+    QByteArray cmd = "cd .vemoria&&cd " + ba + "&&git add -A&&git commit -m \"Initial commit\"";
     system(cmd);
 #endif
 }
