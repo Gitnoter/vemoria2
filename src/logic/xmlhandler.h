@@ -37,6 +37,9 @@ class XMLHandler
     //! \param tagname
     //!
     static void ListElements_Picture(QDomElement root, QPointer<Picture> picture, QString tagname);
+    static void ListElements_Audio(QDomElement root, QPointer<Audio> audio, QString tagname);
+    static void ListElements_Document(QDomElement root, QPointer<Document> document, QString tagname);
+    static void ListElements_Video(QDomElement root, QPointer<Video> video, QString tagname);
 public:
     XMLHandler();
     ~XMLHandler();
@@ -47,6 +50,9 @@ public:
     //! \return all Elements of an XML-File
     //!
     static QPointer<Picture> readXMLFile_Picture(QString documentName);
+    static QPointer<Audio> readXMLFile_Audio(QString documentName);
+    static QPointer<Document> readXMLFile_Document(QString documentName);
+    static QPointer<Video> readXMLFile_Video(QString documentName);
 
     //!
     //! \brief Space for future method to write XML-Files
