@@ -10,11 +10,15 @@
 
 #ifndef XMLHANDLER_H
 #define XMLHANDLER_H
-#include <QCoreApplication>
-#include <QtCore>
-#include <QtXml/QtXml>
-#include <QDebug>
-#include <picture.h>
+#include <logic/picture.h>
+#include <logic/audio.h>
+#include <logic/document.h>
+#include <logic/video.h>
+#include <QPointer>
+#include <QDomElement>
+
+
+
 
 //!
 //! \brief The XMLHandler class
@@ -23,35 +27,39 @@
 //!
 class XMLHandler
 {
-    QString documentName;
- //later:
-   // Picture pic;
-    QString output;
-
-public:
-    XMLHandler();
-
     //!
-    //! \brief ListElements
+    //! \brief ListElements-Method for Picture, Audio, Document and Video
     //! \param root
+    //! \param picture
+    //! \param audio
+    //! \param document
+    //! \param video
     //! \param tagname
     //!
-    void ListElements(QDomElement root, QString tagname);
+    static void ListElements_Picture(QDomElement root, QPointer<Picture> picture, QString tagname);
+    static void ListElements_Audio(QDomElement root, QPointer<Audio> audio, QString tagname);
+    static void ListElements_Document(QDomElement root, QPointer<Document> document, QString tagname);
+    static void ListElements_Video(QDomElement root, QPointer<Video> video, QString tagname);
+public:
+    XMLHandler();
+    ~XMLHandler();
 
     //!
-    //! \brief readXMLFile
-    //! \param documentName
+    //! \brief readXMLFile-Method for Picture, Audio, Document and Video
+    //! \param documentName (with Path)
     //! \return all Elements of an XML-File
     //!
-    QString readXMLFile(QString documentName);
+    static QPointer<Picture> readXMLFile_Picture(QString documentName);
+    static QPointer<Audio> readXMLFile_Audio(QString documentName);
+    static QPointer<Document> readXMLFile_Document(QString documentName);
+    static QPointer<Video> readXMLFile_Video(QString documentName);
 
     //!
     //! \brief Space for future method to write XML-Files
     //!
-   // Picture write_XMLData()
-    //{
-
-    //}
+//    Picture write_XMLData()
+//    {
+//    }
 };
 
 #endif // XMLHANDLER_H
