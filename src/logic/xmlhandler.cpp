@@ -586,8 +586,358 @@ QPointer<Video> XMLHandler::readXMLFile_Video(QString documentName)
    return video;
 }
 
+//!
+//! \brief XMLHandler::writeXMLFile
+//! \param picture
+//! \param documentName
+//!
+void XMLHandler::writeXMLFile(QPointer<Picture> picture, QString documentName)
+{
+    //Write XML
+    QDomDocument document;
+    //Make the root Element
+    QDomElement root = document.createElement("Picture");
+    //Add  root to the document
+    document.appendChild(root);
+    QVector<QString> tempVector;
 
-//void XMLHandler::WriteFile()
-//{
+    //Add elements
+    //title
+    QDomElement title = document.createElement("title");
+    QDomText titletxt = document.createTextNode(picture->getTitle());
+    title.appendChild(titletxt);
+    root.appendChild(title);
+    //date
+    QDomElement date = document.createElement("date");
+    QDomText datetxt = document.createTextNode(picture->getDate());
+    date.appendChild(datetxt);
+    root.appendChild(date);
+    //time
+    QDomElement time = document.createElement("time");
+    QDomText timetxt = document.createTextNode(picture->getTime());
+    time.appendChild(timetxt);
+    root.appendChild(time);
+    //geoposition
+    QDomElement geoposition = document.createElement("geoposition");
+    QDomText geopositiontxt = document.createTextNode(picture->getGeoposition());
+    geoposition.appendChild(geopositiontxt);
+    root.appendChild(geoposition);
+    //description
+    QDomElement description = document.createElement("description");
+    QDomText descriptiontxt = document.createTextNode(picture->getDescription());
+    description.appendChild(descriptiontxt);
+    root.appendChild(description);
+    //creator
+    QDomElement creator = document.createElement("creator");
+    QDomText creatortxt = document.createTextNode(picture->getCreator());
+    creator.appendChild(creatortxt);
+    root.appendChild(creator);
+    //license
+    QDomElement license = document.createElement("license");
+    QDomText licensetxt = document.createTextNode(picture->getLicense());
+    license.appendChild(licensetxt);
+    root.appendChild(license);
+    //people
+    tempVector = picture->getPeople();
+    for(int i = 0; i < tempVector.count(); ++i)
+    {
+        QDomElement people = document.createElement("people");
+        QDomText peopletxt = document.createTextNode(tempVector.at(i));
+        people.appendChild(peopletxt);
+        root.appendChild(people);
+    }
+    //event
+    tempVector = picture->getEvent();
+    for(int i = 0; i < tempVector.count(); ++i)
+    {
+        QDomElement event = document.createElement("event");
+        QDomText eventtxt = document.createTextNode(tempVector.at(i));
+        event.appendChild(eventtxt);
+        root.appendChild(event);
+    }
+    //location
+    tempVector = picture->getLocation();
+    for(int i = 0; i < tempVector.count(); ++i)
+    {
+        QDomElement location = document.createElement("location");
+        QDomText locationtxt = document.createTextNode(tempVector.at(i));
+        location.appendChild(locationtxt);
+        root.appendChild(location);
+    }
 
-//}
+    //Write to File
+    QFile file(documentName);
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+    {
+        qDebug() << "failed to open file for writing";
+    }
+    else
+    {
+        QTextStream stream(&file);
+        stream << document.toString();
+        file.close();
+        qDebug() << "finished writing XML: Picture";
+    }
+}
+
+//!
+//! \brief writeXMLFile
+//! \param video
+//! \param documentName
+//!
+void writeXMLFile(QPointer<Video> video, QString documentName)
+{
+    //Write XML
+    QDomDocument document;
+    //Make the root Element
+    QDomElement root = document.createElement("Video");
+    //Add  root to the document
+    document.appendChild(root);
+    QVector<QString> tempVector;
+
+    //Add elements
+    //title
+    QDomElement title = document.createElement("title");
+    QDomText titletxt = document.createTextNode(video->getTitle());
+    title.appendChild(titletxt);
+    root.appendChild(title);
+    //date
+    QDomElement date = document.createElement("date");
+    QDomText datetxt = document.createTextNode(video->getDate());
+    date.appendChild(datetxt);
+    root.appendChild(date);
+    //time
+    QDomElement time = document.createElement("time");
+    QDomText timetxt = document.createTextNode(video->getTime());
+    time.appendChild(timetxt);
+    root.appendChild(time);
+    //geoposition
+    QDomElement geoposition = document.createElement("geoposition");
+    QDomText geopositiontxt = document.createTextNode(video->getGeoposition());
+    geoposition.appendChild(geopositiontxt);
+    root.appendChild(geoposition);
+    //playbacktime;
+    QDomElement playbacktime = document.createElement("playbacktime");
+    QDomText playbacktimetxt = document.createTextNode(video->getPlaybacktime());
+    playbacktime.appendChild(playbacktimetxt);
+    root.appendChild(playbacktime);
+    //framerate;
+    QDomElement framerate = document.createElement("framerate");
+    QDomText frameratetxt = document.createTextNode(video->getFramerate());
+    framerate.appendChild(frameratetxt);
+    root.appendChild(framerate);
+    //description
+    QDomElement description = document.createElement("description");
+    QDomText descriptiontxt = document.createTextNode(video->getDescription());
+    description.appendChild(descriptiontxt);
+    root.appendChild(description);
+    //creator
+    QDomElement creator = document.createElement("creator");
+    QDomText creatortxt = document.createTextNode(video->getCreator());
+    creator.appendChild(creatortxt);
+    root.appendChild(creator);
+    //license
+    QDomElement license = document.createElement("license");
+    QDomText licensetxt = document.createTextNode(video->getLicense());
+    license.appendChild(licensetxt);
+    root.appendChild(license);
+    //people
+    tempVector = video->getPeople();
+    for(int i = 0; i < tempVector.count(); ++i)
+    {
+        QDomElement people = document.createElement("people");
+        QDomText peopletxt = document.createTextNode(tempVector.at(i));
+        people.appendChild(peopletxt);
+        root.appendChild(people);
+    }
+    //event
+    tempVector = video->getEvent();
+    for(int i = 0; i < tempVector.count(); ++i)
+    {
+        QDomElement event = document.createElement("event");
+        QDomText eventtxt = document.createTextNode(tempVector.at(i));
+        event.appendChild(eventtxt);
+        root.appendChild(event);
+    }
+    //location
+    tempVector = video->getLocation();
+    for(int i = 0; i < tempVector.count(); ++i)
+    {
+        QDomElement location = document.createElement("location");
+        QDomText locationtxt = document.createTextNode(tempVector.at(i));
+        location.appendChild(locationtxt);
+        root.appendChild(location);
+    }
+
+    //Write to File
+    QFile file(documentName);
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+    {
+        qDebug() << "failed to open file for writing";
+    }
+    else
+    {
+        QTextStream stream(&file);
+        stream << document.toString();
+        file.close();
+        qDebug() << "finished writing XML: Video";
+    }
+}
+
+//!
+//! \brief writeXMLFile
+//! \param document
+//! \param documentName
+//!
+void writeXMLFile(QPointer<Document> document, QString documentName)
+{
+    //Write XML
+    QDomDocument documents;
+    //Make the root Element
+    QDomElement root = documents.createElement("Document");
+    //Add  root to the document
+    documents.appendChild(root);
+    QVector<QString> tempVector;
+
+    //Add elements
+    //title
+    QDomElement title = documents.createElement("title");
+    QDomText titletxt = documents.createTextNode(document->getTitle());
+    title.appendChild(titletxt);
+    root.appendChild(title);
+    //creator
+    QDomElement creator = documents.createElement("creator");
+    QDomText creatortxt = documents.createTextNode(document->getCreator());
+    creator.appendChild(creatortxt);
+    root.appendChild(creator);
+    //company
+    QDomElement company = documents.createElement("company");
+    QDomText companytxt = documents.createTextNode(document->getCompany());
+    company.appendChild(companytxt);
+    root.appendChild(company);
+    //alterationdate
+    QDomElement date = documents.createElement("alterationdate");
+    QDomText datetxt = documents.createTextNode(document->getAlterationdate());
+    date.appendChild(datetxt);
+    root.appendChild(date);
+    //numberofpages
+    QDomElement numberofpages = documents.createElement("numberofpages");
+    QDomText numberofpagestxt = documents.createTextNode(document->getNumberofpages());
+    numberofpages.appendChild(numberofpagestxt);
+    root.appendChild(numberofpages);
+    //subject
+    tempVector = document->getSubject();
+    for(int i = 0; i < tempVector.count(); ++i)
+    {
+        QDomElement subject = documents.createElement("subject");
+        QDomText subjecttxt = documents.createTextNode(tempVector.at(i));
+        subject.appendChild(subjecttxt);
+        root.appendChild(subject);
+    }
+
+    //Write to File
+    QFile file(documentName);
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+    {
+        qDebug() << "failed to open file for writing";
+    }
+    else
+    {
+        QTextStream stream(&file);
+        stream << documents.toString();
+        file.close();
+        qDebug() << "finished writing XML: Document";
+    }
+}
+
+//!
+//! \brief writeXMLFile
+//! \param audio
+//! \param documentName
+//!
+void writeXMLFile(QPointer<Audio> audio, QString documentName)
+{
+    //Write XML
+    QDomDocument document;
+    //Make the root Element
+    QDomElement root = document.createElement("Audio");
+    //Add  root to the document
+    document.appendChild(root);
+    QVector<QString> tempVector;
+
+    //Add elements
+    //title
+    QDomElement title = document.createElement("title");
+    QDomText titletxt = document.createTextNode(audio->getTitle());
+    title.appendChild(titletxt);
+    root.appendChild(title);
+    //publicationdate
+    QDomElement publicationdate = document.createElement("publicationdate");
+    QDomText publicationdatetxt = document.createTextNode(audio->getPublicationdate());
+    publicationdate.appendChild(publicationdatetxt);
+    root.appendChild(publicationdate);
+    //length
+    QDomElement length = document.createElement("length");
+    QDomText lengthtxt = document.createTextNode(audio->getLength());
+    length.appendChild(lengthtxt);
+    root.appendChild(length);
+    //album
+    QDomElement album = document.createElement("album");
+    QDomText albumtxt = document.createTextNode(audio->getAlbum());
+    album.appendChild(albumtxt);
+    root.appendChild(album);
+    //titlenumber
+    QString numberoftitle = QString::number(audio->getTitlenumber());
+    QDomElement titlenumber = document.createElement("titlenumber");
+    QDomText titlenumbertxt = document.createTextNode(numberoftitle);
+    titlenumber.appendChild(titlenumbertxt);
+    root.appendChild(titlenumber);
+    //description
+    QDomElement description = document.createElement("description");
+    QDomText descriptiontxt = document.createTextNode(audio->getDescription());
+    description.appendChild(descriptiontxt);
+    root.appendChild(description);
+    //license
+    QDomElement license = document.createElement("license");
+    QDomText licensetxt = document.createTextNode(audio->getLicense());
+    license.appendChild(licensetxt);
+    root.appendChild(license);
+    //recordlabel
+    QDomElement recordlabel = document.createElement("recordlabel");
+    QDomText recordlabeltxt = document.createTextNode(audio->getRecordlabel());
+    recordlabel.appendChild(recordlabeltxt);
+    root.appendChild(recordlabel);
+    //interpreter
+    tempVector = audio->getInterpreter();
+    for(int i = 0; i < tempVector.count(); ++i)
+    {
+        QDomElement interpreter = document.createElement("interpreter");
+        QDomText interpretertxt = document.createTextNode(tempVector.at(i));
+        interpreter.appendChild(interpretertxt);
+        root.appendChild(interpreter);
+    }
+    //genre
+    tempVector = audio->getGenre();
+    for(int i = 0; i < tempVector.count(); ++i)
+    {
+        QDomElement genre = document.createElement("genre");
+        QDomText genretxt = document.createTextNode(tempVector.at(i));
+        genre.appendChild(genretxt);
+        root.appendChild(genre);
+    }
+
+    //Write to File
+    QFile file(documentName);
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+    {
+        qDebug() << "failed to open file for writing";
+    }
+    else
+    {
+        QTextStream stream(&file);
+        stream << document.toString();
+        file.close();
+        qDebug() << "finished writing XML: Audio";
+    }
+}
+

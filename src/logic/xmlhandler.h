@@ -55,11 +55,19 @@ public:
     static QPointer<Video> readXMLFile_Video(QString documentName);
 
     //!
-    //! \brief Space for future method to write XML-Files
+    //! \brief writeXMLFile
+    //! \param picture
+    //! \param video
+    //! \param document
+    //! \param audio
+    //! \param documentName
     //!
-//    Picture write_XMLData()
-//    {
-//    }
+    static void writeXMLFile(QPointer<Picture> picture, QString documentName);
+    static void writeXMLFile(QPointer<Video> video, QString documentName);
+    static void writeXMLFile(QPointer<Document> document, QString documentName);
+    static void writeXMLFile(QPointer<Audio> audio, QString documentName);
+
+
 };
 
 #endif // XMLHANDLER_H
