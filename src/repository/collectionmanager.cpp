@@ -59,13 +59,7 @@ bool CollectionManager::createCollection(QString collectionName)
             if(!QDir(directory.path() + "/.vemoria").exists())
                 directory.mkdir(".vemoria");
 
-
             directory.mkdir(".vemoria/"+ collectionName);
-
-
-
-
-
 
             QFile file;
             file.setFileName(directory.path()+ "/" + ".vemoria/" + collectionName + "/." + collectionName + ".xml");
@@ -111,7 +105,7 @@ void CollectionManager::create(QString& collectionName)
     ///
     /// \brief initial commit with repository-xml
     ///
-
+#ifndef _WIN32
     int error = 0;
     git_libgit2_init();
     QDir directory = QDir::home();
@@ -159,6 +153,7 @@ void CollectionManager::create(QString& collectionName)
 
 
     git_libgit2_shutdown();
+#endif
 
 #ifdef _WIN32
     QByteArray ba = collectionName.toUtf8().constData();
@@ -167,4 +162,67 @@ void CollectionManager::create(QString& collectionName)
 #endif
 }
 
+void CollectionManager::commit(QString& collectionName, QString& commiter_name, QString& commiter_mail, QString& commitmessage)
+{
+    ///
+    /// \brief commit with name mail and message
+    ///
+
+#ifndef _WIN32
+    git_libgit2_init();
+    QDir directory = QDir::home();
+    git_repository *repo = NULL;
+    QByteArray repopath;
+    QByteArray pather = directory.path().toUtf8().constData();
+    QByteArray vem = "/.vemoria/";
+    repopath =  pather + vem + collectionName.toUtf8().constData();
+
+    git_repository_open(&repo, repopath);
+
+    git_index *idx = NULL;
+    git_repository_index(&idx, repo);
+
+    git_index_update_all(idx, NULL, NULL, NULL);
+    git_index_write(idx);
+
+    git_signature *me = NULL;
+    git_signature_now(&me, commiter_name.toUtf8().constData(), commiter_mail.toUtf8().constData());
+
+        git_index *index;
+        git_oid tree_id, commit_id;
+        git_tree *tree;
+        int error=0;
+
+        if (git_repository_index(&index, repo) < 0)
+            ++error;
+
+        if (git_index_write_tree(&tree_id, index) < 0)
+            ++error;
+
+        git_index_free(index);
+
+        if (git_tree_lookup(&tree, repo, &tree_id) < 0)
+                ++error;
+
+        if (git_commit_create_v(
+                  &commit_id, repo, "HEAD", me, me,
+                  NULL, commitmessage.toUtf8().constData(), tree, 0) < 0)
+              ++error;
+
+        git_tree_free(tree);
+            git_signature_free(me);
+
+
+    git_libgit2_shutdown();
+#endif
+
+#ifdef _WIN32
+    QByteArray ba = collectionName.toUtf8().constData();
+    QByteArray commiter;
+    commiter = (commiter_name + commiter_mail).toUtf8().constData();
+    QByteArray cmd = "cd .vemoria&&cd " + ba + "&&git add -A&&git commit -m \""+commitmessage.toUtf8().constData()+"\"";
+    system(cmd);
+#endif
+
+}
 
