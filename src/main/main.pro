@@ -1,6 +1,7 @@
 # qmake project file of the main application
 
-QT       += core gui
+# we need these QT libs
+QT += core gui xml
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -14,6 +15,8 @@ HEADERS += \
 
 OTHER_FILES += \
     version.sh \
+
+RESOURCES = ../gui/resource.qrc
 
 # tell includes.pri which libs we need to link
 DEPENDENCY_LIBRARIES = gui logic repository libqgit2 libgit2
