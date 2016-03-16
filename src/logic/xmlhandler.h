@@ -15,6 +15,7 @@
 #include <logic/document.h>
 #include <logic/video.h>
 #include <QPointer>
+#include <QDomElement>
 
 
 
@@ -26,9 +27,7 @@
 //!
 class XMLHandler
 {
-    //QString FilePath;
-
-       //!
+    //!
     //! \brief ListElements-Method for Picture, Audio, Document and Video
     //! \param root
     //! \param picture
@@ -60,7 +59,6 @@ public:
     //!
 //    Picture write_XMLData()
 //    {
-
 //    }
 };
 
