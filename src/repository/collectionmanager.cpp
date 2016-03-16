@@ -105,7 +105,7 @@ void CollectionManager::create(QString& collectionName)
     ///
     /// \brief initial commit with repository-xml
     ///
-
+#ifndef _WIN32
     int error = 0;
     git_libgit2_init();
     QDir directory = QDir::home();
@@ -153,6 +153,7 @@ void CollectionManager::create(QString& collectionName)
 
 
     git_libgit2_shutdown();
+#endif
 
 #ifdef _WIN32
     QByteArray ba = collectionName.toUtf8().constData();
