@@ -12,6 +12,7 @@
 #define ITEM_H
 
 #include <QString>
+#include <QFile>
 
 
 
@@ -25,7 +26,7 @@
  *  string class.
  */
  
-class Item
+class Item: public QFile
 {
   public:
     // Default constructors will do.

@@ -36,3 +36,4 @@ HEADERS  += \
     uiservices.h \
     version.h \
     xmlhandler.h
+
