@@ -109,7 +109,7 @@ void CollectionManager::deleteCollection()
 void CollectionManager::create(QString& collectionName)
 {
     ///
-    /// \todo initial commit doesnt work :(
+    /// \brief initial commit with repository-xml
     ///
 
     int error = 0;
@@ -123,6 +123,13 @@ void CollectionManager::create(QString& collectionName)
 
     /* With working directory: */
     git_repository_init(&repo,repopath, false);
+
+
+    git_index *idx = NULL;
+    git_repository_index(&idx, repo);
+
+    git_index_update_all(idx, NULL, NULL, NULL);
+    git_index_write(idx);
 
     git_signature *me = NULL;
     git_signature_now(&me, "Tobi", "inf@hs-worms.de");
@@ -152,6 +159,12 @@ void CollectionManager::create(QString& collectionName)
 
 
     git_libgit2_shutdown();
+
+#ifdef _WIN32
+    QByteArray ba = collectionName.toUtf8().constData();
+    QByteArray cmd = "cd .vemoria&&cd " + ba + "&&git add -A&&git commit -m \"Initial commit\"";
+    system(cmd);
+#endif
 }
 
 
