@@ -28,9 +28,9 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
 
     //XML example code
-    QPointer<Picture> pic;
-    XMLHandler xmlhandler;
-    pic = xmlhandler.readXMLFile_Picture("C:/Picture.xml");
+    //QPointer<Picture> pic;
+    //XMLHandler xmlhandler;
+    //pic = xmlhandler.readXMLFile_Picture("C:/Picture.xml");
 
 
     MainWindow mainwindow;

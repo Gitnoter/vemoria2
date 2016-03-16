@@ -10,17 +10,14 @@
 
 #ifndef XMLHANDLER_H
 #define XMLHANDLER_H
-#include <QStandardItemModel>
 #include <logic/picture.h>
 #include <logic/audio.h>
 #include <logic/document.h>
 #include <logic/video.h>
-#include <logic/undefined.h>
-
-#include <QtCore>
-#include <QtXml/QtXml>
-#include <QDebug>
 #include <QPointer>
+
+
+
 
 //!
 //! \brief The XMLHandler class
@@ -29,11 +26,15 @@
 //!
 class XMLHandler
 {
-    QString FilePath;
+    //QString FilePath;
 
        //!
-    //! \brief ListElements
+    //! \brief ListElements-Method for Picture, Audio, Document and Video
     //! \param root
+    //! \param picture
+    //! \param audio
+    //! \param document
+    //! \param video
     //! \param tagname
     //!
     static void ListElements_Picture(QDomElement root, QPointer<Picture> picture, QString tagname);
@@ -45,8 +46,8 @@ public:
     ~XMLHandler();
 
     //!
-    //! \brief readXMLFile
-    //! \param documentName
+    //! \brief readXMLFile-Method for Picture, Audio, Document and Video
+    //! \param documentName (with Path)
     //! \return all Elements of an XML-File
     //!
     static QPointer<Picture> readXMLFile_Picture(QString documentName);
