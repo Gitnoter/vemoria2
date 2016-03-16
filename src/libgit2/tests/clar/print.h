@@ -1,9 +1,14 @@
+#include <unistd.h>
 
 static void clar_print_init(int test_count, int suite_count, const char *suite_names)
 {
+        int PATH_LEN = 1024;
+        char dirname [PATH_LEN];
+        getcwd(dirname, PATH_LEN);
+
 	(void)test_count;
 	printf("Loaded %d suites: %s\n", (int)suite_count, suite_names);
-	printf("Started\n");
+        printf("Started in %s\n", dirname);
 }
 
 static void clar_print_shutdown(int test_count, int suite_count, int error_count)
