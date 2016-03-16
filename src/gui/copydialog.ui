@@ -67,7 +67,7 @@ border-width:1px;</string>
  }</string>
    </property>
    <property name="text">
-    <string>Select Folder</string>
+    <string>Start</string>
    </property>
   </widget>
   <widget class="QLabel" name="bytesLabel">

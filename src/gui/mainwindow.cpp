@@ -17,6 +17,12 @@
 #include <QDesktopWidget>
 #include <copydialog.h>
 #include <selectcollection.h>
+#include <QDir>
+#include <QLayout>
+#include <QListWidgetItem>
+#include <QSize>
+#include <QFileDialog>
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -27,6 +33,20 @@ MainWindow::MainWindow(QWidget *parent) :
 
     trigger = false;
     addTags();
+
+
+    dirModel = new QFileSystemModel(this);
+
+    fileModel = new QFileSystemModel(this);
+
+    ui->listView->setModel(fileModel);
+
+    QDir directory = QDir::home();
+    QString path = directory.path() + "/.vemoria";
+    ui->listView->setRootIndex(fileModel->setRootPath(path));
+
+    countRepoItems();
+
 }
 
 void MainWindow::resizeEvent(QResizeEvent*)
@@ -48,7 +68,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-//test
+//test metedata
 void MainWindow::addTags(){
 
     QLabel *label = new QLabel();
@@ -86,29 +106,7 @@ void MainWindow::addTags(){
     ui->formLayout_2->addWidget(lineedit5);
 }
 
-void MainWindow::on_pushButton_2_clicked()
-{
-        ui->gridDetail->show();
-
-        //not the best solution....
-        if(trigger == false){
-
-        const int width = QApplication::desktop()->width();
-
-        QSize windowSize;
-        windowSize = size();
-
-        int y  = 0;
-        y = windowSize.height();
-
-        //trigger the resize event to expand the scrollarea
-        resize(width,  y - 1);
-        resize(width,  y + 1);
-
-        trigger = true;
-        }
-}
-
+//show popupCollection
 void MainWindow::on_actionNew_Collection_triggered()
 {
       popupCollection popwindows;
@@ -116,16 +114,8 @@ void MainWindow::on_actionNew_Collection_triggered()
       popwindows.exec();
 }
 
-void MainWindow::on_deleteBtn_clicked()
-{
 
-}
-
-void MainWindow::on_saveBtn_clicked()
-{
-
-}
-
+//about message box
 void MainWindow::on_actionInfo_triggered()
 {
          QMessageBox msgBox;
@@ -150,13 +140,189 @@ void MainWindow::on_pushButton_3_clicked()
 
 void MainWindow::on_addButton_clicked()
 {
-//    copyDialog cpyDialog;
-//    cpyDialog.setModal(true);
-//    cpyDialog.setData("C:/Users/Dennis/Desktop/");
-//    cpyDialog.exec();
-
       selectCollection selectColl;
       selectColl.setModal(true);
       selectColl.exec();
+}
 
+//count items in the contentWindow & show path
+void MainWindow::countItems(QString path){
+
+//    QDir dir(path);
+
+//    int total_files = dir.count();
+
+//    QString totalFilesString = QString::number(total_files);
+
+    int counter = 0;
+
+    //extend filter
+    QDirIterator it(path, QStringList() << "*.png" << "*.jpg" << "*.jpeg", QDir::Files, QDirIterator::Subdirectories);
+    while (it.hasNext()) {
+        qDebug() << it.next();
+        counter++;
+    }
+
+    QString itemsCounterString = QString::number(counter);
+
+    ui->countItemsLabel->setText(itemsCounterString);
+    ui->pathLabel->setText(path + "/");
+}
+
+//show files in contentWindow
+void MainWindow::on_listView_clicked(const QModelIndex &index)
+{
+        fileModel = new QFileSystemModel(this);
+
+        ui->imageList->setModel(fileModel);
+
+        QString mPath = dirModel->fileInfo(index).absoluteFilePath();
+
+        //warning no subdirs
+        QString newPath = mPath + "/files";
+        countItems(newPath);
+
+        ui->imageList->setRootIndex(fileModel->setRootPath(newPath));
+}
+
+
+//show file in detail bar
+void MainWindow::on_imageList_clicked(const QModelIndex &index)
+{
+    QString mPath = dirModel->fileInfo(index).absoluteFilePath();
+    QFileInfo file(mPath);
+    qDebug() << mPath;
+
+    QPixmap pix(mPath);
+
+    QSize picSize =  pix.size();
+    int height = picSize.height();
+    int width  = picSize.width();
+
+    //resize Image to widget size
+    if(height > 265){
+    ui->imagePreview->setPixmap(pix.scaled (265, 150, Qt::IgnoreAspectRatio, Qt::FastTransformation ));
+    }
+    else{
+        ui->imagePreview->setPixmap(pix.scaled (width, height, Qt::IgnoreAspectRatio, Qt::FastTransformation ));
+    }
+
+    ui->editFiles->setText(file.fileName());
+
+    nameFile = file.fileName();
+    pathFile = mPath;
+
+    ui->gridDetail->show();
+
+    //not the best solution....
+    if(trigger == false){
+
+    const int width = QApplication::desktop()->width();
+
+    QSize windowSize;
+    windowSize = size();
+
+    int y  = 0;
+    y = windowSize.height();
+
+    //trigger the resize event to expand the scrollarea
+    resize(width,  y - 1);
+    resize(width,  y + 1);
+
+    trigger = true;
+    }
+}
+
+//save file changes
+void MainWindow::on_saveBtn_clicked()
+{
+    //check if for illegal expression
+    QFileInfo info = (pathFile);
+    QString absolut = info.absolutePath();
+    absolut = absolut + "/";
+
+    QString getFileName = ui->editFiles->text();
+    QDir renameFile = (absolut);
+
+    qDebug() << pathFile;
+    qDebug() << getFileName;
+    qDebug() << renameFile;
+    qDebug() << nameFile;
+    qDebug() << absolut;
+
+    if(nameFile != getFileName){
+    renameFile.rename(nameFile, getFileName);
+    ui->imageList->setRootIndex(fileModel->setRootPath(absolut));
+    }
+}
+
+void MainWindow::on_deleteBtn_clicked()
+{
+
+}
+
+void MainWindow::countRepoItems(){
+
+    int counter = 0;
+
+    //extend filter
+    QDirIterator it("C:/Users/Dennis/.Vemoria", QStringList() << "*.png" << "*.jpg" << "*.jpeg", QDir::Files, QDirIterator::Subdirectories);
+    while (it.hasNext()) {
+        qDebug() << it.next();
+        counter++;
+    }
+
+    QString itemsCounterString = QString::number(counter);
+    ui->repoItems->setText(itemsCounterString);
+}
+
+
+//set image filter
+void MainWindow::on_filterImagesButton_clicked()
+{
+
+        QFileInfo info = (pathFile);
+        QString absolut = info.absolutePath();
+        absolut = absolut + "/";
+
+        QStringList filters;
+        //extend filter
+        filters << "*.png" << "*.jpg" << "*.jpeg";
+
+        fileModel->setNameFilters(filters);
+        fileModel->setNameFilterDisables(false);
+
+        ui->imageList->setRootIndex(fileModel->setRootPath(absolut));
+}
+
+void MainWindow::on_filterVideoButton_clicked()
+{
+    QFileInfo info = (pathFile);
+    QString absolut = info.absolutePath();
+    absolut = absolut + "/";
+
+    QStringList filters;
+    //extend filter
+    filters << "*.mp4" << "*.mkv";
+
+    fileModel->setNameFilters(filters);
+    fileModel->setNameFilterDisables(false);
+
+    ui->imageList->setRootIndex(fileModel->setRootPath(absolut));
+}
+
+void MainWindow::on_filterDocumentsButton_clicked()
+{
+    QFileInfo info = (pathFile);
+    QString absolut = info.absolutePath();
+    absolut = absolut + "/";
+
+    QStringList filters;
+    //extend filter
+    filters << "*.pdf" << "*.doc" << "*.txt";
+
+    fileModel->setNameFilters(filters);
+    fileModel->setNameFilterDisables(false);
+
+    ui->imageList->setRootIndex(fileModel->setRootPath(absolut));
 }

@@ -300,6 +300,9 @@ QGroupBox{
                     <property name="rightMargin">
                      <number>20</number>
                     </property>
+                    <property name="spacing">
+                     <number>9</number>
+                    </property>
                     <item row="0" column="0">
                      <layout class="QFormLayout" name="formLayout_3">
                       <property name="horizontalSpacing">
@@ -308,28 +311,6 @@ QGroupBox{
                       <property name="verticalSpacing">
                        <number>0</number>
                       </property>
-                      <item row="1" column="0">
-                       <widget class="QLabel" name="rootIcon">
-                        <property name="styleSheet">
-                         <string notr="true">#rootIcon{
-	padding-right:10px;
-}</string>
-                        </property>
-                        <property name="text">
-                         <string/>
-                        </property>
-                        <property name="pixmap">
-                         <pixmap resource="resource.qrc">:/icons/icons/root-image.png</pixmap>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="1" column="1">
-                       <widget class="QLabel" name="RootLabel">
-                        <property name="text">
-                         <string>Collections</string>
-                        </property>
-                       </widget>
-                      </item>
                       <item row="2" column="0" colspan="2">
                        <widget class="QGroupBox" name="groupBox">
                         <property name="sizePolicy">
@@ -341,7 +322,7 @@ QGroupBox{
                         <property name="minimumSize">
                          <size>
                           <width>0</width>
-                          <height>0</height>
+                          <height>90</height>
                          </size>
                         </property>
                         <property name="maximumSize">
@@ -404,44 +385,354 @@ QGroupBox{
                              <number>0</number>
                             </property>
                             <item row="0" column="1">
-                             <widget class="QPushButton" name="openButton">
-                              <property name="cursor">
+                             <widget class="QListView" name="listView">
+                              <property name="minimumSize">
+                               <size>
+                                <width>0</width>
+                                <height>80</height>
+                               </size>
+                              </property>
+                              <property name="cursor" stdset="0">
                                <cursorShape>PointingHandCursor</cursorShape>
                               </property>
                               <property name="styleSheet">
-                               <string notr="true">#openButton{
-	text-align:left;
-	background:none;
-	border:none;
-	padding-left:10px;
+                               <string notr="true">#listView{
+background-color:white;
+border:none;
 }</string>
                               </property>
-                              <property name="text">
-                               <string>Example</string>
+                              <property name="verticalScrollBarPolicy">
+                               <enum>Qt::ScrollBarAlwaysOff</enum>
                               </property>
-                              <property name="autoDefault">
-                               <bool>false</bool>
-                              </property>
-                              <property name="default">
-                               <bool>false</bool>
-                              </property>
-                              <property name="flat">
-                               <bool>true</bool>
-                              </property>
-                             </widget>
-                            </item>
-                            <item row="0" column="0">
-                             <widget class="QLabel" name="label_2">
-                              <property name="text">
-                               <string/>
-                              </property>
-                              <property name="pixmap">
-                               <pixmap resource="resource.qrc">:/icons/icons/root-image.png</pixmap>
+                              <property name="horizontalScrollBarPolicy">
+                               <enum>Qt::ScrollBarAlwaysOff</enum>
                               </property>
                              </widget>
                             </item>
                            </layout>
                           </widget>
+                         </item>
+                        </layout>
+                       </widget>
+                      </item>
+                      <item row="4" column="0" colspan="2">
+                       <widget class="QGroupBox" name="groupBox_3">
+                        <property name="minimumSize">
+                         <size>
+                          <width>0</width>
+                          <height>90</height>
+                         </size>
+                        </property>
+                        <property name="styleSheet">
+                         <string notr="true">#groupBox_3{
+	border:none;
+	margin-top:15px;
+	margin-left:33px;
+}</string>
+                        </property>
+                        <property name="title">
+                         <string/>
+                        </property>
+                        <layout class="QGridLayout" name="gridLayout_7">
+                         <property name="leftMargin">
+                          <number>0</number>
+                         </property>
+                         <property name="topMargin">
+                          <number>0</number>
+                         </property>
+                         <property name="rightMargin">
+                          <number>0</number>
+                         </property>
+                         <property name="bottomMargin">
+                          <number>0</number>
+                         </property>
+                         <property name="spacing">
+                          <number>0</number>
+                         </property>
+                         <item row="0" column="0">
+                          <layout class="QFormLayout" name="formLayout_8">
+                           <property name="horizontalSpacing">
+                            <number>0</number>
+                           </property>
+                           <property name="verticalSpacing">
+                            <number>0</number>
+                           </property>
+                           <item row="2" column="1">
+                            <widget class="QPushButton" name="filterDocumentsButton">
+                             <property name="cursor">
+                              <cursorShape>PointingHandCursor</cursorShape>
+                             </property>
+                             <property name="styleSheet">
+                              <string notr="true">#filterDocumentsButton{
+	text-align:left;
+	background:none;
+	border:none;
+	padding:0;
+	margin-top:12px;
+}</string>
+                             </property>
+                             <property name="text">
+                              <string>Documents</string>
+                             </property>
+                             <property name="flat">
+                              <bool>true</bool>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="2" column="0">
+                            <widget class="QLabel" name="filterDocumentIcon">
+                             <property name="styleSheet">
+                              <string notr="true">#filterDocumentIcon{
+	margin-top:12px;
+}</string>
+                             </property>
+                             <property name="text">
+                              <string/>
+                             </property>
+                             <property name="pixmap">
+                              <pixmap resource="resource.qrc">:/icons/icons/filter-documents.png</pixmap>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="1" column="1">
+                            <widget class="QPushButton" name="filterVideoButton">
+                             <property name="sizePolicy">
+                              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                               <horstretch>0</horstretch>
+                               <verstretch>0</verstretch>
+                              </sizepolicy>
+                             </property>
+                             <property name="minimumSize">
+                              <size>
+                               <width>0</width>
+                               <height>25</height>
+                              </size>
+                             </property>
+                             <property name="cursor">
+                              <cursorShape>PointingHandCursor</cursorShape>
+                             </property>
+                             <property name="styleSheet">
+                              <string notr="true">#filterVideoButton{
+	text-align:left;
+	border:none;
+	background:none;
+	padding:0;
+	margin-top:12px;
+}</string>
+                             </property>
+                             <property name="text">
+                              <string>Videos</string>
+                             </property>
+                             <property name="flat">
+                              <bool>true</bool>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="1" column="0">
+                            <widget class="QLabel" name="filterVideoIcon">
+                             <property name="styleSheet">
+                              <string notr="true">#filterVideoIcon{
+	margin-top:12px;
+}</string>
+                             </property>
+                             <property name="text">
+                              <string/>
+                             </property>
+                             <property name="pixmap">
+                              <pixmap resource="resource.qrc">:/icons/icons/filter-videos.png</pixmap>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="0" column="1">
+                            <widget class="QPushButton" name="filterImagesButton">
+                             <property name="enabled">
+                              <bool>true</bool>
+                             </property>
+                             <property name="sizePolicy">
+                              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                               <horstretch>0</horstretch>
+                               <verstretch>0</verstretch>
+                              </sizepolicy>
+                             </property>
+                             <property name="minimumSize">
+                              <size>
+                               <width>0</width>
+                               <height>20</height>
+                              </size>
+                             </property>
+                             <property name="cursor">
+                              <cursorShape>PointingHandCursor</cursorShape>
+                             </property>
+                             <property name="styleSheet">
+                              <string notr="true">#filterImagesButton{
+	text-align:left;
+	padding:0;
+	border:none;
+	background:none;
+}</string>
+                             </property>
+                             <property name="text">
+                              <string>Images</string>
+                             </property>
+                             <property name="flat">
+                              <bool>true</bool>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="0" column="0">
+                            <widget class="QLabel" name="filterImagesIcon">
+                             <property name="styleSheet">
+                              <string notr="true">#filterImagesIcon{
+	padding-right:10px;
+}</string>
+                             </property>
+                             <property name="text">
+                              <string/>
+                             </property>
+                             <property name="pixmap">
+                              <pixmap resource="resource.qrc">:/icons/icons/filter-images.png</pixmap>
+                             </property>
+                            </widget>
+                           </item>
+                          </layout>
+                         </item>
+                        </layout>
+                       </widget>
+                      </item>
+                      <item row="5" column="0" colspan="2">
+                       <widget class="QGroupBox" name="groupBox_4">
+                        <property name="styleSheet">
+                         <string notr="true">#groupBox_4{
+	border:none;
+	margin-top:45px;
+
+}</string>
+                        </property>
+                        <property name="title">
+                         <string/>
+                        </property>
+                        <layout class="QGridLayout" name="gridLayout_9">
+                         <property name="leftMargin">
+                          <number>0</number>
+                         </property>
+                         <property name="topMargin">
+                          <number>0</number>
+                         </property>
+                         <property name="rightMargin">
+                          <number>0</number>
+                         </property>
+                         <property name="bottomMargin">
+                          <number>0</number>
+                         </property>
+                         <property name="spacing">
+                          <number>0</number>
+                         </property>
+                         <item row="0" column="0">
+                          <layout class="QFormLayout" name="formLayout_9">
+                           <property name="horizontalSpacing">
+                            <number>0</number>
+                           </property>
+                           <property name="verticalSpacing">
+                            <number>0</number>
+                           </property>
+                           <item row="0" column="1">
+                            <widget class="QLabel" name="label">
+                             <property name="text">
+                              <string>Progress</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="0" column="0">
+                            <widget class="QLabel" name="progressIcon">
+                             <property name="styleSheet">
+                              <string notr="true">#progressIcon{
+	padding-right:10px;
+}</string>
+                             </property>
+                             <property name="text">
+                              <string/>
+                             </property>
+                             <property name="pixmap">
+                              <pixmap resource="resource.qrc">:/icons/icons/progress.png</pixmap>
+                             </property>
+                            </widget>
+                           </item>
+                          </layout>
+                         </item>
+                        </layout>
+                       </widget>
+                      </item>
+                      <item row="6" column="0" colspan="2">
+                       <widget class="QGroupBox" name="groupBox_5">
+                        <property name="styleSheet">
+                         <string notr="true">#groupBox_5{
+	border:none;
+	margin-top:15px;
+	margin-left:33px;
+}</string>
+                        </property>
+                        <property name="title">
+                         <string/>
+                        </property>
+                        <layout class="QGridLayout" name="gridLayout_13">
+                         <property name="leftMargin">
+                          <number>0</number>
+                         </property>
+                         <property name="topMargin">
+                          <number>0</number>
+                         </property>
+                         <property name="rightMargin">
+                          <number>0</number>
+                         </property>
+                         <property name="bottomMargin">
+                          <number>0</number>
+                         </property>
+                         <property name="spacing">
+                          <number>0</number>
+                         </property>
+                         <item row="0" column="0">
+                          <layout class="QFormLayout" name="formLayout_10">
+                           <property name="horizontalSpacing">
+                            <number>0</number>
+                           </property>
+                           <property name="verticalSpacing">
+                            <number>0</number>
+                           </property>
+                           <item row="1" column="0" colspan="2">
+                            <widget class="QRadioButton" name="todoButton">
+                             <property name="cursor">
+                              <cursorShape>PointingHandCursor</cursorShape>
+                             </property>
+                             <property name="styleSheet">
+                              <string notr="true">#todoButton{
+	margin-top:6px;
+}</string>
+                             </property>
+                             <property name="text">
+                              <string>To Do</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="0" column="0" colspan="2">
+                            <widget class="QRadioButton" name="doneButton">
+                             <property name="cursor">
+                              <cursorShape>PointingHandCursor</cursorShape>
+                             </property>
+                             <property name="styleSheet">
+                              <string notr="true"/>
+                             </property>
+                             <property name="text">
+                              <string>Done</string>
+                             </property>
+                             <property name="iconSize">
+                              <size>
+                               <width>16</width>
+                               <height>16</height>
+                              </size>
+                             </property>
+                            </widget>
+                           </item>
+                          </layout>
                          </item>
                         </layout>
                        </widget>
@@ -529,295 +820,26 @@ QGroupBox{
                         </layout>
                        </widget>
                       </item>
-                      <item row="4" column="0" colspan="2">
-                       <widget class="QGroupBox" name="groupBox_3">
+                      <item row="1" column="0">
+                       <widget class="QLabel" name="rootIcon">
                         <property name="styleSheet">
-                         <string notr="true">#groupBox_3{
-	border:none;
-	margin-top:15px;
-	margin-left:33px;
-}</string>
-                        </property>
-                        <property name="title">
-                         <string/>
-                        </property>
-                        <layout class="QGridLayout" name="gridLayout_7">
-                         <property name="leftMargin">
-                          <number>0</number>
-                         </property>
-                         <property name="topMargin">
-                          <number>0</number>
-                         </property>
-                         <property name="rightMargin">
-                          <number>0</number>
-                         </property>
-                         <property name="bottomMargin">
-                          <number>0</number>
-                         </property>
-                         <property name="spacing">
-                          <number>0</number>
-                         </property>
-                         <item row="0" column="0">
-                          <layout class="QFormLayout" name="formLayout_8">
-                           <property name="horizontalSpacing">
-                            <number>0</number>
-                           </property>
-                           <property name="verticalSpacing">
-                            <number>0</number>
-                           </property>
-                           <item row="0" column="0">
-                            <widget class="QLabel" name="filterImagesIcon">
-                             <property name="styleSheet">
-                              <string notr="true">#filterImagesIcon{
+                         <string notr="true">#rootIcon{
 	padding-right:10px;
 }</string>
-                             </property>
-                             <property name="text">
-                              <string/>
-                             </property>
-                             <property name="pixmap">
-                              <pixmap resource="resource.qrc">:/icons/icons/filter-images.png</pixmap>
-                             </property>
-                            </widget>
-                           </item>
-                           <item row="0" column="1">
-                            <widget class="QPushButton" name="filterImagesButton">
-                             <property name="enabled">
-                              <bool>true</bool>
-                             </property>
-                             <property name="cursor">
-                              <cursorShape>PointingHandCursor</cursorShape>
-                             </property>
-                             <property name="styleSheet">
-                              <string notr="true">#filterImagesButton{
-	text-align:left;
-	padding:0;
-	border:none;
-	background:none;
-}</string>
-                             </property>
-                             <property name="text">
-                              <string>Images</string>
-                             </property>
-                             <property name="flat">
-                              <bool>true</bool>
-                             </property>
-                            </widget>
-                           </item>
-                           <item row="1" column="1">
-                            <widget class="QPushButton" name="filterVideoButton">
-                             <property name="cursor">
-                              <cursorShape>PointingHandCursor</cursorShape>
-                             </property>
-                             <property name="styleSheet">
-                              <string notr="true">#filterVideoButton{
-	text-align:left;
-	border:none;
-	background:none;
-	padding:0;
-	margin-top:12px;
-}</string>
-                             </property>
-                             <property name="text">
-                              <string>Videos</string>
-                             </property>
-                             <property name="flat">
-                              <bool>true</bool>
-                             </property>
-                            </widget>
-                           </item>
-                           <item row="1" column="0">
-                            <widget class="QLabel" name="filterVideoIcon">
-                             <property name="styleSheet">
-                              <string notr="true">#filterVideoIcon{
-	margin-top:12px;
-}</string>
-                             </property>
-                             <property name="text">
-                              <string/>
-                             </property>
-                             <property name="pixmap">
-                              <pixmap resource="resource.qrc">:/icons/icons/filter-videos.png</pixmap>
-                             </property>
-                            </widget>
-                           </item>
-                           <item row="2" column="1">
-                            <widget class="QPushButton" name="filterDocumentsButton">
-                             <property name="cursor">
-                              <cursorShape>PointingHandCursor</cursorShape>
-                             </property>
-                             <property name="styleSheet">
-                              <string notr="true">#filterDocumentsButton{
-	text-align:left;
-	background:none;
-	border:none;
-	padding:0;
-	margin-top:12px;
-}</string>
-                             </property>
-                             <property name="text">
-                              <string>Documents</string>
-                             </property>
-                             <property name="flat">
-                              <bool>true</bool>
-                             </property>
-                            </widget>
-                           </item>
-                           <item row="2" column="0">
-                            <widget class="QLabel" name="filterDocumentIcon">
-                             <property name="styleSheet">
-                              <string notr="true">#filterDocumentIcon{
-	margin-top:12px;
-}</string>
-                             </property>
-                             <property name="text">
-                              <string/>
-                             </property>
-                             <property name="pixmap">
-                              <pixmap resource="resource.qrc">:/icons/icons/filter-documents.png</pixmap>
-                             </property>
-                            </widget>
-                           </item>
-                          </layout>
-                         </item>
-                        </layout>
-                       </widget>
-                      </item>
-                      <item row="5" column="0" colspan="2">
-                       <widget class="QGroupBox" name="groupBox_4">
-                        <property name="styleSheet">
-                         <string notr="true">#groupBox_4{
-	border:none;
-	margin-top:30px;
-}</string>
                         </property>
-                        <property name="title">
+                        <property name="text">
                          <string/>
                         </property>
-                        <layout class="QGridLayout" name="gridLayout_9">
-                         <property name="leftMargin">
-                          <number>0</number>
-                         </property>
-                         <property name="topMargin">
-                          <number>0</number>
-                         </property>
-                         <property name="rightMargin">
-                          <number>0</number>
-                         </property>
-                         <property name="bottomMargin">
-                          <number>0</number>
-                         </property>
-                         <property name="spacing">
-                          <number>0</number>
-                         </property>
-                         <item row="0" column="0">
-                          <layout class="QFormLayout" name="formLayout_9">
-                           <property name="horizontalSpacing">
-                            <number>0</number>
-                           </property>
-                           <property name="verticalSpacing">
-                            <number>0</number>
-                           </property>
-                           <item row="0" column="0">
-                            <widget class="QLabel" name="progressIcon">
-                             <property name="styleSheet">
-                              <string notr="true">#progressIcon{
-	padding-right:10px;
-}</string>
-                             </property>
-                             <property name="text">
-                              <string/>
-                             </property>
-                             <property name="pixmap">
-                              <pixmap resource="resource.qrc">:/icons/icons/progress.png</pixmap>
-                             </property>
-                            </widget>
-                           </item>
-                           <item row="0" column="1">
-                            <widget class="QLabel" name="label">
-                             <property name="text">
-                              <string>Progress</string>
-                             </property>
-                            </widget>
-                           </item>
-                          </layout>
-                         </item>
-                        </layout>
+                        <property name="pixmap">
+                         <pixmap resource="resource.qrc">:/icons/icons/root-image.png</pixmap>
+                        </property>
                        </widget>
                       </item>
-                      <item row="6" column="0" colspan="2">
-                       <widget class="QGroupBox" name="groupBox_5">
-                        <property name="styleSheet">
-                         <string notr="true">#groupBox_5{
-	border:none;
-	margin-top:15px;
-	margin-left:33px;
-}</string>
+                      <item row="1" column="1">
+                       <widget class="QLabel" name="RootLabel">
+                        <property name="text">
+                         <string>Collections</string>
                         </property>
-                        <property name="title">
-                         <string/>
-                        </property>
-                        <layout class="QGridLayout" name="gridLayout_13">
-                         <property name="leftMargin">
-                          <number>0</number>
-                         </property>
-                         <property name="topMargin">
-                          <number>0</number>
-                         </property>
-                         <property name="rightMargin">
-                          <number>0</number>
-                         </property>
-                         <property name="bottomMargin">
-                          <number>0</number>
-                         </property>
-                         <property name="spacing">
-                          <number>0</number>
-                         </property>
-                         <item row="0" column="0">
-                          <layout class="QFormLayout" name="formLayout_10">
-                           <property name="horizontalSpacing">
-                            <number>0</number>
-                           </property>
-                           <property name="verticalSpacing">
-                            <number>0</number>
-                           </property>
-                           <item row="0" column="0" colspan="2">
-                            <widget class="QRadioButton" name="doneButton">
-                             <property name="cursor">
-                              <cursorShape>PointingHandCursor</cursorShape>
-                             </property>
-                             <property name="styleSheet">
-                              <string notr="true"/>
-                             </property>
-                             <property name="text">
-                              <string>Done</string>
-                             </property>
-                             <property name="iconSize">
-                              <size>
-                               <width>16</width>
-                               <height>16</height>
-                              </size>
-                             </property>
-                            </widget>
-                           </item>
-                           <item row="1" column="0" colspan="2">
-                            <widget class="QRadioButton" name="todoButton">
-                             <property name="cursor">
-                              <cursorShape>PointingHandCursor</cursorShape>
-                             </property>
-                             <property name="styleSheet">
-                              <string notr="true">#todoButton{
-	margin-top:6px;
-}</string>
-                             </property>
-                             <property name="text">
-                              <string>To Do</string>
-                             </property>
-                            </widget>
-                           </item>
-                          </layout>
-                         </item>
-                        </layout>
                        </widget>
                       </item>
                      </layout>
@@ -1008,7 +1030,7 @@ QGroupBox{
                          <number>0</number>
                         </property>
                         <item>
-                         <widget class="QLabel" name="label_4">
+                         <widget class="QLabel" name="repoItems">
                           <property name="text">
                            <string>432 Elements</string>
                           </property>
@@ -1185,7 +1207,7 @@ QGroupBox{
               <property name="minimumSize">
                <size>
                 <width>0</width>
-                <height>47</height>
+                <height>44</height>
                </size>
               </property>
               <property name="styleSheet">
@@ -1250,12 +1272,12 @@ padding-right:3px;
 </string>
                    </property>
                    <property name="text">
-                    <string>/</string>
+                    <string/>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QLabel" name="label_7">
+                  <widget class="QLabel" name="pathLabel">
                    <property name="styleSheet">
                     <string notr="true">color:#191919;
 font-family: 'Source Sans Pro';
@@ -1264,12 +1286,12 @@ font-weight:regular;
 padding-right:13px;</string>
                    </property>
                    <property name="text">
-                    <string>Images 2015</string>
+                    <string>Path</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QLabel" name="label_8">
+                  <widget class="QLabel" name="countItemsLabel">
                    <property name="sizePolicy">
                     <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
                      <horstretch>0</horstretch>
@@ -1300,7 +1322,7 @@ font-family: 'Source Sans Pro';
 font-weight:regular;</string>
                    </property>
                    <property name="text">
-                    <string>24</string>
+                    <string>0</string>
                    </property>
                   </widget>
                  </item>
@@ -1323,7 +1345,7 @@ font-weight:regular;</string>
               <property name="minimumSize">
                <size>
                 <width>300</width>
-                <height>47</height>
+                <height>44</height>
                </size>
               </property>
               <property name="styleSheet">
@@ -1373,9 +1395,12 @@ border-bottom:1px solid #e3e3e3;
           </widget>
          </item>
          <item row="1" column="0">
-          <widget class="QPushButton" name="pushButton_2">
-           <property name="text">
-            <string>test open detail</string>
+          <widget class="QListView" name="imageList">
+           <property name="styleSheet">
+            <string notr="true">#imageList{
+border:none;
+background-color:white;
+}</string>
            </property>
           </widget>
          </item>
@@ -1672,7 +1697,7 @@ border:1px solid #e8293f;</string>
                         <number>15</number>
                        </property>
                        <item row="0" column="0" colspan="2">
-                        <widget class="QLabel" name="label_10">
+                        <widget class="QLabel" name="imagePreview">
                          <property name="minimumSize">
                           <size>
                            <width>0</width>
@@ -1692,6 +1717,9 @@ border:1px solid #e8293f;</string>
                          </property>
                          <property name="text">
                           <string/>
+                         </property>
+                         <property name="alignment">
+                          <set>Qt::AlignCenter</set>
                          </property>
                         </widget>
                        </item>

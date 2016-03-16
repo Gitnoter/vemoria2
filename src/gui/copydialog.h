@@ -15,8 +15,10 @@ class copyDialog : public QDialog
 public:
     explicit copyDialog(QWidget *parent = 0);
     ~copyDialog();
-    void setData(const QString &labelText);
+    void setData(const QString &labelText, const QString &dirName);
     QString path;
+    QString dirPath;
+    QString dirName;
 
 private slots:
     void on_pushButton_clicked();
@@ -31,6 +33,8 @@ private:
     quint64 file_size(QString path);
     quint64 stackSize;
     int itemsCounter;
+    void startCopy();
+    bool bullshit;
 
 };
 

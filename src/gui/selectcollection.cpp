@@ -6,6 +6,7 @@
 #include <QListWidgetItem>
 #include <QSize>
 #include <copydialog.h>
+#include <QFileDialog>
 
 selectCollection::selectCollection(QWidget *parent) :
     QDialog(parent),
@@ -13,22 +14,19 @@ selectCollection::selectCollection(QWidget *parent) :
 {
         ui->setupUi(this);
 
-        QString mPath = "C:/";
-        dirModel = new QFileSystemModel(this);
-
-        dirModel->setRootPath(mPath);
-
         fileModel = new QFileSystemModel(this);
-
-        fileModel->setRootPath(mPath);
 
         ui->listView->setModel(fileModel);
 
-       // if(!QDir(directory.path() + "/.vemoria").exists()){
+        QDir directory = QDir::home();
+        if(QDir(directory.path() + "/.vemoria").exists()){
                     QDir directory = QDir::home();
                     QString path = directory.path() + "/.vemoria";
                     ui->listView->setRootIndex(fileModel->setRootPath(path));
-       // }
+        }
+        else{
+            //call Collection func
+        }
 }
 
 selectCollection::~selectCollection()
@@ -38,10 +36,14 @@ selectCollection::~selectCollection()
 
 void selectCollection::on_pushButton_clicked()
 {
+
+    //open file explorer to select a directory
+    QString dirName = QFileDialog::getExistingDirectory(this, tr("Open Directory"),"/home", QFileDialog::ShowDirsOnly  | QFileDialog::DontResolveSymlinks);
+
     if(selectedPath != NULL){
         copyDialog cpyDialog;
+        cpyDialog.setData(selectedPath, dirName);
         cpyDialog.setModal(true);
-        cpyDialog.setData(selectedPath);
         cpyDialog.exec();
     }
    else{
@@ -53,6 +55,5 @@ void selectCollection::on_listView_clicked(const QModelIndex &index)
 {
           QString mPath = dirModel->fileInfo(index).absoluteFilePath();
           selectedPath = mPath;
-
           ui->label->setText(mPath);
 }

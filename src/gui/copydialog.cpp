@@ -12,8 +12,15 @@
 
 copyDialog::copyDialog(QWidget *parent) : QDialog(parent), ui(new Ui::copyDialog)
 {
+   qDebug() << "copyDialog";
+
     ui->setupUi(this);
+
+   qDebug() << "setupUI";
+
     ui->progressBar->setValue(0);
+    stackSize = 0;
+    itemsCounter = 0;
 }
 
 copyDialog::~copyDialog()
@@ -21,17 +28,30 @@ copyDialog::~copyDialog()
     delete ui;
 }
 
-void copyDialog::setData(const QString &labelText){
-    ui->pathLabel->setText("Collection selected: " + labelText + "/");
+void copyDialog::setData(const QString &labelText, const QString &dirName){
+
+    ui->pathLabel->setText("Copy from: " + labelText + "/" + dirName);
     path = labelText + "/";
+    this->dirName = dirName;
+
+    qDebug() << "setData";
+
+    startCopy();
+
+}
+
+void copyDialog::startCopy(){
+
+    qDebug() << "startCopy";
+
 }
 
 void copyDialog::on_pushButton_clicked()
 {
-    ui->progressBar->setValue(0);
+     ui->progressBar->setValue(0);
 
     //open file explorer to select a directory
-    QString dirName = QFileDialog::getExistingDirectory(this, tr("Open Directory"),"/home", QFileDialog::ShowDirsOnly  | QFileDialog::DontResolveSymlinks);
+
     QFileInfo file(dirName);
 
     stackSize = 0;
@@ -47,6 +67,10 @@ void copyDialog::on_pushButton_clicked()
     //ui->pathLabel->setText("Copying items from " + dirName + " to C:/Users/");
 
     if(copy == true){
+
+        QDir renameDir = (path);
+        renameDir.rename(file.fileName(), "files");
+
         ui->progressBar->setMaximum(100);
         ui->progressBar->setValue(100);
         ui->speedLabel->setText("Data rate: 0 kb/s");
@@ -80,8 +104,9 @@ bool copyDialog::copyDir(QString sourcePath, QString targetPath, quint64 size)
             //get file size to calculate speed & process status
             quint64 fileSize = file_size(newSrcFilePath);
 
-            timer time;
-            int speed = time.MySlot(fileSize);
+            //timer time;
+            //int speed = time.MySlot(fileSize);
+            int speed = 0;
 
             //calculate current copyied files in bytes
             stackSize = fileSize + stackSize;
