@@ -19,8 +19,8 @@ SOURCES += \
     picture.cpp \
     undefined.cpp \
     video.cpp \
-    uiservices.cpp
-    xmlhandler.cpp \
+    uiservices.cpp \
+    xmlhandler.cpp
 
 HEADERS  += \
     audio.h \

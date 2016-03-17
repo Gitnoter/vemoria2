@@ -29,10 +29,14 @@ int main(int argc, char *argv[])
     ///\todo We should parse the command line arguments here.
     QApplication app(argc, argv);
 
-    //XML example code
-    //QPointer<Picture> pic;
-    //XMLHandler xmlhandler;
-    //pic = xmlhandler.readXMLFile_Picture("C:/Picture.xml");
+    //XML example code start
+//    QPointer<Picture> pic;
+//    XMLHandler xmlhandler;
+//    pic = xmlhandler.readXMLFile_Picture("C:/Picture.xml");
+
+//    XMLHandler xmlwriter;
+//    xmlwriter.writeXMLFile(pic,"C:/Users/Jay/Desktop/XMLTest/" + pic->getTitle() + ".xml");
+    //XML example code end
 
 
     UiServices* uiservices = new UiServices();
