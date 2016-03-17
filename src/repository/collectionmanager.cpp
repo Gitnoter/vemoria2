@@ -105,8 +105,8 @@ void CollectionManager::create(QString& collectionName)
     ///
     /// \brief initial commit with repository-xml
     ///
-#ifndef _WIN32
-    int error = 0;
+
+    int error;
     git_libgit2_init();
     QDir directory = QDir::home();
     git_repository *repo = NULL;
@@ -114,10 +114,11 @@ void CollectionManager::create(QString& collectionName)
     QByteArray pather = directory.path().toUtf8().constData();
     QByteArray vem = "/.vemoria/";
     repopath =  pather + vem + collectionName.toUtf8().constData();
-
+    error = 0;
+    error = error + 0;
     /* With working directory: */
     git_repository_init(&repo,repopath, false);
-
+#ifndef _WIN32
 
     git_index *idx = NULL;
     git_repository_index(&idx, repo);
