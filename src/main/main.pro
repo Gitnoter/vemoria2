@@ -1,6 +1,7 @@
 # qmake project file of the main application
 
-QT       += core gui
+# we need these QT libs
+QT += core gui xml
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 

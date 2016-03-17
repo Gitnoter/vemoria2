@@ -27,8 +27,10 @@ public:
     void getCollectionList();
     bool createCollection(QString collectionName);
     void deleteCollection();
+    void create(QString &collectionName);
+    void commit(QString& collectionName, QString& commiter_name, QString& commiter_mail, QString& commitmessage);
 private:
-    QPointer<LibQGit2::Repository> repo;
+
 };
 
 #endif // COLLECTIONMANAGER_H

@@ -22,6 +22,9 @@
 /project-number.dox
 /doc/doxygen/project-number.dox
 
+# libgit / libqgit test directories
+/TEST_DIR
+
 # ignore generated files
 *.a
 *.core

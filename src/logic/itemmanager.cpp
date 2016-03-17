@@ -1,29 +1,32 @@
-////////////////////////////////////////////////////////////////////////
-/// Project Vemoria                                                    /
-///                                                                    /
-/// Vemoria aims to be an environment for archiving multimedia files.  /
-///                                                                    /
-///                                                                    /
-/// This project is licensed under the EUPL v.1.1 or a later version.  /
-////////////////////////////////////////////////////////////////////////
+/// \file
+/// \brief	Vemoria ItemManager implementation.
+/// The ItemManager will instantly apply changes to files in the repository (Items) and provide
+/// functionality around files in general.
+/// \ingroup	g_logic
+///
 #include "itemmanager.h"
+#include <QDesktopServices>
+#include <QUrl>
+#include <QFileInfo>
+#include <QDateTime>
 
-ItemManager::ItemManager()
+
+ItemManager::ItemManager(UiServices *newUiservices)
+{
+    this->uiservices = newUiservices;
+}
+
+void ItemManager::getItemDetails(QString const & /*itemname*/) const
 {
 
 }
 
-void ItemManager::getItemDetails(string /*itemname*/)
+void ItemManager::setItemDetails(QString const & /*itemname*/, QString /*Details*/[] /*, specific Item(Pointer?)*/)
 {
 
 }
 
-void ItemManager::setItemDetails(string /*itemname*/, string /*Details*/[] /*, specific Item(Pointer?)*/)
-{
-
-}
-
-string ItemManager::getItemList()
+QString ItemManager::getItemList() const
 {
     return "";
 }
@@ -42,7 +45,7 @@ void ItemManager::restoreItem()
 
 }
 
-void ItemManager::exportItems(string /*ItemList*/[])
+void ItemManager::exportItems(QString /*ItemList*/[])
 {
 
 }
@@ -52,9 +55,14 @@ void ItemManager::createItem()
 
 }
 
-void ItemManager::openItemExternally(string /*itemname*/)
+void ItemManager::openItemExternally( Item & /*itemToOpen*/ )
 {
-
+    ///
+    /// \brief ItemManager::openItemExternally
+    /// We kindly ask QDesktopSerivices to open the file.
+    ///
+    ///
+    // QDesktopServices::openUrl(QUrl("file:///"+itemToOpen.getPath(),QUrl::TolerantMode));
 }
 
 void ItemManager::createDir()

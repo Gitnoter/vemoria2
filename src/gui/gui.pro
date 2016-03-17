@@ -16,7 +16,8 @@ SOURCES += \
     undefinedgui_2.cpp \
     copydialog.cpp \
     timer.cpp \
-    selectcollection.cpp
+    selectcollection.cpp \
+    qtguiservices.cpp
 
 HEADERS  += \
     mainwindow.h \
@@ -25,7 +26,8 @@ HEADERS  += \
     undefinedgui_2.h \
     copydialog.h \
     timer.h \
-    selectcollection.h
+    selectcollection.h \
+    qtguiservices.h
 
 FORMS += \
     mainwindow.ui \

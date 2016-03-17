@@ -10,6 +10,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "../version.h"
+#include <QDebug> //currently here for debugging purposes, obviously
 #include "popupcollection.h"
 #include "QMessageBox"
 #include <QTextEdit>
@@ -23,6 +24,13 @@
 #include <QSize>
 #include <QFileDialog>
 #include <QDebug>
+#include "QFontDatabase"
+#include <QDesktopServices>
+#include <QUrl>
+#include <QFile>
+#include <QFileDialog>
+#include <QMessageBox>
+#include "qtguiservices.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -370,4 +378,18 @@ void MainWindow::on_collectionOpen_clicked()
     QString path = directory.path() + "/.vemoria";
     ui->imageList->setRootIndex(fileModel->setRootPath(path));
 
+}
+
+
+void MainWindow::on_pushButton_5_clicked()
+{
+
+    QtGuiServices guiServices;
+    guiServices.openURL(this, QUrl("",QUrl::TolerantMode));
+}
+
+void MainWindow::on_pushButton_4_clicked()
+{
+    QtGuiServices guiServices;
+    guiServices.deleteURL(QUrl("C:/Users/Sulfi/Desktop/QTremove/test.txt",QUrl::TolerantMode));
 }

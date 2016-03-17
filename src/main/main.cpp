@@ -12,9 +12,14 @@
 
 #include <QApplication>
 #include "gui/mainwindow.h"
+#include "itemmanager.h"
+#include "uiservices.h"
 #include "QFile"
 #include "QFont"
 #include "QDebug"
+
+#include "xmlhandler.h"
+#include <QPointer>
 
 /// The usual program entry.
 /// The main function is as short as possible, as we cannot easily test in in a unit test.
@@ -24,8 +29,22 @@ int main(int argc, char *argv[])
     ///\todo We should parse the command line arguments here.
     QApplication app(argc, argv);
 
+    //XML example code start
+//    QPointer<Picture> pic;
+//    XMLHandler xmlhandler;
+//    pic = xmlhandler.readXMLFile_Picture("C:/Picture.xml");
+
+//    XMLHandler xmlwriter;
+//    xmlwriter.writeXMLFile(pic,"C:/Users/Jay/Desktop/XMLTest/" + pic->getTitle() + ".xml");
+    //XML example code end
+
+
+    UiServices* uiservices = new UiServices();
+    ItemManager* itemmanager = new ItemManager(uiservices);
+
     MainWindow mainwindow;
     mainwindow.showMaximized();
+    (void) itemmanager;
 
 
      QFile file(":/fonts/fonts/SourceSansPro-Regular.ttf");

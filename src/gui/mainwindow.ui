@@ -1462,6 +1462,32 @@ border:none;
 background-color:white;
 }</string>
            </property>
+           <widget class="QPushButton" name="pushButton_5">
+            <property name="geometry">
+             <rect>
+              <x>70</x>
+              <y>70</y>
+              <width>75</width>
+              <height>23</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>openwith</string>
+            </property>
+           </widget>
+           <widget class="QPushButton" name="pushButton_4">
+            <property name="geometry">
+             <rect>
+              <x>330</x>
+              <y>70</y>
+              <width>75</width>
+              <height>23</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>delete</string>
+            </property>
+           </widget>
           </widget>
          </item>
         </layout>
@@ -2077,6 +2103,7 @@ border-radius: 4px;
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <resources/>
  <resources>
   <include location="resource.qrc"/>
   <include location="resource.qrc"/>
