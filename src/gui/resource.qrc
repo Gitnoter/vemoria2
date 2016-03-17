@@ -14,6 +14,7 @@
         <file>icons/trash.png</file>
         <file>icons/home.png</file>
         <file>icons/VEM.png</file>
+        <file>icons/more.png</file>
     </qresource>
     <qresource prefix="/fonts">
         <file>fonts/SourceSansPro-Black.ttf</file>
@@ -28,5 +29,56 @@
         <file>fonts/SourceSansPro-Regular.ttf</file>
         <file>fonts/SourceSansPro-Semibold.ttf</file>
         <file>fonts/SourceSansPro-SemiboldItalic.ttf</file>
+    </qresource>
+    <qresource prefix="/fileIcons">
+        <file>fileIcons/3gp.png</file>
+        <file>fileIcons/7z.png</file>
+        <file>fileIcons/ae.png</file>
+        <file>fileIcons/ai.png</file>
+        <file>fileIcons/apk.png</file>
+        <file>fileIcons/asf.png</file>
+        <file>fileIcons/avi.png</file>
+        <file>fileIcons/bak.png</file>
+        <file>fileIcons/bmp.png</file>
+        <file>fileIcons/cdr.png</file>
+        <file>fileIcons/css.png</file>
+        <file>fileIcons/csv.png</file>
+        <file>fileIcons/divx.png</file>
+        <file>fileIcons/dll.png</file>
+        <file>fileIcons/doc.png</file>
+        <file>fileIcons/doxy.png</file>
+        <file>fileIcons/dw.png</file>
+        <file>fileIcons/dwg.png</file>
+        <file>fileIcons/eps.png</file>
+        <file>fileIcons/exe.png</file>
+        <file>fileIcons/flv.png</file>
+        <file>fileIcons/fw.png</file>
+        <file>fileIcons/gif.png</file>
+        <file>fileIcons/gz.png</file>
+        <file>fileIcons/html.png</file>
+        <file>fileIcons/ico.png</file>
+        <file>fileIcons/iso.png</file>
+        <file>fileIcons/jar.png</file>
+        <file>fileIcons/jpg.png</file>
+        <file>fileIcons/js.png</file>
+        <file>fileIcons/mov.png</file>
+        <file>fileIcons/mp3.png</file>
+        <file>fileIcons/mp4.png</file>
+        <file>fileIcons/mpeg.png</file>
+        <file>fileIcons/pdf.png</file>
+        <file>fileIcons/php.png</file>
+        <file>fileIcons/png.png</file>
+        <file>fileIcons/ppt.png</file>
+        <file>fileIcons/ps.png</file>
+        <file>fileIcons/psd.png</file>
+        <file>fileIcons/rar.png</file>
+        <file>fileIcons/svg.png</file>
+        <file>fileIcons/swf.png</file>
+        <file>fileIcons/sys.png</file>
+        <file>fileIcons/tar.png</file>
+        <file>fileIcons/tiff.png</file>
+        <file>fileIcons/txt.png</file>
+        <file>fileIcons/wav.png</file>
+        <file>fileIcons/zip.png</file>
     </qresource>
 </RCC>

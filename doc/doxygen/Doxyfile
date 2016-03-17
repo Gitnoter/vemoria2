@@ -775,6 +775,7 @@ INPUT                  = \
 			build \
 			src/main \
 			src/gui  \
+			build/gui \
 			src/logic \
 			src/repository \
 			src/libqgit2/qgit2 \
