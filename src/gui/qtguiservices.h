@@ -20,7 +20,7 @@ class QtGuiServices : public UiServices
 {
 public:
     QtGuiServices();
-    void openURL(MainWindow *window, QUrl path);
+    void openURL(QUrl path);
     void deleteURL(QUrl path);
 };
 

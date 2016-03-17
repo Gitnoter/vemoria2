@@ -36,8 +36,6 @@ private slots:
 
     void on_actionInfo_triggered();
 
-    void on_pushButton_5_clicked();
-
     void on_pushButton_3_clicked();
 
     void addTags();
@@ -58,7 +56,7 @@ private slots:
 
     void on_collectionOpen_clicked();
 
-    void on_pushButton_4_clicked();
+    void on_openFileBtn_clicked();
 
 private:
     Ui::MainWindow *ui;
@@ -75,7 +73,16 @@ private:
 
     QString nameFile;
 
+    QString collectionName;
+
     void countRepoItems();
+
+    QString defaultName = "defaultName";
+
+    QString defaultMail = "infxxx@hs-worms.de";
+
+    QString defaultMessage = "defaultMessage";
+
 
 protected:
  void resizeEvent(QResizeEvent *e);

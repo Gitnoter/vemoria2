@@ -31,6 +31,7 @@
 #include <QFileDialog>
 #include <QMessageBox>
 #include "qtguiservices.h"
+#include <repository/collectionmanager.h>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -174,12 +175,17 @@ void MainWindow::countItems(QString path){
 //show files in contentWindow
 void MainWindow::on_listView_clicked(const QModelIndex &index)
 {
-    fileModel = new QFileSystemModel(this);
-
+    //fileModel = new QFileSystemModel(this);
 
     ui->imageList->setModel(fileModel);
 
-    QString mPath = dirModel->fileInfo(index).absoluteFilePath();
+    QString mPath = fileModel->fileInfo(index).absoluteFilePath();
+
+
+    QDir dirName = mPath;
+    QString dirNameString = dirName.dirName();
+
+    collectionName = dirNameString;
 
     //warning no subdirs
     QString newPath = mPath + "/files";
@@ -192,7 +198,7 @@ void MainWindow::on_listView_clicked(const QModelIndex &index)
 //show file in detail bar
 void MainWindow::on_imageList_clicked(const QModelIndex &index)
 {
-    QString mPath = dirModel->fileInfo(index).absoluteFilePath();
+    QString mPath = fileModel->fileInfo(index).absoluteFilePath();
 
     QFileInfo filetester (mPath);
 
@@ -226,6 +232,7 @@ void MainWindow::on_imageList_clicked(const QModelIndex &index)
         ui->editFiles->setText(file.fileName());
 
         nameFile = file.fileName();
+
         pathFile = mPath;
 
         ui->gridDetail->show();
@@ -249,11 +256,9 @@ void MainWindow::on_imageList_clicked(const QModelIndex &index)
         }
     }
     else{
-
-        fileModel = new QFileSystemModel(this);
         ui->imageList->setModel(fileModel);
 
-        QString mPath = dirModel->fileInfo(index).absoluteFilePath();
+        QString mPath = fileModel->fileInfo(index).absoluteFilePath();
 
         //warning no subdirs
         QString newPath = mPath + "/files";
@@ -278,11 +283,6 @@ void MainWindow::on_saveBtn_clicked()
         renameFile.rename(nameFile, getFileName);
         ui->imageList->setRootIndex(fileModel->setRootPath(absolut));
     }
-}
-
-void MainWindow::on_deleteBtn_clicked()
-{
-
 }
 
 void MainWindow::countRepoItems(){
@@ -380,16 +380,24 @@ void MainWindow::on_collectionOpen_clicked()
 
 }
 
-
-void MainWindow::on_pushButton_5_clicked()
+void MainWindow::on_openFileBtn_clicked()
 {
-
     QtGuiServices guiServices;
-    guiServices.openURL(this, QUrl("",QUrl::TolerantMode));
+    guiServices.openURL(QUrl(pathFile, QUrl::TolerantMode));
 }
 
-void MainWindow::on_pushButton_4_clicked()
+void MainWindow::on_deleteBtn_clicked()
 {
     QtGuiServices guiServices;
-    guiServices.deleteURL(QUrl("C:/Users/Sulfi/Desktop/QTremove/test.txt",QUrl::TolerantMode));
+    guiServices.deleteURL(QUrl(pathFile,QUrl::TolerantMode));
+
+    //check if for illegal expression
+    QFileInfo info = (pathFile);
+    QString absolut = info.absolutePath();
+    absolut = absolut + "/";
+    ui->imageList->setRootIndex(fileModel->setRootPath(absolut));
+
+    CollectionManager collmanager;
+    collmanager.commit(collectionName, defaultName, defaultMail, defaultMessage);
+
 }

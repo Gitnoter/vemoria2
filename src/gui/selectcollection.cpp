@@ -53,7 +53,7 @@ void selectCollection::on_pushButton_clicked()
 
 void selectCollection::on_listView_clicked(const QModelIndex &index)
 {
-          QString mPath = dirModel->fileInfo(index).absoluteFilePath();
+          QString mPath = fileModel->fileInfo(index).absoluteFilePath();
           selectedPath = mPath;
           ui->label->setText(mPath);
 }

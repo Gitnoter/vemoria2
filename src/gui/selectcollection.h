@@ -23,7 +23,6 @@ private slots:
 
 private:
     Ui::selectCollection *ui;
-    QFileSystemModel *dirModel;
     QFileSystemModel *fileModel;
     QString selectedPath;
 };
