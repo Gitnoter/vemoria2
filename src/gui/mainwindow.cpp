@@ -10,6 +10,9 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "../version.h"
+#include "logic/picture.h"
+#include "logic/xmlhandler.h"
+
 #include <QDebug> //currently here for debugging purposes, obviously
 #include "popupcollection.h"
 #include "QMessageBox"
@@ -83,15 +86,14 @@ void MainWindow::addTags(){
     QLabel *label = new QLabel();
     label->setText("Description");
 
-    QTextEdit *lineedit = new QTextEdit();
-    lineedit->setPlaceholderText("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut");
+    lineedit = new QTextEdit();
+    lineedit->setPlaceholderText(description);
 
     QLabel *label2 = new QLabel();
     label2->setText("Persons");
 
     QTextEdit *lineedit2 = new QTextEdit();
-    lineedit2->setPlaceholderText("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut");
-
+    lineedit2->setPlaceholderText(description);
 
     QLabel *label3 = new QLabel();
     label3->setText("Other");
@@ -210,6 +212,17 @@ void MainWindow::on_imageList_clicked(const QModelIndex &index)
         QString suffix  =  file.suffix();
 
         if(suffix == "png" || suffix == "jpg" || suffix == "jpeg" || suffix == "bmp" || suffix == "jng" || suffix == "jp2" || suffix  == "img"){
+
+            Picture * picture = new Picture();
+            XMLHandler xmlhandler;
+            picture = xmlhandler.readXMLFile_Picture(mPath+".xml");
+            description = picture->getDescription();
+            QTextEdit *lineediti = new QTextEdit();
+            lineediti->setText(/*description*/"hallo");
+            ui->formLayout_2->addWidget(lineediti);
+//            lineedit=new QTextEdit();
+//            lineedit->setText(description);
+
 
             QPixmap pix(mPath);
             QSize picSize =  pix.size();

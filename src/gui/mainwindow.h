@@ -13,6 +13,7 @@
 #include <QMainWindow>
 #include <QDialog>
 #include <QFileSystemModel>
+#include <QTextEdit>
 
 namespace Ui {
 class MainWindow;
@@ -82,6 +83,10 @@ private:
     QString defaultMail = "infxxx@hs-worms.de";
 
     QString defaultMessage = "defaultMessage";
+
+    //Datatype information
+    QString description="heyho";
+    QTextEdit *lineedit;
 
 
 protected:
