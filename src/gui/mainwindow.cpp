@@ -83,11 +83,6 @@ MainWindow::~MainWindow()
 //test metedata
 void MainWindow::addTags(){
 
-    QLabel *label = new QLabel();
-    label->setText("Description");
-
-    lineedit = new QTextEdit();
-    lineedit->setPlaceholderText(description);
 
     QLabel *label2 = new QLabel();
     label2->setText("Persons");
@@ -107,8 +102,8 @@ void MainWindow::addTags(){
     QTextEdit *lineedit5 = new QTextEdit();
     lineedit5->setPlaceholderText("lassst ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut ");
 
-    ui->formLayout_2->addWidget(label);
-    ui->formLayout_2->addWidget(lineedit);
+    //ui->formLayout_2->addWidget(label);
+    //ui->formLayout_2->addWidget(lineedit);
     ui->formLayout_2->addWidget(label2);
     ui->formLayout_2->addWidget(lineedit2);
     ui->formLayout_2->addWidget(label3);
@@ -217,9 +212,44 @@ void MainWindow::on_imageList_clicked(const QModelIndex &index)
             XMLHandler xmlhandler;
             picture = xmlhandler.readXMLFile_Picture(mPath+".xml");
             description = picture->getDescription();
-            QTextEdit *lineediti = new QTextEdit();
-            lineediti->setText(/*description*/"hallo");
-            ui->formLayout_2->addWidget(lineediti);
+
+            //QTextEdit *lineediti = new QTextEdit();
+            QLabel *label = new QLabel();
+            label->setText("Description");
+            QTextEdit* lineedit = new QTextEdit();
+            lineedit->setText(description);
+
+            QLabel *label2 = new QLabel();
+            label2->setText("Persons");
+
+
+
+
+            QVector<QTextEdit> lineedits;
+
+
+            //QVector<QTextEdit> *lineedits;
+            for (int i = 0; i<picture->getPeople().count();i++)
+            {
+
+                QTextEdit *lines = new QTextEdit();
+                lines->setText(picture->getPeople().at(i));
+
+                ui->formLayout_2->addWidget(lines);
+
+
+
+
+                //lineedits.append(new QTextEdit());
+
+
+//                lineedits->at(i)= lines;
+                //lines = lineedits->at(i);
+            }
+
+            ui->formLayout_2->addWidget(label);
+            ui->formLayout_2->addWidget(lineedit);
+
 //            lineedit=new QTextEdit();
 //            lineedit->setText(description);
 

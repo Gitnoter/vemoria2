@@ -85,8 +85,7 @@ private:
     QString defaultMessage = "defaultMessage";
 
     //Datatype information
-    QString description="heyho";
-    QTextEdit *lineedit;
+    QString description="emptee";
 
 
 protected:
