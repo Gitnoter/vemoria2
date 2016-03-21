@@ -113,34 +113,7 @@ MainWindow::~MainWindow()
 
 //test metedata
 void MainWindow::addTags(){
-
-
-    QLabel *label2 = new QLabel();
-    label2->setText("Persons");
-
-    QTextEdit *lineedit2 = new QTextEdit();
-    lineedit2->setPlaceholderText(description);
-
-    QLabel *label3 = new QLabel();
-    label3->setText("Other");
-
-    QTextEdit *lineedit3 = new QTextEdit();
-    lineedit3->setPlaceholderText("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut");
-
-    QTextEdit *lineedit4 = new QTextEdit();
-    lineedit4->setPlaceholderText("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut");
-
-    QTextEdit *lineedit5 = new QTextEdit();
-    lineedit5->setPlaceholderText("lassst ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut ");
-
-    //ui->formLayout_2->addWidget(label);
-    //ui->formLayout_2->addWidget(lineedit);
-    ui->formLayout_2->addWidget(label2);
-    ui->formLayout_2->addWidget(lineedit2);
-    ui->formLayout_2->addWidget(label3);
-    ui->formLayout_2->addWidget(lineedit3);
-    ui->formLayout_2->addWidget(lineedit4);
-    ui->formLayout_2->addWidget(lineedit5);
+//delete?
 }
 
 //show popupCollection
@@ -279,36 +252,117 @@ void MainWindow::on_imageList_clicked(const QModelIndex &index)
             picture = xmlhandler.readXMLFile_Picture(mPath+".xml");
             description = picture->getDescription();
 
-            //QTextEdit *lineediti = new QTextEdit();
-            QLabel *label = new QLabel();
-            label->setText("Description");
-            QTextEdit* lineedit = new QTextEdit();
-            lineedit->setText(description);
+            //Title
+            QLabel *lbl_title = new QLabel();
+            lbl_title->setText("Title");
+            QTextEdit* tb_title = new QTextEdit();
+            tb_title->setText(picture->getTitle());
 
-            QLabel *label2 = new QLabel();
-            label2->setText("Persons");
+            QLabel *lbl_date = new QLabel();
+            lbl_date->setText("Date");
+            QTextEdit* tb_date = new QTextEdit();
+            tb_date->setText(picture->getDate());
 
-            QVector<QTextEdit> lineedits;
+            QLabel *lbl_time = new QLabel();
+            lbl_time->setText("Time");
+            QTextEdit* tb_time = new QTextEdit();
+            tb_time->setText(picture->getTime());
 
+            QLabel *lbl_geoposition = new QLabel();
+            lbl_geoposition->setText("Geoposition");
+            QTextEdit* tb_geoposition = new QTextEdit();
+            tb_geoposition->setText(picture->getGeoposition());
 
-            //QVector<QTextEdit> *lineedits;
-            for (int i = 0; i<picture->getPeople().count();i++)
+            QLabel *lbl_description = new QLabel();
+            lbl_description->setText("Description");
+            QTextEdit* tb_description = new QTextEdit();
+            tb_description->setText(picture->getDescription());
+
+            QLabel *lbl_creator = new QLabel();
+            lbl_creator->setText("Creator");
+            QTextEdit* tb_creator = new QTextEdit();
+            tb_creator->setText(picture->getCreator());
+
+            QLabel *lbl_license = new QLabel();
+            lbl_license->setText("License");
+            QTextEdit* tb_license = new QTextEdit();
+            tb_license->setText(picture->getLicense());
+
+            QLabel *lbl_people = new QLabel();
+            lbl_people->setText("People");
+            QTextEdit* tb_people = new QTextEdit();
+            QString people="";
+
+            //QString blub = picture->getPeople().count();
+//            QByteArray =
+            qDebug() << "Anzahl people:" << QString::number(picture->getPeople().count()) << endl;
+
+            for (int i = 0; i < picture->getPeople().count();i++)
             {
+                people += picture->getPeople().at(i);
+                people += "\n";
+                //qDebug() << "Anzahl for:" << i << endl;
+            }
+            tb_people->setText(people);
+            qDebug() << "People" << people << endl;
 
-                QTextEdit *lines = new QTextEdit();
-                lines->setText(picture->getPeople().at(i));
+//            QLabel *lbl_events = new QLabel();
+//            lbl_events->setText("Events");
+//            QTextEdit* tb_events = new QTextEdit();
+//            tb_events->setText(people);
 
-                ui->formLayout_2->addWidget(lines);
+//            QLabel *lbl_locations = new QLabel();
+//            lbl_locations->setText("Locations");
+//            QTextEdit* tb_locations = new QTextEdit();
+//            tb_locations->setText(people);
 
+
+            ui->formLayout_2->addWidget(lbl_title);
+            ui->formLayout_2->addWidget(tb_title);
+            ui->formLayout_2->addWidget(lbl_date);
+            ui->formLayout_2->addWidget(tb_date);
+            ui->formLayout_2->addWidget(lbl_time);
+            ui->formLayout_2->addWidget(tb_time);
+            ui->formLayout_2->addWidget(lbl_geoposition);
+            ui->formLayout_2->addWidget(tb_geoposition);
+            ui->formLayout_2->addWidget(lbl_description);
+            ui->formLayout_2->addWidget(tb_description);
+            ui->formLayout_2->addWidget(lbl_creator);
+            ui->formLayout_2->addWidget(tb_creator);
+            ui->formLayout_2->addWidget(lbl_license);
+            ui->formLayout_2->addWidget(tb_license);
+            ui->formLayout_2->addWidget(lbl_people);
+            ui->formLayout_2->addWidget(tb_people);
+//            ui->formLayout_2->addWidget(lbl_events);
+//            ui->formLayout_2->addWidget(tb_events);
+//            ui->formLayout_2->addWidget(lbl_locations);
+//            ui->formLayout_2->addWidget(tb_locations);
+
+//            QVector<QTextEdit> lineedits;
+//            //QVector<QTextEdit> *lineedits;
+//            for (int i = 0; i<picture->getPeople().count();i++)
+//            {
+
+//                QTextEdit *lines = new QTextEdit();
+//                lines->setText(picture->getPeople().at(i));
+
+//                ui->formLayout_2->addWidget(lines);
                 //lineedits.append(new QTextEdit());
 
 
                 //                lineedits->at(i)= lines;
-                //lines = lineedits->at(i);
-            }
+                //lines = lineedits->at(i)
 
-            ui->formLayout_2->addWidget(label);
-            ui->formLayout_2->addWidget(lineedit);
+//                //lineedits.append(new QTextEdit());
+
+
+////                lineedits->at(i)= lines;
+//                //lines = lineedits->at(i);
+//            }
+
+
+//            ui->formLayout_2->addWidget(label);
+//            ui->formLayout_2->addWidget(lineedit);
 
             //            lineedit=new QTextEdit();
             //            lineedit->setText(description);
