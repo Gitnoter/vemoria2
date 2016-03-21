@@ -14,6 +14,7 @@
 #include <QDialog>
 #include <QFileSystemModel>
 #include <QTextEdit>
+#include <QLabel>
 
 namespace Ui {
 class MainWindow;
@@ -94,6 +95,28 @@ private:
 
     //Datatype information
     QString description="emptee";
+
+    //Textboxes
+    QLabel *lbl_title = new QLabel();
+    QTextEdit* tb_title = new QTextEdit();
+    QLabel *lbl_date = new QLabel();
+    QTextEdit* tb_date = new QTextEdit();
+    QLabel *lbl_time = new QLabel();
+    QTextEdit* tb_time = new QTextEdit();
+    QLabel *lbl_geoposition = new QLabel();
+    QTextEdit* tb_geoposition = new QTextEdit();
+    QLabel *lbl_description = new QLabel();
+    QTextEdit* tb_description = new QTextEdit();
+    QLabel *lbl_creator = new QLabel();
+    QTextEdit* tb_creator = new QTextEdit();
+    QLabel *lbl_license = new QLabel();
+    QTextEdit* tb_license = new QTextEdit();
+    QLabel *lbl_people = new QLabel();
+    QTextEdit* tb_people = new QTextEdit();
+    QLabel *lbl_events = new QLabel();
+    QTextEdit* tb_events = new QTextEdit();
+    QLabel *lbl_locations = new QLabel();
+    QTextEdit* tb_locations = new QTextEdit();
 
 
 protected:
