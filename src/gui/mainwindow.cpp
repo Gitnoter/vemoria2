@@ -233,7 +233,6 @@ void MainWindow::countItems2(QString path){
 //show files in contentWindow
 void MainWindow::on_listView_clicked(const QModelIndex &index)
 {
-    //fileModel = new QFileSystemModel(this);
 
     ui->imageList->setModel(fileModel);
 
@@ -245,7 +244,6 @@ void MainWindow::on_listView_clicked(const QModelIndex &index)
 
     collectionName = dirNameString;
 
-    //warning no subdirs
     countItems(mPath, collectionName);
 
     fileModel->setFilter(QDir::NoDotAndDotDot | QDir::Dirs);
