@@ -213,14 +213,64 @@ void MainWindow::on_imageList_clicked(const QModelIndex &index)
             picture = xmlhandler.readXMLFile_Picture(mPath+".xml");
             description = picture->getDescription();
 
-            //QTextEdit *lineediti = new QTextEdit();
-            QLabel *label = new QLabel();
-            label->setText("Description");
-            QTextEdit* lineedit = new QTextEdit();
-            lineedit->setText(description);
+            //Title
+            QLabel *lbl_title = new QLabel();
+            lbl_title->setText("Title");
+            QTextEdit* tb_title = new QTextEdit();
+            tb_title->setText(picture->getTitle());
 
-            QLabel *label2 = new QLabel();
-            label2->setText("Persons");
+            QLabel *lbl_date = new QLabel();
+            lbl_date->setText("Date");
+            QTextEdit* tb_date = new QTextEdit();
+            tb_date->setText(picture->getDate());
+
+            QLabel *lbl_time = new QLabel();
+            lbl_time->setText("Time");
+            QTextEdit* tb_time = new QTextEdit();
+            tb_time->setText(picture->getTime());
+
+            QLabel *lbl_geoposition = new QLabel();
+            lbl_geoposition->setText("Geoposition");
+            QTextEdit* tb_geoposition = new QTextEdit();
+            tb_geoposition->setText(picture->getGeoposition());
+
+            QLabel *lbl_description = new QLabel();
+            lbl_description->setText("Description");
+            QTextEdit* tb_description = new QTextEdit();
+            tb_description->setText(picture->getDescription());
+
+            QLabel *lbl_creator = new QLabel();
+            lbl_creator->setText("Creator");
+            QTextEdit* tb_creator = new QTextEdit();
+            tb_creator->setText(picture->getCreator());
+
+            QLabel *lbl_license = new QLabel();
+            lbl_license->setText("License");
+            QTextEdit* tb_license = new QTextEdit();
+            tb_license->setText(picture->getLicense());
+
+            QLabel *lbl_people = new QLabel();
+            lbl_people->setText("People");
+            QTextEdit* tb_people = new QTextEdit();
+            QString people="";
+            for (int i = 0; i < picture->getPeople().count();i++)
+            {
+                people += picture->getPeople().at(i);
+                people += "\n";
+            }
+            qDebug() << "People" << people << endl;
+            tb_people->setText(people);
+
+            QLabel *lbl_events = new QLabel();
+            lbl_events->setText("Events");
+            QTextEdit* tb_events = new QTextEdit();
+            tb_events->setText(people);
+
+            QLabel *lbl_locations = new QLabel();
+            lbl_locations->setText("Locations");
+            QTextEdit* tb_locations = new QTextEdit();
+            tb_locations->setText(people);
+
 
 
 
@@ -247,8 +297,8 @@ void MainWindow::on_imageList_clicked(const QModelIndex &index)
                 //lines = lineedits->at(i);
             }
 
-            ui->formLayout_2->addWidget(label);
-            ui->formLayout_2->addWidget(lineedit);
+//            ui->formLayout_2->addWidget(label);
+//            ui->formLayout_2->addWidget(lineedit);
 
 //            lineedit=new QTextEdit();
 //            lineedit->setText(description);
