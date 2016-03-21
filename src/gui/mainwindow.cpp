@@ -449,6 +449,53 @@ void MainWindow::on_saveBtn_clicked()
     QString absolut = info.absolutePath();
     absolut = absolut + "/";
 
+    Picture *picture = new Picture();
+
+    QString title = tb_title->toPlainText();
+    QString date = tb_date->toPlainText();
+    QString time = tb_time->toPlainText();
+    QString geoposition = tb_geoposition->toPlainText();
+    QString description = tb_description->toPlainText();
+    QString creator = tb_creator->toPlainText();
+    QString license = tb_license->toPlainText();
+
+    QString people =tb_people->toPlainText();
+    QStringList peoplelist = people.split("\n",QString::SkipEmptyParts);
+    QVector <QString> peoplevector;
+    for (int i = 0; i<peoplelist.count();i++)
+    {
+        peoplevector.append(peoplelist.at(i));
+    }
+
+    QString event =tb_events->toPlainText();
+    QStringList eventlist = event.split("\n",QString::SkipEmptyParts);
+    QVector <QString> eventvector;
+    for (int i = 0; i<eventlist.count();i++)
+    {
+        eventvector.append(eventlist.at(i));
+    }
+
+    QString location =tb_locations->toPlainText();
+    QStringList locationlist = location.split("\n",QString::SkipEmptyParts);
+    QVector <QString> locationvector;
+    for (int i = 0; i<locationlist.count();i++)
+    {
+        locationvector.append(locationlist.at(i));
+    }
+
+    picture->setTitle(title);
+    picture->setDate(date);
+    picture->setTime(time);
+    picture->setGeoposition(geoposition);
+    picture->setDescription(description);
+    picture->setCreator(creator);
+    picture->setLicense(license);
+    picture->setPeople(peoplevector);
+    picture->setEvent(eventvector);
+    picture->setLocation(locationvector);
+
+
+
     QString getFileName = ui->editFiles->text();
     QDir renameFile = (absolut);
 
