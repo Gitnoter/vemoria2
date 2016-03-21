@@ -257,7 +257,6 @@ void MainWindow::on_imageList_clicked(const QModelIndex &index)
 
     QString mPath = fileModel->fileInfo(index).absoluteFilePath();
     currentPath = mPath;
-    QString xmlPath;
     xmlPath = fileModel->fileInfo(index).absolutePath();
     xmlPath+= "/.";
     xmlPath+= fileModel->fileInfo(index).fileName();
@@ -356,13 +355,6 @@ void MainWindow::on_imageList_clicked(const QModelIndex &index)
             ui->formLayout_2->addWidget(tb_locations);
 
 
-
-
-
-
-
-
-
             QPixmap pix(mPath);
             QSize picSize =  pix.size();
             int height = picSize.height();
@@ -449,6 +441,7 @@ void MainWindow::on_saveBtn_clicked()
     QString absolut = info.absolutePath();
     absolut = absolut + "/";
 
+    XMLHandler xmlhandler;
     Picture *picture = new Picture();
 
     QString title = tb_title->toPlainText();
@@ -494,6 +487,7 @@ void MainWindow::on_saveBtn_clicked()
     picture->setEvent(eventvector);
     picture->setLocation(locationvector);
 
+    xmlhandler.writeXMLFile(picture,xmlPath);
 
 
     QString getFileName = ui->editFiles->text();
