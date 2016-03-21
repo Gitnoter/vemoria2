@@ -127,7 +127,7 @@ void CollectionManager::create(QString& collectionName)
     git_index_write(idx);
 
     git_signature *me = NULL;
-    git_signature_now(&me, "Tobi", "inf@hs-worms.de");
+    git_signature_now(&me, "User17", "inf017@hs-worms.de");
 
         git_index *index;
         git_oid tree_id, commit_id;
