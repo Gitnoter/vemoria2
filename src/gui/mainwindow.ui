@@ -1446,7 +1446,7 @@ border-bottom:1px solid #e3e3e3;
                   <string notr="true">padding-right:10px;</string>
                  </property>
                  <property name="text">
-                  <string>User17</string>
+                  <string>Max Mustermann</string>
                  </property>
                  <property name="alignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
