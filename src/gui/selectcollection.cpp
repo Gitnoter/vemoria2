@@ -25,7 +25,7 @@ selectCollection::selectCollection(QWidget *parent) :
                     ui->listView->setRootIndex(fileModel->setRootPath(path));
         }
         else{
-            //call Collection func
+            ui->listView->setRootIndex(fileModel->setRootPath(QDir::homePath()));
         }
 }
 

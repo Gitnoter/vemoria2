@@ -54,6 +54,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->listView->setModel(fileModel);
 
     QDir directory = QDir::home();
+    if(!QDir(directory.path() + "/.vemoria").exists()){
+        directory.mkdir(".vemoria");
+    }
+
     QString path = directory.path() + "/.vemoria";
     ui->listView->setRootIndex(fileModel->setRootPath(path));
 
