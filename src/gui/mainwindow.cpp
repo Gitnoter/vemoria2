@@ -46,9 +46,6 @@ MainWindow::MainWindow(QWidget *parent) :
     trigger = false;
     addTags();
 
-
-    dirModel = new QFileSystemModel(this);
-
     fileModel = new QFileSystemModel(this);
 
     ui->listView->setModel(fileModel);
@@ -56,6 +53,21 @@ MainWindow::MainWindow(QWidget *parent) :
     QDir directory = QDir::home();
     QString path = directory.path() + "/.vemoria";
     ui->listView->setRootIndex(fileModel->setRootPath(path));
+
+
+    if(QDir(path).exists()){
+
+    QDir dir( directory.path() + "/.vemoria" );
+
+    dir.setFilter( QDir::AllEntries | QDir::NoDotAndDotDot );
+
+    int total_files = dir.count();
+
+    QString itemsCounterString = QString::number(total_files);
+
+    ui->countItemsLabel->setText(itemsCounterString);
+
+    }
 
     countRepoItems();
 
@@ -154,38 +166,50 @@ void MainWindow::on_addButton_clicked()
 //count items in the contentWindow & show path
 void MainWindow::countItems(QString path, QString collectionPath){
 
-    int counter = 0;
-
-    //extend filter
-    QDirIterator it(path, QStringList() << "*.png" << "*.jpg" << "*.jpeg", QDir::Files, QDirIterator::Subdirectories);
-    while (it.hasNext()) {
-        it.next();
-        counter++;
-    }
-
-    QString itemsCounterString = QString::number(counter);
-
-    ui->countItemsLabel->setText(itemsCounterString);
-
-    QDir collectionName (collectionPath);
-
-    ui->pathLabel->setText(collectionName.dirName() + "/");
-}
-
-void MainWindow::countItems2(QString path){
-
     //int counter = 0;
 
 //    //extend filter
-//    QDirIterator it(path, QStringList() << "*.png" << "*.jpg" << "*.jpeg", QDir::Files, QDirIterator::Subdirectories);
+//    QDirIterator it(path, QStringList() << "*.png" << "*.jpg" << "*.jpeg", QDir::Files | QDir::NoDotAndDotDot, QDirIterator::Subdirectories);
 //    while (it.hasNext()) {
 //        it.next();
 //        counter++;
 //    }
 
-    QDir countFiles (path);
+//    QString itemsCounterString = QString::number(counter);
 
-    QString itemsCounterString = QString::number(countFiles.count());
+//    ui->countItemsLabel->setText(itemsCounterString);
+
+//    QDir collectionName (collectionPath);
+
+    QDir dir(path);
+
+    qDebug() << "get path: " + path;
+
+    dir.setFilter( QDir::AllEntries | QDir::NoDotAndDotDot );
+
+    int total_files = dir.count();
+
+    QString itemsCounterString = QString::number(total_files);
+
+     ui->countItemsLabel->setText(itemsCounterString);
+
+    ui->pathLabel->setText(collectionPath + "/");
+}
+
+void MainWindow::countItems2(QString path){
+
+    int counter = 0;
+
+        //extend filter
+        QDirIterator it(path, QStringList() << "*.png" << "*.jpg" << "*.jpeg", QDir::Files | QDir::NoDotAndDotDot, QDirIterator::Subdirectories);
+        while (it.hasNext()) {
+            it.next();
+            counter++;
+        }
+
+    //QDir countFiles (path);
+
+    QString itemsCounterString = QString::number(counter);
 
     ui->countItemsLabel->setText(itemsCounterString);
 }
@@ -205,10 +229,9 @@ void MainWindow::on_listView_clicked(const QModelIndex &index)
     collectionName = dirNameString;
 
     //warning no subdirs
-    QString newPath = mPath + "/files";
-    countItems(newPath, collectionName);
+    countItems(mPath, collectionName);
 
-    fileModel->setFilter(QDir::NoDotDot | QDir::Dirs);
+    fileModel->setFilter(QDir::NoDot | QDir::Dirs);
 
     ui->imageList->setRootIndex(fileModel->setRootPath(mPath));
 }
