@@ -72,6 +72,8 @@ private:
 
     void countItems2(QString path);
 
+    void countRepos();
+
     QString pathFile;
 
     QString nameFile;

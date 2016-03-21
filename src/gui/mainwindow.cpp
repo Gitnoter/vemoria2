@@ -54,23 +54,34 @@ MainWindow::MainWindow(QWidget *parent) :
     QString path = directory.path() + "/.vemoria";
     ui->listView->setRootIndex(fileModel->setRootPath(path));
 
+    ui->collectionOpen->hide();
+
+    countRepos();
+    countRepoItems();
+
+}
+
+void MainWindow::countRepos(){
+
+    QDir directory = QDir::home();
+    QString path = directory.path() + "/.vemoria";
 
     if(QDir(path).exists()){
 
-    QDir dir( directory.path() + "/.vemoria" );
+        QDir dir( directory.path() + "/.vemoria" );
 
-    dir.setFilter( QDir::AllEntries | QDir::NoDotAndDotDot );
+        dir.setFilter( QDir::AllEntries | QDir::NoDotAndDotDot );
 
-    int total_files = dir.count();
+        int total_files = dir.count();
 
-    QString itemsCounterString = QString::number(total_files);
+        QString itemsCounterString = QString::number(total_files);
 
-    ui->countItemsLabel->setText(itemsCounterString);
+        ui->countItemsLabel->setText(itemsCounterString);
 
+        if(total_files > 3){
+            ui->collectionOpen->show();
+        }
     }
-
-    countRepoItems();
-
 }
 
 void MainWindow::resizeEvent(QResizeEvent*)
@@ -161,6 +172,8 @@ void MainWindow::on_addButton_clicked()
     selectCollection selectColl;
     selectColl.setModal(true);
     selectColl.exec();
+
+    countRepos();
 }
 
 //count items in the contentWindow & show path
@@ -168,18 +181,18 @@ void MainWindow::countItems(QString path, QString collectionPath){
 
     //int counter = 0;
 
-//    //extend filter
-//    QDirIterator it(path, QStringList() << "*.png" << "*.jpg" << "*.jpeg", QDir::Files | QDir::NoDotAndDotDot, QDirIterator::Subdirectories);
-//    while (it.hasNext()) {
-//        it.next();
-//        counter++;
-//    }
+    //    //extend filter
+    //    QDirIterator it(path, QStringList() << "*.png" << "*.jpg" << "*.jpeg", QDir::Files | QDir::NoDotAndDotDot, QDirIterator::Subdirectories);
+    //    while (it.hasNext()) {
+    //        it.next();
+    //        counter++;
+    //    }
 
-//    QString itemsCounterString = QString::number(counter);
+    //    QString itemsCounterString = QString::number(counter);
 
-//    ui->countItemsLabel->setText(itemsCounterString);
+    //    ui->countItemsLabel->setText(itemsCounterString);
 
-//    QDir collectionName (collectionPath);
+    //    QDir collectionName (collectionPath);
 
     QDir dir(path);
 
@@ -191,7 +204,7 @@ void MainWindow::countItems(QString path, QString collectionPath){
 
     QString itemsCounterString = QString::number(total_files);
 
-     ui->countItemsLabel->setText(itemsCounterString);
+    ui->countItemsLabel->setText(itemsCounterString);
 
     ui->pathLabel->setText(collectionPath + "/");
 }
@@ -200,12 +213,12 @@ void MainWindow::countItems2(QString path){
 
     int counter = 0;
 
-        //extend filter
-        QDirIterator it(path, QStringList() << "*.png" << "*.jpg" << "*.jpeg", QDir::Files | QDir::NoDotAndDotDot, QDirIterator::Subdirectories);
-        while (it.hasNext()) {
-            it.next();
-            counter++;
-        }
+    //extend filter
+    QDirIterator it(path, QStringList() << "*.png" << "*.jpg" << "*.jpeg", QDir::Files | QDir::NoDotAndDotDot, QDirIterator::Subdirectories);
+    while (it.hasNext()) {
+        it.next();
+        counter++;
+    }
 
     //QDir countFiles (path);
 
@@ -267,9 +280,6 @@ void MainWindow::on_imageList_clicked(const QModelIndex &index)
             QLabel *label2 = new QLabel();
             label2->setText("Persons");
 
-
-
-
             QVector<QTextEdit> lineedits;
 
 
@@ -282,21 +292,18 @@ void MainWindow::on_imageList_clicked(const QModelIndex &index)
 
                 ui->formLayout_2->addWidget(lines);
 
-
-
-
                 //lineedits.append(new QTextEdit());
 
 
-//                lineedits->at(i)= lines;
+                //                lineedits->at(i)= lines;
                 //lines = lineedits->at(i);
             }
 
             ui->formLayout_2->addWidget(label);
             ui->formLayout_2->addWidget(lineedit);
 
-//            lineedit=new QTextEdit();
-//            lineedit->setText(description);
+            //            lineedit=new QTextEdit();
+            //            lineedit->setText(description);
 
 
             QPixmap pix(mPath);
