@@ -42,6 +42,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->gridDetail->hide();
+    ui->countItemsLabel->hide();
 
     trigger = false;
     addTags();
@@ -536,7 +537,7 @@ void MainWindow::on_backBtn_clicked()
 
     foreach (const QString &collectionName, collectionNames){
 
-        qDebug() << "foreach: default " + homePath + "/" + collectionName;
+       qDebug() << "foreach: default " + homePath + "/" + collectionName;
         qDebug() << "foreach: current " + currentPath;
 
        if(homePath + "/" + collectionName == currentPath){
@@ -576,4 +577,5 @@ void MainWindow::on_backBtn_clicked()
 
         ui->imageList->setRootIndex(fileModel->setRootPath(dir.path()));
     }
+
 }
