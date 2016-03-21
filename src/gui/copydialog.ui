@@ -11,7 +11,11 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Copy files to Collection</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="resource.qrc">
+    <normaloff>:/icons/icons/VEM.png</normaloff>:/icons/icons/VEM.png</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color:white;</string>
@@ -204,6 +208,9 @@ border-width:1px;</string>
    </property>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="resource.qrc"/>
+  <include location="resource.qrc"/>
+ </resources>
  <connections/>
 </ui>

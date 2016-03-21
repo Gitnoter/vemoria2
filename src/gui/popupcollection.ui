@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Create Collection</string>
   </property>
   <property name="windowIcon">
    <iconset resource="resource.qrc">
@@ -72,6 +72,9 @@ background-color:#FFF;
              <height>30</height>
             </size>
            </property>
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
+           </property>
            <property name="styleSheet">
             <string notr="true">#pushButton_2{
 color:white;
@@ -91,6 +94,9 @@ border:1px solid #e8293f;
              <width>0</width>
              <height>30</height>
             </size>
+           </property>
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
            </property>
            <property name="styleSheet">
             <string notr="true">#pushButton{
