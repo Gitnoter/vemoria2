@@ -10,6 +10,9 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "../version.h"
+#include "logic/picture.h"
+#include "logic/xmlhandler.h"
+
 #include <QDebug> //currently here for debugging purposes, obviously
 #include "popupcollection.h"
 #include "QMessageBox"
@@ -80,18 +83,12 @@ MainWindow::~MainWindow()
 //test metedata
 void MainWindow::addTags(){
 
-    QLabel *label = new QLabel();
-    label->setText("Description");
-
-    QTextEdit *lineedit = new QTextEdit();
-    lineedit->setPlaceholderText("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut");
 
     QLabel *label2 = new QLabel();
     label2->setText("Persons");
 
     QTextEdit *lineedit2 = new QTextEdit();
-    lineedit2->setPlaceholderText("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut");
-
+    lineedit2->setPlaceholderText(description);
 
     QLabel *label3 = new QLabel();
     label3->setText("Other");
@@ -105,8 +102,8 @@ void MainWindow::addTags(){
     QTextEdit *lineedit5 = new QTextEdit();
     lineedit5->setPlaceholderText("lassst ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut ");
 
-    ui->formLayout_2->addWidget(label);
-    ui->formLayout_2->addWidget(lineedit);
+    //ui->formLayout_2->addWidget(label);
+    //ui->formLayout_2->addWidget(lineedit);
     ui->formLayout_2->addWidget(label2);
     ui->formLayout_2->addWidget(lineedit2);
     ui->formLayout_2->addWidget(label3);
@@ -232,6 +229,52 @@ void MainWindow::on_imageList_clicked(const QModelIndex &index)
         QString suffix  =  file.suffix();
 
         if(suffix == "png" || suffix == "jpg" || suffix == "jpeg" || suffix == "bmp" || suffix == "jng" || suffix == "jp2" || suffix  == "img"){
+
+            Picture * picture = new Picture();
+            XMLHandler xmlhandler;
+            picture = xmlhandler.readXMLFile_Picture(mPath+".xml");
+            description = picture->getDescription();
+
+            //QTextEdit *lineediti = new QTextEdit();
+            QLabel *label = new QLabel();
+            label->setText("Description");
+            QTextEdit* lineedit = new QTextEdit();
+            lineedit->setText(description);
+
+            QLabel *label2 = new QLabel();
+            label2->setText("Persons");
+
+
+
+
+            QVector<QTextEdit> lineedits;
+
+
+            //QVector<QTextEdit> *lineedits;
+            for (int i = 0; i<picture->getPeople().count();i++)
+            {
+
+                QTextEdit *lines = new QTextEdit();
+                lines->setText(picture->getPeople().at(i));
+
+                ui->formLayout_2->addWidget(lines);
+
+
+
+
+                //lineedits.append(new QTextEdit());
+
+
+//                lineedits->at(i)= lines;
+                //lines = lineedits->at(i);
+            }
+
+            ui->formLayout_2->addWidget(label);
+            ui->formLayout_2->addWidget(lineedit);
+
+//            lineedit=new QTextEdit();
+//            lineedit->setText(description);
+
 
             QPixmap pix(mPath);
             QSize picSize =  pix.size();
