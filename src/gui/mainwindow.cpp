@@ -182,6 +182,7 @@ void MainWindow::on_addButton_clicked()
     selectColl.exec();
 
     countRepos();
+    countRepoItems();
 }
 
 //count items in the contentWindow & show path
@@ -380,7 +381,7 @@ void MainWindow::on_imageList_clicked(const QModelIndex &index)
         QPixmap pixHome(":/icons/icons/home.png");
         ui->backBtn->setIcon(pixHome);
 
-         qDebug() << "home: " + currentPath;
+        qDebug() << "home: " + currentPath;
 
     }
     else{
@@ -537,14 +538,14 @@ void MainWindow::on_backBtn_clicked()
 
     foreach (const QString &collectionName, collectionNames){
 
-       qDebug() << "foreach: default " + homePath + "/" + collectionName;
+        qDebug() << "foreach: default " + homePath + "/" + collectionName;
         qDebug() << "foreach: current " + currentPath;
 
-       if(homePath + "/" + collectionName == currentPath){
+        if(homePath + "/" + collectionName == currentPath){
 
-        QPixmap pixHome(":/icons/icons/home.png");
-        ui->backBtn->setIcon(pixHome);
-       }
+            QPixmap pixHome(":/icons/icons/home.png");
+            ui->backBtn->setIcon(pixHome);
+        }
     }
 
     if(homePath == currentPath){
@@ -555,7 +556,6 @@ void MainWindow::on_backBtn_clicked()
         qDebug() << "home: " + currentPath + "/" + collectionName;
 
         countItems2(currentPath);
-
     }
     else{
         qDebug() << "back: " + currentPath;
@@ -577,5 +577,4 @@ void MainWindow::on_backBtn_clicked()
 
         ui->imageList->setRootIndex(fileModel->setRootPath(dir.path()));
     }
-
 }
