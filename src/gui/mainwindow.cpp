@@ -260,7 +260,8 @@ void MainWindow::on_imageList_clicked(const QModelIndex &index)
             }
             qDebug() << "People" << people << endl;
             tb_people->setText(people);
-
+            ui->formLayout_2->addWidget(lbl_people);
+            ui->formLayout_2->addWidget(tb_people);
             QLabel *lbl_events = new QLabel();
             lbl_events->setText("Events");
             QTextEdit* tb_events = new QTextEdit();
