@@ -1443,7 +1443,7 @@ border-bottom:1px solid #e3e3e3;
                   <string notr="true">padding-right:10px;</string>
                  </property>
                  <property name="text">
-                  <string>inf2179@hs-worms.de</string>
+                  <string>User17</string>
                  </property>
                  <property name="alignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -2023,7 +2023,7 @@ border-top:1px solid #e3e3e3;
      <x>0</x>
      <y>0</y>
      <width>1189</width>
-     <height>40</height>
+     <height>41</height>
     </rect>
    </property>
    <property name="styleSheet">
