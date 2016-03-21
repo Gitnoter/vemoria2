@@ -235,6 +235,13 @@ void MainWindow::on_imageList_clicked(const QModelIndex &index)
 {
     QString mPath = fileModel->fileInfo(index).absoluteFilePath();
     currentPath = mPath;
+    QString xmlPath;
+    xmlPath = fileModel->fileInfo(index).absolutePath();
+    xmlPath+= "/.";
+    xmlPath+= fileModel->fileInfo(index).fileName();
+
+    xmlPath+= ".xml";
+//qDebug() << "XML:" << xmlPath;
 
     QFileInfo filetester (mPath);
 
@@ -249,7 +256,7 @@ void MainWindow::on_imageList_clicked(const QModelIndex &index)
 
             Picture * picture = new Picture();
             XMLHandler xmlhandler;
-            picture = xmlhandler.readXMLFile_Picture(mPath+".xml");
+            picture = xmlhandler.readXMLFile_Picture(xmlPath);
             description = picture->getDescription();
 
             //Title
@@ -292,11 +299,6 @@ void MainWindow::on_imageList_clicked(const QModelIndex &index)
             lbl_people->setText("People");
             QTextEdit* tb_people = new QTextEdit();
             QString people="";
-
-            //QString blub = picture->getPeople().count();
-//            QByteArray =
-            qDebug() << "Anzahl people:" << QString::number(picture->getPeople().count()) << endl;
-
             for (int i = 0; i < picture->getPeople().count();i++)
             {
                 people += picture->getPeople().at(i);
@@ -304,17 +306,30 @@ void MainWindow::on_imageList_clicked(const QModelIndex &index)
                 //qDebug() << "Anzahl for:" << i << endl;
             }
             tb_people->setText(people);
-            qDebug() << "People" << people << endl;
 
-//            QLabel *lbl_events = new QLabel();
-//            lbl_events->setText("Events");
-//            QTextEdit* tb_events = new QTextEdit();
-//            tb_events->setText(people);
+            QLabel *lbl_events = new QLabel();
+            lbl_events->setText("Events");
+            QTextEdit* tb_events = new QTextEdit();
+            QString events="";
+            for (int i = 0; i < picture->getEvent().count();i++)
+            {
+                events += picture->getEvent().at(i);
+                events += "\n";
+                //qDebug() << "Anzahl for:" << i << endl;
+            }
+            tb_events->setText(events);
 
-//            QLabel *lbl_locations = new QLabel();
-//            lbl_locations->setText("Locations");
-//            QTextEdit* tb_locations = new QTextEdit();
-//            tb_locations->setText(people);
+            QLabel *lbl_locations = new QLabel();
+            lbl_locations->setText("Locations");
+            QTextEdit* tb_locations = new QTextEdit();
+            QString locations="";
+            for (int i = 0; i < picture->getLocation().count();i++)
+            {
+                locations += picture->getLocation().at(i);
+                locations += "\n";
+                //qDebug() << "Anzahl for:" << i << endl;
+            }
+            tb_locations->setText(locations);
 
 
             ui->formLayout_2->addWidget(lbl_title);
@@ -333,10 +348,10 @@ void MainWindow::on_imageList_clicked(const QModelIndex &index)
             ui->formLayout_2->addWidget(tb_license);
             ui->formLayout_2->addWidget(lbl_people);
             ui->formLayout_2->addWidget(tb_people);
-//            ui->formLayout_2->addWidget(lbl_events);
-//            ui->formLayout_2->addWidget(tb_events);
-//            ui->formLayout_2->addWidget(lbl_locations);
-//            ui->formLayout_2->addWidget(tb_locations);
+            ui->formLayout_2->addWidget(lbl_events);
+            ui->formLayout_2->addWidget(tb_events);
+            ui->formLayout_2->addWidget(lbl_locations);
+            ui->formLayout_2->addWidget(tb_locations);
 
 //            QVector<QTextEdit> lineedits;
 //            //QVector<QTextEdit> *lineedits;
