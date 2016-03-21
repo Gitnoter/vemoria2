@@ -1,3 +1,13 @@
+/// \file
+/// \brief	Vemoria selectcollection cpp file
+/// \ingroup	gui
+//----------------------------------------------------------------------
+// This file is part of the Vemoria project.
+// Vemoria aims to be an environment for archiving multimedia files.
+//
+// This file is licensed under the EUPL v.1.1 or a later version.
+//----------------------------------------------------------------------
+
 #include "selectcollection.h"
 #include "ui_selectcollection.h"
 #include "QLabel"
@@ -25,7 +35,7 @@ selectCollection::selectCollection(QWidget *parent) :
                     ui->listView->setRootIndex(fileModel->setRootPath(path));
         }
         else{
-            //call Collection func
+            ui->listView->setRootIndex(fileModel->setRootPath(QDir::homePath()));
         }
 }
 

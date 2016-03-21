@@ -42,23 +42,54 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->gridDetail->hide();
+    ui->countItemsLabel->hide();
 
     trigger = false;
     addTags();
 
-
-    dirModel = new QFileSystemModel(this);
+    QPixmap pixHome(":/icons/icons/home.png");
+    ui->backBtn->setIcon(pixHome);
 
     fileModel = new QFileSystemModel(this);
 
     ui->listView->setModel(fileModel);
 
     QDir directory = QDir::home();
+    if(!QDir(directory.path() + "/.vemoria").exists()){
+        directory.mkdir(".vemoria");
+    }
+
     QString path = directory.path() + "/.vemoria";
     ui->listView->setRootIndex(fileModel->setRootPath(path));
 
+    ui->collectionOpen->hide();
+
+    countRepos();
     countRepoItems();
 
+}
+
+void MainWindow::countRepos(){
+
+    QDir directory = QDir::home();
+    QString path = directory.path() + "/.vemoria";
+
+    if(QDir(path).exists()){
+
+        QDir dir( directory.path() + "/.vemoria" );
+
+        dir.setFilter( QDir::AllEntries | QDir::NoDotAndDotDot );
+
+        int total_files = dir.count();
+
+        QString itemsCounterString = QString::number(total_files);
+
+        ui->countItemsLabel->setText(itemsCounterString);
+
+        if(total_files > 3){
+            ui->collectionOpen->show();
+        }
+    }
 }
 
 void MainWindow::resizeEvent(QResizeEvent*)
@@ -149,46 +180,80 @@ void MainWindow::on_addButton_clicked()
     selectCollection selectColl;
     selectColl.setModal(true);
     selectColl.exec();
+
+    countRepos();
 }
 
 //count items in the contentWindow & show path
-void MainWindow::countItems(QString path){
+void MainWindow::countItems(QString path, QString collectionPath){
+
+    //int counter = 0;
+
+    //    //extend filter
+    //    QDirIterator it(path, QStringList() << "*.png" << "*.jpg" << "*.jpeg", QDir::Files | QDir::NoDotAndDotDot, QDirIterator::Subdirectories);
+    //    while (it.hasNext()) {
+    //        it.next();
+    //        counter++;
+    //    }
+
+    //    QString itemsCounterString = QString::number(counter);
+
+    //    ui->countItemsLabel->setText(itemsCounterString);
+
+    //    QDir collectionName (collectionPath);
+
+    QDir dir(path);
+
+    qDebug() << "get path: " + path;
+
+    dir.setFilter( QDir::AllEntries | QDir::NoDotAndDotDot );
+
+    int total_files = dir.count();
+
+    QString itemsCounterString = QString::number(total_files);
+
+    ui->countItemsLabel->setText(itemsCounterString);
+
+    ui->pathLabel->setText(collectionPath + "/");
+}
+
+void MainWindow::countItems2(QString path){
 
     int counter = 0;
 
     //extend filter
-    QDirIterator it(path, QStringList() << "*.png" << "*.jpg" << "*.jpeg", QDir::Files, QDirIterator::Subdirectories);
+    QDirIterator it(path, QStringList() << "*.png" << "*.jpg" << "*.jpeg", QDir::Files | QDir::NoDotAndDotDot, QDirIterator::Subdirectories);
     while (it.hasNext()) {
         it.next();
         counter++;
     }
 
+    //QDir countFiles (path);
+
     QString itemsCounterString = QString::number(counter);
 
     ui->countItemsLabel->setText(itemsCounterString);
-    ui->pathLabel->setText(path + "/");
 }
 
 //show files in contentWindow
 void MainWindow::on_listView_clicked(const QModelIndex &index)
 {
-    //fileModel = new QFileSystemModel(this);
 
     ui->imageList->setModel(fileModel);
 
     QString mPath = fileModel->fileInfo(index).absoluteFilePath();
-
+    currentPath = mPath;
 
     QDir dirName = mPath;
     QString dirNameString = dirName.dirName();
 
     collectionName = dirNameString;
 
-    //warning no subdirs
-    QString newPath = mPath + "/files";
-    countItems(newPath);
+    countItems(mPath, collectionName);
 
-    ui->imageList->setRootIndex(fileModel->setRootPath(newPath));
+    fileModel->setFilter(QDir::NoDotAndDotDot | QDir::Dirs);
+
+    ui->imageList->setRootIndex(fileModel->setRootPath(mPath));
 }
 
 
@@ -196,6 +261,7 @@ void MainWindow::on_listView_clicked(const QModelIndex &index)
 void MainWindow::on_imageList_clicked(const QModelIndex &index)
 {
     QString mPath = fileModel->fileInfo(index).absoluteFilePath();
+    currentPath = mPath;
 
     QFileInfo filetester (mPath);
 
@@ -273,9 +339,6 @@ void MainWindow::on_imageList_clicked(const QModelIndex &index)
             tb_locations->setText(people);
 
 
-
-
-
             QVector<QTextEdit> lineedits;
 
 
@@ -288,21 +351,18 @@ void MainWindow::on_imageList_clicked(const QModelIndex &index)
 
                 ui->formLayout_2->addWidget(lines);
 
-
-
-
                 //lineedits.append(new QTextEdit());
 
 
-//                lineedits->at(i)= lines;
+                //                lineedits->at(i)= lines;
                 //lines = lineedits->at(i);
             }
 
 //            ui->formLayout_2->addWidget(label);
 //            ui->formLayout_2->addWidget(lineedit);
 
-//            lineedit=new QTextEdit();
-//            lineedit->setText(description);
+            //            lineedit=new QTextEdit();
+            //            lineedit->setText(description);
 
 
             QPixmap pix(mPath);
@@ -354,11 +414,32 @@ void MainWindow::on_imageList_clicked(const QModelIndex &index)
 
         QString mPath = fileModel->fileInfo(index).absoluteFilePath();
 
-        //warning no subdirs
-        QString newPath = mPath + "/files";
-        countItems(newPath);
+        fileModel->setFilter(QDir::NoDotAndDotDot | QDir::Files | QDir::Dirs);
 
-        ui->imageList->setRootIndex(fileModel->setRootPath(newPath));
+        //warning no subdirs
+        //QString newPath = mPath + "/files";
+        countItems2(mPath);
+
+        ui->imageList->setRootIndex(fileModel->setRootPath(mPath));
+    }
+
+    QDir directory = QDir::home();
+    QString homePath = directory.path() + "/.vemoria";
+
+    if(homePath == currentPath){
+
+        QPixmap pixHome(":/icons/icons/home.png");
+        ui->backBtn->setIcon(pixHome);
+
+         qDebug() << "home: " + currentPath;
+
+    }
+    else{
+        qDebug() << "back: " + currentPath;
+
+        QPixmap pixBack(":/icons/icons/back.png");
+        ui->backBtn->setIcon(pixBack);
+
     }
 }
 
@@ -493,5 +574,59 @@ void MainWindow::on_deleteBtn_clicked()
 
     CollectionManager collmanager;
     collmanager.commit(collectionName, defaultName, defaultMail, defaultMessage);
+
+}
+
+void MainWindow::on_backBtn_clicked()
+{
+
+    QDir directory = QDir::home();
+    QString homePath = directory.path() + "/.vemoria";
+    QDir homeDir (homePath);
+
+    QStringList collectionNames = homeDir.entryList( QDir::Dirs | QDir::NoDotAndDotDot | QDir::Hidden);
+
+    foreach (const QString &collectionName, collectionNames){
+
+       qDebug() << "foreach: default " + homePath + "/" + collectionName;
+        qDebug() << "foreach: current " + currentPath;
+
+       if(homePath + "/" + collectionName == currentPath){
+
+        QPixmap pixHome(":/icons/icons/home.png");
+        ui->backBtn->setIcon(pixHome);
+       }
+    }
+
+    if(homePath == currentPath){
+
+        QPixmap pixHome(":/icons/icons/home.png");
+        ui->backBtn->setIcon(pixHome);
+
+        qDebug() << "home: " + currentPath + "/" + collectionName;
+
+        countItems2(currentPath);
+
+    }
+    else{
+        qDebug() << "back: " + currentPath;
+
+        //QPixmap pixBack(":/icons/icons/back.png");
+        //ui->backBtn->setIcon(pixBack);
+
+        QDir dir (currentPath);
+
+        dir.cdUp();
+
+        currentPath = dir.path();
+
+        countItems2(currentPath + "/");
+
+        ui->imageList->setModel(fileModel);
+
+        fileModel->setFilter(QDir::NoDotAndDotDot | QDir::Files | QDir::Dirs);
+
+        ui->imageList->setRootIndex(fileModel->setRootPath(dir.path()));
+    }
 
 }

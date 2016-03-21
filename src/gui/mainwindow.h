@@ -59,6 +59,8 @@ private slots:
 
     void on_openFileBtn_clicked();
 
+    void on_backBtn_clicked();
+
 private:
     Ui::MainWindow *ui;
 
@@ -68,13 +70,19 @@ private:
 
     QFileSystemModel *fileModel;
 
-    void countItems(QString path);
+    void countItems(QString path, QString collectionPath);
+
+    void countItems2(QString path);
+
+    void countRepos();
 
     QString pathFile;
 
     QString nameFile;
 
     QString collectionName;
+
+    QString currentPath;
 
     void countRepoItems();
 

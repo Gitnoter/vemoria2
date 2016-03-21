@@ -612,6 +612,12 @@ border:none;
                       </item>
                       <item row="5" column="0" colspan="2">
                        <widget class="QGroupBox" name="groupBox_4">
+                        <property name="sizePolicy">
+                         <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+                          <horstretch>0</horstretch>
+                          <verstretch>0</verstretch>
+                         </sizepolicy>
+                        </property>
                         <property name="styleSheet">
                          <string notr="true">#groupBox_4{
 	border:none;
@@ -1297,26 +1303,6 @@ border-bottom:1px solid #e3e3e3;
                   <number>0</number>
                  </property>
                  <item>
-                  <widget class="QLabel" name="label_5">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="styleSheet">
-                    <string notr="true">padding-left:10px;
-padding-right:3px;</string>
-                   </property>
-                   <property name="text">
-                    <string/>
-                   </property>
-                   <property name="pixmap">
-                    <pixmap resource="resource.qrc">:/icons/icons/home.png</pixmap>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
                   <widget class="QLabel" name="label_6">
                    <property name="sizePolicy">
                     <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -1337,6 +1323,25 @@ padding-right:3px;
                   </widget>
                  </item>
                  <item>
+                  <widget class="QPushButton" name="backBtn">
+                   <property name="cursor">
+                    <cursorShape>PointingHandCursor</cursorShape>
+                   </property>
+                   <property name="text">
+                    <string/>
+                   </property>
+                   <property name="iconSize">
+                    <size>
+                     <width>17</width>
+                     <height>16</height>
+                    </size>
+                   </property>
+                   <property name="flat">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
                   <widget class="QLabel" name="pathLabel">
                    <property name="styleSheet">
                     <string notr="true">color:#191919;
@@ -1346,7 +1351,7 @@ font-weight:regular;
 padding-right:13px;</string>
                    </property>
                    <property name="text">
-                    <string>Path</string>
+                    <string>/.Vemoria</string>
                    </property>
                   </widget>
                  </item>
@@ -1441,7 +1446,7 @@ border-bottom:1px solid #e3e3e3;
                   <string notr="true">padding-right:10px;</string>
                  </property>
                  <property name="text">
-                  <string>inf2179@hs-worms.de</string>
+                  <string>Max Mustermann</string>
                  </property>
                  <property name="alignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
