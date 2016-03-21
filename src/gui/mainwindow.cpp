@@ -530,13 +530,28 @@ void MainWindow::on_backBtn_clicked()
 
     QDir directory = QDir::home();
     QString homePath = directory.path() + "/.vemoria";
+    QDir homeDir (homePath);
+
+    QStringList collectionNames = homeDir.entryList( QDir::Dirs | QDir::NoDotAndDotDot | QDir::Hidden);
+
+    foreach (const QString &collectionName, collectionNames){
+
+       qDebug() << "foreach: default " + homePath + "/" + collectionName;
+        qDebug() << "foreach: current " + currentPath;
+
+       if(homePath + "/" + collectionName == currentPath){
+
+        QPixmap pixHome(":/icons/icons/home.png");
+        ui->backBtn->setIcon(pixHome);
+       }
+    }
 
     if(homePath == currentPath){
 
         QPixmap pixHome(":/icons/icons/home.png");
         ui->backBtn->setIcon(pixHome);
 
-        qDebug() << "home: " + currentPath;
+        qDebug() << "home: " + currentPath + "/" + collectionName;
 
         countItems2(currentPath);
 
@@ -544,8 +559,8 @@ void MainWindow::on_backBtn_clicked()
     else{
         qDebug() << "back: " + currentPath;
 
-        QPixmap pixBack(":/icons/icons/back.png");
-        ui->backBtn->setIcon(pixBack);
+        //QPixmap pixBack(":/icons/icons/back.png");
+        //ui->backBtn->setIcon(pixBack);
 
         QDir dir (currentPath);
 
@@ -561,4 +576,5 @@ void MainWindow::on_backBtn_clicked()
 
         ui->imageList->setRootIndex(fileModel->setRootPath(dir.path()));
     }
+
 }
