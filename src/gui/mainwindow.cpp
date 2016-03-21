@@ -46,6 +46,9 @@ MainWindow::MainWindow(QWidget *parent) :
     trigger = false;
     addTags();
 
+    QPixmap pixHome(":/icons/icons/home.png");
+    ui->backBtn->setIcon(pixHome);
+
     fileModel = new QFileSystemModel(this);
 
     ui->listView->setModel(fileModel);
@@ -235,6 +238,7 @@ void MainWindow::on_listView_clicked(const QModelIndex &index)
     ui->imageList->setModel(fileModel);
 
     QString mPath = fileModel->fileInfo(index).absoluteFilePath();
+    currentPath = mPath;
 
     QDir dirName = mPath;
     QString dirNameString = dirName.dirName();
@@ -244,7 +248,7 @@ void MainWindow::on_listView_clicked(const QModelIndex &index)
     //warning no subdirs
     countItems(mPath, collectionName);
 
-    fileModel->setFilter(QDir::NoDot | QDir::Dirs);
+    fileModel->setFilter(QDir::NoDotAndDotDot | QDir::Dirs);
 
     ui->imageList->setRootIndex(fileModel->setRootPath(mPath));
 }
@@ -254,6 +258,7 @@ void MainWindow::on_listView_clicked(const QModelIndex &index)
 void MainWindow::on_imageList_clicked(const QModelIndex &index)
 {
     QString mPath = fileModel->fileInfo(index).absoluteFilePath();
+    currentPath = mPath;
 
     QFileInfo filetester (mPath);
 
@@ -362,6 +367,25 @@ void MainWindow::on_imageList_clicked(const QModelIndex &index)
         countItems2(mPath);
 
         ui->imageList->setRootIndex(fileModel->setRootPath(mPath));
+    }
+
+    QDir directory = QDir::home();
+    QString homePath = directory.path() + "/.vemoria";
+
+    if(homePath == currentPath){
+
+        QPixmap pixHome(":/icons/icons/home.png");
+        ui->backBtn->setIcon(pixHome);
+
+         qDebug() << "home: " + currentPath;
+
+    }
+    else{
+        qDebug() << "back: " + currentPath;
+
+        QPixmap pixBack(":/icons/icons/back.png");
+        ui->backBtn->setIcon(pixBack);
+
     }
 }
 
@@ -497,4 +521,42 @@ void MainWindow::on_deleteBtn_clicked()
     CollectionManager collmanager;
     collmanager.commit(collectionName, defaultName, defaultMail, defaultMessage);
 
+}
+
+void MainWindow::on_backBtn_clicked()
+{
+
+    QDir directory = QDir::home();
+    QString homePath = directory.path() + "/.vemoria";
+
+    if(homePath == currentPath){
+
+        QPixmap pixHome(":/icons/icons/home.png");
+        ui->backBtn->setIcon(pixHome);
+
+        qDebug() << "home: " + currentPath;
+
+        countItems2(currentPath);
+
+    }
+    else{
+        qDebug() << "back: " + currentPath;
+
+        QPixmap pixBack(":/icons/icons/back.png");
+        ui->backBtn->setIcon(pixBack);
+
+        QDir dir (currentPath);
+
+        dir.cdUp();
+
+        currentPath = dir.path();
+
+        countItems2(currentPath + "/");
+
+        ui->imageList->setModel(fileModel);
+
+        fileModel->setFilter(QDir::NoDotAndDotDot | QDir::Files | QDir::Dirs);
+
+        ui->imageList->setRootIndex(fileModel->setRootPath(dir.path()));
+    }
 }

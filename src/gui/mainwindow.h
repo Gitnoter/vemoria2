@@ -59,6 +59,8 @@ private slots:
 
     void on_openFileBtn_clicked();
 
+    void on_backBtn_clicked();
+
 private:
     Ui::MainWindow *ui;
 
@@ -79,6 +81,8 @@ private:
     QString nameFile;
 
     QString collectionName;
+
+    QString currentPath;
 
     void countRepoItems();
 
