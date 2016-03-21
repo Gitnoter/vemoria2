@@ -1,3 +1,12 @@
+/// \file
+/// \brief	Vemoria copydialog cpp file
+/// \ingroup	gui
+//----------------------------------------------------------------------
+// This file is part of the Vemoria project.
+// Vemoria aims to be an environment for archiving multimedia files.
+//
+// This file is licensed under the EUPL v.1.1 or a later version.
+//----------------------------------------------------------------------
 #include "copydialog.h"
 #include "ui_copydialog.h"
 #include <QFileDialog>
@@ -71,7 +80,7 @@ void copyDialog::on_pushButton_clicked()
     if(copy == true){
 
         QDir renameDir = (path);
-        renameDir.rename(file.fileName(), "files");
+        //renameDir.rename(file.fileName(), "files");
 
         ui->progressBar->setMaximum(100);
         ui->progressBar->setValue(100);
@@ -109,8 +118,10 @@ bool copyDialog::copyDir(QString sourcePath, QString targetPath, quint64 size)
             //C:/Users/Dennis/.vemoria/Kitzbühel/images"
 
             QFile fileXML;
+
             QString date = QDateTime::currentDateTime().toString();
             fileXML.setFileName(dir + "/." + fileName + ".xml");
+
             QString vemoriaVersion = VERSION;
 
             fileXML.open(QIODevice::ReadWrite | QIODevice::Text);
@@ -123,6 +134,16 @@ bool copyDialog::copyDir(QString sourcePath, QString targetPath, quint64 size)
             stream<<"\t<createDate>"<< date <<"</createDate>"<<endl;
             stream<<"</notes>"<<endl;
             fileXML.close();
+
+
+            #ifdef _WIN32
+
+                QString path = dir + "/." + fileName + ".xml";
+
+                qDebug() << "system path: " + path;
+
+                system("attrib +h " + path.toLatin1());
+            #endif
 
             //get file size to calculate speed & process status
             quint64 fileSize = file_size(newSrcFilePath);

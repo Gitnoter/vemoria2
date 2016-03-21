@@ -155,7 +155,7 @@ void MainWindow::on_addButton_clicked()
 }
 
 //count items in the contentWindow & show path
-void MainWindow::countItems(QString path){
+void MainWindow::countItems(QString path, QString collectionPath){
 
     int counter = 0;
 
@@ -169,7 +169,28 @@ void MainWindow::countItems(QString path){
     QString itemsCounterString = QString::number(counter);
 
     ui->countItemsLabel->setText(itemsCounterString);
-    ui->pathLabel->setText(path + "/");
+
+    QDir collectionName (collectionPath);
+
+    ui->pathLabel->setText(collectionName.dirName() + "/");
+}
+
+void MainWindow::countItems2(QString path){
+
+    //int counter = 0;
+
+//    //extend filter
+//    QDirIterator it(path, QStringList() << "*.png" << "*.jpg" << "*.jpeg", QDir::Files, QDirIterator::Subdirectories);
+//    while (it.hasNext()) {
+//        it.next();
+//        counter++;
+//    }
+
+    QDir countFiles (path);
+
+    QString itemsCounterString = QString::number(countFiles.count());
+
+    ui->countItemsLabel->setText(itemsCounterString);
 }
 
 //show files in contentWindow
@@ -181,7 +202,6 @@ void MainWindow::on_listView_clicked(const QModelIndex &index)
 
     QString mPath = fileModel->fileInfo(index).absoluteFilePath();
 
-
     QDir dirName = mPath;
     QString dirNameString = dirName.dirName();
 
@@ -189,9 +209,11 @@ void MainWindow::on_listView_clicked(const QModelIndex &index)
 
     //warning no subdirs
     QString newPath = mPath + "/files";
-    countItems(newPath);
+    countItems(newPath, collectionName);
 
-    ui->imageList->setRootIndex(fileModel->setRootPath(newPath));
+    fileModel->setFilter(QDir::NoDotDot | QDir::Dirs);
+
+    ui->imageList->setRootIndex(fileModel->setRootPath(mPath));
 }
 
 
@@ -260,11 +282,13 @@ void MainWindow::on_imageList_clicked(const QModelIndex &index)
 
         QString mPath = fileModel->fileInfo(index).absoluteFilePath();
 
-        //warning no subdirs
-        QString newPath = mPath + "/files";
-        countItems(newPath);
+        fileModel->setFilter(QDir::NoDotAndDotDot | QDir::Files | QDir::Dirs);
 
-        ui->imageList->setRootIndex(fileModel->setRootPath(newPath));
+        //warning no subdirs
+        //QString newPath = mPath + "/files";
+        countItems2(mPath);
+
+        ui->imageList->setRootIndex(fileModel->setRootPath(mPath));
     }
 }
 

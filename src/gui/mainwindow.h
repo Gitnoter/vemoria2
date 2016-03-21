@@ -67,7 +67,9 @@ private:
 
     QFileSystemModel *fileModel;
 
-    void countItems(QString path);
+    void countItems(QString path, QString collectionPath);
+
+    void countItems2(QString path);
 
     QString pathFile;
 
