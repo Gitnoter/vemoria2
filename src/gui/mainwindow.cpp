@@ -10,6 +10,9 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "../version.h"
+#include "logic/picture.h"
+#include "logic/xmlhandler.h"
+
 #include <QDebug> //currently here for debugging purposes, obviously
 #include "popupcollection.h"
 #include "QMessageBox"
@@ -31,6 +34,7 @@
 #include <QFileDialog>
 #include <QMessageBox>
 #include "qtguiservices.h"
+#include <repository/collectionmanager.h>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -38,23 +42,54 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->gridDetail->hide();
+    ui->countItemsLabel->hide();
 
     trigger = false;
     addTags();
 
-
-    dirModel = new QFileSystemModel(this);
+    QPixmap pixHome(":/icons/icons/home.png");
+    ui->backBtn->setIcon(pixHome);
 
     fileModel = new QFileSystemModel(this);
 
     ui->listView->setModel(fileModel);
 
     QDir directory = QDir::home();
+    if(!QDir(directory.path() + "/.vemoria").exists()){
+        directory.mkdir(".vemoria");
+    }
+
     QString path = directory.path() + "/.vemoria";
     ui->listView->setRootIndex(fileModel->setRootPath(path));
 
+    ui->collectionOpen->hide();
+
+    countRepos();
     countRepoItems();
 
+}
+
+void MainWindow::countRepos(){
+
+    QDir directory = QDir::home();
+    QString path = directory.path() + "/.vemoria";
+
+    if(QDir(path).exists()){
+
+        QDir dir( directory.path() + "/.vemoria" );
+
+        dir.setFilter( QDir::AllEntries | QDir::NoDotAndDotDot );
+
+        int total_files = dir.count();
+
+        QString itemsCounterString = QString::number(total_files);
+
+        ui->countItemsLabel->setText(itemsCounterString);
+
+        if(total_files > 3){
+            ui->collectionOpen->show();
+        }
+    }
 }
 
 void MainWindow::resizeEvent(QResizeEvent*)
@@ -78,40 +113,7 @@ MainWindow::~MainWindow()
 
 //test metedata
 void MainWindow::addTags(){
-
-    QLabel *label = new QLabel();
-    label->setText("Description");
-
-    QTextEdit *lineedit = new QTextEdit();
-    lineedit->setPlaceholderText("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut");
-
-    QLabel *label2 = new QLabel();
-    label2->setText("Persons");
-
-    QTextEdit *lineedit2 = new QTextEdit();
-    lineedit2->setPlaceholderText("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut");
-
-
-    QLabel *label3 = new QLabel();
-    label3->setText("Other");
-
-    QTextEdit *lineedit3 = new QTextEdit();
-    lineedit3->setPlaceholderText("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut");
-
-    QTextEdit *lineedit4 = new QTextEdit();
-    lineedit4->setPlaceholderText("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut");
-
-    QTextEdit *lineedit5 = new QTextEdit();
-    lineedit5->setPlaceholderText("lassst ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut ");
-
-    ui->formLayout_2->addWidget(label);
-    ui->formLayout_2->addWidget(lineedit);
-    ui->formLayout_2->addWidget(label2);
-    ui->formLayout_2->addWidget(lineedit2);
-    ui->formLayout_2->addWidget(label3);
-    ui->formLayout_2->addWidget(lineedit3);
-    ui->formLayout_2->addWidget(lineedit4);
-    ui->formLayout_2->addWidget(lineedit5);
+//delete?
 }
 
 //show popupCollection
@@ -151,48 +153,95 @@ void MainWindow::on_addButton_clicked()
     selectCollection selectColl;
     selectColl.setModal(true);
     selectColl.exec();
+
+    countRepos();
 }
 
 //count items in the contentWindow & show path
-void MainWindow::countItems(QString path){
+void MainWindow::countItems(QString path, QString collectionPath){
+
+    //int counter = 0;
+
+    //    //extend filter
+    //    QDirIterator it(path, QStringList() << "*.png" << "*.jpg" << "*.jpeg", QDir::Files | QDir::NoDotAndDotDot, QDirIterator::Subdirectories);
+    //    while (it.hasNext()) {
+    //        it.next();
+    //        counter++;
+    //    }
+
+    //    QString itemsCounterString = QString::number(counter);
+
+    //    ui->countItemsLabel->setText(itemsCounterString);
+
+    //    QDir collectionName (collectionPath);
+
+    QDir dir(path);
+
+    qDebug() << "get path: " + path;
+
+    dir.setFilter( QDir::AllEntries | QDir::NoDotAndDotDot );
+
+    int total_files = dir.count();
+
+    QString itemsCounterString = QString::number(total_files);
+
+    ui->countItemsLabel->setText(itemsCounterString);
+
+    ui->pathLabel->setText(collectionPath + "/");
+}
+
+void MainWindow::countItems2(QString path){
 
     int counter = 0;
 
     //extend filter
-    QDirIterator it(path, QStringList() << "*.png" << "*.jpg" << "*.jpeg", QDir::Files, QDirIterator::Subdirectories);
+    QDirIterator it(path, QStringList() << "*.png" << "*.jpg" << "*.jpeg", QDir::Files | QDir::NoDotAndDotDot, QDirIterator::Subdirectories);
     while (it.hasNext()) {
         it.next();
         counter++;
     }
 
+    //QDir countFiles (path);
+
     QString itemsCounterString = QString::number(counter);
 
     ui->countItemsLabel->setText(itemsCounterString);
-    ui->pathLabel->setText(path + "/");
 }
 
 //show files in contentWindow
 void MainWindow::on_listView_clicked(const QModelIndex &index)
 {
-    fileModel = new QFileSystemModel(this);
-
 
     ui->imageList->setModel(fileModel);
 
-    QString mPath = dirModel->fileInfo(index).absoluteFilePath();
+    QString mPath = fileModel->fileInfo(index).absoluteFilePath();
+    currentPath = mPath;
 
-    //warning no subdirs
-    QString newPath = mPath + "/files";
-    countItems(newPath);
+    QDir dirName = mPath;
+    QString dirNameString = dirName.dirName();
 
-    ui->imageList->setRootIndex(fileModel->setRootPath(newPath));
+    collectionName = dirNameString;
+
+    countItems(mPath, collectionName);
+
+    fileModel->setFilter(QDir::NoDotAndDotDot | QDir::Dirs);
+
+    ui->imageList->setRootIndex(fileModel->setRootPath(mPath));
 }
 
 
 //show file in detail bar
 void MainWindow::on_imageList_clicked(const QModelIndex &index)
 {
-    QString mPath = dirModel->fileInfo(index).absoluteFilePath();
+    QString mPath = fileModel->fileInfo(index).absoluteFilePath();
+    currentPath = mPath;
+    QString xmlPath;
+    xmlPath = fileModel->fileInfo(index).absolutePath();
+    xmlPath+= "/.";
+    xmlPath+= fileModel->fileInfo(index).fileName();
+
+    xmlPath+= ".xml";
+//qDebug() << "XML:" << xmlPath;
 
     QFileInfo filetester (mPath);
 
@@ -204,6 +253,135 @@ void MainWindow::on_imageList_clicked(const QModelIndex &index)
         QString suffix  =  file.suffix();
 
         if(suffix == "png" || suffix == "jpg" || suffix == "jpeg" || suffix == "bmp" || suffix == "jng" || suffix == "jp2" || suffix  == "img"){
+
+            Picture * picture = new Picture();
+            XMLHandler xmlhandler;
+            picture = xmlhandler.readXMLFile_Picture(xmlPath);
+            description = picture->getDescription();
+
+            //Title
+            QLabel *lbl_title = new QLabel();
+            lbl_title->setText("Title");
+            QTextEdit* tb_title = new QTextEdit();
+            tb_title->setText(picture->getTitle());
+
+            QLabel *lbl_date = new QLabel();
+            lbl_date->setText("Date");
+            QTextEdit* tb_date = new QTextEdit();
+            tb_date->setText(picture->getDate());
+
+            QLabel *lbl_time = new QLabel();
+            lbl_time->setText("Time");
+            QTextEdit* tb_time = new QTextEdit();
+            tb_time->setText(picture->getTime());
+
+            QLabel *lbl_geoposition = new QLabel();
+            lbl_geoposition->setText("Geoposition");
+            QTextEdit* tb_geoposition = new QTextEdit();
+            tb_geoposition->setText(picture->getGeoposition());
+
+            QLabel *lbl_description = new QLabel();
+            lbl_description->setText("Description");
+            QTextEdit* tb_description = new QTextEdit();
+            tb_description->setText(picture->getDescription());
+
+            QLabel *lbl_creator = new QLabel();
+            lbl_creator->setText("Creator");
+            QTextEdit* tb_creator = new QTextEdit();
+            tb_creator->setText(picture->getCreator());
+
+            QLabel *lbl_license = new QLabel();
+            lbl_license->setText("License");
+            QTextEdit* tb_license = new QTextEdit();
+            tb_license->setText(picture->getLicense());
+
+            QLabel *lbl_people = new QLabel();
+            lbl_people->setText("People");
+            QTextEdit* tb_people = new QTextEdit();
+            QString people="";
+            for (int i = 0; i < picture->getPeople().count();i++)
+            {
+                people += picture->getPeople().at(i);
+                people += "\n";
+                //qDebug() << "Anzahl for:" << i << endl;
+            }
+            tb_people->setText(people);
+
+            QLabel *lbl_events = new QLabel();
+            lbl_events->setText("Events");
+            QTextEdit* tb_events = new QTextEdit();
+            QString events="";
+            for (int i = 0; i < picture->getEvent().count();i++)
+            {
+                events += picture->getEvent().at(i);
+                events += "\n";
+                //qDebug() << "Anzahl for:" << i << endl;
+            }
+            tb_events->setText(events);
+
+            QLabel *lbl_locations = new QLabel();
+            lbl_locations->setText("Locations");
+            QTextEdit* tb_locations = new QTextEdit();
+            QString locations="";
+            for (int i = 0; i < picture->getLocation().count();i++)
+            {
+                locations += picture->getLocation().at(i);
+                locations += "\n";
+                //qDebug() << "Anzahl for:" << i << endl;
+            }
+            tb_locations->setText(locations);
+
+
+            ui->formLayout_2->addWidget(lbl_title);
+            ui->formLayout_2->addWidget(tb_title);
+            ui->formLayout_2->addWidget(lbl_date);
+            ui->formLayout_2->addWidget(tb_date);
+            ui->formLayout_2->addWidget(lbl_time);
+            ui->formLayout_2->addWidget(tb_time);
+            ui->formLayout_2->addWidget(lbl_geoposition);
+            ui->formLayout_2->addWidget(tb_geoposition);
+            ui->formLayout_2->addWidget(lbl_description);
+            ui->formLayout_2->addWidget(tb_description);
+            ui->formLayout_2->addWidget(lbl_creator);
+            ui->formLayout_2->addWidget(tb_creator);
+            ui->formLayout_2->addWidget(lbl_license);
+            ui->formLayout_2->addWidget(tb_license);
+            ui->formLayout_2->addWidget(lbl_people);
+            ui->formLayout_2->addWidget(tb_people);
+            ui->formLayout_2->addWidget(lbl_events);
+            ui->formLayout_2->addWidget(tb_events);
+            ui->formLayout_2->addWidget(lbl_locations);
+            ui->formLayout_2->addWidget(tb_locations);
+
+//            QVector<QTextEdit> lineedits;
+//            //QVector<QTextEdit> *lineedits;
+//            for (int i = 0; i<picture->getPeople().count();i++)
+//            {
+
+//                QTextEdit *lines = new QTextEdit();
+//                lines->setText(picture->getPeople().at(i));
+
+//                ui->formLayout_2->addWidget(lines);
+                //lineedits.append(new QTextEdit());
+
+
+                //                lineedits->at(i)= lines;
+                //lines = lineedits->at(i)
+
+//                //lineedits.append(new QTextEdit());
+
+
+////                lineedits->at(i)= lines;
+//                //lines = lineedits->at(i);
+//            }
+
+
+//            ui->formLayout_2->addWidget(label);
+//            ui->formLayout_2->addWidget(lineedit);
+
+            //            lineedit=new QTextEdit();
+            //            lineedit->setText(description);
+
 
             QPixmap pix(mPath);
             QSize picSize =  pix.size();
@@ -226,6 +404,7 @@ void MainWindow::on_imageList_clicked(const QModelIndex &index)
         ui->editFiles->setText(file.fileName());
 
         nameFile = file.fileName();
+
         pathFile = mPath;
 
         ui->gridDetail->show();
@@ -249,17 +428,36 @@ void MainWindow::on_imageList_clicked(const QModelIndex &index)
         }
     }
     else{
-
-        fileModel = new QFileSystemModel(this);
         ui->imageList->setModel(fileModel);
 
-        QString mPath = dirModel->fileInfo(index).absoluteFilePath();
+        QString mPath = fileModel->fileInfo(index).absoluteFilePath();
+
+        fileModel->setFilter(QDir::NoDotAndDotDot | QDir::Files | QDir::Dirs);
 
         //warning no subdirs
-        QString newPath = mPath + "/files";
-        countItems(newPath);
+        //QString newPath = mPath + "/files";
+        countItems2(mPath);
 
-        ui->imageList->setRootIndex(fileModel->setRootPath(newPath));
+        ui->imageList->setRootIndex(fileModel->setRootPath(mPath));
+    }
+
+    QDir directory = QDir::home();
+    QString homePath = directory.path() + "/.vemoria";
+
+    if(homePath == currentPath){
+
+        QPixmap pixHome(":/icons/icons/home.png");
+        ui->backBtn->setIcon(pixHome);
+
+         qDebug() << "home: " + currentPath;
+
+    }
+    else{
+        qDebug() << "back: " + currentPath;
+
+        QPixmap pixBack(":/icons/icons/back.png");
+        ui->backBtn->setIcon(pixBack);
+
     }
 }
 
@@ -278,11 +476,6 @@ void MainWindow::on_saveBtn_clicked()
         renameFile.rename(nameFile, getFileName);
         ui->imageList->setRootIndex(fileModel->setRootPath(absolut));
     }
-}
-
-void MainWindow::on_deleteBtn_clicked()
-{
-
 }
 
 void MainWindow::countRepoItems(){
@@ -380,16 +573,78 @@ void MainWindow::on_collectionOpen_clicked()
 
 }
 
-
-void MainWindow::on_pushButton_5_clicked()
+void MainWindow::on_openFileBtn_clicked()
 {
-
     QtGuiServices guiServices;
-    guiServices.openURL(this, QUrl("",QUrl::TolerantMode));
+    guiServices.openURL(QUrl(pathFile, QUrl::TolerantMode));
 }
 
-void MainWindow::on_pushButton_4_clicked()
+void MainWindow::on_deleteBtn_clicked()
 {
     QtGuiServices guiServices;
-    guiServices.deleteURL(QUrl("C:/Users/Sulfi/Desktop/QTremove/test.txt",QUrl::TolerantMode));
+    guiServices.deleteURL(QUrl(pathFile,QUrl::TolerantMode));
+
+    //check if for illegal expression
+    QFileInfo info = (pathFile);
+    QString absolut = info.absolutePath();
+    absolut = absolut + "/";
+    ui->imageList->setRootIndex(fileModel->setRootPath(absolut));
+
+    CollectionManager collmanager;
+    collmanager.commit(collectionName, defaultName, defaultMail, defaultMessage);
+
+}
+
+void MainWindow::on_backBtn_clicked()
+{
+
+    QDir directory = QDir::home();
+    QString homePath = directory.path() + "/.vemoria";
+    QDir homeDir (homePath);
+
+    QStringList collectionNames = homeDir.entryList( QDir::Dirs | QDir::NoDotAndDotDot | QDir::Hidden);
+
+    foreach (const QString &collectionName, collectionNames){
+
+       qDebug() << "foreach: default " + homePath + "/" + collectionName;
+        qDebug() << "foreach: current " + currentPath;
+
+       if(homePath + "/" + collectionName == currentPath){
+
+        QPixmap pixHome(":/icons/icons/home.png");
+        ui->backBtn->setIcon(pixHome);
+       }
+    }
+
+    if(homePath == currentPath){
+
+        QPixmap pixHome(":/icons/icons/home.png");
+        ui->backBtn->setIcon(pixHome);
+
+        qDebug() << "home: " + currentPath + "/" + collectionName;
+
+        countItems2(currentPath);
+
+    }
+    else{
+        qDebug() << "back: " + currentPath;
+
+        //QPixmap pixBack(":/icons/icons/back.png");
+        //ui->backBtn->setIcon(pixBack);
+
+        QDir dir (currentPath);
+
+        dir.cdUp();
+
+        currentPath = dir.path();
+
+        countItems2(currentPath + "/");
+
+        ui->imageList->setModel(fileModel);
+
+        fileModel->setFilter(QDir::NoDotAndDotDot | QDir::Files | QDir::Dirs);
+
+        ui->imageList->setRootIndex(fileModel->setRootPath(dir.path()));
+    }
+
 }

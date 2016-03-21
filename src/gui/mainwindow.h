@@ -13,6 +13,7 @@
 #include <QMainWindow>
 #include <QDialog>
 #include <QFileSystemModel>
+#include <QTextEdit>
 
 namespace Ui {
 class MainWindow;
@@ -36,8 +37,6 @@ private slots:
 
     void on_actionInfo_triggered();
 
-    void on_pushButton_5_clicked();
-
     void on_pushButton_3_clicked();
 
     void addTags();
@@ -58,7 +57,9 @@ private slots:
 
     void on_collectionOpen_clicked();
 
-    void on_pushButton_4_clicked();
+    void on_openFileBtn_clicked();
+
+    void on_backBtn_clicked();
 
 private:
     Ui::MainWindow *ui;
@@ -69,13 +70,31 @@ private:
 
     QFileSystemModel *fileModel;
 
-    void countItems(QString path);
+    void countItems(QString path, QString collectionPath);
+
+    void countItems2(QString path);
+
+    void countRepos();
 
     QString pathFile;
 
     QString nameFile;
 
+    QString collectionName;
+
+    QString currentPath;
+
     void countRepoItems();
+
+    QString defaultName = "defaultName";
+
+    QString defaultMail = "infxxx@hs-worms.de";
+
+    QString defaultMessage = "defaultMessage";
+
+    //Datatype information
+    QString description="emptee";
+
 
 protected:
  void resizeEvent(QResizeEvent *e);

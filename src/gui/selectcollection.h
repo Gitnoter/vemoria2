@@ -1,3 +1,12 @@
+/// \file
+/// \brief	Vemoria selectioncollection header file
+/// \ingroup	gui
+//----------------------------------------------------------------------
+// This file is part of the Vemoria project.
+// Vemoria aims to be an environment for archiving multimedia files.
+//
+// This file is licensed under the EUPL v.1.1 or a later version.
+//----------------------------------------------------------------------
 #ifndef SELECTCOLLECTION_H
 #define SELECTCOLLECTION_H
 
@@ -23,7 +32,6 @@ private slots:
 
 private:
     Ui::selectCollection *ui;
-    QFileSystemModel *dirModel;
     QFileSystemModel *fileModel;
     QString selectedPath;
 };
