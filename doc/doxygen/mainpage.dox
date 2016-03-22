@@ -1,0 +1,43 @@
+//-------------------------------------------------------------------------
+// This file is part of the Vemoria project.
+// Vemoria aims to be an environment for archiving multimedia files.
+//
+// This file is licensed under the EUPL v.1.1 or a later version.
+//-------------------------------------------------------------------------
+
+//-------------------------------------------------------------------------
+// This file contains the main page of the generated documentation.
+//-------------------------------------------------------------------------
+
+/** 
+\mainpage Vemoria Source Code Design Documentation
+
+\section contents Table of Contents
+\li \ref g_main
+\li \ref g_gui
+\li \ref g_logic
+\li \ref g_repository
+\li \subpage p_libqgit2
+
+\section links Links
+
+\subsection vemoria_links Vemoria Links
+  \li <a
+    href="https://atlas.ai.it.hs-worms.de/confluence/display/VEM">Vemoria
+    Confluence Space</a>
+
+\subsection external_links External Pages
+  \li <a href="http://en.cppreference.com/w/cpp">C++ Reference</a>
+  \li <a href="http://qt-project.org/doc/">Qt Project</a>
+  \li <a href="http://www.doxygen.org">Doxygen Homepage</a>
+  \li <a
+    href="http://gcc.gnu.org/onlinedocs/libstdc++/latest-doxygen/">Standard
+    C++ Library (GNU)</a>
+
+\subsection resources_links Resources
+  \li <a href="https://www.google.com/fonts#UsePlace:use/Collection:Source+Sans+Pro">Font: Source Sans Pro - SIL Open Font License, 1.1</a>
+  \li <a href="http://ionicons.com/">Icons: Ionicons - MIT</a>
+  \li <a href="	https://projects.kde.org/projects/playground/libs/libqgit2/repository">Lib: libqgit2 - C++ Qt - LGPL</a>
+
+*/
+// vim: syntax=c++.doxygen sw=2
