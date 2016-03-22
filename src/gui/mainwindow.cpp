@@ -572,6 +572,9 @@ void MainWindow::on_collectionOpen_clicked()
     QString path = directory.path() + "/.vemoria";
     ui->imageList->setRootIndex(fileModel->setRootPath(path));
 
+    QPixmap pixHome(":/icons/icons/home.png");
+    ui->backBtn->setIcon(pixHome);
+
 }
 
 void MainWindow::on_openFileBtn_clicked()
