@@ -20,7 +20,7 @@
 #include <QFile>
 #include <QFileInfo>
 #include <QPointer>
-
+#include <QProcess>
 
 
 using namespace LibQGit2;
@@ -79,7 +79,7 @@ bool CollectionManager::createCollection(QString collectionName)
             ///
             #ifdef _WIN32
                 QByteArray ba = collectionName.toLatin1();
-                system("attrib +h " + directory.path().toLatin1() + "\\" + ".vemoria\\" + ba + "\\." + ba + ".xml");
+                QProcess::execute("attrib +h " + directory.path().toLatin1() + "\\" + ".vemoria\\" + ba + "\\." + ba + ".xml");
             #endif
             create(collectionName);
 
@@ -158,7 +158,8 @@ void CollectionManager::create(QString& collectionName)
 
 #ifdef _WIN32
     QByteArray ba = collectionName.toUtf8().constData();
-    QByteArray cmd = "cd .vemoria&&cd " + ba + "&&git add -A&&git commit -m \"Initial commit\"";
+    QByteArray homepath = directory.path().toUtf8().constData();
+    QByteArray cmd = "cd "+homepath+"/.vemoria&&cd " + ba + "&&git add -A&&git commit -m \"Initial commit\"";
     system(cmd);
 #endif
 }
@@ -168,10 +169,10 @@ void CollectionManager::commit(QString& collectionName, QString& commiter_name, 
     ///
     /// \brief commit with name mail and message
     ///
-
+QDir directory = QDir::home();
 #ifndef _WIN32
     git_libgit2_init();
-    QDir directory = QDir::home();
+
     git_repository *repo = NULL;
     QByteArray repopath;
     QByteArray pather = directory.path().toUtf8().constData();
@@ -221,8 +222,10 @@ void CollectionManager::commit(QString& collectionName, QString& commiter_name, 
     QByteArray ba = collectionName.toUtf8().constData();
     QByteArray commiter;
     commiter = (commiter_name + commiter_mail).toUtf8().constData();
-    QByteArray cmd = "cd .vemoria&&cd " + ba + "&&git add -A&&git commit -m \""+commitmessage.toUtf8().constData()+"\"";
+    QByteArray homepath = directory.path().toUtf8().constData();
+    QByteArray cmd = "cd "+homepath+"/.vemoria&&cd " + ba  + "&&git add -A&&git commit -m \""+commitmessage.toUtf8().constData()+"\"";
     system(cmd);
+    //QProcess::execute(cmd);
 #endif
 
 }
