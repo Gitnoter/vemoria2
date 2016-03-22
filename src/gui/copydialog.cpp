@@ -142,7 +142,9 @@ bool copyDialog::copyDir(QString sourcePath, QString targetPath, quint64 size)
 
                 qDebug() << "system path: " + path;
 
-                system("attrib +h \"" + path.toLatin1() + "\"");
+                QProcess::execute("attrib +h \"" + path.toLatin1() + "\"");
+
+                //system("attrib +h \"" + path.toLatin1() + "\"");
             #endif
 
             //get file size to calculate speed & process status
