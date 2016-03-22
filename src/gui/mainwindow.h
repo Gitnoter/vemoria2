@@ -85,6 +85,8 @@ private:
 
     QString currentPath;
 
+    QString xmlPath;
+
     void countRepoItems();
 
     QString defaultName = "defaultName";

@@ -257,7 +257,6 @@ void MainWindow::on_imageList_clicked(const QModelIndex &index)
 
     QString mPath = fileModel->fileInfo(index).absoluteFilePath();
     currentPath = mPath;
-    QString xmlPath;
     xmlPath = fileModel->fileInfo(index).absolutePath();
     xmlPath+= "/.";
     xmlPath+= fileModel->fileInfo(index).fileName();
@@ -356,13 +355,6 @@ void MainWindow::on_imageList_clicked(const QModelIndex &index)
             ui->formLayout_2->addWidget(tb_locations);
 
 
-
-
-
-
-
-
-
             QPixmap pix(mPath);
             QSize picSize =  pix.size();
             int height = picSize.height();
@@ -448,6 +440,55 @@ void MainWindow::on_saveBtn_clicked()
     QFileInfo info = (pathFile);
     QString absolut = info.absolutePath();
     absolut = absolut + "/";
+
+    XMLHandler xmlhandler;
+    Picture *picture = new Picture();
+
+    QString title = tb_title->toPlainText();
+    QString date = tb_date->toPlainText();
+    QString time = tb_time->toPlainText();
+    QString geoposition = tb_geoposition->toPlainText();
+    QString description = tb_description->toPlainText();
+    QString creator = tb_creator->toPlainText();
+    QString license = tb_license->toPlainText();
+
+    QString people =tb_people->toPlainText();
+    QStringList peoplelist = people.split("\n",QString::SkipEmptyParts);
+    QVector <QString> peoplevector;
+    for (int i = 0; i<peoplelist.count();i++)
+    {
+        peoplevector.append(peoplelist.at(i));
+    }
+
+    QString event =tb_events->toPlainText();
+    QStringList eventlist = event.split("\n",QString::SkipEmptyParts);
+    QVector <QString> eventvector;
+    for (int i = 0; i<eventlist.count();i++)
+    {
+        eventvector.append(eventlist.at(i));
+    }
+
+    QString location =tb_locations->toPlainText();
+    QStringList locationlist = location.split("\n",QString::SkipEmptyParts);
+    QVector <QString> locationvector;
+    for (int i = 0; i<locationlist.count();i++)
+    {
+        locationvector.append(locationlist.at(i));
+    }
+
+    picture->setTitle(title);
+    picture->setDate(date);
+    picture->setTime(time);
+    picture->setGeoposition(geoposition);
+    picture->setDescription(description);
+    picture->setCreator(creator);
+    picture->setLicense(license);
+    picture->setPeople(peoplevector);
+    picture->setEvent(eventvector);
+    picture->setLocation(locationvector);
+
+    xmlhandler.writeXMLFile(picture,xmlPath);
+
 
     QString getFileName = ui->editFiles->text();
     QDir renameFile = (absolut);
